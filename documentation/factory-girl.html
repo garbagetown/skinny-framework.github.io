@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>FactoryGirl - Skinny Framework</title>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Skinny Framework</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+        <div class="col-xs-2">
+          <div class="content small">
+            <h5>Documentation</h5>
+            <hr/>
+            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
+            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
+            <p><a href="/documentation/validator.html">Validator</a></p>
+            <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
+            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/tasks.html">Tasks</a></p>
+            <p><a href="/documentation/testing.html">Testing</a></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="content">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+            <h2>FactoryGirl</h2>
+
+<hr/>
+
+<h3>Easy-to-use Fixture</h3>
+
+<p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
+
+<p>FactoryGirl is a part of Skinny ORM, so you can use FactoryGirl even in your Play2 apps!</p>
+
+<p><img alt="Logo" src="/images/scalikejdbc.png" /></p>
+
+<p>Just add skinny-orm to your apps.</p>
+<pre class="highlight text">libraryDependencies += &quot;org.skinny-framewrok&quot; %% &quot;skinny-orm&quot; % &quot;[0.9,)&quot;
+</pre>
+<hr/>
+
+<h3>Usage</h3>
+
+<p>FactoryGirl&#39; usage is very simple.</p>
+
+<ul>
+<li>Defining <code>SkinnyCRUDMapper</code></li>
+<li>Append definitions to <code>factories.conf</code></li>
+</ul>
+
+<p>Exaple code:</p>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+<span class="n">object</span> <span class="n">Company</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">def</span> <span class="n">extract</span> <span class="o">...</span>
+<span class="o">}</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">...</span>
+<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">...</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nc">Country</span> <span class="o">...</span>
+<span class="n">object</span> <span class="n">Country</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Country</span><span class="o">]</span> <span class="o">...</span>
+
+
+<span class="n">val</span> <span class="n">company1</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+<span class="n">val</span> <span class="n">company2</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;FactoryPal, Inc.&quot;</span><span class="o">)</span>
+
+<span class="n">val</span> <span class="n">country</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">,</span> <span class="err">'</span><span class="n">countryyy</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+
+<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withValues</span><span class="o">(</span><span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
+</pre>
+<p>In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
+<pre class="highlight text">countryyy {
+  name=&quot;Japan&quot;
+}
+member {
+  countryId=&quot;#{countryId}&quot;
+}
+company {
+  name=&quot;FactoryGirl, Inc.&quot;
+}
+name {
+  first=&quot;Kazuhiro&quot;
+  last=&quot;Sera&quot;
+}
+skill {
+  name=&quot;Scala Programming&quot;
+}
+</pre>
+<hr/>
+
+<h3>More Examples:</h3>
+
+<p>You can find more examples here:</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/tree/master/example/src/test">example/src/test</a></p>
+
+            <hr/>
+            <div class="alert alert-info small"> 
+              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

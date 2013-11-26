@@ -24,6 +24,14 @@
               <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
               </ul>
             </li>
             <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
@@ -36,6 +44,14 @@
             <h5>Documentation</h5>
             <hr/>
             <p><a href="/documentation/getting-started.html">Getting Started</a></p>
+            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
+            <p><a href="/documentation/validator.html">Validator</a></p>
+            <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
+            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/tasks.html">Tasks</a></p>
+            <p><a href="/documentation/testing.html">Testing</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -50,6 +66,8 @@
 <p><img alt="Logo" src="/images/logo.png" /></p>
 
 <p><strong>[Notice]</strong> Still in alpha stage. Architecture and API compatibility won&rsquo;t be kept until 1.0 release (2013 4Q).</p>
+
+<hr/>
 
 <h3>Why Skinny?</h3>
 
@@ -67,29 +85,33 @@
 
 <p>A sound-alike word <strong>&ldquo;好きに (su-ki-ni)&rdquo;</strong> in Japanese means <strong>&ldquo;as you like it&rdquo;</strong>. This is only half kidding but it also represents Skinny&rsquo;s concept. Skinny framework should provide flexible APIs to empower developers as much as possible and shouldn&rsquo;t bother them.</p>
 
+<hr/>
+
 <h2>How to use</h2>
 
 <p>Actually, application built with Skinny framework is a Scalatra application. After preparing Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
-<pre class="highlight java"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="n">Seq</span><span class="o">(</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-framework&quot;</span> <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-task&quot;</span>      <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-test&quot;</span>      <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span> <span class="o">%</span> <span class="s">&quot;test&quot;</span>
-<span class="o">)</span>
+<pre class="highlight text">libraryDependencies ++= Seq(
+  &quot;org.skinny-framework&quot; %% &quot;skinny-framework&quot; % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-task&quot;      % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
+)
 </pre>
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re a Play2 (or any others) user, these components are available for you as well.</p>
-<pre class="highlight java"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="n">Seq</span><span class="o">(</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-orm&quot;</span>       <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-validator&quot;</span> <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-test&quot;</span>      <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span> <span class="o">%</span> <span class="s">&quot;test&quot;</span>
-<span class="o">)</span>
+<pre class="highlight text">libraryDependencies ++= Seq(
+  &quot;org.skinny-framework&quot; %% &quot;skinny-orm&quot;       % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-validator&quot; % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
+)
 </pre>
+<hr/>
+
 <h2>Try Skinny now</h2>
 
 <p>Download <code>skinny-blank-app.zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.16/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.17/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -120,6 +142,8 @@ mkdir skinny-app
 yo skinny
 ./skinny run
 </pre>
+<hr/>
+
 <h2>Components</h2>
 
 <h3>Routing &amp; Controller &amp; Validator</h3>
@@ -131,62 +155,23 @@ yo skinny
 <p><code>SkinnyController</code> is a trait which extends <code>ScalatraFilter</code> and out-of-the-box components are integrated. </p>
 <pre class="highlight java"><span class="c1">// src/main/scala/controller/MembersController.scala</span>
 <span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">protectFromForgery</span><span class="o">()</span>
-
-  <span class="n">beforeAction</span><span class="o">(</span><span class="n">only</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">,</span> <span class="err">'</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span> <span class="n">set</span><span class="o">(</span><span class="s">&quot;countries&quot;</span><span class="o">,</span> <span class="n">Country</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span> <span class="o">}</span>
-
   <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// set 'members' in the request scope, then you can use it in views</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span> <span class="c1">// can call this in views</span>
     <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/index&quot;</span><span class="o">)</span>
   <span class="o">}</span>
-
-  <span class="n">def</span> <span class="n">newOne</span> <span class="o">=</span> <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)</span>
-
-  <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> 
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;countryId&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span>
-  <span class="o">)</span>
-
-  <span class="n">def</span> <span class="n">createFormParams</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span>
-    <span class="s">&quot;groupId&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Int</span> <span class="o">,</span> <span class="s">&quot;countryId&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Long</span><span class="o">)</span>
-
-  <span class="n">def</span> <span class="n">create</span> <span class="o">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="na">validate</span><span class="o">())</span> <span class="o">{</span>
-    <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">createFormParams</span><span class="o">)</span>
-    <span class="n">redirect</span><span class="o">(</span><span class="s">&quot;/members&quot;</span><span class="o">)</span>
-  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)</span>
-  <span class="o">}</span>
 <span class="o">}</span>
-
 <span class="c1">// src/main/scala/controller/Controllers.scala</span>
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
   <span class="n">val</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
     <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>
-    <span class="n">post</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">create</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-
 <span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
 <span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// register routes</span>
     <span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre>
-<p>Skinny-Validator is newly created validator which is based on <a href="https://github.com/seratch/inputvalidator">seratch/inputvalidator</a> and much improved. Rules are so simple that you can easily add original validation rules. Furthermore, you can use this validator with any other frameworks.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.validator._</span>
-<span class="n">object</span> <span class="n">alphabetOnly</span> <span class="kd">extends</span> <span class="n">ValidationRule</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;alphabetOnly&quot;</span>
-  <span class="n">def</span> <span class="n">isValid</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">isEmpty</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">||</span> <span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">matches</span><span class="o">(</span><span class="s">&quot;^[a-zA-Z]*$&quot;</span><span class="o">)</span>
-<span class="o">}</span>
-
-<span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span>
-  <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="o">&amp;</span> <span class="n">alphabetOnly</span><span class="o">,</span> 
-  <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;countryId&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span>
-<span class="o">)</span>
 </pre>
 <p><code>SkinnyResource</code> which is similar to Rails ActiveResource is available. That&rsquo;s a pretty DRY way.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">CompaniesController</span> <span class="kd">extends</span> <span class="n">SkinnyResource</span> <span class="o">{</span>
@@ -196,16 +181,16 @@ yo skinny
   <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">&quot;companies&quot;</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">&quot;company&quot;</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLegnth</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span> <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;registrationCode&quot;</span> <span class="n">is</span> <span class="n">numeric</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createFormStrongParameters</span> <span class="o">=</span> 
-    <span class="n">Seq</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">&quot;registrationCode&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Int</span><span class="o">)</span>
-
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLegnth</span><span class="o">(</span><span class="mi">64</span><span class="o">))</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
+  <span class="o">...</span>
 <span class="o">}</span>
 </pre>
 <p><code>Company</code> object should implement <code>skinny.SkinnyModel</code> APIs and you should prepare some view templates under <code>src/main/webapp/WEB-INF/views/members/</code>.</p>
+
+<p>See in detail:</p>
+
+<p><a href="/documentation/controller-and-routes.html">Controller &amp; Routes</a></p>
+
+<hr/>
 
 <h3>ORM</h3>
 
@@ -229,21 +214,14 @@ yo skinny
 <pre class="highlight java"><span class="n">Member</span><span class="o">.</span><span class="na">withAlias</span> <span class="o">{</span> <span class="n">m</span> <span class="o">=&gt;</span> <span class="c1">// or &quot;val m = Member.defaultAlias&quot;</span>
   <span class="c1">// find by primary key</span>
   <span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
-  <span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
-  <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
   <span class="c1">// find many</span>
   <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">()</span>
   <span class="n">val</span> <span class="n">groupMembers</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">&quot;Scala Users&quot;</span><span class="o">,</span> <span class="err">'</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
   <span class="c1">// count</span>
-  <span class="n">val</span> <span class="nl">allCount:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countAll</span><span class="o">()</span>
   <span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNotNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">countryId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
   <span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">.</span><span class="na">apply</span><span class="o">()</span>
 
-  <span class="c1">// create with stong parameters</span>
-  <span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Bob&quot;</span><span class="o">)</span>
-  <span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span>
-    <span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
-  <span class="c1">// create with unsafe parameters</span>
+  <span class="c1">// create with parameters</span>
   <span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
     <span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
     <span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Chris&quot;</span><span class="o">,</span>
@@ -259,45 +237,12 @@ yo skinny
   <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 <span class="o">}</span>
 </pre>
-<p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany</code> (<code>hasManyThrough</code>) to the companion.</p>
+<p>See in detail:</p>
 
-<p><strong>[Notice]</strong> Unfortunately, Skinny-ORM doesn&rsquo;t retrieve nested associations (e.g. members.head.groups.head.country) automatically though we&rsquo;re still seeking a way to resolve this issue.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span> 
-  <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
+<p><a href="/documentation/orm.html">O/R Mapper</a></p>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// If byDefault is called, this join condition is enabled by default</span>
-  <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span><span class="n">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">c</span><span class="o">))).</span><span class="na">byDefault</span>
-  <span class="n">val</span> <span class="n">skills</span> <span class="o">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
-    <span class="n">MemberSkill</span><span class="o">,</span> <span class="n">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">skills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">))</span>
-<span class="o">}</span>
+<hr/>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without skills</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
-</pre>
-<p>If you need to add methods, just write methods that use ScalikeJDBC&#39; APIs directly.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">defaultAlias</span>
-  <span class="n">def</span> <span class="n">findByGroupId</span><span class="o">(</span><span class="nl">groupId:</span> <span class="n">Long</span><span class="o">)(</span><span class="n">implicit</span> <span class="nl">s:</span> <span class="n">DBSession</span> <span class="o">=</span> <span class="n">autoSession</span><span class="o">):</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> 
-    <span class="n">withSQL</span> <span class="o">{</span> <span class="n">select</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">Member</span> <span class="n">as</span> <span class="n">m</span><span class="o">).</span><span class="na">where</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">)</span> <span class="o">}</span>
-      <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">apply</span><span class="o">(</span><span class="n">m</span><span class="o">)).</span><span class="na">list</span><span class="o">.</span><span class="na">apply</span><span class="o">()</span>
-<span class="o">}</span>
-</pre>
-<p><code>timetamps</code> from <code>ActiveRecord</code> is available as the <code>TimestampsFeature</code> trait.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span> <span class="nl">updatedAt:</span> <span class="n">Option</span><span class="o">[</span><span class="n">DateTime</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="n">with</span> <span class="n">TimestampsFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-<span class="c1">// created_at timestamp not null, updated_at timestamp</span>
-</pre>
-<p>Soft delete support is also available.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> 
-  <span class="n">with</span> <span class="n">SoftDeleteWithTimestamp</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-<span class="c1">// deleted_at timestamp</span>
-</pre>
-<p>Furthermore, optimistic lock is also available.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> 
-  <span class="n">with</span> <span class="n">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-<span class="c1">// lock_version bigint</span>
-</pre>
 <h3>DB Migration</h3>
 
 <p>DB migration comes with <a href="http://flywaydb.org/">Flyway</a>. Usage is pretty simple.</p>
@@ -307,43 +252,21 @@ yo skinny
 </pre>
 <p>This command expects <code>src/main/resources/db/migration/V***_***.sql</code> files. </p>
 
-<p>Try it with <a href="https://github.com/skinny-framework/skinny-framework/releases">blank-app</a> right now!</p>
+<p>See in detail:</p>
+
+<p><a href="/documentation/db-migration.html">DB Migration</a></p>
+
+<hr/>
 
 <h3>View Templates</h3>
 
-<p>Skinny framework basically follows Scalatra&rsquo;s <a href="http://scalate.fusesource.org/">Scalate</a>Support, but Skinny has an additional convention.</p>
+<p>Skinny framework basically follows Scalatra&rsquo;s <a href="http://scalate.fusesource.org/">Scalate</a> Support, but Skinny has an additional convention.</p>
 
 <p><img alt="Scalate Logo" src="/images/scalate.png" /></p>
 
 <p>Templates&#39; path should be <code>{path}.{format}.{extension}</code>. Expected {format} are <code>html</code>, <code>json</code>, <code>js</code> and <code>xml</code>.</p>
 
-<p>The following ssp is <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code>.</p>
-<pre class="highlight java"><span class="o">&lt;%</span><span class="nd">@val</span> <span class="nl">members:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">model</span><span class="o">.</span><span class="na">Member</span><span class="o">]</span> <span class="o">%&gt;</span>
-<span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Members</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">hr</span><span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">table</span> <span class="kd">class</span><span class="err">=&quot;</span><span class="nc">table</span> <span class="n">table</span><span class="o">-</span><span class="n">bordered</span><span class="s">&quot;&gt;
-&lt;thead&gt;
-  &lt;tr&gt;
-    &lt;th&gt;ID&lt;/th&gt;
-    &lt;th&gt;Name&lt;/th&gt;
-    &lt;th&gt;&lt;/th&gt;
-  &lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-  #for (member &lt;- members)
-  &lt;tr&gt;
-    &lt;td&gt;${member.id}&lt;/td&gt;
-    &lt;td&gt;${member.name}&lt;/td&gt;
-    &lt;td&gt;
-      &lt;a href=&quot;</span><span class="o">/</span><span class="n">members</span><span class="o">/</span><span class="err">$</span><span class="o">{</span><span class="n">member</span><span class="o">.</span><span class="na">id</span><span class="o">}/</span><span class="n">edit</span><span class="s">&quot; class=&quot;</span><span class="n">btn</span> <span class="n">btn</span><span class="o">-</span><span class="n">info</span><span class="s">&quot;&gt;Edit&lt;/a&gt;
-      &lt;a data-method=&quot;</span><span class="n">delete</span><span class="s">&quot; data-confirm=&quot;</span><span class="n">Are</span> <span class="n">you</span> <span class="n">sure</span><span class="o">?</span><span class="s">&quot; href=&quot;</span><span class="o">/</span><span class="n">members</span><span class="o">/</span><span class="err">$</span><span class="o">{</span><span class="n">member</span><span class="o">.</span><span class="na">id</span><span class="o">}</span><span class="s">&quot; class=&quot;</span><span class="n">btn</span> <span class="n">btn</span><span class="o">-</span><span class="n">danger</span><span class="err">&quot;</span><span class="o">&gt;</span><span class="n">Delete</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
-  <span class="o">&lt;/</span><span class="n">tr</span><span class="o">&gt;</span>
-  <span class="err">#</span><span class="n">end</span>
-<span class="o">&lt;/</span><span class="n">tbody</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span>
-</pre>
-<p>Your controller code will be like this:</p>
+<p>For instance, your controller code will be like this:</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
   <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
     <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
@@ -351,21 +274,38 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<p>If you need to customize view templates, override the settings.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyServlet</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">scalateExtension</span> <span class="o">=</span> <span class="s">&quot;scaml&quot;</span>
+<p>The render method expects that <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> exists.</p>
+<pre class="highlight text">&lt;%@val members: Seq[model.Member] %&gt;
+&lt;hr/&gt;
+#for (member &lt;- members)
+  ${member.name}
+#end
+</pre>
+<p>Scalate supports many template engines. If you&rsquo;d like to use other Scalate templates, just override the settings in controllers.</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">scalateExtension</span> <span class="o">=</span> <span class="s">&quot;jade&quot;</span>
 <span class="o">}</span>
 </pre>
-<p>And then, use scaml instead.</p>
+<p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html.jade</code> instead.</p>
 
-<h3>CoffeeScript &amp; LESS support</h3>
+<p>See in detail:</p>
+
+<p><a href="/documentation/view-templates.html">View Templates</a></p>
+
+<hr/>
+
+<h3>Assets Support (CoffeeScript, LESS and Sass)</h3>
+
+<p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
+<img alt="LESS Logo" src="/images/less.png" />
+<img alt="Sass Logo" src="/images/sass.png" /></p>
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
-<pre class="highlight java"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="n">Seq</span><span class="o">(</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-framework&quot;</span> <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-assets&quot;</span>    <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span><span class="o">,</span>
-  <span class="s">&quot;org.skinny-framework&quot;</span> <span class="o">%%</span> <span class="s">&quot;skinny-test&quot;</span>      <span class="o">%</span> <span class="s">&quot;[0.9,)&quot;</span> <span class="o">%</span> <span class="s">&quot;test&quot;</span>
-<span class="o">)</span>
+<pre class="highlight text">libraryDependencies ++= Seq(
+  &quot;org.skinny-framework&quot; %% &quot;skinny-framework&quot; % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-assets&quot;    % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
+)
 </pre>
 <p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, TypeScript and LESS.</p>
 <pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
@@ -375,9 +315,11 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<h4>CoffeeScript</h4>
+<p>AssetsController supports Last-Modified header and returns status 304 correctly if the requested file isn&rsquo;t changed. </p>
 
-<p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" /></p>
+<p>However, precompiling them is highly recommended in production (./skinny package does that).</p>
+
+<h4>CoffeeScript</h4>
 
 <p>If you use CoffeeScript, just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
 <pre class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
@@ -385,36 +327,24 @@ yo skinny
 <span class="nx">echo</span> <span class="s">&quot;foo&quot;</span>
 </pre>
 <p>You can access the latest compiled JavaScript code at <code>http://localhost:8080/assets/js/echo.js</code>.</p>
-<pre class="highlight javascript"><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">echo</span><span class="p">;</span>
 
-  <span class="nx">echo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-  <span class="p">};</span>
-
-  <span class="nx">echo</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
-
-<span class="p">}).</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</pre>
 <h4>LESS</h4>
-
-<p><img alt="LESS Logo" src="/images/less.png" /></p>
 
 <p>If you use LESS, just put *.less files under <code>WEB-INF/assets/less</code>:</p>
 <pre class="highlight text">// src/main/webapp/WEB-INF/assets/less/box.less
 @base: #f938ab;
-.box { 
+.box {
   color: saturate(@base, 5%);
   border-color: lighten(@base, 30%);
 }
 </pre>
-<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code>.</p>
-<pre class="highlight css"><span class="nc">.box</span> <span class="p">{</span>
-  <span class="nl">color</span><span class="p">:</span> <span class="m">#fe33ac</span><span class="p">;</span>
-  <span class="nl">border-color</span><span class="p">:</span> <span class="m">#fdcdea</span><span class="p">;</span>
-<span class="p">}</span>
-</pre>
-<p>In production environment, precompiling coffee/less files to js/css is recommended.</p>
+<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code></p>
+
+<h4>Sass</h4>
+
+<p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
+
+<hr/>
 
 <h3>Testing support</h3>
 
@@ -429,9 +359,11 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<p>You can see some examples here:</p>
+<p>See in detail:</p>
 
-<p>https://github.com/skinny-framework/skinny-framework/tree/develop/example/src/test/scala</p>
+<p><a href="/documentation/testing.html">Testing</a></p>
+
+<hr/>
 
 <h3>FactoryGirl</h3>
 
@@ -442,31 +374,18 @@ yo skinny
 <span class="o">}</span>
 
 <span class="n">val</span> <span class="n">company1</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
-<span class="n">val</span> <span class="n">company2</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;FactoryPal, Inc.&quot;</span><span class="o">)</span>
-
-<span class="n">val</span> <span class="n">country</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">,</span> <span class="err">'</span><span class="n">countryyy</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
-
-<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withValues</span><span class="o">(</span><span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-<span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
 </pre>
 <p>Settings is not in yaml files but typesafe-config conf file. In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
-<pre class="highlight text">countryyy {
-  name=&quot;Japan&quot;
-}
-member {
-  countryId=&quot;#{countryId}&quot;
-}
-company {
+<pre class="highlight text">company {
   name=&quot;FactoryGirl, Inc.&quot;
 }
-name {
-  first=&quot;Kazuhiro&quot;
-  last=&quot;Sera&quot;
-}
-skill {
-  name=&quot;Scala Programming&quot;
-}
 </pre>
+<p>See in detail:</p>
+
+<p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+
+<hr/>
+
 <h2>License</h2>
 
 <p>(The MIT License)</p>

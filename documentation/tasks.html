@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>Contribution - Skinny Framework</title>
+    <title>Tasks - Skinny Framework</title>
     <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
@@ -57,50 +57,48 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2>Contribution</h2>
+            <h2>Tasks</h2>
 
 <hr/>
 
-<h3>How to contribute skinny-framework.org?</h3>
+<h3>Task Launcher</h3>
 
-<h4>fork skinny-framework project</h4>
+<p>skinny-task is a mechanism to run tasks easily.</p>
 
-<p>Fork <a href="https://github.com/skinny-framework/skinny-framework">https://github.com/skinny-framework/skinny-framework</a>.</p>
+<p>By default, the following tasks are already registered.</p>
 
-<h4>change under the website directory</h4>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/task/src/main/scala/skinny/task/TaskLauncher.scala">task/src/main/scala/skinny/task/TaskLauncher.scala</a></p>
 
-<p>How to debug:</p>
-<pre class="highlight text">git clone [your forked repository].
-cd website
-gem install bundler
-bundle install
-middleman server
+<p>skinny-blank-app prepares easy-to-use TaksRunner.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/yeoman-generator-skinny/app/templates/task/src/main/scala/TaskRunner.scala">task/src/main/scala/TaskRunner.scala</a></p>
+<pre class="highlight java"><span class="n">object</span> <span class="n">TaskLancher</span> <span class="kd">extends</span> <span class="n">skinny</span><span class="o">.</span><span class="na">task</span><span class="o">.</span><span class="na">TaskLauncher</span> <span class="o">{</span>
+
+  <span class="c1">// def register(name: String, runner: (List[String]) =&gt; Unit)</span>
+  <span class="n">register</span><span class="o">(</span><span class="s">&quot;assets:precompile&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">buildDir</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">headOption</span><span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="s">&quot;build&quot;</span><span class="o">)</span>
+    <span class="n">skinny</span><span class="o">.</span><span class="na">task</span><span class="o">.</span><span class="na">AssetsPrecompileTask</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">Array</span><span class="o">(</span><span class="n">buildDir</span><span class="o">))</span>
+  <span class="o">})</span>
+<span class="o">}</span>
 </pre>
-<h4>make a pull request</h4>
-
-<p>Create a branch to request, and send your pull request to <code>develop</code> branch (not <code>master</code> branch).</p>
-
 <hr/>
 
-<h3>How to contribute libraries?</h3>
+<h3>Creating Custom Tasks</h3>
 
-<h4>fork skinny-framework project</h4>
+<p>Creating tasks is pretty easy. It&rsquo;s just defining a function <code>(List[String]) =&gt; Unit</code>.</p>
+<pre class="highlight java"><span class="n">register</span><span class="o">(</span><span class="s">&quot;echo&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">params</span> <span class="n">foreach</span> <span class="n">println</span><span class="o">)</span>
+</pre>
+<p>Run the task:</p>
+<pre class="highlight text">sbt &quot;task/run echo foo bar baz&quot;
 
-<p>Fork <a href="https://github.com/skinny-framework/skinny-framework">https://github.com/skinny-framework/skinny-framework</a>.</p>
+[info] Running TaskLancher echo foo bar baz
+foo
+bar
+baz
+</pre>
+<p>Improve your development with tasks.</p>
 
-<p>git clone [your forked repository].</p>
-
-<h4>modify and write tests</h4>
-
-<p>Modify code &amp; write test.</p>
-
-<h4>run all the existing tests</h4>
-
-<p>Run all the tests at least with H2 database.</p>
-
-<h4>make a pull request</h4>
-
-<p>Create a branch to request, and send your pull request to <code>develop</code> branch (not <code>master</code> branch).</p>
+<p>If you have good idea, please write a blog post or give us some feedback.</p>
 
             <hr/>
             <div class="alert alert-info small"> 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>View Templates - Skinny Framework</title>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Skinny Framework</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+        <div class="col-xs-2">
+          <div class="content small">
+            <h5>Documentation</h5>
+            <hr/>
+            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
+            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
+            <p><a href="/documentation/validator.html">Validator</a></p>
+            <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
+            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/tasks.html">Tasks</a></p>
+            <p><a href="/documentation/testing.html">Testing</a></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="content">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+            <h2>View Templates</h2>
+
+<hr/>
+
+<h3>Scalate</h3>
+
+<p>Skinny framework basically follows Scalatra&rsquo;s <a href="http://scalate.fusesource.org/">Scalate</a> Support, but Skinny has an additional convention.</p>
+
+<p><img alt="Scalate Logo" src="/images/scalate.png" /></p>
+
+<p>Templates&#39; path should be <code>{path}.{format}.{extension}</code>. Expected {format} are <code>html</code>, <code>json</code>, <code>js</code> and <code>xml</code>.</p>
+
+<p>For instance, your controller code will be like this:</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
+  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+    <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/index&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>The render method expects that <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> exists.</p>
+<pre class="highlight xml"><span class="err">&lt;</span>%@val members: Seq[model.Member] %&gt;
+<span class="nt">&lt;h3&gt;</span>Members<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;hr/&gt;</span>
+<span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-bordered&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;thead&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>ID<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;&lt;/th&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;/thead&gt;</span>
+<span class="nt">&lt;tbody&gt;</span>
+  #for (member <span class="nt">&lt;-</span> <span class="err">members)</span>
+  <span class="err">&lt;tr</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;td&gt;</span>${member.id}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>${member.name}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/members/${member.id}/edit&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-info&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">data-method=</span><span class="s">&quot;delete&quot;</span> <span class="na">data-confirm=</span><span class="s">&quot;Are you sure?&quot;</span> <span class="na">href=</span><span class="s">&quot;/members/${member.id}&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
+  #end
+<span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
+</pre>
+<p>Scalate supports many template engines.</p>
+
+<ul>
+<li>Mustache</li>
+<li>Scaml</li>
+<li>Jade</li>
+<li>SSP</li>
+</ul>
+
+<p><a href="http://scalate.fusesource.org/">http://scalate.fusesource.org/index.html</a></p>
+
+<p>If you&rsquo;d like to use other Scalate templates, just override the settings in controllers.</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">scalateExtension</span> <span class="o">=</span> <span class="s">&quot;jade&quot;</span>
+  <span class="c1">// ssp(default), scaml, jade ,mustache</span>
+<span class="o">}</span>
+</pre>
+<p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html.jade</code> instead.</p>
+
+<hr/>
+
+<h3>FreeMarker</h3>
+
+<p>If you prefer FreeMarker template engine, you can easily use it with Skinny framework.</p>
+
+<p><a href="http://freemarker.org/">http://freemarker.org/</a></p>
+
+<p>First, add <code>skinny-freemarker</code> to your library-dependencies.</p>
+<pre class="highlight text">libraryDependencies += &quot;org.skinny-framewrok&quot; %% &quot;skinny-freemarker&quot; % &quot;[0.9,)&quot;
+</pre>
+<p>Mixin <code>FreeMarkerTemplateEngineFeature</code> to your controllers.</p>
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.controller.feature.FreeMarkerTemplateEngineFeature</span>
+
+<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
+  <span class="n">with</span> <span class="n">FreeMarkerTemplateEngineFeature</span> <span class="o">{</span>
+
+  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+    <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/index&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html.ftl</code> instead.</p>
+
+<hr/>
+
+<h3>Thymeleaf</h3>
+
+<p>If you prefer Thymeleaf template engine, you can easily use it with Skinny framework.</p>
+
+<p><a href="http://www.thymeleaf.org/">http://www.thymeleaf.org/</a></p>
+
+<p>First, add <code>skinny-thymeleaf</code> to your library-dependencies.</p>
+<pre class="highlight text">libraryDependencies += &quot;org.skinny-framewrok&quot; %% &quot;skinny-thymeleaf&quot; % &quot;[0.9,)&quot;
+</pre>
+<p>Mixin <code>ThymeleafTemplateEngineFeature</code> to your controllers.</p>
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.controller.feature.ThymeleafTemplateEngineFeature</span>
+
+<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
+  <span class="n">with</span> <span class="n">ThymeleafTemplateEngineFeature</span> <span class="o">{</span>
+
+  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+    <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/index&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html</code> instead.</p>
+
+            <hr/>
+            <div class="alert alert-info small"> 
+              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>Skinny Framework</title>
+    <title>Getting Started - Skinny Framework</title>
     <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
@@ -24,6 +24,14 @@
               <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
               </ul>
             </li>
             <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
@@ -36,13 +44,155 @@
             <h5>Documentation</h5>
             <hr/>
             <p><a href="/documentation/getting-started.html">Getting Started</a></p>
+            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
+            <p><a href="/documentation/validator.html">Validator</a></p>
+            <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
+            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/tasks.html">Tasks</a></p>
+            <p><a href="/documentation/testing.html">Testing</a></p>
           </div>
         </div>
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h1>TODO</h1>
+            <h2>Getting Started</h2>
 
+<hr/>
+
+<h3>Downloading skinny-blank-app.zip</h3>
+
+<p>We highly recommend using skinny-blank-app for your first Skinny app.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases">github.com/skinny-framework/skinny-framework/releases</a></p>
+
+<p>Download latest <code>skinny-blank-app.zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
+
+<p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
+<pre class="highlight shell">./skinny run
+</pre>
+<p>And then, access <code>http://localhost:8080/</code> and app should return 200 OK.</p>
+
+<hr/>
+
+<h3>Using generator</h3>
+
+<p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
+<pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
+./skinny db:migrate
+./skinny run
+</pre>
+<p>And then, access <code>http://localhost:8080/members</code>.</p>
+
+<p>You can run generated tests.</p>
+<pre class="highlight text">./skinny db:migrate test
+./skinny test
+</pre>
+<p>If you just need a controller, run generator like this:</p>
+<pre class="highlight shell">./skinny g controller <span class="nb">help</span>
+</pre>
+<p>And then, access <code>http://localhost:8080/help</code>.</p>
+
+<p>Finally, let&rsquo;s create war file to deploy.</p>
+<pre class="highlight shell">./skinny package
+</pre>
+<hr/>
+
+<h3>Yeoman generator</h3>
+
+<p><img alt="Yeoman" src="/images/yeoman.png" /></p>
+
+<p>If you&rsquo;re familiar with <a href="http://yeoman.io">Yeoman</a>, a generator for <a href="https://github.com/skinny-framework/skinny-framework">Skinny framework</a> is available.</p>
+<pre class="highlight shell"><span class="c"># brew instsall node</span>
+npm install -g yo
+npm install -g generator-skinny
+mkdir skinny-app
+<span class="nb">cd </span>skinny-app
+yo skinny
+./skinny run
+</pre>
+<hr/>
+
+<h3>Project Structure</h3>
+
+<p>The following tree is directories and files in skinny-blank-app project. Basically using this style is preferred.</p>
+<pre class="highlight shell">.
+├── README.md
+├── bin
+│   └── sbt-launch.jar <span class="c"># global sbt script in PATH is given priority over this</span>
+├── build              <span class="c"># packaging war file uses this directory</span>
+├── build.sbt
+├── project
+│   ├── Build.scala
+│   ├── build.properties
+│   └── plugins.sbt
+├── sbt        <span class="c"># global sbt script in PATH is given priority over this</span>
+├── sbt.bat    <span class="c"># global sbt script in PATH is given priority over this</span>
+├── skinny     <span class="c"># skinny command for Mac/Linux users</span>
+├── skinny.bat <span class="c"># skinny command for Windows users</span>
+├── src
+│   ├── main
+│   │   ├── resources
+│   │   │   ├── application.conf <span class="c"># app configuration</span>
+│   │   │   ├── logback.xml      <span class="c"># logging configuration</span>
+│   │   │   └── messages.conf    <span class="c"># error messages, i18n</span>
+│   │   ├── scala
+│   │   │   ├── ScalatraBootstrap.scala   <span class="c"># should be here and should be this name for Scalatra</span>
+│   │   │   ├── controller                <span class="c"># this package can be changed</span>
+│   │   │   │   ├── ApplicationController.scala
+│   │   │   │   ├── Controllers.scala     <span class="c"># a preferred way to collect controllers with routes</span>
+│   │   │   │   └── RootController.scala
+│   │   │   ├── lib   <span class="c"># same as Rails's lib directory</span>
+│   │   │   ├── model <span class="c"># Skinny ORM models or other models</span>
+│   │   │   └── templates
+│   │   │       └── ScalatePackage.scala <span class="c"># should be here and should this name for Scalate</span>
+│   │   └── webapp
+│   │       ├── WEB-INF
+│   │       │   ├── assets
+│   │       │   │   ├── coffee
+│   │       │   │   │   └── echo.coffee <span class="c"># converted JS at localhost:8080/assets/echo.js</span>
+│   │       │   │   └── less
+│   │       │   │       └── box.less    <span class="c"># converted CSS at localhost:8080/assets/box.css</span>
+│   │       │   ├── layouts
+│   │       │   │   └── default.jade <span class="c"># layout file (ssp, scaml and mustache are also OK)</span>
+│   │       │   ├── views
+│   │       │   │   ├── error
+│   │       │   │   │   ├── 403.html.jade
+│   │       │   │   │   ├── 403.html.scaml
+│   │       │   │   │   ├── 403.html.ssp
+│   │       │   │   │   ├── 404.html.jade
+│   │       │   │   │   ├── 404.html.scaml
+│   │       │   │   │   ├── 404.html.ssp
+│   │       │   │   │   ├── 406.html.jade
+│   │       │   │   │   ├── 406.html.scaml
+│   │       │   │   │   ├── 406.html.ssp
+│   │       │   │   │   ├── 500.html.jade
+│   │       │   │   │   ├── 500.html.scaml
+│   │       │   │   │   ├── 500.html.ssp
+│   │       │   │   │   ├── 503.html.jade
+│   │       │   │   │   ├── 503.html.scaml
+│   │       │   │   │   └── 503.html.ssp
+│   │       │   │   └── root
+│   │       │   │       └── index.html.ssp <span class="c"># render(&quot;/root/index&quot;) expects this file</span>
+│   │       │   └── web.xml
+│   │       └── assets
+│   │           └── js
+│   │               ├── jquery-2.0.3.min.js
+│   │               └── jquery-2.0.3.min.map
+│   └── <span class="nb">test</span>
+│       ├── resources
+│       │   ├── factories.conf <span class="c"># FactoryGirl's configuration</span>
+│       │   └── logback.xml    <span class="c"># logging in Test</span>
+│       └── scala
+│           └── controller
+│               └── RootControllerSpec.scala
+└── task
+    └── src
+        └── main
+            └── scala
+                └── TaskRunner.scala <span class="c"># if you add new tasks, modify this </span>
+</pre>
             <hr/>
             <div class="alert alert-info small"> 
               If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
