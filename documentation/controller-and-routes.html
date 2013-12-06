@@ -57,11 +57,11 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2>Controller &amp; Routes</h2>
+            <h2 id="toc_0">Controller &amp; Routes</h2>
 
 <hr/>
 
-<h3>Routing &amp; Controller</h3>
+<h3 id="toc_1">Routing &amp; Controller</h3>
 
 <p>Skinny&rsquo;s routing mechanism and controller layer on MVC architecture is a <strong>rich Scalatra</strong>. </p>
 
@@ -128,7 +128,7 @@
 </pre>
 <hr/>
 
-<h4>SkinnyController &amp; SkinnyServlet</h4>
+<h4 id="toc_2">SkinnyController &amp; SkinnyServlet</h4>
 
 <p>There are two controller base trait. SkinnyController is a ScalatraFilter. SkinnyServlet is a ScalatraServlet.</p>
 
@@ -143,7 +143,7 @@
 
 <hr/>
 
-<h3>SkinnyResource</h3>
+<h3 id="toc_3">SkinnyResource</h3>
 
 <p>SkinnyResource is a useful base trait for RESTful web services. SkinnyResource is very similar to Rails ActiveResource.</p>
 
@@ -231,7 +231,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3>skinny.Skinny</h3>
+<h3 id="toc_4">skinny.Skinny</h3>
 
 <p>skinny.Skinny provides getters for basic elements in view templates.</p>
 <pre class="highlight text">&lt;%@val s: skinny.Skinny %&gt;
@@ -256,7 +256,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3>How to Do It</h3>
+<h3 id="toc_5">How to Do It</h3>
 
 <p>Basically, you will use Scalatra&rsquo;s DSL.</p>
 
@@ -264,7 +264,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
-<h4>(Query/Form/Path) Parameters</h4>
+<h4 id="toc_6">(Query/Form/Path) Parameters</h4>
 
 <p><a href="http://www.scalatra.org/guides/http/routes.html">http://www.scalatra.org/guides/http/routes.html</a></p>
 
@@ -275,7 +275,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>multiParams(&ldquo;captures&rdquo;)</li>
 </ul>
 
-<h4>Cookies</h4>
+<h4 id="toc_7">Cookies</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -283,7 +283,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>cookies</li>
 </ul>
 
-<h4>Request/Response Headers</h4>
+<h4 id="toc_8">Request/Response Headers</h4>
 
 <p><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html">http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html</a></p>
 
@@ -294,7 +294,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>response.setHeader(name, value)</li>
 </ul>
 
-<h4>Session</h4>
+<h4 id="toc_9">Session</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.SessionSupport">http://www.scalatra.org/2.2/api/index.html#org.scalatra.SessionSupport</a></p>
 
@@ -303,7 +303,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>session(key)</li>
 </ul>
 
-<h4>Flash</h4>
+<h4 id="toc_10">Flash</h4>
 
 <p><a href="http://www.scalatra.org/guides/http/flash.html">http://www.scalatra.org/guides/http/flash.html</a></p>
 
@@ -313,7 +313,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>flash.now += (name -> value)</li>
 </ul>
 
-<h4>Response handling</h4>
+<h4 id="toc_11">Response handling</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -321,11 +321,11 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>halt(status, body, headers, reason)</li>
 </ul>
 
-<h4>Before/After Filters</h4>
+<h4 id="toc_12">Before/After Filters</h4>
 
 <p>Scalatra has filters by default. However, we highly recommend Skinny users to use Skinny&rsquo;s filters.</p>
 
-<h5>Scalatra filters</h5>
+<h5 id="toc_13">Scalatra filters</h5>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -334,7 +334,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>after(transformers)(action)</li>
 </ul>
 
-<h5>Skinny filters</h5>
+<h5 id="toc_14">Skinny filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>

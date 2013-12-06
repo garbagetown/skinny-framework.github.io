@@ -57,7 +57,7 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h1>Skinny Framework</h1>
+            <h1 id="toc_0">Skinny Framework</h1>
 
 <p>Skinny is a full-stack web app framework, which is built on <a href="http://scalatra.org">Scalatra</a> and additional components are integrated. </p>
 
@@ -69,25 +69,25 @@
 
 <hr/>
 
-<h3>Why Skinny?</h3>
+<h3 id="toc_1">Why Skinny?</h3>
 
 <p>What does the name of <code>Skinny</code> actually mean?</p>
 
-<h4>Application should be skinny</h4>
+<h4 id="toc_2">Application should be skinny</h4>
 
 <p>All the parts of web application - controllers, models, views, routings and other settings - should be skinny. If you use Skinny framework, you don&rsquo;t need to have non-essential code anymore. For instance, when you create a simple registration form, all you need to do is just defining parameters and validation rules and creating view templates in an efficient way (ssp, scaml, jade, FreeMarker or something else) in most cases.</p>
 
-<h4>Framework should be skinny</h4>
+<h4 id="toc_3">Framework should be skinny</h4>
 
 <p>Even if you need to investigate Skinny&rsquo;s inside, don&rsquo;t worry. Skinny keeps itself skinny, too. I believe that if the framework is well-designed, eventually the implementation is skinny. </p>
 
-<h4>&ldquo;su-ki-ni&rdquo; in Japanese means &ldquo;as you like it&rdquo;</h4>
+<h4 id="toc_4">&ldquo;su-ki-ni&rdquo; in Japanese means &ldquo;as you like it&rdquo;</h4>
 
 <p>A sound-alike word <strong>&ldquo;好きに (su-ki-ni)&rdquo;</strong> in Japanese means <strong>&ldquo;as you like it&rdquo;</strong>. This is only half kidding but it also represents Skinny&rsquo;s concept. Skinny framework should provide flexible APIs to empower developers as much as possible and shouldn&rsquo;t bother them.</p>
 
 <hr/>
 
-<h2>How to use</h2>
+<h2 id="toc_5">How to use</h2>
 
 <p>Actually, application built with Skinny framework is a Scalatra application. After preparing Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre class="highlight text">libraryDependencies ++= Seq(
@@ -105,13 +105,13 @@
 </pre>
 <hr/>
 
-<h2>Try Skinny now</h2>
+<h2 id="toc_6">Try Skinny now</h2>
 
 <p>Download <code>skinny-blank-app.zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.17/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.19/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -127,7 +127,7 @@
 <p>Let&rsquo;s create war file to deploy.</p>
 <pre class="highlight shell">./skinny package
 </pre>
-<h3>Yeoman generator</h3>
+<h3 id="toc_7">Yeoman generator</h3>
 
 <p><img alt="Yeoman" src="/images/yeoman.png" /></p>
 
@@ -144,9 +144,9 @@ yo skinny
 </pre>
 <hr/>
 
-<h2>Components</h2>
+<h2 id="toc_8">Components</h2>
 
-<h3>Routing &amp; Controller &amp; Validator</h3>
+<h3 id="toc_9">Routing &amp; Controller &amp; Validator</h3>
 
 <p>Skinny&rsquo;s routing mechanism and controller layer on MVC architecture is a <strong>rich Scalatra</strong>. Skinny&rsquo;s extension provides you much simpler/rich syntax. Of course, if you need to use Scalatra&rsquo;s API directly, Skinny never bothers you.</p>
 
@@ -192,7 +192,7 @@ yo skinny
 
 <hr/>
 
-<h3>ORM</h3>
+<h3 id="toc_10">ORM</h3>
 
 <p>Skinny provides you Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>.</p>
 
@@ -243,7 +243,7 @@ yo skinny
 
 <hr/>
 
-<h3>DB Migration</h3>
+<h3 id="toc_11">DB Migration</h3>
 
 <p>DB migration comes with <a href="http://flywaydb.org/">Flyway</a>. Usage is pretty simple.</p>
 
@@ -258,7 +258,7 @@ yo skinny
 
 <hr/>
 
-<h3>View Templates</h3>
+<h3 id="toc_12">View Templates</h3>
 
 <p>Skinny framework basically follows Scalatra&rsquo;s <a href="http://scalate.fusesource.org/">Scalate</a> Support, but Skinny has an additional convention.</p>
 
@@ -294,7 +294,7 @@ yo skinny
 
 <hr/>
 
-<h3>Assets Support (CoffeeScript, LESS and Sass)</h3>
+<h3 id="toc_13">Assets Support (CoffeeScript, LESS and Sass)</h3>
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
 <img alt="LESS Logo" src="/images/less.png" />
@@ -319,7 +319,7 @@ yo skinny
 
 <p>However, precompiling them is highly recommended in production (./skinny package does that).</p>
 
-<h4>CoffeeScript</h4>
+<h4 id="toc_14">CoffeeScript</h4>
 
 <p>If you use CoffeeScript, just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
 <pre class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
@@ -328,7 +328,7 @@ yo skinny
 </pre>
 <p>You can access the latest compiled JavaScript code at <code>http://localhost:8080/assets/js/echo.js</code>.</p>
 
-<h4>LESS</h4>
+<h4 id="toc_15">LESS</h4>
 
 <p>If you use LESS, just put *.less files under <code>WEB-INF/assets/less</code>:</p>
 <pre class="highlight text">// src/main/webapp/WEB-INF/assets/less/box.less
@@ -340,13 +340,13 @@ yo skinny
 </pre>
 <p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code></p>
 
-<h4>Sass</h4>
+<h4 id="toc_16">Sass</h4>
 
 <p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
 
 <hr/>
 
-<h3>Testing support</h3>
+<h3 id="toc_17">Testing support</h3>
 
 <p>You can use Scalatra&rsquo;s great test support. Some optional feature is provided by skinny-test library.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
@@ -365,7 +365,7 @@ yo skinny
 
 <hr/>
 
-<h3>FactoryGirl</h3>
+<h3 id="toc_18">FactoryGirl</h3>
 
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
@@ -386,7 +386,7 @@ yo skinny
 
 <hr/>
 
-<h2>License</h2>
+<h2 id="toc_19">License</h2>
 
 <p>(The MIT License)</p>
 
