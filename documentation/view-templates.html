@@ -78,30 +78,39 @@
 <span class="o">}</span>
 </pre>
 <p>The render method expects that <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> exists.</p>
-<pre class="highlight xml"><span class="err">&lt;</span>%@val members: Seq[model.Member] %&gt;
-<span class="nt">&lt;h3&gt;</span>Members<span class="nt">&lt;/h3&gt;</span>
-<span class="nt">&lt;hr/&gt;</span>
-<span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-bordered&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;thead&gt;</span>
-  <span class="nt">&lt;tr&gt;</span>
-    <span class="nt">&lt;th&gt;</span>ID<span class="nt">&lt;/th&gt;</span>
-    <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
-    <span class="nt">&lt;th&gt;&lt;/th&gt;</span>
-  <span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;/thead&gt;</span>
-<span class="nt">&lt;tbody&gt;</span>
-  #for (member <span class="nt">&lt;-</span> <span class="err">members)</span>
-  <span class="err">&lt;tr</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td&gt;</span>${member.id}<span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;</span>${member.name}<span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;</span>
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/members/${member.id}/edit&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-info&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
-      <span class="nt">&lt;a</span> <span class="na">data-method=</span><span class="s">&quot;delete&quot;</span> <span class="na">data-confirm=</span><span class="s">&quot;Are you sure?&quot;</span> <span class="na">href=</span><span class="s">&quot;/members/${member.id}&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-danger&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/td&gt;</span>
-  <span class="nt">&lt;/tr&gt;</span>
+<pre class="highlight text">&lt;%@val members: Seq[model.Member] %&gt;
+&lt;h3&gt;Members&lt;/h3&gt;
+&lt;hr/&gt;
+&lt;table class=&quot;table table-bordered&quot;&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  #for (member &lt;- members)
+  &lt;tr&gt;
+    &lt;td&gt;${member.id}&lt;/td&gt;
+    &lt;td&gt;${member.name}&lt;/td&gt;
+    &lt;td&gt;
+      &lt;!-- Using Scalatra reverse routes is recommended --&gt;
+      &lt;a href=&quot;${url(MembersController.editUrl, &quot;id&quot; -&gt; member.id.toString)}&quot; 
+         class=&quot;btn btn-info&quot;&gt;Edit&lt;/a&gt;
+      &lt;a data-method=&quot;delete&quot; data-confirm=&quot;Are you sure?&quot; 
+         href=&quot;${url(MembersControlller.deleteUrl, &quot;id&quot; -&gt; member.id.toString)}&quot; 
+         class=&quot;btn btn-danger&quot;&gt;Delete&lt;/a&gt;
+
+      &lt;!-- Primitive HTML coding is also possible --&gt;
+      &lt;a href=&quot;/members/${member.id}/edit&quot; class=&quot;btn btn-info&quot;&gt;Edit&lt;/a&gt;
+      &lt;a data-method=&quot;delete&quot; data-confirm=&quot;Are you sure?&quot;
+         href=&quot;/members/${member.id}&quot; class=&quot;btn btn-danger&quot;&gt;Delete&lt;/a&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
   #end
-<span class="nt">&lt;/tbody&gt;</span>
-<span class="nt">&lt;/table&gt;</span>
+&lt;/tbody&gt;
+&lt;/table&gt;
 </pre>
 <p>Scalate supports many template engines.</p>
 
@@ -122,6 +131,14 @@
 </pre>
 <p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html.jade</code> instead.</p>
 
+<p>Scaffoding will be the easiest way to understand. Try it now!</p>
+<pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean birthday:Option[LocalDate]
+./skinny g scaffold:scaml companies company name:String 
+./skinny g scaffold:jade  countries country name:String code:Int
+
+./skinny db:migrate
+./skinny run
+</pre>
 <hr/>
 
 <h3 id="toc_2">FreeMarker</h3>

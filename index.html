@@ -111,7 +111,7 @@
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.19/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.20/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -134,7 +134,7 @@
 <p>If you&rsquo;re familiar with <a href="http://yeoman.io">Yeoman</a>, a generator for <a href="https://github.com/skinny-framework/skinny-framework">Skinny framework</a> is available.</p>
 
 <p><a href="https://npmjs.org/package/generator-skinny"><img alt="NPM" src="https://nodei.co/npm/generator-skinny.png?downloads=true" /></a></p>
-<pre class="highlight shell"><span class="c"># brew instsall node</span>
+<pre class="highlight shell"><span class="c"># brew install node</span>
 npm install -g yo
 npm install -g generator-skinny
 mkdir skinny-app
@@ -162,8 +162,8 @@ yo skinny
 <span class="o">}</span>
 <span class="c1">// src/main/scala/controller/Controllers.scala</span>
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
-  <span class="n">val</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
+  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>

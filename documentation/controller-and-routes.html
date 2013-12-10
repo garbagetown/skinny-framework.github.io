@@ -97,14 +97,23 @@
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
     <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)</span>
   <span class="o">}</span>
+
+  <span class="c1">// whether query param or path param</span>
+  <span class="n">def</span> <span class="n">show</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">).</span><span class="na">map</span> <span class="o">{</span> <span class="n">id</span> <span class="o">=&gt;</span>
+    <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">).</span><span class="na">map</span> <span class="o">{</span> <span class="n">member</span> <span class="o">=&gt;</span>
+      <span class="n">set</span><span class="o">(</span><span class="s">&quot;member&quot;</span> <span class="o">-&gt;</span> <span class="n">member</span><span class="o">)</span>
+    <span class="o">}.</span><span class="na">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+  <span class="o">}.</span><span class="na">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+
 <span class="o">}</span>
 
 <span class="c1">// src/main/scala/controller/Controllers.scala</span>
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
-  <span class="n">val</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>
-    <span class="n">post</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">create</span><span class="o">)</span>
+  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">newUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">createUrl</span> <span class="o">=</span> <span class="n">post</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">create</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
@@ -128,7 +137,32 @@
 </pre>
 <hr/>
 
-<h4 id="toc_2">SkinnyController &amp; SkinnyServlet</h4>
+<h4 id="toc_2">Reverse Routes</h4>
+
+<p>You can use Scalatra&rsquo;s reverse routes.</p>
+
+<p><a href="http://www.scalatra.org/2.2/guides/http/reverse-routes.html">http://www.scalatra.org/2.2/guides/http/reverse-routes.html</a></p>
+
+<p>In controllers:</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
+  <span class="n">def</span> <span class="n">oldPage</span> <span class="o">=</span> <span class="n">redirect</span><span class="o">(</span><span class="n">url</span><span class="o">(</span><span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">.</span><span class="na">indexUrl</span><span class="o">))</span>
+<span class="o">}</span>
+
+<span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
+  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>In views:</p>
+<pre class="highlight text">// Jade example
+a(href={url(MembersController.showUrl, &quot;id&quot; -&gt; member.id.toString)}) Show detail
+
+</pre>
+<hr/>
+
+<h4 id="toc_3">SkinnyController &amp; SkinnyServlet</h4>
 
 <p>There are two controller base trait. SkinnyController is a ScalatraFilter. SkinnyServlet is a ScalatraServlet.</p>
 
@@ -143,7 +177,7 @@
 
 <hr/>
 
-<h3 id="toc_3">SkinnyResource</h3>
+<h3 id="toc_4">SkinnyResource</h3>
 
 <p>SkinnyResource is a useful base trait for RESTful web services. SkinnyResource is very similar to Rails ActiveResource.</p>
 
@@ -231,7 +265,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_4">skinny.Skinny</h3>
+<h3 id="toc_5">skinny.Skinny</h3>
 
 <p>skinny.Skinny provides getters for basic elements in view templates.</p>
 <pre class="highlight text">&lt;%@val s: skinny.Skinny %&gt;
@@ -256,7 +290,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_5">How to Do It</h3>
+<h3 id="toc_6">How to Do It</h3>
 
 <p>Basically, you will use Scalatra&rsquo;s DSL.</p>
 
@@ -264,7 +298,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
-<h4 id="toc_6">(Query/Form/Path) Parameters</h4>
+<h4 id="toc_7">(Query/Form/Path) Parameters</h4>
 
 <p><a href="http://www.scalatra.org/guides/http/routes.html">http://www.scalatra.org/guides/http/routes.html</a></p>
 
@@ -275,7 +309,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>multiParams(&ldquo;captures&rdquo;)</li>
 </ul>
 
-<h4 id="toc_7">Cookies</h4>
+<h4 id="toc_8">Cookies</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -283,7 +317,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>cookies</li>
 </ul>
 
-<h4 id="toc_8">Request/Response Headers</h4>
+<h4 id="toc_9">Request/Response Headers</h4>
 
 <p><a href="http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html">http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html</a></p>
 
@@ -294,7 +328,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>response.setHeader(name, value)</li>
 </ul>
 
-<h4 id="toc_9">Session</h4>
+<h4 id="toc_10">Session</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.SessionSupport">http://www.scalatra.org/2.2/api/index.html#org.scalatra.SessionSupport</a></p>
 
@@ -303,7 +337,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>session(key)</li>
 </ul>
 
-<h4 id="toc_10">Flash</h4>
+<h4 id="toc_11">Flash</h4>
 
 <p><a href="http://www.scalatra.org/guides/http/flash.html">http://www.scalatra.org/guides/http/flash.html</a></p>
 
@@ -313,7 +347,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>flash.now += (name -> value)</li>
 </ul>
 
-<h4 id="toc_11">Response handling</h4>
+<h4 id="toc_12">Response handling</h4>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -321,11 +355,11 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>halt(status, body, headers, reason)</li>
 </ul>
 
-<h4 id="toc_12">Before/After Filters</h4>
+<h4 id="toc_13">Before/After Filters</h4>
 
 <p>Scalatra has filters by default. However, we highly recommend Skinny users to use Skinny&rsquo;s filters.</p>
 
-<h5 id="toc_13">Scalatra filters</h5>
+<h5 id="toc_14">Scalatra filters</h5>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -334,7 +368,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>after(transformers)(action)</li>
 </ul>
 
-<h5 id="toc_14">Skinny filters</h5>
+<h5 id="toc_15">Skinny filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
