@@ -157,9 +157,11 @@
 </pre>
 <p>In views:</p>
 <pre class="highlight text">// Jade example
-a(href={url(MembersController.showUrl, &quot;id&quot; -&gt; member.id.toString)}) Show detail
+a(href={url(Controllers.members.showUrl, &quot;id&quot; -&gt; member.id.toString)}) Show detail
 
 </pre>
+<p>FYI: You can see more examples for SkinnyResource by generating scaffold views.</p>
+
 <hr/>
 
 <h4 id="toc_3">SkinnyController &amp; SkinnyServlet</h4>
