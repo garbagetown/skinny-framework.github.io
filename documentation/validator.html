@@ -74,11 +74,39 @@
 <p>Basic usage is combining validation rules with <code>&amp;</code>. If a failure is found, rest of them will be skipped.</p>
 
 <p><code>checkAll</code> executes all the validations even if some of them already failed.</p>
-<pre class="highlight java"><span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+<pre class="highlight java"><span class="c1">// withDate joins birthdayYear, birthdayMonth and birthdayDay into single birthday</span>
+<span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDate</span><span class="o">(</span><span class="s">&quot;birthday&quot;</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">checkAll</span><span class="o">(</span><span class="n">minLength</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">20</span><span class="o">)),</span>
-  <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;birthday&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateFormat</span>
+  <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;birthday&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateFormat</span><span class="o">,</span>
+  <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;point&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span>
 <span class="o">)</span>
+
+<span class="n">def</span> <span class="n">createStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
+  <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
+  <span class="s">&quot;birthday&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">LocalDate</span><span class="o">,</span>
+  <span class="s">&quot;point&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Int</span>
+<span class="o">)</span>
+
+<span class="n">def</span> <span class="n">create</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="na">validate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createNewModel</span><span class="o">(</span><span class="n">createParams</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="n">createStrongParameters</span><span class="o">))</span>
+    <span class="n">redirect</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;/members/${id}&quot;</span><span class="o">)</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+  <span class="c1">// or using #fold</span>
+<span class="o">}</span>
 </pre>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/ParamType.scala">/common/src/main/scala/skinny/ParamType.scala</a></p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/StrongParameters.scala">/common/src/main/scala/skinny/StrongParameters.scala</a></p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala">/framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala</a></p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/validator/src/main/scala/skinny/validator/ValidatorLike.scala">/validator/src/main/scala/skinny/validator/ValidatorLike.scala</a></p>
+
 <hr/>
 
 <h3 id="toc_2">Creating Custom Validators</h3>
