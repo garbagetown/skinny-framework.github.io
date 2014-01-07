@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -138,6 +144,27 @@
 
 ./skinny db:migrate
 ./skinny run
+</pre>
+<p>For instance, if you use jade instead, above code will be simpler like this. Scaml is very similar.</p>
+<pre class="highlight text">-@val members: Seq[model.Member] 
+h3 Members
+hr
+table(class=&quot;table table-bordered&quot;)
+  thead
+    tr
+      th ID
+      th Name
+      th
+  tbody
+  -for (member &lt;- members)
+    tr
+      td #{member.id}
+      td #{member.name}
+      td
+        a(href={url(MembersController.editUrl, &quot;id&quot; -&gt; member.id.toString)} class=&quot;btn btn-info&quot;) Edit
+        a(data-method=&quot;delete&quot; data-confirm=&quot;Are you sure?&quot; href={url(MembersControlller.deleteUrl, &quot;id&quot; -&gt; member.id.toString)} class=&quot;btn btn-danger&quot;) Delete
+        a(href={s&quot;/members/${member.id}/edit&quot;} class=&quot;btn btn-info&quot;) Edit
+        a(data-method=&quot;delete&quot; data-confirm=&quot;Are you sure?&quot; href={s&quot;/members/${member.id}&quot;} class=&quot;btn btn-danger&quot;) Delete
 </pre>
 <hr/>
 

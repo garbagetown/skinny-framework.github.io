@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -74,7 +80,9 @@
 <p>Just run the following command.</p>
 <pre class="highlight text">./skinny db:migrate [env] [dbname]
 </pre>
-<p>This command expects <code>src/main/resources/db/migration/V***_***.sql</code> files.</p>
+<p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
+
+<p>Be aware of required two underscores at filename.</p>
 
 <h3 id="toc_3">Customizing Migration</h3>
 

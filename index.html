@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -65,7 +71,7 @@
 
 <p><img alt="Logo" src="/images/logo.png" /></p>
 
-<p><strong>[Notice]</strong> Still in alpha stage. Architecture and API compatibility won&rsquo;t be kept until 1.0 release (2013 4Q).</p>
+<p><strong>[Notice]</strong> Still in alpha stage. Architecture and API compatibility won&rsquo;t be kept until 1.0 release (2014/03).</p>
 
 <hr/>
 
@@ -111,7 +117,7 @@
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.20/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.21/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -163,7 +169,7 @@ yo skinny
 <span class="c1">// src/main/scala/controller/Controllers.scala</span>
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
   <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">index</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
@@ -211,31 +217,25 @@ yo skinny
 <span class="o">}</span>
 </pre>
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
-<pre class="highlight java"><span class="n">Member</span><span class="o">.</span><span class="na">withAlias</span> <span class="o">{</span> <span class="n">m</span> <span class="o">=&gt;</span> <span class="c1">// or &quot;val m = Member.defaultAlias&quot;</span>
-  <span class="c1">// find by primary key</span>
-  <span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
-  <span class="c1">// find many</span>
-  <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">()</span>
-  <span class="n">val</span> <span class="n">groupMembers</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">&quot;Scala Users&quot;</span><span class="o">,</span> <span class="err">'</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
-  <span class="c1">// count</span>
-  <span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNotNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">countryId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
-  <span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">.</span><span class="na">apply</span><span class="o">()</span>
+<pre class="highlight java"><span class="c1">// find by primary key</span>
+<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
+<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
+<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
 
-  <span class="c1">// create with parameters</span>
-  <span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
-    <span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
-    <span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Chris&quot;</span><span class="o">,</span>
-    <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
-  <span class="o">)</span>
+<span class="c1">// find many</span>
+<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">()</span>
+<span class="n">val</span> <span class="n">groupMembers</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">&quot;Scala Users&quot;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
 
-  <span class="c1">// update with strong parameters</span>
-  <span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
-  <span class="c1">// update with unsafe parameters</span>
-  <span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span>
-
-  <span class="c1">// delete</span>
-  <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
-<span class="o">}</span>
+<span class="c1">// create with unsafe parameters</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
+  <span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
+  <span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Chris&quot;</span><span class="o">,</span>
+  <span class="err">&#39;</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
+<span class="o">)</span>
+<span class="c1">// update with unsafe parameters</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span>
+<span class="c1">// delete</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 </pre>
 <p>See in detail:</p>
 
@@ -250,7 +250,7 @@ yo skinny
 <p><img alt="Flyway Logo" src="/images/flyway.png" /></p>
 <pre class="highlight shell">./skinny db:migrate <span class="o">[</span>env]
 </pre>
-<p>This command expects <code>src/main/resources/db/migration/V***_***.sql</code> files. </p>
+<p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
 
 <p>See in detail:</p>
 
@@ -307,7 +307,7 @@ yo skinny
   &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
 )
 </pre>
-<p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, TypeScript and LESS.</p>
+<p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, LESS and Sass.</p>
 <pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
 <span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
@@ -321,28 +321,19 @@ yo skinny
 
 <h4 id="toc_14">CoffeeScript</h4>
 
-<p>If you use CoffeeScript, just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
-<pre class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
-</span><span class="nx">echo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">v</span>
-<span class="nx">echo</span> <span class="s">&quot;foo&quot;</span>
-</pre>
-<p>You can access the latest compiled JavaScript code at <code>http://localhost:8080/assets/js/echo.js</code>.</p>
+<p>Just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
 
 <h4 id="toc_15">LESS</h4>
 
-<p>If you use LESS, just put *.less files under <code>WEB-INF/assets/less</code>:</p>
-<pre class="highlight text">// src/main/webapp/WEB-INF/assets/less/box.less
-@base: #f938ab;
-.box {
-  color: saturate(@base, 5%);
-  border-color: lighten(@base, 30%);
-}
-</pre>
-<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code></p>
+<p>Just put *.less files under <code>WEB-INF/assets/less</code>:</p>
 
 <h4 id="toc_16">Sass</h4>
 
 <p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
+
+<p>See in detail:</p>
+
+<p><a href="/documentation/assets.html">Assets Support</a></p>
 
 <hr/>
 
@@ -354,7 +345,7 @@ yo skinny
 
   <span class="n">it</span> <span class="n">should</span> <span class="s">&quot;show index page&quot;</span> <span class="n">in</span> <span class="o">{</span>
     <span class="n">withSession</span><span class="o">(</span><span class="s">&quot;userId&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
+    <span class="n">i</span>  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>

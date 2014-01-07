@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -75,7 +81,7 @@
   <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection enabled</span>
 
   <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// set 'members' in the request scope, then you can use it in views</span>
+    <span class="c1">// set &#39;members&#39; in the request scope, then you can use it in views</span>
     <span class="n">set</span><span class="o">(</span><span class="s">&quot;members&quot;</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">&quot;/members/index&quot;</span><span class="o">)</span>
   <span class="o">}</span>
@@ -110,10 +116,10 @@
 <span class="c1">// src/main/scala/controller/Controllers.scala</span>
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
   <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">newUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">createUrl</span> <span class="o">=</span> <span class="n">post</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">create</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">index</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">newUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="k">new</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">createUrl</span> <span class="o">=</span> <span class="n">post</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">create</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">show</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
@@ -150,8 +156,8 @@
 
 <span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
   <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">index</span><span class="o">)</span>
+    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id&quot;</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">show</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -374,7 +380,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_13">Session</h3>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session('name)</span>
+<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session(&#39;name)</span>
 <span class="n">session</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
 <span class="n">session</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
 </pre>
@@ -464,10 +470,10 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
   <span class="n">after</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
   <span class="c1">// Skinny filters</span>
-  <span class="n">beforeAction</span><span class="o">(</span><span class="n">only</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">,</span> <span class="err">'</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
+  <span class="n">beforeAction</span><span class="o">(</span><span class="n">only</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">&#39;</span><span class="n">index</span><span class="o">,</span> <span class="err">&#39;</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;before&quot;</span><span class="o">)</span>
   <span class="o">}</span>
-  <span class="n">afterAction</span><span class="o">(</span><span class="n">except</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
+  <span class="n">afterAction</span><span class="o">(</span><span class="n">except</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">&#39;</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;after&quot;</span><span class="o">)</span>
   <span class="o">}</span>
 
@@ -477,9 +483,9 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
   <span class="n">def</span> <span class="n">edit</span> <span class="o">=</span> <span class="o">...</span>
 
   <span class="c1">// routes</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>      <span class="c1">// before, after</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newInput</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>   <span class="c1">// before</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id/edit&quot;</span><span class="o">)(</span><span class="n">edit</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">edit</span><span class="o">)</span> <span class="c1">// after</span>
+  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/?&quot;</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">index</span><span class="o">)</span>      <span class="c1">// before, after</span>
+  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/new&quot;</span><span class="o">)(</span><span class="n">newInput</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="k">new</span><span class="o">)</span>   <span class="c1">// before</span>
+  <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members/:id/edit&quot;</span><span class="o">)(</span><span class="n">edit</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">&#39;</span><span class="n">edit</span><span class="o">)</span> <span class="c1">// after</span>
 
 <span class="o">}</span>
 </pre>

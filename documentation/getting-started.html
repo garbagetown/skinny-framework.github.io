@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -143,7 +149,7 @@ yo skinny
 │   │   │   │   ├── ApplicationController.scala
 │   │   │   │   ├── Controllers.scala     <span class="c"># a preferred way to collect controllers with routes</span>
 │   │   │   │   └── RootController.scala
-│   │   │   ├── lib   <span class="c"># same as Rails's lib directory</span>
+│   │   │   ├── lib   <span class="c"># same as Rails&#39;s lib directory</span>
 │   │   │   ├── model <span class="c"># Skinny ORM models or other models</span>
 │   │   │   └── templates
 │   │   │       └── ScalatePackage.scala <span class="c"># should be here and should this name for Scalate</span>
@@ -182,7 +188,7 @@ yo skinny
 │   │               └── jquery-2.0.3.min.map
 │   └── <span class="nb">test</span>
 │       ├── resources
-│       │   ├── factories.conf <span class="c"># FactoryGirl's configuration</span>
+│       │   ├── factories.conf <span class="c"># FactoryGirl&#39;s configuration</span>
 │       │   └── logback.xml    <span class="c"># logging in Test</span>
 │       └── scala
 │           └── controller
@@ -192,6 +198,17 @@ yo skinny
         └── main
             └── scala
                 └── TaskRunner.scala <span class="c"># if you add new tasks, modify this </span>
+</pre>
+<hr/>
+
+<h3 id="toc_5">Tips for Developers</h3>
+
+<hr/>
+
+<h4 id="toc_6">Avoiding sbt&rsquo;s frequent OOMError</h4>
+
+<p>Skinny Framework uses xsbt-web-plugin. <code>skinny run</code> with sbt plugin invokes Jetty and detects source code changes and re-compiles and restarts Jetty server. Finally, you will see OutOfMemoryError (PermGen) after refreshing several times. To reduce this pain, specify sbt options like this:</p>
+<pre class="highlight text">SBT_OPTS=&quot;-XX:+CMSClassUnloadingEnabled -Xmx2048M -XX:MaxPermSize=512M&quot;
 </pre>
             <hr/>
             <div class="alert alert-info small"> 

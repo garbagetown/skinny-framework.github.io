@@ -27,14 +27,17 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,11 +50,14 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
         <div class="col-xs-10">
@@ -66,8 +72,6 @@
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
 
 <p>FactoryGirl is a part of Skinny ORM, so you can use FactoryGirl even in your Play2 apps!</p>
-
-<p><img alt="Logo" src="/images/scalikejdbc.png" /></p>
 
 <p>Just add skinny-orm to your apps.</p>
 <pre class="highlight text">libraryDependencies += &quot;org.skinny-framewrok&quot; %% &quot;skinny-orm&quot; % &quot;[0.9,)&quot;
@@ -95,12 +99,12 @@
 
 
 <span class="n">val</span> <span class="n">company1</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
-<span class="n">val</span> <span class="n">company2</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;FactoryPal, Inc.&quot;</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">company2</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;FactoryPal, Inc.&quot;</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="n">country</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">,</span> <span class="err">'</span><span class="n">countryyy</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+<span class="n">val</span> <span class="n">country</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">countryyy</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
 
-<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withValues</span><span class="o">(</span><span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
-<span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withValues</span><span class="o">(</span><span class="err">&#39;</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">&#39;</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
 </pre>
 <p>In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
 <pre class="highlight text">countryyy {
