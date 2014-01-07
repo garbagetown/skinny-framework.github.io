@@ -93,7 +93,8 @@
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// only define ResultSet extractor at minimum</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
+
   <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
     <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
@@ -114,7 +115,7 @@
 <span class="c1">// count</span>
 <span class="n">val</span> <span class="nl">allCount:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countAll</span><span class="o">()</span>
 <span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
-<span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNotNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">countryId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+<span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">countryId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 <span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">.</span><span class="na">apply</span><span class="o">()</span>
 
 <span class="c1">// create with stong parameters</span>
@@ -140,10 +141,72 @@
 
 <hr/>
 
-<h4 id="toc_3">Dynamic Table Name</h4>
+<h4 id="toc_3">Other Settings</h4>
+
+<p>Skinny ORM provides the folllowing settings to overwrite.</p>
+<pre class="highlight java"><span class="n">object</span> <span class="n">GroupMember</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="c1">// default: &#39;default</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">connectionPoolName</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">legacydb</span>
+
+  <span class="c1">// default: None </span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">schemaName</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="s">&quot;public&quot;</span><span class="o">)</span>
+
+  <span class="c1">// Basically tableName is loaded from jdbc metadata and cached on the JVM</span>
+  <span class="c1">// However, if the name of object/class which extends SkinnyMapper is not the camelCase of table name,</span>
+  <span class="c1">// you need to override tableName by yourself.</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;group_members&quot;</span> <span class="c1">// default: group_member </span>
+
+  <span class="c1">// Basically columnNames are loaded from jdbc metadata and cached on the JVM</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">columnNames</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="s">&quot;birthday&quot;</span><span class="o">,</span> <span class="s">&quot;created_at&quot;</span><span class="o">)</span>
+
+  <span class="c1">// field name which represents the (single) primary key column</span>
+  <span class="c1">// default: &quot;id&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">&quot;uid&quot;</span> 
+
+  <span class="c1">// with SkinnyCRUDMapper[GroupMember]</span>
+  <span class="c1">// createWithAttributes will try returing generated id if true</span>
+  <span class="c1">// default: true</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">useAutoIncrementPrimaryKey</span> <span class="o">=</span> <span class="kc">false</span>
+
+  <span class="c1">// with SkinnyCRUDMapper[GroupMember]</span>
+  <span class="c1">// default scope for update operations</span>
+  <span class="c1">// default: None</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultScopeForUpdateOperations</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">column</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">))</span>
+
+  <span class="c1">// with TimestampsFeature[GroupMember]</span>
+  <span class="c1">// default: &quot;createdAt&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">&quot;createdTimestamp&quot;</span>
+
+  <span class="c1">// with TimestampsFeature[GroupMember]</span>
+  <span class="c1">// default: &quot;updatedAt&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;updatedTimestamp&quot;</span>
+
+  <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] </span>
+  <span class="c1">// default: &quot;lockTimestamp&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">&quot;locked_at&quot;</span>
+
+  <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]</span>
+  <span class="c1">// default: &quot;lockVersion&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">lockVersionFieldName</span> <span class="o">=</span> <span class="s">&quot;ver&quot;</span>
+
+  <span class="c1">// with SoftDeleteWithBooleanFeature[GroupMember]</span>
+  <span class="c1">// default: &quot;isDeleted&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">isDeletedFieldName</span> <span class="o">=</span> <span class="s">&quot;deleted&quot;</span>
+
+  <span class="c1">// with SoftDeleteWithTimestampFeature[GroupMember]</span>
+  <span class="c1">// default: &quot;deletedAt&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;deletedTimestamp&quot;</span>
+
+<span class="o">}</span>
+</pre>
+<hr/>
+
+<h4 id="toc_4">Dynamic Table Name</h4>
 
 <p><code>#withTableName</code> enables using another table name only for current query.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Order</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Order</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;o&quot;</span><span class="o">)</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;orders&quot;</span>
 <span class="o">}</span>
 
@@ -157,13 +220,14 @@
 
 <hr/>
 
-<h4 id="toc_4">Relationships</h4>
+<h4 id="toc_5">Relationships</h4>
 
 <p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany</code> (<code>hasManyThrough</code>) to the companion.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span>
   <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
 
   <span class="c1">// If byDefault is called, this join condition is enabled by default</span>
   <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span><span class="n">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">c</span><span class="o">))).</span><span class="na">byDefault</span>
@@ -179,7 +243,7 @@
 
 <hr/>
 
-<h5 id="toc_5">Entity Equality</h5>
+<h5 id="toc_6">Entity Equality</h5>
 
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
@@ -198,7 +262,7 @@
 
 <hr/>
 
-<h4 id="toc_6">Eager Loading</h4>
+<h4 id="toc_7">Eager Loading</h4>
 
 <p>You can call <code>includes</code> for eager loading. But nested entities&rsquo;s eager loading is not supported yet.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -216,7 +280,7 @@
 
 <hr/>
 
-<h4 id="toc_7">Adding Methods</h4>
+<h4 id="toc_8">Adding Methods</h4>
 
 <p>If you need to add methods, just write methods that use ScalikeJDBC&#39; APIs directly.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -242,7 +306,7 @@
 </pre>
 <hr/>
 
-<h4 id="toc_8">Timestamps</h4>
+<h4 id="toc_9">Timestamps</h4>
 
 <p><code>timetamps</code> from ActiveRecord is available as the <code>TimestampsFeature</code> trait.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
@@ -256,7 +320,7 @@
 
 <hr/>
 
-<h4 id="toc_9">Soft Deletion</h4>
+<h4 id="toc_10">Soft Deletion</h4>
 
 <p>Soft delete support is also available.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
@@ -269,7 +333,7 @@
 
 <hr/>
 
-<h4 id="toc_10">Optimistic Lock</h4>
+<h4 id="toc_11">Optimistic Lock</h4>
 
 <p>Furthermore, optimistic lock is also available.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
