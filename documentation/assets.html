@@ -67,7 +67,8 @@
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
 <img alt="LESS Logo" src="/images/less.png" />
-<img alt="Sass Logo" src="/images/sass.png" /></p>
+<img alt="Sass Logo" src="/images/sass.png" />
+<img alt="React Logo" src="/images/react.png" /></p>
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight text">libraryDependencies ++= Seq(
@@ -92,6 +93,10 @@
 
 <h3 id="toc_1">CoffeeScript</h3>
 
+<p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" /></p>
+
+<p><a href="http://coffeescript.org/">http://coffeescript.org/</a></p>
+
 <p>If you use CoffeeScript, just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
 <pre class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
 </span><span class="nx">echo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">v</span>
@@ -103,6 +108,10 @@
 
 <h3 id="toc_2">LESS</h3>
 
+<p><img alt="LESS Logo" src="/images/less.png" /></p>
+
+<p><a href="http://lesscss.org/">http://lesscss.org/</a></p>
+
 <p>If you use LESS, just put *.less files under <code>WEB-INF/assets/less</code>:</p>
 <pre class="highlight text">// src/main/webapp/WEB-INF/assets/less/box.less
 @base: #f938ab;
@@ -111,11 +120,15 @@
   border-color: lighten(@base, 30%);
 }
 </pre>
-<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code></p>
+<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/box.css</code>.</p>
 
 <hr/>
 
 <h3 id="toc_3">Sass</h3>
+
+<p><img alt="Sass Logo" src="/images/sass.png" /></p>
+
+<p><a href="http://sass-lang.com/">http://sass-lang.com/</a></p>
 
 <p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
 <pre class="highlight scss"><span class="c1">// src/main/webapp/WEB-INF/assets/scss/main.scss
@@ -126,11 +139,29 @@
   <span class="nl">color</span><span class="p">:</span> <span class="nv">$primary-color</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
-<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/main.css</code></p>
+<p>You can access the latest compiled CSS file at <code>http://localhost:8080/assets/css/main.css</code>.</p>
 
 <hr/>
 
-<h3 id="toc_4">Adding compilers</h3>
+<h3 id="toc_4">JSX for React</h3>
+
+<p><img alt="React Logo" src="/images/react.png" /></p>
+
+<p><a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a></p>
+
+<p>If you use JSX templates for React, put *.jsx files under <code>WEB-INF/assets/jsx</code>:</p>
+<pre class="highlight xml">// src/main/webapp/WEB-INF/assets/jsx/react-example.jsx
+/** @jsx React.DOM */
+React.renderComponent(
+  <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span>,
+  document.getElementById(&#39;example&#39;)
+);
+</pre>
+<p>You can access the latest transformed JS file at <code>http://localhost:8080/assets/js/react-example.js</code>.</p>
+
+<hr/>
+
+<h3 id="toc_5">Adding compilers</h3>
 
 <p>If you need other script support, you can add compiler to AssetsController.</p>
 

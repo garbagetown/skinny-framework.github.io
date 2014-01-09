@@ -117,7 +117,7 @@
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.23/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.24/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -294,11 +294,12 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_13">Assets Support (CoffeeScript, LESS and Sass)</h3>
+<h3 id="toc_13">Assets Support (CoffeeScript, LESS, Sass and JXS for React)</h3>
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
 <img alt="LESS Logo" src="/images/less.png" />
-<img alt="Sass Logo" src="/images/sass.png" /></p>
+<img alt="Sass Logo" src="/images/sass.png" />
+<img alt="React Logo" src="/images/react.png" /></p>
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight text">libraryDependencies ++= Seq(
@@ -321,23 +322,35 @@ yo skinny
 
 <h4 id="toc_14">CoffeeScript</h4>
 
-<p>Just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
+<p><a href="http://coffeescript.org/">http://coffeescript.org/</a></p>
+
+<p>Just put *.coffee files under <code>WEB-INF/assets/coffee</code>.</p>
 
 <h4 id="toc_15">LESS</h4>
 
-<p>Just put *.less files under <code>WEB-INF/assets/less</code>:</p>
+<p><a href="http://lesscss.org/">http://lesscss.org/</a></p>
+
+<p>Just put *.less files under <code>WEB-INF/assets/less</code>.</p>
 
 <h4 id="toc_16">Sass</h4>
 
+<p><a href="http://sass-lang.com/">http://sass-lang.com/</a></p>
+
 <p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
 
-<p>See in detail:</p>
+<h4 id="toc_17">JSX for React</h4>
+
+<p><a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a></p>
+
+<p>If you use JSX templates for React, put *.jsx files under <code>WEB-INF/assets/jsx</code>.</p>
+
+<p>See in detail: </p>
 
 <p><a href="/documentation/assets.html">Assets Support</a></p>
 
 <hr/>
 
-<h3 id="toc_17">Testing support</h3>
+<h3 id="toc_18">Testing support</h3>
 
 <p>You can use Scalatra&rsquo;s great test support. Some optional feature is provided by skinny-test library.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
@@ -356,7 +369,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_18">FactoryGirl</h3>
+<h3 id="toc_19">FactoryGirl</h3>
 
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
@@ -377,7 +390,7 @@ yo skinny
 
 <hr/>
 
-<h2 id="toc_19">License</h2>
+<h2 id="toc_20">License</h2>
 
 <p>(The MIT License)</p>
 
