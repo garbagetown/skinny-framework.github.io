@@ -103,7 +103,7 @@
 
 <span class="n">val</span> <span class="n">country</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">countryyy</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
 
-<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withValues</span><span class="o">(</span><span class="err">&#39;</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">memberFactory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withVariables</span><span class="o">(</span><span class="err">&#39;</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
 <span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberFactory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">&#39;</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
 </pre>
 <p>In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
@@ -126,7 +126,46 @@ skill {
 </pre>
 <hr/>
 
-<h3 id="toc_3">More Examples:</h3>
+<h3 id="toc_3">Methods</h3>
+
+<p>You should be aware that FactoryGirl has following two methods.</p>
+
+<hr/>
+
+<h3 id="toc_4">withVariables</h3>
+
+<p>Attributes passed by this method will be used for replacing variables such as &ldquo;#{userId}&rdquo; in factories.conf.</p>
+<pre class="highlight java"><span class="cm">/* factories.conf
+member {
+  name=&quot;Alice&quot;
+  countryId=&quot;#{cntId}&quot;
+}
+ */</span>
+<span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withVariables</span><span class="o">(</span>
+  <span class="err">&#39;</span><span class="n">cntId</span> <span class="o">-&gt;</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">).</span><span class="na">create</span><span class="o">().</span><span class="na">id</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+
+<span class="c1">// will use name: Alice, countryId: 234</span>
+</pre>
+<hr/>
+
+<h3 id="toc_5">withAttributes</h3>
+
+<p>Thesse attributes will overwrite the values in factories.conf. </p>
+<pre class="highlight java"><span class="cm">/* factories.conf
+member {
+  name=&quot;Alice&quot;
+  country=&quot;USA&quot;
+}
+ */</span>
+<span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">&#39;</span><span class="n">country</span> <span class="o">-&gt;</span> <span class="s">&quot;Japan&quot;</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+<span class="c1">// will use name: Alice, country: Japan</span>
+
+<span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">&#39;</span><span class="n">country</span> <span class="o">-&gt;</span> <span class="s">&quot;Japan&quot;</span><span class="o">)</span>
+<span class="c1">// do the same thing!</span>
+</pre>
+<hr/>
+
+<h3 id="toc_6">More Examples:</h3>
 
 <p>You can find more examples here:</p>
 
