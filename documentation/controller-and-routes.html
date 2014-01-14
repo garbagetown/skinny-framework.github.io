@@ -34,6 +34,7 @@
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
@@ -57,6 +58,7 @@
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/documentation/packaging.html">Packaging</a></p>
             <p><a href="/contribution.html">Contribution</a></p>
           </div>
         </div>
@@ -298,160 +300,15 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h2 id="toc_6">How to Do It</h2>
+<h3 id="toc_6">beforeAction/afterAction Filters</h3>
 
-<p>Basically, you will use Scalatra&rsquo;s DSL.</p>
+<p>Thoguh Scalatra has before/after filters by default. But we recommend Skinny users to use Skinny&rsquo;s beforeAction/afterAction filters.</p>
 
-<p><a href="http://www.scalatra.org/2.2/guides/">http://www.scalatra.org/2.2/guides/</a></p>
+<p>The reason is that Scalatra&rsquo;s filters might effect other controllers that are defined below in ScalatraBootstrap.scala and it&rsquo;s not easy to figure out where each controller&rsquo;s before/after affects completely.</p>
 
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
+<p>So if you need filters that are similar to Rails filters, just use Skinny filters.</p>
 
-<hr/>
-
-<h3 id="toc_7">(Query/Form/Path) Parameters</h3>
-
-<h4 id="toc_8">params</h4>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">id:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAsOrElse</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
-
-<span class="n">val</span> <span class="nl">ids:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Seq</span><span class="o">[</span><span class="n">Int</span><span class="o">]]</span> <span class="o">=</span> <span class="n">multiParams</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">&quot;ids&quot;</span><span class="o">)</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParams">/api/index.html#org.scalatra.ScalatraParams</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedParams">/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedParams</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams">/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams</a></p>
-
-<h4 id="toc_9">multiParams(&ldquo;splat&rdquo;)</h4>
-<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;/say/*/to/*&quot;</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches &quot;GET /say/hello/to/world&quot;</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;splat&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;hello&quot;, &quot;world&quot;)</span>
-<span class="o">}</span>
-
-<span class="n">get</span><span class="o">(</span><span class="s">&quot;/download/*.*&quot;</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches &quot;GET /download/path/to/file.xml&quot;</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;splat&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;path/to/file&quot;, &quot;xml&quot;)</span>
-<span class="o">}</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
-
-<p><a href="http://www.scalatra.org/guides/http/routes.html">/guides/http/routes.html</a></p>
-
-<h4 id="toc_10">multiParams(&ldquo;captures&rdquo;)</h4>
-<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;&quot;&quot;^\/f(.*)/b(.*)&quot;&quot;&quot;</span><span class="o">.</span><span class="na">r</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches &quot;GET /foo/bar&quot;</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;captures&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;oo&quot;, &quot;ar&quot;)</span>
-<span class="o">}</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
-
-<p><a href="http://www.scalatra.org/guides/http/routes.html">/guides/http/routes.html</a></p>
-
-<hr/>
-
-<h3 id="toc_11">Cookies</h3>
-<pre class="highlight java"><span class="n">def</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">cookies</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
-  <span class="n">cookies</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
-<span class="o">}</span>
-
-<span class="n">def</span> <span class="n">helloWithOptions</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">implicit</span> <span class="n">val</span> <span class="n">options</span> <span class="o">=</span> <span class="n">CookieOptions</span><span class="o">(</span><span class="n">secure</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
-  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span><span class="o">)</span>
-  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span><span class="o">)(</span><span class="n">options</span><span class="o">)</span>
-<span class="o">}</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.SweetCookies">/api/index.html#org.scalatra.SweetCookies</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/org/scalatra/CookieOptions.html">/api/org/scalatra/CookieOptions.html</a></p>
-
-<hr/>
-
-<h3 id="toc_12">Request/Response Headers</h3>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
-<pre class="highlight java"><span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
-<span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichResponse">/api/index.html#org.scalatra.servlet.RichResponse</a></p>
-
-<hr/>
-
-<h3 id="toc_13">Session</h3>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session(&#39;name)</span>
-<span class="n">session</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
-<span class="n">session</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.RichSession">/api/index.html#org.scalatra.RichSession</a></p>
-
-<hr/>
-
-<h3 id="toc_14">Flash</h3>
-<pre class="highlight java"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">=</span> <span class="n">value</span>
-<span class="n">flash</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
-<span class="n">flash</span><span class="o">.</span><span class="na">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
-</pre>
-<p><a href="http://www.scalatra.org/guides/http/flash.html">/guides/http/flash.html</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.FlashMap">/api/index.html#org.scalatra.FlashMap</a></p>
-
-<hr/>
-
-<h3 id="toc_15">Request Body</h3>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">body:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">body</span>
-<span class="n">val</span> <span class="nl">stream:</span> <span class="n">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">inputStream</span> <span class="c1">// raw HTTP POST data</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
-
-<hr/>
-
-<h3 id="toc_16">File Upload</h3>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">FileUploadSupport</span> <span class="o">{</span>
-
-  <span class="n">def</span> <span class="n">upload</span> <span class="o">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;file&quot;</span><span class="o">)</span> <span class="n">match</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="n">Some</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="o">=&gt;</span>
-      <span class="n">Ok</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">Map</span><span class="o">(</span>
-        <span class="s">&quot;Content-Type&quot;</span>        <span class="o">-&gt;</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">contentType</span><span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="s">&quot;application/octet-stream&quot;</span><span class="o">)),</span>
-        <span class="s">&quot;Content-Disposition&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="s">&quot;attachment; filename=\&quot;&quot;</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">name</span> <span class="o">+</span> <span class="s">&quot;\&quot;&quot;</span><span class="o">)</span>
-      <span class="o">))</span>
-    <span class="k">case</span> <span class="n">None</span> <span class="o">=&gt;</span>
-      <span class="n">BadRequest</span><span class="o">(</span><span class="n">displayPage</span><span class="o">(</span>
-        <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-          <span class="n">Hey</span><span class="o">!</span> <span class="n">You</span> <span class="n">forgot</span> <span class="n">to</span> <span class="n">select</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
-        <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;))</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</pre>
-<p><a href="http://www.scalatra.org/guides/formats/upload.html">/guides/formats/upload.html</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.fileupload.FileUploadSupport">/api/index.html#org.scalatra.fileupload.FileUploadSupport</a></p>
-
-<hr/>
-
-<h3 id="toc_17">Response handling</h3>
-<pre class="highlight java"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
-<span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="o">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;foo&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;bar&quot;</span><span class="o">),</span> <span class="n">reason</span> <span class="o">=</span> <span class="s">&quot;why&quot;</span><span class="o">)</span>
-
-<span class="n">redirect</span><span class="o">(</span><span class="s">&quot;/top&quot;</span><span class="o">)</span> <span class="c1">// 302</span>
-<span class="n">redirect301</span><span class="o">(</span><span class="s">&quot;/new_url&quot;</span><span class="o">)</span> <span class="c1">// 301</span>
-<span class="n">redirect302</span><span class="o">(</span><span class="s">&quot;/somewhere&quot;</span><span class="o">)</span> <span class="c1">// 302</span>
-<span class="n">redirect303</span><span class="o">(</span><span class="s">&quot;/complete&quot;</span><span class="o">)</span> <span class="c1">// 303</span>
-</pre>
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
-
-<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ActionResult">/index.html#org.scalatra.ActionResult</a></p>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala">/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala</a></p>
-
-<p><a href="https://github.com/scalatra/scalatra/blob/2.2.x_2.10/core/src/main/scala/org/scalatra/ActionResult.scala">/core/src/main/scala/org/scalatra/ActionResult.scala</a></p>
-
-<h3 id="toc_18">Before/After Filters</h3>
-
-<p>Scalatra has filters by default. However, we highly recommend Skinny users to use Skinny&rsquo;s filters.</p>
-
-<h5 id="toc_19">Scalatra filters</h5>
+<h5 id="toc_7">Scalatra&rsquo;s before/after filters</h5>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -460,7 +317,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>after(transformers)(action)</li>
 </ul>
 
-<h5 id="toc_20">Skinny filters</h5>
+<h5 id="toc_8">Skinny&rsquo;s beforeAction/afterAction filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
@@ -489,9 +346,213 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <span class="o">}</span>
 </pre>
-<p>Scalatra&rsquo;s filters might effect other controllers.</p>
+<hr/>
 
-<p>If you need filters that are similar to Rails filters, just use Skinny filters.</p>
+<h2 id="toc_9">SkinnyFilter</h2>
+
+<p>SkinnyFilter is our original filter to enable easily handling before/after/error for each controller. You can apply the same beforeAction/afterAction/error filters to several controllers by just mixing SkinnyFilter based traits.</p>
+
+<p>Contrary to your expectations, Scalatra doesn&rsquo;t run all the handlers for after and error. Only the first one would be applied and the others are just ignored. We think it&rsquo;s difficult to be aware of this specification (it&rsquo;s not a bug but by design). So SkinnyFilter&rsquo;s before/after/error handlers would be always applied. </p>
+
+<p>For instance, in skinny-blank-app, ErrrorPageFilter is applied to ApplicationController. </p>
+<pre class="highlight java"><span class="n">trait</span> <span class="n">ApplicationController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
+  <span class="n">with</span> <span class="n">ErrorPageFilter</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</pre>
+<p>ErrorPageFilter is as follows. It&rsquo;s pretty easy to customized such a filter (e.g. adding error notification). Isn&rsquo;t it?</p>
+<pre class="highlight java"><span class="n">trait</span> <span class="n">ErrorPageFilter</span> <span class="kd">extends</span> <span class="n">SkinnyRenderingFilter</span> <span class="o">{</span>
+  <span class="c1">// appends error filter in order</span>
+  <span class="n">addRenderingErrorFilter</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nl">e:</span> <span class="n">Throwable</span> <span class="o">=&gt;</span>
+      <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span>
+      <span class="k">try</span> <span class="o">{</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="n">render</span><span class="o">(</span><span class="s">&quot;/error/500&quot;</span><span class="o">)</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nl">e:</span> <span class="n">Exception</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">e</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>It just outputs error logging, set status as 500 and renders &ldquo;/error/500.html.ssp&rdquo; or similar templates. <code>SkinnyRenderingFilter</code> is a sub trait of <code>SkinnyFilter</code>. <code>SkinnyFilter</code>&rsquo;s response value is always ignored. But <code>SkinnyRenderingFilter</code> can return response body like above.</p>
+
+<p>Second example is <code>TxPerRequestFilter</code> which enables to apply open-session-in-view pattern to your apps.</p>
+<pre class="highlight java"><span class="n">trait</span> <span class="n">TxPerRequestFilter</span> <span class="kd">extends</span> <span class="n">SkinnyFilter</span> <span class="n">with</span> <span class="n">Logging</span> <span class="o">{</span>
+  <span class="n">def</span> <span class="nl">cp:</span> <span class="n">ConnectionPool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>
+
+  <span class="n">def</span> <span class="n">begin</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">db</span> <span class="o">=</span> <span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">cp</span><span class="o">.</span><span class="na">borrow</span><span class="o">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="na">begin</span><span class="o">()</span>
+  <span class="o">}</span>
+
+  <span class="n">addErrorFilter</span> <span class="o">{</span> <span class="k">case</span> <span class="nl">e:</span> <span class="n">Throwable</span> <span class="o">=&gt;</span>
+    <span class="n">Option</span><span class="o">(</span><span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">load</span><span class="o">()).</span><span class="na">foreach</span> <span class="o">{</span> <span class="n">db</span> <span class="o">=&gt;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="na">isTxNotActive</span><span class="o">)</span> <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="n">_</span><span class="o">.</span><span class="na">rollbackIfActive</span><span class="o">())</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="n">def</span> <span class="n">commit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">db</span> <span class="o">=</span> <span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">load</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="na">isTxNotActive</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="n">_</span><span class="o">.</span><span class="na">commit</span><span class="o">())</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="n">beforeAction</span><span class="o">()(</span><span class="n">begin</span><span class="o">)</span>
+  <span class="n">afterAction</span><span class="o">()(</span><span class="n">commit</span><span class="o">)</span>
+<span class="o">}</span>
+</pre>
+<hr/>
+
+<h2 id="toc_10">Examples to do that</h2>
+
+<p>Basically, you will use Scalatra&rsquo;s DSL.</p>
+
+<p><a href="http://www.scalatra.org/2.2/guides/">http://www.scalatra.org/2.2/guides/</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase</a></p>
+
+<hr/>
+
+<h3 id="toc_11">(Query/Form/Path) Parameters</h3>
+
+<h4 id="toc_12">params</h4>
+<pre class="highlight java"><span class="n">val</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
+<span class="n">val</span> <span class="nl">id:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
+<span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAsOrElse</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
+
+<span class="n">val</span> <span class="nl">ids:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Seq</span><span class="o">[</span><span class="n">Int</span><span class="o">]]</span> <span class="o">=</span> <span class="n">multiParams</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">&quot;ids&quot;</span><span class="o">)</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParams">/api/index.html#org.scalatra.ScalatraParams</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedParams">/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedParams</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams">/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams</a></p>
+
+<h4 id="toc_13">multiParams(&ldquo;splat&rdquo;)</h4>
+<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;/say/*/to/*&quot;</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Matches &quot;GET /say/hello/to/world&quot;</span>
+  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;splat&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;hello&quot;, &quot;world&quot;)</span>
+<span class="o">}</span>
+
+<span class="n">get</span><span class="o">(</span><span class="s">&quot;/download/*.*&quot;</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Matches &quot;GET /download/path/to/file.xml&quot;</span>
+  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;splat&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;path/to/file&quot;, &quot;xml&quot;)</span>
+<span class="o">}</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
+
+<p><a href="http://www.scalatra.org/guides/http/routes.html">/guides/http/routes.html</a></p>
+
+<h4 id="toc_14">multiParams(&ldquo;captures&rdquo;)</h4>
+<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;&quot;&quot;^\/f(.*)/b(.*)&quot;&quot;&quot;</span><span class="o">.</span><span class="na">r</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Matches &quot;GET /foo/bar&quot;</span>
+  <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;captures&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;oo&quot;, &quot;ar&quot;)</span>
+<span class="o">}</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
+
+<p><a href="http://www.scalatra.org/guides/http/routes.html">/guides/http/routes.html</a></p>
+
+<hr/>
+
+<h3 id="toc_15">Cookies</h3>
+<pre class="highlight java"><span class="n">def</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="n">cookies</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
+  <span class="n">cookies</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
+<span class="o">}</span>
+
+<span class="n">def</span> <span class="n">helloWithOptions</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="n">implicit</span> <span class="n">val</span> <span class="n">options</span> <span class="o">=</span> <span class="n">CookieOptions</span><span class="o">(</span><span class="n">secure</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span><span class="o">)</span>
+  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span><span class="o">)(</span><span class="n">options</span><span class="o">)</span>
+<span class="o">}</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.SweetCookies">/api/index.html#org.scalatra.SweetCookies</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/org/scalatra/CookieOptions.html">/api/org/scalatra/CookieOptions.html</a></p>
+
+<hr/>
+
+<h3 id="toc_16">Request/Response Headers</h3>
+<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
+<pre class="highlight java"><span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
+<span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichResponse">/api/index.html#org.scalatra.servlet.RichResponse</a></p>
+
+<hr/>
+
+<h3 id="toc_17">Session</h3>
+<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session(&#39;name)</span>
+<span class="n">session</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
+<span class="n">session</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.RichSession">/api/index.html#org.scalatra.RichSession</a></p>
+
+<hr/>
+
+<h3 id="toc_18">Flash</h3>
+<pre class="highlight java"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">flash</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
+<span class="n">flash</span><span class="o">.</span><span class="na">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
+</pre>
+<p><a href="http://www.scalatra.org/guides/http/flash.html">/guides/http/flash.html</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.FlashMap">/api/index.html#org.scalatra.FlashMap</a></p>
+
+<hr/>
+
+<h3 id="toc_19">Request Body</h3>
+<pre class="highlight java"><span class="n">val</span> <span class="nl">body:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">body</span>
+<span class="n">val</span> <span class="nl">stream:</span> <span class="n">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">inputStream</span> <span class="c1">// raw HTTP POST data</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
+
+<hr/>
+
+<h3 id="toc_20">File Upload</h3>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">FileUploadSupport</span> <span class="o">{</span>
+
+  <span class="n">def</span> <span class="n">upload</span> <span class="o">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;file&quot;</span><span class="o">)</span> <span class="n">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">Some</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="o">=&gt;</span>
+      <span class="n">Ok</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">Map</span><span class="o">(</span>
+        <span class="s">&quot;Content-Type&quot;</span>        <span class="o">-&gt;</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">contentType</span><span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="s">&quot;application/octet-stream&quot;</span><span class="o">)),</span>
+        <span class="s">&quot;Content-Disposition&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="s">&quot;attachment; filename=\&quot;&quot;</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">name</span> <span class="o">+</span> <span class="s">&quot;\&quot;&quot;</span><span class="o">)</span>
+      <span class="o">))</span>
+    <span class="k">case</span> <span class="n">None</span> <span class="o">=&gt;</span>
+      <span class="n">BadRequest</span><span class="o">(</span><span class="n">displayPage</span><span class="o">(</span>
+        <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+          <span class="n">Hey</span><span class="o">!</span> <span class="n">You</span> <span class="n">forgot</span> <span class="n">to</span> <span class="n">select</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
+        <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p><a href="http://www.scalatra.org/guides/formats/upload.html">/guides/formats/upload.html</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.fileupload.FileUploadSupport">/api/index.html#org.scalatra.fileupload.FileUploadSupport</a></p>
+
+<hr/>
+
+<h3 id="toc_21">Response handling</h3>
+<pre class="highlight java"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+<span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="o">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;foo&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;bar&quot;</span><span class="o">),</span> <span class="n">reason</span> <span class="o">=</span> <span class="s">&quot;why&quot;</span><span class="o">)</span>
+
+<span class="n">redirect</span><span class="o">(</span><span class="s">&quot;/top&quot;</span><span class="o">)</span> <span class="c1">// 302</span>
+<span class="n">redirect301</span><span class="o">(</span><span class="s">&quot;/new_url&quot;</span><span class="o">)</span> <span class="c1">// 301</span>
+<span class="n">redirect302</span><span class="o">(</span><span class="s">&quot;/somewhere&quot;</span><span class="o">)</span> <span class="c1">// 302</span>
+<span class="n">redirect303</span><span class="o">(</span><span class="s">&quot;/complete&quot;</span><span class="o">)</span> <span class="c1">// 303</span>
+</pre>
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
+
+<p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ActionResult">/index.html#org.scalatra.ActionResult</a></p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala">/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala</a></p>
+
+<p><a href="https://github.com/scalatra/scalatra/blob/2.2.x_2.10/core/src/main/scala/org/scalatra/ActionResult.scala">/core/src/main/scala/org/scalatra/ActionResult.scala</a></p>
 
             <hr/>
             <div class="alert alert-info small"> 

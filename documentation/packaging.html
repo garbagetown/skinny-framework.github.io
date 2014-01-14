@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>Testing - Skinny Framework</title>
+    <title>Packaging - Skinny Framework</title>
     <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
@@ -65,30 +65,63 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2 id="toc_0">Testing</h2>
+            <h2 id="toc_0">Packaging</h2>
 
 <hr/>
 
-<h3 id="toc_1">Testable Application</h3>
+<h3 id="toc_1">Servlet application</h3>
 
-<p>You can use Scalatra&rsquo;s great test support. Some optional feature is provided by skinny-test library.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
-  <span class="n">addFilter</span><span class="o">(</span><span class="n">MembersController</span><span class="o">,</span> <span class="s">&quot;/*&quot;</span><span class="o">)</span>
+<p>Skinny applications runs on any Serlvet containers. </p>
 
-  <span class="n">it</span> <span class="n">should</span> <span class="s">&quot;show index page&quot;</span> <span class="n">in</span> <span class="o">{</span>
-    <span class="n">withSession</span><span class="o">(</span><span class="s">&quot;userId&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span>
+<p>So what you need to do is just creating war file and deploying it to your production servers.</p>
+
+<hr/>
+
+<h3 id="toc_2">Packaging war file</h3>
+
+<p>It&rsquo;s utmost simple to do that. Just </p>
+<pre class="highlight text">./skinny package
 </pre>
-<p>You can see some examples here:</p>
+<p>You will see created war file under <code>build/target/scala_2.10</code>.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/tree/master/example/src/test/scala">example/src/test/scala</a></p>
+<p>If you deploy war file to maven repository (e.g. Artifactory), just <code>./skinny publish</code> after configuring build settings (default settings doesn&rsquo;t work for you).</p>
 
-<p>See also:</p>
+<hr/>
 
-<p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+<h3 id="toc_3">Creating stand alone app</h3>
+
+<p>What&rsquo;s more, you can easily create stand alone jar file by just run the following command: </p>
+<pre class="highlight text">./skinny package:standalone
+</pre>
+<p>After a while, you will get standalone jar file. </p>
+<pre class="highlight text">java -jar standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
+</pre>
+<p>You can pass configuration via system properties. Otherwise, it&rsquo;s also possible to use environment variables.</p>
+<pre class="highlight text">java -jar -Dskinny.port=9000 -Dskinny.env=production \
+  standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
+</pre>
+<hr/>
+
+<h3 id="toc_4">Configuration</h3>
+
+<p>Options to configure your Skinny applications. You can pass the following values from environment variables or system properties.</p>
+
+<hr/>
+
+<h4 id="toc_5">skinny.env</h4>
+
+<p>Default value is &ldquo;development&rdquo;. If skinny.env is &ldquo;production&rdquo;, application load the &ldquo;production&rdquo; settings from &ldquo;src/main/resources/application.conf&rdquo;.</p>
+
+<p>You can access the value via <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/SkinnyEnv.scala"><code>skinny.SkinnyEnv</code></a> in application.</p>
+
+<p>default: development
+- skinny.port: for stand alone apps</p>
+
+<hr/>
+
+<h4 id="toc_6">skinny.port (only for stand alone apps)</h4>
+
+<p>Default value is 8080. You can customize the port number stand alone app server listens.</p>
 
             <hr/>
             <div class="alert alert-info small"> 
