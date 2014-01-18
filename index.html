@@ -317,7 +317,38 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_13">Assets Support (CoffeeScript, LESS, Sass and JXS for React)</h3>
+<h3 id="toc_13">Skinny Mailer</h3>
+
+<hr/>
+
+<p>SkinnyMailer makes sending emails pretty easy.</p>
+<pre class="highlight java"><span class="n">val</span> <span class="n">config</span> <span class="o">=</span> <span class="n">SkinnyMailerConfig</span><span class="o">.</span><span class="na">default</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
+  <span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="o">)</span>
+<span class="n">val</span> <span class="n">mailer</span> <span class="o">=</span> <span class="n">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
+
+<span class="n">mailer</span>
+  <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="s">&quot;info@skinny-framework.org&quot;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">to</span><span class="o">(</span><span class="s">&quot;you@example.com&quot;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">cc</span><span class="o">(</span><span class="s">&quot;support@skinny-framework.org&quot;</span><span class="o">,</span> <span class="s">&quot;xxx@example.com&quot;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">subject</span><span class="o">(</span><span class="s">&quot;Skinny Framework 1.0.0 is out!&quot;</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">body</span> <span class="o">{</span>
+    <span class="s">&quot;&quot;&quot;Hi all,
+    |
+    |We&#39;re very proud to announce that Sinny Framework version 1.0.0 is relaesed.
+    |
+    |.....
+    |
+    |Best,
+    |Skinny Framework Team
+    |&quot;&quot;&quot;</span>
+  <span class="o">}.</span><span class="na">deliver</span><span class="o">()</span>
+</pre>
+<p>See in detail: <a href="/documentation/mail.html">Mail</a></p>
+
+<hr/>
+
+<h3 id="toc_14">Assets Support (CoffeeScript, LESS, Sass and JXS for React)</h3>
 
 <hr/>
 
@@ -349,7 +380,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_14">Testing Support</h3>
+<h3 id="toc_15">Testing Support</h3>
 
 <hr/>
 
@@ -368,7 +399,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_15">FactoryGirl</h3>
+<h3 id="toc_16">FactoryGirl</h3>
 
 <hr/>
 
@@ -389,7 +420,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="toc_16">Under The MIT License</h3>
+<h3 id="toc_17">Under The MIT License</h3>
 
 <hr/>
 
