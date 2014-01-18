@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -65,7 +67,9 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2 id="toc_0">Assets Support</h2>
+            <h1 id="toc_0">Assets Support</h1>
+
+<hr/>
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
 <img alt="LESS Logo" src="/images/less.png" />
@@ -93,13 +97,18 @@
 
 <hr/>
 
-<h3 id="toc_1">CoffeeScript</h3>
+<h2 id="toc_1">CoffeeScript</h2>
+
+<hr/>
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" /></p>
 
 <p><a href="http://coffeescript.org/">http://coffeescript.org/</a></p>
 
-<p>If you use CoffeeScript, just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
+<p>Skinny tries to find native compiler (npm install -g coffee-script) at first.
+If it&rsquo;s absent, Skinny uses own compiler on the Rhino JS engine. So you don&rsquo;t need preparing CoffeeScript compiler in advance.</p>
+
+<p>Easy to start! Just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
 <pre class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
 </span><span class="nx">echo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">v</span>
 <span class="nx">echo</span> <span class="s">&quot;foo&quot;</span>
@@ -108,13 +117,18 @@
 
 <hr/>
 
-<h3 id="toc_2">LESS</h3>
+<h2 id="toc_2">LESS</h2>
+
+<hr/>
 
 <p><img alt="LESS Logo" src="/images/less.png" /></p>
 
 <p><a href="http://lesscss.org/">http://lesscss.org/</a></p>
 
-<p>If you use LESS, just put *.less files under <code>WEB-INF/assets/less</code>:</p>
+<p>Skinny tries to find native compiler (npm install -g less) at first.
+If it&rsquo;s absent, Skinny uses own compiler on the Rhino JS engine. So you don&rsquo;t need preparing LESS compiler in advance.</p>
+
+<p>Easy to start! Just put *.less files under <code>WEB-INF/assets/less</code>:</p>
 <pre class="highlight text">// src/main/webapp/WEB-INF/assets/less/box.less
 @base: #f938ab;
 .box {
@@ -126,13 +140,19 @@
 
 <hr/>
 
-<h3 id="toc_3">Sass</h3>
+<h2 id="toc_3">Sass</h2>
+
+<hr/>
 
 <p><img alt="Sass Logo" src="/images/sass.png" /></p>
 
 <p><a href="http://sass-lang.com/">http://sass-lang.com/</a></p>
 
-<p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
+<p>Sass is implemented by Ruby and it works on the Ruby runtime. You need preparing Ruby runtime and Sass native compiler in advance.</p>
+
+<p>And then, just put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>.</p>
+
+<p>If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
 <pre class="highlight scss"><span class="c1">// src/main/webapp/WEB-INF/assets/scss/main.scss
 </span><span class="nv">$font-stack</span><span class="p">:</span>    <span class="n">Helvetica</span><span class="o">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
 <span class="nv">$primary-color</span><span class="p">:</span> <span class="mh">#333</span><span class="p">;</span>
@@ -145,13 +165,18 @@
 
 <hr/>
 
-<h3 id="toc_4">JSX for React</h3>
+<h2 id="toc_4">JSX for React</h2>
+
+<hr/>
 
 <p><img alt="React Logo" src="/images/react.png" /></p>
 
 <p><a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a></p>
 
-<p>If you use JSX templates for React, put *.jsx files under <code>WEB-INF/assets/jsx</code>:</p>
+<p>Skinny tries to find native compiler (npm install -g react-tools) at first.
+If it&rsquo;s absent, Skinny uses own compiler on the Rhino JS engine. So you don&rsquo;t need preparing JSX compiler in advance.</p>
+
+<p>Easy to start! Just put *.jsx files under <code>WEB-INF/assets/jsx</code>:</p>
 <pre class="highlight xml">// src/main/webapp/WEB-INF/assets/jsx/react-example.jsx
 /** @jsx React.DOM */
 React.renderComponent(
@@ -163,7 +188,9 @@ React.renderComponent(
 
 <hr/>
 
-<h3 id="toc_5">Adding compilers</h3>
+<h2 id="toc_5">Adding Other Compilers</h2>
+
+<hr/>
 
 <p>If you need other script support, you can add compiler to AssetsController.</p>
 

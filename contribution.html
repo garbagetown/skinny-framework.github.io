@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -69,11 +71,15 @@
 
 <hr/>
 
-<h3 id="toc_1">How to contribute skinny-framework.org?</h3>
+<h3 id="toc_1">Website</h3>
+
+<hr/>
 
 <h4 id="toc_2">fork skinny-framework.github.io project</h4>
 
 <p>Fork <a href="https://github.com/skinny-framework/skinny-framework.github.io">https://github.com/skinny-framework/skinny-framework.github.io</a>.</p>
+
+<hr/>
 
 <h4 id="toc_3">change under the website directory</h4>
 
@@ -86,26 +92,39 @@ bundle exec middleman server
 </pre>
 <p>Access <code>http://localhost:4567</code> from your browser.</p>
 
+<hr/>
+
 <h4 id="toc_4">make a pull request</h4>
 
 <p>Create a branch to request, and send your pull request to <code>develop</code> branch (not <code>master</code> branch).</p>
 
 <hr/>
 
-<h3 id="toc_5">How to contribute libraries?</h3>
+<h3 id="toc_5">Libraries</h3>
+
+<hr/>
 
 <h4 id="toc_6">fork skinny-framework project</h4>
 
 <p>Fork <a href="https://github.com/skinny-framework/skinny-framework">https://github.com/skinny-framework/skinny-framework</a>.</p>
 <pre class="highlight text">git clone [your forked repository].
 </pre>
+<hr/>
+
 <h4 id="toc_7">modify and write tests</h4>
 
 <p>Modify code &amp; write test.</p>
 
+<hr/>
+
 <h4 id="toc_8">run all the existing tests</h4>
 
 <p>Run all the tests at least with H2 database.</p>
+<pre class="highlight shell">rm -rf db/example-test<span class="k">*</span>
+./skinny db:migrate <span class="nb">test
+</span>sbt <span class="nb">test</span>
+</pre>
+<hr/>
 
 <h4 id="toc_9">make a pull request</h4>
 

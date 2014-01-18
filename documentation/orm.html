@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -70,6 +72,8 @@
 <hr/>
 
 <h3 id="toc_1">Skinny-ORM</h3>
+
+<hr/>
 
 <p>Skinny provides you Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>. This is a portable library. So you can use it with Play2, pure Scalatra, Lift and any other frameworks.</p>
 
@@ -131,6 +135,7 @@
 
 <span class="c1">// ------------</span>
 <span class="c1">// find by condition</span>
+
 <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAllBy</span><span class="o">(</span>
   <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupName</span><span class="o">,</span> <span class="s">&quot;scalajp&quot;</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">delete</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span>
 
@@ -139,19 +144,34 @@
 
 <span class="c1">// ------------</span>
 <span class="c1">// count</span>
-<span class="n">val</span> <span class="nl">allCount:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countAll</span><span class="o">()</span>
 
-<span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">.</span><span class="na">apply</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">shopId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 
-<span class="n">val</span> <span class="n">count</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">countryId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">shopId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">cancelled</span><span class="o">,</span> <span class="kc">false</span><span class="o">)).</span><span class="na">distinctCount</span><span class="o">(</span><span class="err">&#39;</span><span class="n">customerId</span><span class="o">)</span>
+
+<span class="c1">// ------------</span>
+<span class="c1">// calcuations</span>
+<span class="c1">// min, max, average and sum</span>
+
+<span class="n">Order</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="err">&#39;</span><span class="n">amount</span><span class="o">)</span>
+
+<span class="n">Product</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">ge</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">createdAt</span><span class="o">,</span> <span class="n">startDate</span><span class="o">)).</span><span class="na">max</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">average</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
+
+<span class="n">Product</span><span class="o">.</span><span class="na">calculate</span><span class="o">(</span><span class="n">sqls</span><span class="s">&quot;original_func(${p.userId})&quot;</span><span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// create with strong parameters</span>
+
 <span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Bob&quot;</span><span class="o">)</span>
 <span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// create with unsafe parameters</span>
+
 <span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
   <span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
   <span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Chris&quot;</span><span class="o">,</span>
@@ -164,23 +184,38 @@
 
 <span class="c1">// ------------</span>
 <span class="c1">// update with unsafe parameters</span>
+
 <span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span>
+
 <span class="c1">// update by condition</span>
+
 <span class="n">Member</span><span class="o">.</span><span class="na">updateBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">)).</span><span class="na">withAttribtues</span><span class="o">(</span><span class="err">&#39;</span><span class="n">groupId</span> <span class="o">-&gt;</span> <span class="mi">234</span><span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// delete</span>
+
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
-<span class="c1">// delete by condition</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 </pre>
 <p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">skinny.orm.feature.CRUDFeature.scala</a></p>
 
 <hr/>
 
-<h4 id="toc_4">Associations</h4>
+<h3 id="toc_4">Associations</h3>
 
-<p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany(Through)</code> to the companion.</p>
+<hr/>
+
+<p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany(Through)</code> to the companion. </p>
+
+<p>Examples: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
+
+<p>Be aware of Skinny ORM&rsquo;s concept that basically joins tables to resolve associations to reduce N+1 queries. We recommend enabling query logging for development.</p>
+
+<p><a href="http://scalikejdbc.org/documentation/query-inspector.html">http://scalikejdbc.org/documentation/query-inspector.html</a></p>
+
+<p>Typically defining associations are fundamentally not so simple, so you might be confused when specifying these definitions. Understanding how ScalikeJDBC&rsquo;s join queries and One-to-X APIs work may be a short cut.</p>
+
+<p><a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span>
   <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
 
@@ -204,7 +239,7 @@
 
 <hr/>
 
-<h5 id="toc_5">Entity Equality</h5>
+<h4 id="toc_5">Entity Equality</h4>
 
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
@@ -221,9 +256,13 @@
 </pre>
 <p>If you missed above implementation, one-to-many relationships doesn&rsquo;t work as you expect.</p>
 
+<p>See also detail explanation here: <a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
+
 <hr/>
 
-<h4 id="toc_6">Eager Loading</h4>
+<h3 id="toc_6">Eager Loading</h3>
+
+<hr/>
 
 <p>You can call <code>includes</code> for eager loading. But nested entities&rsquo;s eager loading is not supported yet.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -237,11 +276,15 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
 </pre>
+<p>Examples: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
+
 <p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">skinny.orm.feature.IncludesFeature.scala</a></p>
 
 <hr/>
 
-<h4 id="toc_7">Other Settings</h4>
+<h3 id="toc_7">Other Configurations</h3>
+
+<hr/>
 
 <p>Skinny ORM provides the folllowing settings to overwrite.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">GroupMember</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -302,7 +345,9 @@
 </pre>
 <hr/>
 
-<h4 id="toc_8">Dynamic Table Name</h4>
+<h3 id="toc_8">Dynamic Table Name</h3>
+
+<hr/>
 
 <p><code>#withTableName</code> enables using another table name only for current query.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Order</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Order</span><span class="o">]</span> <span class="o">{</span>
@@ -311,16 +356,18 @@
 <span class="o">}</span>
 
 <span class="c1">// default: orders</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">countAll</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
 
 <span class="c1">// other table: orders_2012</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">&quot;orders_2012&quot;</span><span class="o">).</span><span class="na">countAll</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">&quot;orders_2012&quot;</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
 </pre>
 <p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">skinny.orm.feature.DynamicTableNameFeature.scala</a></p>
 
 <hr/>
 
-<h4 id="toc_9">Adding Methods</h4>
+<h3 id="toc_9">Adding Methods</h3>
+
+<hr/>
 
 <p>If you need to add methods, just write methods that use <code>#findBy</code>, <code>#countBy</code> or ScalikeJDBC&#39; APIs directly.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -347,7 +394,9 @@
 
 <hr/>
 
-<h4 id="toc_10">Using Non-Numerical or Typed Primary Key</h4>
+<h3 id="toc_10">Using Non-Numerical or Typed Primary Key</h3>
+
+<hr/>
 
 <p>SkinnyMapper expects Long (bigint) value named <code>id</code> for primary key column.</p>
 
@@ -431,7 +480,9 @@
 
 <hr/>
 
-<h4 id="toc_11">Timestamps</h4>
+<h3 id="toc_11">ActiveRecord-like Timestamps</h3>
+
+<hr/>
 
 <p><code>timetamps</code> from ActiveRecord is available as the <code>TimestampsFeature</code> trait. </p>
 
@@ -452,7 +503,9 @@
 
 <hr/>
 
-<h4 id="toc_12">Soft Deletion</h4>
+<h3 id="toc_12">Soft Deletion</h3>
+
+<hr/>
 
 <p>Soft delete support is also available. </p>
 
@@ -470,7 +523,9 @@
 
 <hr/>
 
-<h4 id="toc_13">Optimistic Lock</h4>
+<h3 id="toc_13">Optimistic Lock</h3>
+
+<hr/>
 
 <p>Furthermore, optimistic lock is also available. </p>
 
@@ -485,7 +540,9 @@
 
 <hr/>
 
-<h4 id="toc_14">FactoryGirl</h4>
+<h3 id="toc_14">FactoryGirl</h3>
+
+<hr/>
 
 <p>Easy-to-use fixture tool named FactoryGirl makes your testing more comfortable.</p>
 

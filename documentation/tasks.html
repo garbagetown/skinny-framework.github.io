@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -71,9 +73,9 @@
 
 <h3 id="toc_1">Task Launcher</h3>
 
-<p>skinny-task is a mechanism to run tasks easily.</p>
+<hr/>
 
-<p>By default, the following tasks are already registered.</p>
+<p>skinny-task is a mechanism to run tasks easily. By default, the following tasks are already registered.</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/task/src/main/scala/skinny/task/TaskLauncher.scala">task/src/main/scala/skinny/task/TaskLauncher.scala</a></p>
 
@@ -91,7 +93,9 @@
 </pre>
 <hr/>
 
-<h3 id="toc_2">Creating Custom Tasks</h3>
+<h3 id="toc_2">Creating Your Own Tasks</h3>
+
+<hr/>
 
 <p>Creating tasks is pretty easy. It&rsquo;s just defining a function <code>(List[String]) =&gt; Unit</code>.</p>
 <pre class="highlight java"><span class="n">register</span><span class="o">(</span><span class="s">&quot;echo&quot;</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">params</span> <span class="n">foreach</span> <span class="n">println</span><span class="o">)</span>

@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -69,7 +71,9 @@
 
 <hr/>
 
-<h3 id="toc_1">Routing &amp; Controller</h3>
+<h2 id="toc_1">Routing &amp; Controller</h2>
+
+<hr/>
 
 <p>Skinny&rsquo;s routing mechanism and controller layer on MVC architecture is a <strong>rich Scalatra</strong>. </p>
 
@@ -145,7 +149,9 @@
 </pre>
 <hr/>
 
-<h4 id="toc_2">Reverse Routes</h4>
+<h3 id="toc_2">Reverse Routes</h3>
+
+<hr/>
 
 <p>You can use Scalatra&rsquo;s reverse routes.</p>
 
@@ -172,7 +178,9 @@ a(href={url(Controllers.members.showUrl, &quot;id&quot; -&gt; member.id.toString
 
 <hr/>
 
-<h4 id="toc_3">SkinnyController &amp; SkinnyServlet</h4>
+<h3 id="toc_3">SkinnyController &amp; SkinnyServlet</h3>
+
+<hr/>
 
 <p>There are two controller base trait. SkinnyController is a ScalatraFilter. SkinnyServlet is a ScalatraServlet.</p>
 
@@ -188,6 +196,8 @@ a(href={url(Controllers.members.showUrl, &quot;id&quot; -&gt; member.id.toString
 <hr/>
 
 <h3 id="toc_4">SkinnyResource</h3>
+
+<hr/>
 
 <p>SkinnyResource is a useful base trait for RESTful web services. SkinnyResource is very similar to Rails ActiveResource.</p>
 
@@ -277,6 +287,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <h3 id="toc_5">skinny.Skinny</h3>
 
+<hr/>
+
 <p>skinny.Skinny provides getters for basic elements in view templates.</p>
 <pre class="highlight text">&lt;%@val s: skinny.Skinny %&gt;
 </pre>
@@ -301,6 +313,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_6">beforeAction/afterAction Filters</h3>
+
+<hr/>
 
 <p>Thoguh Scalatra has before/after filters by default. But we recommend Skinny users to use Skinny&rsquo;s beforeAction/afterAction filters.</p>
 
@@ -349,6 +363,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h2 id="toc_9">SkinnyFilter</h2>
+
+<hr/>
 
 <p>SkinnyFilter is our original filter to enable easily handling before/after/error for each controller. You can apply the same beforeAction/afterAction/error filters to several controllers by just mixing SkinnyFilter based traits.</p>
 
@@ -405,7 +421,9 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 </pre>
 <hr/>
 
-<h2 id="toc_10">Examples to do that</h2>
+<h2 id="toc_10">How to Do It? Examples</h2>
+
+<hr/>
 
 <p>Basically, you will use Scalatra&rsquo;s DSL.</p>
 
@@ -416,6 +434,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_11">(Query/Form/Path) Parameters</h3>
+
+<hr/>
 
 <h4 id="toc_12">params</h4>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
@@ -458,6 +478,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_15">Cookies</h3>
+
+<hr/>
 <pre class="highlight java"><span class="n">def</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">{</span>
   <span class="n">cookies</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
   <span class="n">cookies</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
@@ -476,6 +498,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_16">Request/Response Headers</h3>
+
+<hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
 </pre>
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
@@ -487,15 +511,76 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_17">Session</h3>
+
+<hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session(&#39;name)</span>
 <span class="n">session</span> <span class="o">+=</span> <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;value&quot;</span>
 <span class="n">session</span> <span class="o">-=</span> <span class="s">&quot;name&quot;</span>
 </pre>
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.RichSession">/api/index.html#org.scalatra.RichSession</a></p>
 
+<p>Even if you don&rsquo;t use session by yourself, Scalatra&rsquo;s Flash and CSRF protection features are using servlet sessions.
+So your apps are not naturally stateless.</p>
+
+<p>We recommend you using SkinnySesison to keep your Skinny apps stateless.
+When you enable SkinnySession, these features also start using SkinnySession instead of Servlet session attributes.</p>
+
+<p>ScalatraBootstrap.scala:</p>
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">scalikejdbc._</span>
+<span class="kn">import</span> <span class="nn">skinny.session.SkinnySessionInitializer</span>
+<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="kd">extends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Database queries will be increased</span>
+    <span class="n">GlobalSettings</span><span class="o">.</span><span class="na">loggingSQLAndTime</span> <span class="o">=</span> <span class="n">LoggingSQLAndTimeSettings</span><span class="o">(</span>
+      <span class="n">singleLineMode</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="o">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="n">SkinnySessionInitializer</span><span class="o">],</span> <span class="s">&quot;/*&quot;</span><span class="o">)</span>
+
+    <span class="n">Controllers</span><span class="o">.</span><span class="na">root</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+    <span class="n">AssetsController</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>controller/RootController.scala:</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">RootController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="n">with</span> <span class="n">SkinnySessionFilter</span> <span class="o">{</span>
+
+  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Any</span><span class="o">]</span> <span class="o">=</span> <span class="n">skinnySession</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span>
+    <span class="n">skinnySession</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="s">&quot;value&quot;</span><span class="o">)</span>
+    <span class="n">skinnySession</span><span class="o">.</span><span class="na">deleteAttribute</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+<p>DB migration file:</p>
+<pre class="highlight sql"><span class="c1">-- H2 Database compatible
+</span><span class="k">create</span> <span class="k">table</span> <span class="n">skinny_sessions</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">created_at</span> <span class="k">timestamp</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">expire_at</span> <span class="k">timestamp</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">servlet_sessions</span> <span class="p">(</span>
+  <span class="n">jsession_id</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">skinny_session_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">created_at</span> <span class="k">timestamp</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="k">foreign</span> <span class="k">key</span><span class="p">(</span><span class="n">skinny_session_id</span><span class="p">)</span> <span class="k">references</span> <span class="n">skinny_sessions</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">skinny_session_attributes</span> <span class="p">(</span>
+  <span class="n">skinny_session_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">attribute_name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">attribute_value</span> <span class="n">varbinary</span><span class="p">(</span><span class="mi">10485760</span><span class="p">),</span>
+  <span class="k">foreign</span> <span class="k">key</span><span class="p">(</span><span class="n">skinny_session_id</span><span class="p">)</span> <span class="k">references</span> <span class="n">skinny_sessions</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">alter</span> <span class="k">table</span> <span class="n">skinny_session_attributes</span> <span class="k">add</span> <span class="k">constraint</span>
+  <span class="n">skinny_session_attributes_unique_idx</span>
+  <span class="k">unique</span><span class="p">(</span><span class="n">skinny_session_id</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">);</span>
+</pre>
 <hr/>
 
 <h3 id="toc_18">Flash</h3>
+
+<hr/>
+
+<p>Notice: Flash uses servlet sessions by default. Be aware of sticky session mode.</p>
 <pre class="highlight java"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">=</span> <span class="n">value</span>
 <span class="n">flash</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
 <span class="n">flash</span><span class="o">.</span><span class="na">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
@@ -507,6 +592,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_19">Request Body</h3>
+
+<hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">body:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">body</span>
 <span class="n">val</span> <span class="nl">stream:</span> <span class="n">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">inputStream</span> <span class="c1">// raw HTTP POST data</span>
 </pre>
@@ -515,6 +602,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_20">File Upload</h3>
+
+<hr/>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">FileUploadSupport</span> <span class="o">{</span>
 
   <span class="n">def</span> <span class="n">upload</span> <span class="o">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;file&quot;</span><span class="o">)</span> <span class="n">match</span> <span class="o">{</span>
@@ -538,6 +627,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h3 id="toc_21">Response handling</h3>
+
+<hr/>
 <pre class="highlight java"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
 <span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="o">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;foo&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;bar&quot;</span><span class="o">),</span> <span class="n">reason</span> <span class="o">=</span> <span class="s">&quot;why&quot;</span><span class="o">)</span>
 
@@ -554,6 +645,32 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p><a href="https://github.com/scalatra/scalatra/blob/2.2.x_2.10/core/src/main/scala/org/scalatra/ActionResult.scala">/core/src/main/scala/org/scalatra/ActionResult.scala</a></p>
 
+<hr/>
+
+<h3 id="toc_22">CSRF Protection</h3>
+
+<hr/>
+
+<p>Notice: Scalatra CSRF protection implementation uses servlet sessions by default. Be aware of sticky session mode.</p>
+
+<p>Define <code>protectFromForgery</code> in controller/RootController.scala:</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nc">RootController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span>
+
+<span class="o">}</span>
+</pre>
+<p>Use <code>Skinny.csrfMetaTags</code> in /WEB-INF/layouts/default.jade:</p>
+<pre class="highlight text">-@val body: String
+-@val s: skinny.Skinny
+!!! 5
+%html(lang=&quot;en&quot;)
+  %head
+    %meta(charset=&quot;utf-8&quot;)
+    != s.csrfMetaTags
+  %body
+    =unescape(body)
+    %script(type=&quot;text/javascript&quot; src={uri(&quot;/assets/js/skinny.js&quot;)})
+</pre>
             <hr/>
             <div class="alert alert-info small"> 
               If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>

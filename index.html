@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -65,21 +67,23 @@
         <div class="col-xs-10">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h1 id="toc_0">Skinny Framework</h1>
+            <p><img alt="Logo" src="/images/logo.png" /></p>
 
-<p>Skinny is a full-stack web app framework, which is built on <a href="http://scalatra.org">Scalatra</a> and additional components are integrated. </p>
+<h1 id="toc_0">Skinny Framework</h1>
 
-<p>To put it simply, Skinny framework&rsquo;s concept is <strong>Scala on Rails</strong>. Skinny is highly inspired by <a href="http://rubyonrails.org/">Ruby on Rails</a> and it is optimized for sustainable productivity for ordinary Servlet-based app development. </p>
+<hr/>
 
-<p><img alt="Logo" src="/images/logo.png" /></p>
+<p>Skinny is a full-stack web app framework, which is built on <a href="http://scalatra.org">Scalatra</a> and additional components are integrated.</p>
 
-<p><strong>[Notice]</strong> Still in alpha stage. Architecture and API compatibility won&rsquo;t be kept until 1.0 release (2014/03).</p>
+<p>To put it simply, Skinny framework&rsquo;s concept is <strong>Scala on Rails</strong>. Skinny is highly inspired by <a href="http://rubyonrails.org/">Ruby on Rails</a> and it is optimized for sustainable productivity for ordinary Servlet-based app development.</p>
 
 <hr/>
 
 <h3 id="toc_1">Why Skinny?</h3>
 
-<p>What does the name of <code>Skinny</code> actually mean?</p>
+<hr/>
+
+<p>What does the name of <code>Skinny</code> actually mean? We have three reasons as follows.</p>
 
 <h4 id="toc_2">Application should be skinny</h4>
 
@@ -95,31 +99,15 @@
 
 <hr/>
 
-<h2 id="toc_5">How to use</h2>
+<h2 id="toc_5">Try Skinny Framework now!</h2>
 
-<p>Actually, application built with Skinny framework is a Scalatra application. After preparing Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
-<pre class="highlight text">libraryDependencies ++= Seq(
-  &quot;org.skinny-framework&quot; %% &quot;skinny-framework&quot; % &quot;[0.9,)&quot;,
-  &quot;org.skinny-framework&quot; %% &quot;skinny-task&quot;      % &quot;[0.9,)&quot;,
-  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
-)
-</pre>
-<p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re a Play2 (or any others) user, these components are available for you as well.</p>
-<pre class="highlight text">libraryDependencies ++= Seq(
-  &quot;org.skinny-framework&quot; %% &quot;skinny-orm&quot;       % &quot;[0.9,)&quot;,
-  &quot;org.skinny-framework&quot; %% &quot;skinny-validator&quot; % &quot;[0.9,)&quot;,
-  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
-)
-</pre>
 <hr/>
-
-<h2 id="toc_6">Try Skinny now</h2>
 
 <p>Download <code>skinny-blank-app.zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.25-1/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/0.9.26/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create your first Skinny app by using scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
@@ -135,7 +123,14 @@
 <p>Let&rsquo;s create war file to deploy.</p>
 <pre class="highlight shell">./skinny package
 </pre>
-<h3 id="toc_7">Yeoman generator</h3>
+<p>or it&rsquo;s possible to portable runnable jar file (with embedded Jetty server).</p>
+<pre class="highlight shell">./skinny package:standalone
+</pre>
+<hr/>
+
+<h3 id="toc_6">Try by using Yeoman generator</h3>
+
+<hr/>
 
 <p><img alt="Yeoman" src="/images/yeoman.png" /></p>
 
@@ -152,9 +147,37 @@ yo skinny
 </pre>
 <hr/>
 
-<h2 id="toc_8">Components</h2>
+<h3 id="toc_7">Integrating with existing Scalatra apps</h3>
+
+<hr/>
+
+<p>Actually, application built with Skinny framework is a Scalatra application.</p>
+
+<p>After preparing Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
+<pre class="highlight text">libraryDependencies ++= Seq(
+  &quot;org.skinny-framework&quot; %% &quot;skinny-assets&quot;    % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-framework&quot; % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-task&quot;      % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-test&quot;      % &quot;[0.9,)&quot; % &quot;test&quot;
+)
+</pre>
+<p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re a Play2 (or any others) user, these components are available for you as well.</p>
+<pre class="highlight text">libraryDependencies ++= Seq(
+  &quot;org.skinny-framework&quot; %% &quot;skinny-orm&quot;        % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-mailer&quot;     % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-standalone&quot; % &quot;[0.9,)&quot;,
+  &quot;org.skinny-framework&quot; %% &quot;skinny-validator&quot;  % &quot;[0.9,)&quot;
+)
+</pre>
+<hr/>
+
+<h2 id="toc_8">Skinny&rsquo;s Components Overview</h2>
+
+<hr/>
 
 <h3 id="toc_9">Routing &amp; Controller &amp; Validator</h3>
+
+<hr/>
 
 <p>Skinny&rsquo;s routing mechanism and controller layer on MVC architecture is a <strong>rich Scalatra</strong>. Skinny&rsquo;s extension provides you much simpler/rich syntax. Of course, if you need to use Scalatra&rsquo;s API directly, Skinny never bothers you.</p>
 
@@ -194,13 +217,13 @@ yo skinny
 </pre>
 <p><code>Company</code> object should implement <code>skinny.SkinnyModel</code> APIs and you should prepare some view templates under <code>src/main/webapp/WEB-INF/views/members/</code>.</p>
 
-<p>See in detail:</p>
-
-<p><a href="/documentation/controller-and-routes.html">Controller &amp; Routes</a></p>
+<p>See in detail: <a href="/documentation/controller-and-routes.html">Controller &amp; Routes</a></p>
 
 <hr/>
 
-<h3 id="toc_10">ORM</h3>
+<h3 id="toc_10">Skinny ORM</h3>
+
+<hr/>
 
 <p>Skinny provides you Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>.</p>
 
@@ -239,13 +262,13 @@ yo skinny
 <span class="c1">// delete</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 </pre>
-<p>See in detail:</p>
-
-<p><a href="/documentation/orm.html">O/R Mapper</a></p>
+<p>See in detail: <a href="/documentation/orm.html">O/R Mapper</a></p>
 
 <hr/>
 
-<h3 id="toc_11">DB Migration</h3>
+<h3 id="toc_11">DB Migration with Flyway</h3>
+
+<hr/>
 
 <p>DB migration comes with <a href="http://flywaydb.org/">Flyway</a>. Usage is pretty simple.</p>
 
@@ -254,13 +277,13 @@ yo skinny
 </pre>
 <p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
 
-<p>See in detail:</p>
-
-<p><a href="/documentation/db-migration.html">DB Migration</a></p>
+<p>See in detail: <a href="/documentation/db-migration.html">DB Migration</a></p>
 
 <hr/>
 
 <h3 id="toc_12">View Templates</h3>
+
+<hr/>
 
 <p>Skinny framework basically follows Scalatra&rsquo;s <a href="http://scalate.fusesource.org/">Scalate</a> Support, but Skinny has an additional convention.</p>
 
@@ -290,13 +313,13 @@ yo skinny
 </pre>
 <p>And then, use <code>src/main/webapp/WEB-INF/views/members/index.html.jade</code> instead.</p>
 
-<p>See in detail:</p>
-
-<p><a href="/documentation/view-templates.html">View Templates</a></p>
+<p>See in detail: <a href="/documentation/view-templates.html">View Templates</a></p>
 
 <hr/>
 
 <h3 id="toc_13">Assets Support (CoffeeScript, LESS, Sass and JXS for React)</h3>
+
+<hr/>
 
 <p><img alt="CoffeeScript Logo" src="/images/coffeescript.png" />
 <img alt="LESS Logo" src="/images/less.png" />
@@ -322,37 +345,13 @@ yo skinny
 
 <p>However, precompiling them is highly recommended in production (./skinny package does that).</p>
 
-<h4 id="toc_14">CoffeeScript</h4>
-
-<p><a href="http://coffeescript.org/">http://coffeescript.org/</a></p>
-
-<p>Just put *.coffee files under <code>WEB-INF/assets/coffee</code>.</p>
-
-<h4 id="toc_15">LESS</h4>
-
-<p><a href="http://lesscss.org/">http://lesscss.org/</a></p>
-
-<p>Just put *.less files under <code>WEB-INF/assets/less</code>.</p>
-
-<h4 id="toc_16">Sass</h4>
-
-<p><a href="http://sass-lang.com/">http://sass-lang.com/</a></p>
-
-<p>If you use Sassy CSS, put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>. If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
-
-<h4 id="toc_17">JSX for React</h4>
-
-<p><a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a></p>
-
-<p>If you use JSX templates for React, put *.jsx files under <code>WEB-INF/assets/jsx</code>.</p>
-
-<p>See in detail: </p>
-
-<p><a href="/documentation/assets.html">Assets Support</a></p>
+<p>See in detail: <a href="/documentation/assets.html">Assets Support</a></p>
 
 <hr/>
 
-<h3 id="toc_18">Testing support</h3>
+<h3 id="toc_14">Testing Support</h3>
+
+<hr/>
 
 <p>You can use Scalatra&rsquo;s great test support. Some optional feature is provided by skinny-test library.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
@@ -365,13 +364,13 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<p>See in detail:</p>
-
-<p><a href="/documentation/testing.html">Testing</a></p>
+<p>See in detail: <a href="/documentation/testing.html">Testing</a></p>
 
 <hr/>
 
-<h3 id="toc_19">FactoryGirl</h3>
+<h3 id="toc_15">FactoryGirl</h3>
+
+<hr/>
 
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
@@ -386,13 +385,13 @@ yo skinny
   name=&quot;FactoryGirl, Inc.&quot;
 }
 </pre>
-<p>See in detail:</p>
-
-<p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+<p>See in detail: <a href="/documentation/factory-girl.html">FactoryGirl</a></p>
 
 <hr/>
 
-<h2 id="toc_20">License</h2>
+<h3 id="toc_16">Under The MIT License</h3>
+
+<hr/>
 
 <p>(The MIT License)</p>
 

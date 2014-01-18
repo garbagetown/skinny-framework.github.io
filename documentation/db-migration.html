@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -71,6 +73,8 @@
 
 <h3 id="toc_1">Flyway</h3>
 
+<hr/>
+
 <p>DB migration comes with <a href="http://flywaydb.org/">Flyway</a>.</p>
 
 <p><img alt="Flyway Logo" src="/images/flyway.png" /></p>
@@ -79,12 +83,16 @@
 
 <h3 id="toc_2">Simple Usage</h3>
 
+<hr/>
+
 <p>Just run the following command.</p>
 <pre class="highlight text">./skinny db:migrate [env] [dbname]
 </pre>
 <p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
 
 <p>Be aware of required two underscores at filename.</p>
+
+<hr/>
 
 <h3 id="toc_3">Customizing Migration</h3>
 
@@ -127,7 +135,9 @@
 
 <h3 id="toc_4">Try now</h3>
 
-<p>Scaffolding generates migration SQL file. Try it with <a href="https://github.com/skinny-framework/skinny-framework/releases">blank-app</a>!</p>
+<hr/>
+
+<p>Scaffolding generates migration SQL file. Try it with <a href="https://github.com/skinny-framework/skinny-framework/releases">skinny-blank-app.zip</a>!</p>
 <pre class="highlight text">./skinny g scaffold:jade members member name:String birthday:LocalDate
 </pre><pre class="highlight text">./skinny db:migrate
 ./skinny db:migrate test

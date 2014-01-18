@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Mail - Skinny Framework</title>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Skinny Framework</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+        <div class="col-xs-2">
+          <div class="content small">
+            <h5>Documentation</h5>
+            <hr/>
+            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
+            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
+            <p><a href="/documentation/validator.html">Validator</a></p>
+            <p><a href="/documentation/view-templates.html">View Templates</a></p>
+            <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
+            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
+            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
+            <p><a href="/documentation/tasks.html">Tasks</a></p>
+            <p><a href="/documentation/testing.html">Testing</a></p>
+            <p><a href="/documentation/packaging.html">Packaging</a></p>
+            <p><a href="/contribution.html">Contribution</a></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="content">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+            <h2 id="toc_0">Mail</h2>
+
+<hr/>
+
+<h2 id="toc_1">out-of-the-box SkinnyMailer</h2>
+
+<hr/>
+
+<p><code>SkinnyMailer</code> is the out-of-the-box email module for Skinny applications.</p>
+
+<p>That is an independent library, so you can use only skinny-mailer for any other use cases.</p>
+
+<hr/>
+
+<h2 id="toc_2">Sending emails via GMail STMP servers</h2>
+
+<hr/>
+
+<p>To understand how to use SkinnyMailer, try the following code on the Scala REPL (./skinny console)</p>
+<pre class="highlight java"><span class="c1">// https://support.google.com/accounts/answer/185833</span>
+<span class="n">val</span> <span class="n">yourGmail</span> <span class="o">=</span> <span class="s">&quot;*****@gmail.com&quot;</span>
+<span class="n">val</span> <span class="n">yourPassword</span> <span class="o">=</span> <span class="s">&quot;*****&quot;</span>
+
+<span class="kn">import</span> <span class="nn">skinny.mailer._</span>
+
+<span class="c1">// Prepare configuration for GMail SMTP</span>
+<span class="n">val</span> <span class="n">config</span> <span class="o">=</span> <span class="n">SkinnyMailerConfig</span><span class="o">.</span><span class="na">default</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
+  <span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
+  <span class="n">defaultFrom</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
+  <span class="n">transportProtocol</span> <span class="o">=</span> <span class="s">&quot;smtps&quot;</span><span class="o">,</span>
+  <span class="n">smtp</span> <span class="o">=</span> <span class="n">SkinnyMailerSmtpConfig</span><span class="o">.</span><span class="na">default</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s">&quot;smtp.gmail.com&quot;</span><span class="o">,</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="mi">465</span><span class="o">,</span>
+    <span class="n">authEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourPassword</span><span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">)</span>
+
+<span class="c1">// create a SkinnyMailer</span>
+<span class="n">val</span> <span class="n">GMail</span> <span class="o">=</span> <span class="n">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
+
+<span class="c1">// Simply sending a text mail</span>
+<span class="n">GMail</span><span class="o">.</span>
+  <span class="nf">to</span><span class="p">(</span><span class="n">yourGmail</span><span class="o">).</span>
+  <span class="n">cc</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
+  <span class="n">subject</span><span class="o">(</span><span class="s">&quot;SkinnyMailer GMail Test&quot;</span><span class="o">).</span>
+  <span class="n">body</span> <span class="o">{</span>
+    <span class="s">&quot;&quot;&quot;You succeeded sending email via GMail SMTP server!
+    |
+    |Blah-blah-blah...
+    |
+  &quot;&quot;&quot;</span><span class="o">.</span><span class="na">stripMargin</span>
+  <span class="o">}.</span><span class="na">deliver</span><span class="o">()</span>
+
+<span class="c1">// Sending HTML email with attachments</span>
+<span class="n">GMail</span><span class="o">.</span>
+  <span class="nf">to</span><span class="p">(</span><span class="n">yourGmail</span><span class="o">).</span>
+  <span class="n">cc</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
+  <span class="n">subject</span><span class="o">(</span><span class="s">&quot;SkinnyMailer GMail Test 2&quot;</span><span class="o">).</span>
+  <span class="n">htmlBody</span><span class="o">(</span><span class="s">&quot;&lt;hr/&gt;&lt;b&gt;HTML&lt;/b&gt; sample!&lt;br/&gt;&lt;hr/&gt;&quot;</span><span class="o">).</span>
+  <span class="n">attchment</span><span class="o">(</span><span class="s">&quot;memo.txt&quot;</span><span class="o">,</span> <span class="s">&quot;memomemo&quot;</span><span class="o">,</span> <span class="s">&quot;text/plain; charset=utf-8&quot;</span><span class="o">).</span>
+  <span class="n">deliver</span><span class="o">()</span>
+</pre>
+<hr/>
+
+<h3 id="toc_3">Configuration in application.conf</h3>
+
+<hr/>
+
+<p>Configuration should be defined in src/main/resources/application.conf.</p>
+<pre class="highlight text">development {
+  db {
+    default {
+      driver=&quot;org.h2.Driver&quot;
+      url=&quot;jdbc:h2:file:db/example-development&quot;
+      user=&quot;sa&quot;
+      password=&quot;sa&quot;
+      poolInitialSize=2
+      poolMaxSize=10
+    }
+  }
+  mailer {
+    default {
+      debug=true
+      mimeVersion=&quot;1.0&quot;
+      charset=&quot;UTF-8&quot;
+      contentType=&quot;text/html&quot;
+      from=&quot;xxxxx+from@gmail.com&quot;
+      smtp {
+        host=&quot;smtp.gmail.com&quot;
+        port=465
+        connectTimeoutMillis=3000
+        readTimeoutMillis=6000
+        starttls {
+          enabled:true
+        }
+        auth {
+          //enabled=true
+          enabled=false
+          user=&quot;xxxxx@gmail.com&quot;
+          password=${?GMAIL_PASSWORD}
+        }
+      }
+      transport {
+        //protocol=&quot;smtps&quot;
+        protocol=&quot;logging&quot;
+      }
+    }
+  }
+}
+</pre>
+<hr/>
+
+<h3 id="toc_4">How to use it in controllers</h3>
+
+<hr/>
+
+<p>MailController.scala:</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/example/src/main/scala/controller/MailController.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/example/src/main/scala/controller/MailController.scala</a></p>
+
+<p>Configuration:</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/example/src/main/resources/application.conf">https://github.com/skinny-framework/skinny-framework/blob/develop/example/src/main/resources/application.conf</a></p>
+
+            <hr/>
+            <div class="alert alert-info small"> 
+              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+            </div> 
+<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

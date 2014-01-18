@@ -27,11 +27,12 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -51,11 +52,12 @@
             <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
             <p><a href="/documentation/validator.html">Validator</a></p>
             <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/assets.html">Assets Support</a></p>
+            <p><a href="/documentation/mail.html">Mail</a></p>
             <p><a href="/documentation/orm.html">O/R Mapper</a></p>
             <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
             <p><a href="/documentation/db-migration.html">DB Migration</a></p>
+            <p><a href="/documentation/json.html">Working with JSON</a></p>
             <p><a href="/documentation/tasks.html">Tasks</a></p>
             <p><a href="/documentation/testing.html">Testing</a></p>
             <p><a href="/documentation/packaging.html">Packaging</a></p>
@@ -69,7 +71,9 @@
 
 <hr/>
 
-<h3 id="toc_1">Portable Validator</h3>
+<h3 id="toc_1">Quite Readable and Customizable DSL</h3>
+
+<hr/>
 
 <p>skinny-validator is portable, so you can use skinny-validator with Play2, Scalatra (without Skinny) and any other web app frameworks. Furthermore, you can use it in not only web apps but also any other applications (batch operation, cli and so on).</p>
 
@@ -80,6 +84,8 @@
 <hr/>
 
 <h3 id="toc_2">Creating New Validation Rule</h3>
+
+<hr/>
 
 <p>The way to create new validation rule is pretty simple:</p>
 
@@ -135,6 +141,8 @@
 
 <h3 id="toc_3">Built-in Validation Rules</h3>
 
+<hr/>
+
 <p>In most of cases, built-in validators are useful.</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/validator/src/main/scala/skinny/validator/BuiltinValidationRules.scala">validator/src/main/scala/skinny/validator/BuiltinValidationRules.scala</a></p>
@@ -144,6 +152,8 @@
 <hr/>
 
 <h3 id="toc_4">Validator &amp; MapValidator</h3>
+
+<hr/>
 
 <p>skinny-validator provides <code>Validator</code> and <code>MapValidator</code>. You already see <code>Validator</code> in above code. This one accepts parameters when defining validation rules.</p>
 
@@ -158,6 +168,8 @@
 <hr/>
 
 <h3 id="toc_5">Error Messages</h3>
+
+<hr/>
 
 <p>skinny-validator&rsquo;s <code>Error</code> looks like this:</p>
 <pre class="highlight java"><span class="n">val</span> <span class="n">error</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="na">errors</span><span class="o">.</span><span class="na">head</span>
@@ -187,6 +199,8 @@
 <hr/>
 
 <h3 id="toc_6">How It Works in Skinny apps</h3>
+
+<hr/>
 
 <p>You can easily understand how skinny-valdiator works in Skinny apps.</p>
 
