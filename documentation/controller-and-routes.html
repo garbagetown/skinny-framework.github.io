@@ -71,10 +71,6 @@
 
 <hr/>
 
-<h2 id="toc_1">Routing &amp; Controller</h2>
-
-<hr/>
-
 <p>Skinny&rsquo;s routing mechanism and controller layer on MVC architecture is a <strong>rich Scalatra</strong>. </p>
 
 <p>Skinny&rsquo;s extension provides you much simpler/rich syntax. Of course, if you need to use Scalatra&rsquo;s API directly, Skinny never bothers you.</p>
@@ -149,7 +145,7 @@
 </pre>
 <hr/>
 
-<h3 id="toc_2">Reverse Routes</h3>
+<h3 id="toc_1">Reverse Routes</h3>
 
 <hr/>
 
@@ -178,7 +174,7 @@ a(href={url(Controllers.members.showUrl, &quot;id&quot; -&gt; member.id.toString
 
 <hr/>
 
-<h3 id="toc_3">SkinnyController &amp; SkinnyServlet</h3>
+<h3 id="toc_2">SkinnyController &amp; SkinnyServlet</h3>
 
 <hr/>
 
@@ -195,7 +191,7 @@ a(href={url(Controllers.members.showUrl, &quot;id&quot; -&gt; member.id.toString
 
 <hr/>
 
-<h3 id="toc_4">SkinnyResource</h3>
+<h3 id="toc_3">SkinnyResource</h3>
 
 <hr/>
 
@@ -285,7 +281,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_5">skinny.Skinny</h3>
+<h3 id="toc_4">skinny.Skinny</h3>
 
 <hr/>
 
@@ -312,7 +308,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_6">beforeAction/afterAction Filters</h3>
+<h3 id="toc_5">beforeAction/afterAction Filters</h3>
 
 <hr/>
 
@@ -322,7 +318,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p>So if you need filters that are similar to Rails filters, just use Skinny filters.</p>
 
-<h5 id="toc_7">Scalatra&rsquo;s before/after filters</h5>
+<h5 id="toc_6">Scalatra&rsquo;s before/after filters</h5>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -331,7 +327,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <li>after(transformers)(action)</li>
 </ul>
 
-<h5 id="toc_8">Skinny&rsquo;s beforeAction/afterAction filters</h5>
+<h5 id="toc_7">Skinny&rsquo;s beforeAction/afterAction filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
@@ -362,7 +358,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 </pre>
 <hr/>
 
-<h2 id="toc_9">SkinnyFilter</h2>
+<h3 id="toc_8">SkinnyFilter</h3>
 
 <hr/>
 
@@ -421,7 +417,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 </pre>
 <hr/>
 
-<h2 id="toc_10">How to Do It? Examples</h2>
+<h3 id="toc_9">How to Do It? Examples</h3>
 
 <hr/>
 
@@ -433,11 +429,11 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_11">(Query/Form/Path) Parameters</h3>
+<h4 id="toc_10">(Query/Form/Path) Parameters</h4>
 
 <hr/>
 
-<h4 id="toc_12">params</h4>
+<h4 id="toc_11">params</h4>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
 <span class="n">val</span> <span class="nl">id:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">)</span>
 <span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAsOrElse</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
@@ -450,7 +446,9 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams">/api/index.html#org.scalatra.ScalatraParamsImplicits$TypedMultiParams</a></p>
 
-<h4 id="toc_13">multiParams(&ldquo;splat&rdquo;)</h4>
+<hr/>
+
+<h4 id="toc_12">multiParams(&ldquo;splat&rdquo;)</h4>
 <pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;/say/*/to/*&quot;</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// Matches &quot;GET /say/hello/to/world&quot;</span>
   <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;splat&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;hello&quot;, &quot;world&quot;)</span>
@@ -465,7 +463,9 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p><a href="http://www.scalatra.org/guides/http/routes.html">/guides/http/routes.html</a></p>
 
-<h4 id="toc_14">multiParams(&ldquo;captures&rdquo;)</h4>
+<hr/>
+
+<h4 id="toc_13">multiParams(&ldquo;captures&rdquo;)</h4>
 <pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">&quot;&quot;&quot;^\/f(.*)/b(.*)&quot;&quot;&quot;</span><span class="o">.</span><span class="na">r</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// Matches &quot;GET /foo/bar&quot;</span>
   <span class="n">multiParams</span><span class="o">(</span><span class="s">&quot;captures&quot;</span><span class="o">)</span> <span class="c1">// == Seq(&quot;oo&quot;, &quot;ar&quot;)</span>
@@ -477,7 +477,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_15">Cookies</h3>
+<h4 id="toc_14">Cookies</h4>
 
 <hr/>
 <pre class="highlight java"><span class="n">def</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">{</span>
@@ -497,7 +497,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_16">Request/Response Headers</h3>
+<h4 id="toc_15">Request/Response Headers</h4>
 
 <hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
@@ -510,7 +510,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <hr/>
 
-<h3 id="toc_17">Session</h3>
+<h4 id="toc_16">Session</h4>
 
 <hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="c1">// or session(&#39;name)</span>
@@ -576,7 +576,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 </pre>
 <hr/>
 
-<h3 id="toc_18">Flash</h3>
+<h4 id="toc_17">Flash</h4>
 
 <hr/>
 
@@ -591,7 +591,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 
 <hr/>
 
-<h3 id="toc_19">Request Body</h3>
+<h4 id="toc_18">Request Body</h4>
 
 <hr/>
 <pre class="highlight java"><span class="n">val</span> <span class="nl">body:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">body</span>
@@ -601,7 +601,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 
 <hr/>
 
-<h3 id="toc_20">File Upload</h3>
+<h4 id="toc_19">File Upload</h4>
 
 <hr/>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">FileUploadSupport</span> <span class="o">{</span>
@@ -626,7 +626,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 
 <hr/>
 
-<h3 id="toc_21">Response handling</h3>
+<h4 id="toc_20">Response handling</h4>
 
 <hr/>
 <pre class="highlight java"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
@@ -647,7 +647,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 
 <hr/>
 
-<h3 id="toc_22">CSRF Protection</h3>
+<h4 id="toc_21">CSRF Protection</h4>
 
 <hr/>
 
