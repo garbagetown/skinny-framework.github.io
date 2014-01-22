@@ -90,9 +90,9 @@
 
 <p>Examples:</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/models.scala</a></p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
 
 <hr/>
 
@@ -198,7 +198,8 @@
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 </pre>
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">skinny.orm.feature.CRUDFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala</a></p>
 
 <hr/>
 
@@ -208,7 +209,8 @@
 
 <p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany(Through)</code> to the companion. </p>
 
-<p>Examples: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
+<p>Examples: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala</a></p>
 
 <p>Be aware of Skinny ORM&rsquo;s concept that basically joins tables to resolve associations to reduce N+1 queries. We recommend enabling query logging for development.</p>
 
@@ -217,8 +219,19 @@
 <p>Typically defining associations are fundamentally not so simple, so you might be confused when specifying these definitions. Understanding how ScalikeJDBC&rsquo;s join queries and One-to-X APIs work may be a short cut.</p>
 
 <p><a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span>
-  <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
+
+<hr/>
+
+<h4 id="toc_5">BelongsTo</h4>
+
+<p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association">http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association</a></p>
+
+<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
+  <span class="nl">mentorId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">mentor:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
+  <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
@@ -226,21 +239,154 @@
   <span class="c1">// If byDefault is called, this join condition is enabled by default</span>
   <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span><span class="n">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">c</span><span class="o">)).</span><span class="na">byDefault</span>
 
-  <span class="n">val</span> <span class="n">skills</span> <span class="o">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
-    <span class="n">MemberSkill</span><span class="o">,</span> <span class="n">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">skills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">))</span>
+  <span class="c1">// or more explanatory</span>
+  <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
+    <span class="c1">// entity mapper on the right side</span>
+    <span class="c1">// in this case, default alias will be used in join query</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">Company</span><span class="o">,</span> 
+    <span class="c1">// function to merge association to main entity</span>
+    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">company</span><span class="o">)</span>
+  <span class="o">).</span><span class="na">byDefault</span>
+
+  <span class="c1">// when you cannot use defaultAlias, use this instead</span>
+  <span class="n">val</span> <span class="n">mentorAlais</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;mentor&quot;</span><span class="o">)</span>
+  <span class="n">val</span> <span class="n">mentor</span> <span class="o">=</span> <span class="n">belongToWithAlias</span><span class="o">(</span>
+    <span class="c1">// in this case, &quot;mentor&quot; alias will be used in join query</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">mentorAlias</span><span class="o">,</span>
+    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">mentor</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">mentor</span> <span class="o">=</span> <span class="n">mentor</span><span class="o">))</span>
+    <span class="c1">// mentor will be resolved only when calling #joins </span>
+    <span class="cm">/*.byDefault */</span> 
 <span class="o">}</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without skills</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without mentor</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">mentor</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with mentor</span>
 </pre>
-<p>You can find more examples here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
-
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">skinny.orm.feature.AssociationsFeature.scala</a></p>
+<p>In this case, following table is expected:</p>
+<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">company_id</span> <span class="n">bigint</span><span class="p">,</span>
+  <span class="n">mentor_id</span> <span class="n">bigint</span>
+<span class="p">);</span>
+</pre>
+<p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
 
 <hr/>
 
-<h4 id="toc_5">Entity Equality</h4>
+<h4 id="toc_6">HasOne</h4>
+
+<p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
+
+<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Name</span><span class="p">(</span><span class="nl">first:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">last:</span> <span class="n">String</span><span class="o">)</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Name</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
+
+<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">val</span> <span class="n">name</span> <span class="o">=</span> <span class="n">hasOne</span><span class="o">[</span><span class="n">Name</span><span class="o">](</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">Name</span><span class="o">,</span> 
+    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">)</span>
+  <span class="o">).</span><span class="na">byDefault</span>
+<span class="o">}</span>
+</pre>
+<p>In this case, following tables are expected:</p>
+<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="k">names</span> <span class="p">(</span>
+  <span class="n">member_id</span> <span class="n">bigint</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="k">first</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="k">last</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+</pre>
+<hr/>
+
+<h4 id="toc_7">HasMany</h4>
+
+<p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-many-association">http://guides.rubyonrails.org/association_basics.html#the-has-many-association</a></p>
+
+<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">members:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> 
+  <span class="nl">companyId:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Long</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
+  <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span>
+<span class="o">)</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nf">Skill</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+
+<span class="c1">// -----------------------</span>
+<span class="c1">// hasMany example</span>
+<span class="n">object</span> <span class="n">Company</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="n">val</span> <span class="n">membersRef</span> <span class="o">=</span> <span class="n">hasMany</span><span class="o">[</span><span class="n">Member</span><span class="o">](</span>
+    <span class="c1">// association&#39;s SkinnyMapper and alias</span>
+    <span class="n">many</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">membersAlias</span><span class="o">,</span>
+    <span class="c1">// defines join condition by using aliases</span>
+    <span class="n">on</span> <span class="o">=</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="n">m</span><span class="o">.</span><span class="na">companyId</span><span class="o">),</span>
+    <span class="c1">// function to merge associations to main entity</span>
+    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">company</span><span class="o">,</span> <span class="n">members</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">company</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">members</span> <span class="o">=</span> <span class="n">members</span><span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">}</span>
+<span class="n">Company</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Company</span><span class="o">.</span><span class="na">membersRef</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with members</span>
+
+<span class="c1">// -----------------------</span>
+<span class="c1">// hasManyThrough example</span>
+
+<span class="c1">// join table definition</span>
+<span class="k">case</span> <span class="kd">class</span> <span class="nf">MemberSkill</span><span class="p">(</span><span class="nl">memberId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">skillId:</span> <span class="n">Long</span><span class="o">)</span>
+<span class="n">object</span> <span class="n">MemberSkill</span> <span class="kd">extends</span> <span class="n">SkinnyJoinTable</span><span class="o">[</span><span class="n">MemberSkill</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;members_skills&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;ms&quot;</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// hasManyThrough</span>
+<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="n">val</span> <span class="n">skillsRef</span> <span class="o">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
+    <span class="n">through</span> <span class="o">=</span> <span class="n">MemberSkill</span><span class="o">,</span> 
+    <span class="n">many</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">,</span> 
+    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">skills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">}</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skillsRef</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span> <span class="c1">// with skills</span>
+</pre>
+<p>In this case, following tables are expected:</p>
+<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">company_id</span> <span class="n">bigint</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">skills</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">members_skills</span> <span class="p">(</span>
+  <span class="n">member_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">skill_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+</pre>
+<hr/>
+
+<h4 id="toc_8">What&rsquo;s more</h4>
+
+<p>You can find more examples here:</p>
+
+<p>Table definitions:
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala</a></p>
+
+<p>Model examples:
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala</a></p>
+
+<p>Usage:
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
+
+<hr/>
+
+<h4 id="toc_9">Entity Equality</h4>
 
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
@@ -261,11 +407,39 @@
 
 <hr/>
 
-<h3 id="toc_6">Eager Loading</h3>
+<h3 id="toc_10">Eager Loading</h3>
 
 <hr/>
 
-<p>You can call <code>includes</code> for eager loading. But nested entities&rsquo;s eager loading is not supported yet.</p>
+<p>When you use eager loading by <code>includes</code> API, define both of <code>belongsTo</code> and <code>includes</code>. </p>
+
+<p>Note: nested entities&rsquo;s eager loading is not supported yet.</p>
+
+<p>Indeed, it&rsquo;s not incredibly simple. But we believe that what it does is so clear that you can easily write the definition.</p>
+<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn&#39;t work as expected</span>
+  <span class="c1">// when &quot;val company&quot; is defined in Scala 2.10.x.</span>
+  <span class="c1">// If you suffered that, use &quot;val companyOpt&quot; &quot;companyRef&quot; and so on instead.</span>
+  <span class="n">val</span> <span class="n">companyOpt</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="c1">// normal belongsTo</span>
+    <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
+      <span class="n">right</span> <span class="o">=</span> <span class="n">Company</span><span class="o">,</span>
+      <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">company</span><span class="o">))</span>
+    <span class="c1">// eager loading operation for this one-to-one relation</span>
+    <span class="o">.</span><span class="na">includes</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
+      <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">companies</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">members</span><span class="o">.</span><span class="na">map</span> <span class="o">{</span> <span class="n">m</span> <span class="o">=&gt;</span>
+        <span class="n">companies</span><span class="o">.</span><span class="na">find</span> <span class="o">{</span> <span class="n">c</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">company</span>
+          <span class="o">.</span><span class="na">exists</span><span class="o">(</span><span class="n">_</span><span class="o">.</span><span class="na">id</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+          <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">v</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
+          <span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+      <span class="o">})</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">companyOpt</span><span class="o">).</span><span class="na">findAll</span><span class="o">()</span>
+</pre>
+<p>Yet another example:</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="n">val</span> <span class="n">skills</span> <span class="o">=</span>
     <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
@@ -277,13 +451,14 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
 </pre>
-<p>Examples: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">orm/src/test/scala/skinny/orm/models.scala</a></p>
+<p>Note: when your entities have same associations (e.g. Company has Employee, Country and Employee has Country), avoiding to use default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We have a plan to provide more kind error message for such cases until version 1.0.0.</p>
 
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">skinny.orm.feature.IncludesFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_7">Other Configurations</h3>
+<h3 id="toc_11">Other Configurations</h3>
 
 <hr/>
 
@@ -328,7 +503,7 @@
 
   <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] </span>
   <span class="c1">// default: &quot;lockTimestamp&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">&quot;locked_at&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">&quot;lockedAt&quot;</span>
 
   <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]</span>
   <span class="c1">// default: &quot;lockVersion&quot;</span>
@@ -346,7 +521,7 @@
 </pre>
 <hr/>
 
-<h3 id="toc_8">Dynamic Table Name</h3>
+<h3 id="toc_12">Dynamic Table Name</h3>
 
 <hr/>
 
@@ -362,11 +537,12 @@
 <span class="c1">// other table: orders_2012</span>
 <span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">&quot;orders_2012&quot;</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
 </pre>
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">skinny.orm.feature.DynamicTableNameFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_9">Adding Methods</h3>
+<h3 id="toc_13">Adding Methods</h3>
 
 <hr/>
 
@@ -395,7 +571,7 @@
 
 <hr/>
 
-<h3 id="toc_10">Using Non-Numerical or Typed Primary Key</h3>
+<h3 id="toc_14">Using Non-Numerical or Typed Primary Key</h3>
 
 <hr/>
 
@@ -481,7 +657,7 @@
 
 <hr/>
 
-<h3 id="toc_11">ActiveRecord-like Timestamps</h3>
+<h3 id="toc_15">ActiveRecord-like Timestamps</h3>
 
 <hr/>
 
@@ -500,11 +676,12 @@
   <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;updatedTimestamp&quot;</span>
 <span class="o">}</span>
 </pre>
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">skinny.orm.feature.TimestampsFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_12">Soft Deletion</h3>
+<h3 id="toc_16">Soft Deletion</h3>
 
 <hr/>
 
@@ -518,13 +695,15 @@
   <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;deletedTimestamp&quot;</span>
 <span class="o">}</span>
 </pre>
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">skinny.orm.feature.SoftDeleteWithBooleanFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala</a></p>
 
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala">skinny.orm.feature.SoftDeleteWithTimestampFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_13">Optimistic Lock</h3>
+<h3 id="toc_17">Optimistic Lock</h3>
 
 <hr/>
 
@@ -535,13 +714,15 @@
   <span class="n">with</span> <span class="n">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
 <span class="c1">// lock_version bigint</span>
 </pre>
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">skinny.orm.feature.OptimisticLockWithVersionFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
 
-<p>Source code: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala">skinny.orm.feature.OptimisticLockWithTimestampFeature.scala</a></p>
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_14">FactoryGirl</h3>
+<h3 id="toc_18">FactoryGirl</h3>
 
 <hr/>
 
