@@ -88,19 +88,29 @@
 
 <p>On the other hand, it&rsquo;s impossible to resolve all the nested attributes&#39; relationships by single join query. If you need to resolve nested relationships, you can retrieve them with eagar loading by using <code>#includes</code> method.</p>
 
-<p>Examples:</p>
+<hr/>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/models.scala</a></p>
+<h4 id="toc_2">The Best way to learn</h4>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
+<p>The best way to learn is seeing the following examamples. </p>
+
+<p>Table definitions: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala</a></p>
+
+<p>Model examples: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala</a></p>
+
+<p>Usage: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
+
+<p>If you have some questions or feedbacks, feel free to ask Skinny team or users in the mailing list.</p>
+
+<p><a href="https://groups.google.com/forum/#!forum/skinny-framework">https://groups.google.com/forum/#!forum/skinny-framework</a></p>
 
 <hr/>
 
-<h3 id="toc_2">Your First Mapper</h3>
+<h3 id="toc_3">Your First Mapper</h3>
 
 <hr/>
 
-<h4 id="toc_3">Easy to use and powerful</h4>
+<h4 id="toc_4">Easy to use and powerful</h4>
 
 <p>Skinny-ORM is much powerful, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
@@ -203,7 +213,7 @@
 
 <hr/>
 
-<h3 id="toc_4">Associations</h3>
+<h3 id="toc_5">Associations</h3>
 
 <hr/>
 
@@ -222,7 +232,7 @@
 
 <hr/>
 
-<h4 id="toc_5">BelongsTo</h4>
+<h4 id="toc_6">BelongsTo</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
 
@@ -234,7 +244,7 @@
   <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
+  <span class="c1">// basic settings ...</span>
 
   <span class="c1">// If byDefault is called, this join condition is enabled by default</span>
   <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span><span class="n">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">c</span><span class="o">)).</span><span class="na">byDefault</span>
@@ -273,7 +283,7 @@
 
 <hr/>
 
-<h4 id="toc_6">HasOne</h4>
+<h4 id="toc_7">HasOne</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
 
@@ -284,6 +294,8 @@
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Name</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...</span>
+
   <span class="n">val</span> <span class="n">name</span> <span class="o">=</span> <span class="n">hasOne</span><span class="o">[</span><span class="n">Name</span><span class="o">](</span>
     <span class="n">right</span> <span class="o">=</span> <span class="n">Name</span><span class="o">,</span> 
     <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">)</span>
@@ -302,7 +314,7 @@
 </pre>
 <hr/>
 
-<h4 id="toc_7">HasMany</h4>
+<h4 id="toc_8">HasMany</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
 
@@ -319,6 +331,7 @@
 <span class="c1">// -----------------------</span>
 <span class="c1">// hasMany example</span>
 <span class="n">object</span> <span class="n">Company</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...</span>
 
   <span class="n">val</span> <span class="n">membersRef</span> <span class="o">=</span> <span class="n">hasMany</span><span class="o">[</span><span class="n">Member</span><span class="o">](</span>
     <span class="c1">// association&#39;s SkinnyMapper and alias</span>
@@ -342,6 +355,7 @@
 <span class="o">}</span>
 <span class="c1">// hasManyThrough</span>
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...</span>
 
   <span class="n">val</span> <span class="n">skillsRef</span> <span class="o">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
     <span class="n">through</span> <span class="o">=</span> <span class="n">MemberSkill</span><span class="o">,</span> 
@@ -371,7 +385,7 @@
 </pre>
 <hr/>
 
-<h4 id="toc_8">What&rsquo;s more</h4>
+<h4 id="toc_9">What&rsquo;s more</h4>
 
 <p>You can find more examples here:</p>
 
@@ -386,7 +400,7 @@
 
 <hr/>
 
-<h4 id="toc_9">Entity Equality</h4>
+<h4 id="toc_10">Entity Equality</h4>
 
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
@@ -407,7 +421,7 @@
 
 <hr/>
 
-<h3 id="toc_10">Eager Loading</h3>
+<h3 id="toc_11">Eager Loading</h3>
 
 <hr/>
 
@@ -458,7 +472,7 @@
 
 <hr/>
 
-<h3 id="toc_11">Other Configurations</h3>
+<h3 id="toc_12">Other Configurations</h3>
 
 <hr/>
 
@@ -521,7 +535,7 @@
 </pre>
 <hr/>
 
-<h3 id="toc_12">Dynamic Table Name</h3>
+<h3 id="toc_13">Dynamic Table Name</h3>
 
 <hr/>
 
@@ -542,7 +556,7 @@
 
 <hr/>
 
-<h3 id="toc_13">Adding Methods</h3>
+<h3 id="toc_14">Adding Methods</h3>
 
 <hr/>
 
@@ -571,7 +585,7 @@
 
 <hr/>
 
-<h3 id="toc_14">Using Non-Numerical or Typed Primary Key</h3>
+<h3 id="toc_15">Using Non-Numerical or Typed Primary Key</h3>
 
 <hr/>
 
@@ -657,7 +671,7 @@
 
 <hr/>
 
-<h3 id="toc_15">ActiveRecord-like Timestamps</h3>
+<h3 id="toc_16">ActiveRecord-like Timestamps</h3>
 
 <hr/>
 
@@ -681,7 +695,7 @@
 
 <hr/>
 
-<h3 id="toc_16">Soft Deletion</h3>
+<h3 id="toc_17">Soft Deletion</h3>
 
 <hr/>
 
@@ -703,7 +717,7 @@
 
 <hr/>
 
-<h3 id="toc_17">Optimistic Lock</h3>
+<h3 id="toc_18">Optimistic Lock</h3>
 
 <hr/>
 
@@ -722,7 +736,7 @@
 
 <hr/>
 
-<h3 id="toc_18">FactoryGirl</h3>
+<h3 id="toc_19">FactoryGirl</h3>
 
 <hr/>
 
