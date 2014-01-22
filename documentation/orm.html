@@ -239,7 +239,8 @@
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association">http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association</a></p>
 
 <p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
   <span class="nl">mentorId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">mentor:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
   <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
@@ -278,6 +279,10 @@
   <span class="n">company_id</span> <span class="n">bigint</span><span class="p">,</span>
   <span class="n">mentor_id</span> <span class="n">bigint</span>
 <span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
 </pre>
 <p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
 
@@ -285,7 +290,7 @@
 
 <h4 id="toc_7">HasOne</h4>
 
-<p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
+<p>Same as ActiveRecord&rsquo;s <code>has_one</code> assocation:</p>
 
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
 
@@ -316,7 +321,7 @@
 
 <h4 id="toc_8">HasMany</h4>
 
-<p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
+<p>Same as ActiveRecord&rsquo;s <code>has_many</code> assocation:</p>
 
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-many-association">http://guides.rubyonrails.org/association_basics.html#the-has-many-association</a></p>
 
