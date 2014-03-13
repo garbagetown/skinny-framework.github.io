@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Scaffolding - Skinny Framework</title>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Skinny Framework</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+              </ul>
+            </li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
+            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+        <div class="col-sm-12">
+          <div class="content">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+            <h2 id="scaffolding">Scaffolding</h2>
+
+<hr/>
+
+<h3 id="scaffold-generator">Scaffold Generator</h3>
+
+<hr/>
+
+<p>Skinny has a powerful scaffold generator. Usage is very simple.</p>
+<pre class="highlight plaintext">./skinny g scaffold members member name:String "nickname:String:varchar(64)" birthday:Option[LocalDate]
+./skinny db:migrate
+./skinny run
+</pre>
+<p>Now you can use CRUD pages for members resource at <code>http://localhost:8080/members</code>.</p>
+
+<hr/>
+
+<h4 id="parameters">Parameters</h4>
+
+<p>Scaffold command&rsquo;s parameters are &hellip;</p>
+<pre class="highlight plaintext">./skinny g scaffold:{template} {resources} {resource} "{fieldName:paramType(:columnType)}" ...
+</pre>
+<ul>
+<li>{template}: &ldquo;ssp&rdquo; / &ldquo;scaml&rdquo; / &ldquo;jade&rdquo; (Scalate template name)</li>
+<li>{resources}: Resource name in the plural (camelCase)</li>
+<li>{resource}: Resource name (camelCase)</li>
+<li>{fieldName}: Field name in the resource (camelCase)</li>
+<li>{paramType}: <code>skinny.ParamType</code>. see also: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/ParamType.scala">skinny/ParamType.scala</a></li>
+<li>{columnType}: (optional) Database column type. This will be embedded into DB migration file.</li>
+</ul>
+
+<p>It&rsquo;s also possible to specify namespace for the resource:</p>
+<pre class="highlight plaintext">./skinny g scaffold:{template} {namespace} {resources} {resource} {attributes}...
+</pre>
+<ul>
+<li>{namespace}: prefix for the resource (e.g. admin.foo.bar)</li>
+</ul>
+
+<hr/>
+
+<h4 id="example-usage">Example Usage</h4>
+
+<hr/>
+
+<p>Let&rsquo;s create CRUD pages to manage project members!</p>
+
+<hr/>
+<pre class="highlight plaintext">$ ./skinny g scaffold:jade projectMembers projectMember name:String "nickname:Option[String]:varchar(32)" joinedAt:DateTime leaveAt:Option[DateTime]
+
+[info] Running TaskRunner generate:scaffold:jade projectMembers projectMember name:String nickname:Option[String]:varchar(32) joinedAt:DateTime leaveAt:Option[DateTime]
+
+ *** Skinny Generator Task ***
+
+  "src/main/scala/controller/ApplicationController.scala" skipped.
+  "src/main/scala/controller/ProjectMembersController.scala" created.
+  "src/main/scala/ScalatraBootstrap.scala" modified.
+  "src/test/scala/controller/ProjectMembersControllerSpec.scala" created.
+  "src/test/resources/factories.conf" modified.
+  "src/main/scala/model/ProjectMember.scala" created.
+  "src/test/scala/model/ProjectMemberSpec.scala" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/_form.html.jade" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/new.html.jade" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/edit.html.jade" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/index.html.jade" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/show.html.jade" created.
+  "src/main/resources/messages.conf" modified.
+  "src/main/resources/db/migration/V20140302005853__Create_projectMembers_table.sql" created.
+
+[success] Total time: 1 s, completed Mar 2, 2014 12:58:53 AM
+</pre>
+<p>With namespace:</p>
+<pre class="highlight plaintext">$ ./skinny g scaffold:jade admin.foo members member name:String
+
+[info] Running TaskRunner generate:scaffold:jade admin.foo members member name:String
+
+ *** Skinny Generator Task ***
+
+  "src/main/scala/controller/ApplicationController.scala" skipped.
+  "src/main/scala/controller/admin/foo/MembersController.scala" created.
+  "src/main/scala/ScalatraBootstrap.scala" modified.
+  "src/test/scala/controller/admin/foo/MembersControllerSpec.scala" created.
+  "src/test/resources/factories.conf" modified.
+  "src/main/scala/model/admin/foo/Member.scala" created.
+  "src/test/scala/model/admin/foo/MemberSpec.scala" created.
+  "src/main/webapp/WEB-INF/views/admin/foo/members/_form.html.jade" created.
+  "src/main/webapp/WEB-INF/views/admin/foo/members/new.html.jade" created.
+  "src/main/webapp/WEB-INF/views/admin/foo/members/edit.html.jade" created.
+  "src/main/webapp/WEB-INF/views/admin/foo/members/index.html.jade" created.
+  "src/main/webapp/WEB-INF/views/admin/foo/members/show.html.jade" created.
+  "src/main/resources/messages.conf" modified.
+  "src/main/resources/db/migration/V20140307003617__Create_members_table.sql" created.
+
+[success] Total time: 2 s, completed Mar 7, 2014 12:36:17 AM
+</pre>
+<hr/>
+
+<p>After that, do DB migration.
+<hr/></p>
+<pre class="highlight plaintext">$ ./skinny db:migrate
+</pre>
+<hr/>
+
+<p>Run the Skinny app and access <code>http://localhost:8080/project_members</code> from your browser.
+<hr/></p>
+<pre class="highlight plaintext">$ ./skinny run
+</pre>
+<hr/>
+
+<h4 id="url-/-parameter-names">URL / Parameter Names</h4>
+
+<hr/>
+
+<p>The following is an example controller generated by scaffold command.</p>
+
+<p>Be aware of these rules:</p>
+
+<ul>
+<li>Base URL will be snake_cased. If you&rsquo;d like to change it, edit <code>resourcesBasePath</code></li>
+<li>Parameter names will be snake_cased. <code>useSnakeCasedParamKeys</code> should be true when using <code>Params#withDateTime</code></li>
+</ul>
+
+<p>It&rsquo;ll be the fastest way to understand actual files generated by scaffold generator.</p>
+
+<hr/>
+<pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
+
+<span class="kn">import</span> <span class="nn">skinny._</span>
+<span class="kn">import</span> <span class="nn">skinny.validator._</span>
+<span class="kn">import</span> <span class="nn">model.ProjectMember</span>
+
+<span class="n">object</span> <span class="n">ProjectMembersController</span> <span class="kd">extends</span> <span class="n">SkinnyResource</span> <span class="n">with</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span>
+
+  <span class="n">override</span> <span class="n">def</span> <span class="n">model</span> <span class="o">=</span> <span class="n">ProjectMember</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">"projectMembers"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">"projectMember"</span>
+
+  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesBasePath</span> <span class="o">=</span> <span class="n">s</span><span class="s">"/${toSnakeCase(resourcesName)}"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">useSnakeCasedParamKeys</span> <span class="o">=</span> <span class="kc">true</span>
+
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"joined_at"</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"leave_at"</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"joined_at"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateTimeFormat</span><span class="o">,</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"leave_at"</span><span class="o">)</span> <span class="n">is</span> <span class="n">dateTimeFormat</span>
+  <span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
+    <span class="s">"nickname"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
+    <span class="s">"joined_at"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">DateTime</span><span class="o">,</span>
+    <span class="s">"leave_at"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">DateTime</span>
+  <span class="o">)</span>
+
+<span class="o">...</span>
+</pre>
+<hr/>
+
+<h3 id="reverse-scaffold-generator">Reverse Scaffold Generator</h3>
+
+<hr/>
+
+<p>If you&rsquo;re working with existing database, <code>reverse-scaffold</code> command is pretty useful.</p>
+
+<p>When you have <code>project_members</code> table in database,</p>
+<pre class="highlight sql"><span class="c1">-- For H2 Database
+</span><span class="k">create</span> <span class="k">table</span> <span class="n">project_members</span> <span class="p">(</span>
+  <span class="n">member_id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">nickname</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+  <span class="n">joined_at</span> <span class="k">timestamp</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">leave_at</span> <span class="k">timestamp</span>
+<span class="p">);</span>
+</pre>
+<p>Run the <code>reverse-scaffold</code> command like this.</p>
+
+<p>This command uses DB settings in the <code>src/main/resources/application.conf</code>. SkinnyEnv is set as <code>development</code>. </p>
+<pre class="highlight plaintext">$ ./skinny g reverse-scaffold:scaml project_members projectMembers projectMember
+
+[info] Running TaskRunner generate:reverse-scaffold:scaml project_members projectMembers projectMember
+
+ *** Skinny Reverse Engineering Task ***
+
+  Table     : project_members
+  ID        : memberId
+  Resources : projectMembers
+  Resource  : projectMember
+
+  Columns:
+   - name:String:varchar(512)
+   - nickname:Option[String]:varchar(32)
+   - joinedAt:DateTime
+   - leaveAt:Option[DateTime]
+
+ *** Skinny Generator Task ***
+
+  "src/main/scala/controller/ApplicationController.scala" skipped.
+  "src/main/scala/controller/ProjectMembersController.scala" created.
+  "src/main/scala/ScalatraBootstrap.scala" modified.
+  "src/test/scala/controller/ProjectMembersControllerSpec.scala" created.
+  "src/test/resources/factories.conf" modified.
+  "src/main/scala/model/ProjectMember.scala" created.
+  "src/test/scala/model/ProjectMemberSpec.scala" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/_form.html.scaml" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/new.html.scaml" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/edit.html.scaml" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/index.html.scaml" created.
+  "src/main/webapp/WEB-INF/views/projectMembers/show.html.scaml" created.
+  "src/main/resources/messages.conf" modified.
+  "src/main/resources/db/migration/V20140302010916__Create_projectMembers_table.sql" created.
+
+[success] Total time: 1 s, completed Mar 2, 2014 1:09:16 AM
+</pre>
+<p>The DB migration file generated by this command is commented out by default, so <code>./skinny db:migrate</code> will do nothing.</p>
+
+<p>Just run <code>./skinny run</code> and access <code>http://localhost:8080/project_members</code> from your browser.</p>
+
+<hr/>
+
+<h4 id="parameters">Parameters</h4>
+
+<p>Scaffold command&rsquo;s parameters are &hellip;</p>
+<pre class="highlight plaintext">./skinny g reverse-scaffold:{template} {tableName} {resources} {resource}
+</pre>
+<ul>
+<li>{template}: &ldquo;ssp&rdquo; / &ldquo;scaml&rdquo; / &ldquo;jade&rdquo; (Scalate template name)</li>
+<li>{tableName}: Target table name in the existing database</li>
+<li>{resources}: Resource name in the plural (camelCase)</li>
+<li>{resource}: Resource name (camelCase)</li>
+</ul>
+<pre class="highlight plaintext">./skinny g reverse-scaffold:{template} {namespace} {tableName} {resources} {resource}
+</pre>
+<ul>
+<li>{namespace}: prefix for the resource (e.g. admin.foo.bar)</li>
+</ul>
+
+            <hr/>
+            <div class="alert alert-info small"> 
+              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
+            </div> 
+<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

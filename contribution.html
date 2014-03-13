@@ -5,14 +5,13 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>Contribution - Skinny Framework</title>
-    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
-      <div class="row">
     <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -24,11 +23,14 @@
               <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
@@ -41,51 +43,32 @@
             </li>
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
             <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
+            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-        <div class="col-xs-2">
-          <div class="content small">
-            <h5>Documentation</h5>
-            <hr/>
-            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
-            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
-            <p><a href="/documentation/validator.html">Validator</a></p>
-            <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/assets.html">Assets Support</a></p>
-            <p><a href="/documentation/mail.html">Mail</a></p>
-            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
-            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
-            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
-            <p><a href="/documentation/tasks.html">Tasks</a></p>
-            <p><a href="/documentation/testing.html">Testing</a></p>
-            <p><a href="/documentation/packaging.html">Packaging</a></p>
-            <p><a href="/contribution.html">Contribution</a></p>
-          </div>
-        </div>
-        <div class="col-xs-10">
+        <div class="col-sm-12">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2 id="toc_0">Contribution</h2>
+            <h2 id="contribution">Contribution</h2>
 
 <hr/>
 
-<h3 id="toc_1">Website</h3>
+<h3 id="website">Website</h3>
 
 <hr/>
 
-<h4 id="toc_2">fork skinny-framework.github.io project</h4>
+<h4 id="fork-skinny-framework.github.io-project">fork skinny-framework.github.io project</h4>
 
 <p>Fork <a href="https://github.com/skinny-framework/skinny-framework.github.io">https://github.com/skinny-framework/skinny-framework.github.io</a>.</p>
 
 <hr/>
 
-<h4 id="toc_3">change under the website directory</h4>
+<h4 id="change-under-the-website-directory">change under the website directory</h4>
 
 <p>How to debug:</p>
-<pre class="highlight text">git clone [your forked repository].
+<pre class="highlight plaintext">git clone [your forked repository].
 cd skinny-framework.github.io
 gem install bundler
 bundle install
@@ -95,30 +78,30 @@ bundle exec middleman server
 
 <hr/>
 
-<h4 id="toc_4">make a pull request</h4>
+<h4 id="make-a-pull-request">make a pull request</h4>
 
 <p>Create a branch to request, and send your pull request to <code>develop</code> branch (not <code>master</code> branch).</p>
 
 <hr/>
 
-<h3 id="toc_5">Libraries</h3>
+<h3 id="libraries">Libraries</h3>
 
 <hr/>
 
-<h4 id="toc_6">fork skinny-framework project</h4>
+<h4 id="fork-skinny-framework-project">fork skinny-framework project</h4>
 
 <p>Fork <a href="https://github.com/skinny-framework/skinny-framework">https://github.com/skinny-framework/skinny-framework</a>.</p>
-<pre class="highlight text">git clone [your forked repository].
+<pre class="highlight plaintext">git clone [your forked repository].
 </pre>
 <hr/>
 
-<h4 id="toc_7">modify and write tests</h4>
+<h4 id="modify-and-write-tests">modify and write tests</h4>
 
 <p>Modify code &amp; write test.</p>
 
 <hr/>
 
-<h4 id="toc_8">run all the existing tests</h4>
+<h4 id="run-all-the-existing-tests">run all the existing tests</h4>
 
 <p>Run all the tests at least with H2 database.</p>
 <pre class="highlight shell">rm -rf db/example-test<span class="k">*</span>
@@ -127,13 +110,13 @@ bundle exec middleman server
 </pre>
 <hr/>
 
-<h4 id="toc_9">make a pull request</h4>
+<h4 id="make-a-pull-request">make a pull request</h4>
 
 <p>Create a branch to request, and send your pull request to <code>develop</code> branch (not <code>master</code> branch).</p>
 
             <hr/>
             <div class="alert alert-info small"> 
-              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 <a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -142,7 +125,7 @@ bundle exec middleman server
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>
 

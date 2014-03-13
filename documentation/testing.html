@@ -5,14 +5,13 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>Testing - Skinny Framework</title>
-    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
-      <div class="row">
     <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -24,11 +23,14 @@
               <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
@@ -41,52 +43,48 @@
             </li>
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
             <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
+            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-        <div class="col-xs-2">
-          <div class="content small">
-            <h5>Documentation</h5>
-            <hr/>
-            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
-            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
-            <p><a href="/documentation/validator.html">Validator</a></p>
-            <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/assets.html">Assets Support</a></p>
-            <p><a href="/documentation/mail.html">Mail</a></p>
-            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
-            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
-            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
-            <p><a href="/documentation/tasks.html">Tasks</a></p>
-            <p><a href="/documentation/testing.html">Testing</a></p>
-            <p><a href="/documentation/packaging.html">Packaging</a></p>
-            <p><a href="/contribution.html">Contribution</a></p>
-          </div>
-        </div>
-        <div class="col-xs-10">
+        <div class="col-sm-12">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2 id="toc_0">Testing</h2>
+            <h2 id="testing">Testing</h2>
 
 <hr/>
 
-<h3 id="toc_1">Testability is much important</h3>
+<h3 id="testability-is-very-important">Testability is very important</h3>
 
 <hr/>
 
-<p>You can use Scalatra&rsquo;s great test support. Some optional feature is provided by skinny-test library.</p>
+<p>You can use Scalatra&rsquo;s great test support with Skinny. Some optional features are provided by the skinny-test library.</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
-  <span class="n">addFilter</span><span class="o">(</span><span class="n">MembersController</span><span class="o">,</span> <span class="s">&quot;/*&quot;</span><span class="o">)</span>
+  <span class="n">addFilter</span><span class="o">(</span><span class="n">MembersController</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
 
-  <span class="n">it</span> <span class="n">should</span> <span class="s">&quot;show index page&quot;</span> <span class="n">in</span> <span class="o">{</span>
-    <span class="n">withSession</span><span class="o">(</span><span class="s">&quot;userId&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">get</span><span class="o">(</span><span class="s">&quot;/members&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
+  <span class="n">it</span> <span class="n">should</span> <span class="s">"show index page"</span> <span class="n">in</span> <span class="o">{</span>
+    <span class="n">withSession</span><span class="o">(</span><span class="s">"userId"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">get</span><span class="o">(</span><span class="s">"/members"</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+<hr/>
+
+<h3 id="how-to-run-tests">How to run tests</h3>
+
+<p>Simply use skinny command or sbt directly.</p>
+<pre class="highlight plaintext">./skinny test
+./skinny test-only models.MemberSpec
+</pre>
+<p>If you need a code coverage report, use <code>scoverage:test</code> instead. </p>
+
+<p><a href="https://github.com/scoverage/sbt-scoverage">https://github.com/scoverage/sbt-scoverage</a></p>
+<pre class="highlight plaintext">./skinny scoverage:test
+</pre>
+<p>WARNING: There is a known issue that scoverage doesn&rsquo;t work perfectly with Skinny ORM.</p>
+
 <hr/>
 
 <p>You can see some examples here:</p>
@@ -97,7 +95,7 @@
 
             <hr/>
             <div class="alert alert-info small"> 
-              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 <a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -106,7 +104,7 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>
 

@@ -1,5 +1,5 @@
 body {
-  background-color: #7B68EE;
+  background-color: #6E6E6E;
   padding-top: 20px;
 }
 .content {
@@ -9,9 +9,8 @@ body {
 .navbar {
   background-color: #FFFFFF;
 }
-.highlight table { border-spacing: 0; }
 .highlight table td { padding: 5px; }
-.highlight table .gutter { text-align: right; }
+.highlight table pre { margin: 0; }
 .highlight {
   color: #faf6e4;
   background-color: #122b3b;
@@ -20,7 +19,7 @@ body {
   color: #dee5e7;
   background-color: #4e5d62;
 }
-.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -37,14 +36,14 @@ body {
   color: #fefeec;
   background-color: #cc0000;
 }
-.highlight .k, .highlight .kd {
+.highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
   font-weight: bold;
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
 }
-.highlight .p {
+.highlight .p, .highlight .pi {
   color: #4df4ff;
 }
 .highlight .gd {
@@ -123,7 +122,7 @@ body {
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo {
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -174,3 +173,132 @@ body {
   color: #a8e1fe;
   font-weight: bold;
 }
+code {
+  color: #61380B;
+}
+
+/* move special fonts to HTML head for better performance */
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');
+/* custom template */
+html, body {
+   height: 100%;
+   font-family:'Open Sans',arial,sans-serif;
+}
+a {
+  color: #6c8b9f;
+}
+a:hover { 
+  color: #6c8b9f;
+}
+.wrapper, .row {
+   height: 100%;
+   margin-left:0;
+   margin-right:0;
+}
+.wrapper:before, .wrapper:after,
+.column:before, .column:after {
+    content: "";
+    display: table;
+}
+.wrapper:after,
+.column:after {
+    clear: both;
+}
+.column {
+    height: 100%;
+    overflow: auto;
+    *zoom:1;
+}
+.column .padding {
+    padding: 20px;
+}
+.box {
+    bottom: 0; /* increase for footer use */
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-size:cover;
+    background-attachment:fixed;
+}
+.divider {
+    margin-top:32px;
+}
+#main {
+    background-color:#fefefe;
+}
+#main .img-circle {
+  margin-top:18px;
+  height:70px;
+  width:70px;
+}
+#sidebar, #sidebar a {
+    color:#ffffff;
+    background-color:transparent;
+    text-shadow:1px 0 1px #888888;
+}
+#sidebar a.logo {
+  display:block;
+  padding:3px;
+  background-color:#fff;
+  color:#777777;
+  height:40px;
+  width:40px;
+  margin:15px;
+  font-size:26px;
+  font-weight:700;
+  text-align:center;
+  text-decoration:none;
+  text-shadow:0 0 0;
+}
+#sidebar-footer {
+  position:absolute;bottom:5px;
+}
+#footer {
+  margin-bottom:20px;
+}
+
+/* center and adjust the sidebar contents on smaller devices */
+@media (max-width: 768px) {
+  #sidebar,#sidebar a.logo {
+    text-align:center;
+    margin:0 auto;
+    margin-top:30px;
+    font-size:26px;
+  }
+  #sidebar a.logo {
+    font-size:50px;
+    height:75px;
+    width:75px;
+    margin-bottom:30px;
+  }
+}
+
+/* bootstrap overrides */
+h1,h2,h3 {
+   font-weight:800;
+   font-family:'Open Sans',arial,sans-serif;
+}
+.jumbotron {
+  background-color:transparent;
+}
+.label-default {
+  background-color:#dddddd;
+}
+.page-header {
+  margin-top: 55px;
+  padding-top: 9px;
+  border-top:1px solid #eeeeee;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+.col-sm-9.full {
+    width: 100%;
+}
+small.text-muted {
+  font-family:courier,courier-new,monospace;
+}
+
+
+

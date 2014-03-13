@@ -5,14 +5,13 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>ORM - Skinny Framework</title>
-    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
-      <div class="row">
     <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -24,11 +23,14 @@
               <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
                 <li><a href="/documentation/orm.html">O/R Mapper</a></li>
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
@@ -41,58 +43,39 @@
             </li>
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
             <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
+            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-        <div class="col-xs-2">
-          <div class="content small">
-            <h5>Documentation</h5>
-            <hr/>
-            <p><a href="/documentation/getting-started.html">Getting Started</a></p>
-            <p><a href="/documentation/controller-and-routes.html">Controller & Routes</a></p>
-            <p><a href="/documentation/validator.html">Validator</a></p>
-            <p><a href="/documentation/view-templates.html">View Templates</a></p>
-            <p><a href="/documentation/assets.html">Assets Support</a></p>
-            <p><a href="/documentation/mail.html">Mail</a></p>
-            <p><a href="/documentation/orm.html">O/R Mapper</a></p>
-            <p><a href="/documentation/factory-girl.html">FactoryGirl</a></p>
-            <p><a href="/documentation/db-migration.html">DB Migration</a></p>
-            <p><a href="/documentation/json.html">Working with JSON</a></p>
-            <p><a href="/documentation/tasks.html">Tasks</a></p>
-            <p><a href="/documentation/testing.html">Testing</a></p>
-            <p><a href="/documentation/packaging.html">Packaging</a></p>
-            <p><a href="/contribution.html">Contribution</a></p>
-          </div>
-        </div>
-        <div class="col-xs-10">
+        <div class="col-sm-12">
           <div class="content">
 <a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-            <h2 id="toc_0">ORM</h2>
+            <h2 id="orm">ORM</h2>
 
 <hr/>
 
-<h3 id="toc_1">Skinny-ORM</h3>
+<h3 id="skinny-orm">Skinny-ORM</h3>
 
 <hr/>
 
-<p>Skinny provides you Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>. This is a portable library. So you can use it with Play2, pure Scalatra, Lift and any other frameworks.</p>
+<p>Skinny provides you with Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>. This is a portable library, so you can also use it with Play2, pure Scalatra, Lift and any other frameworks.</p>
 
 <p><img alt="Logo" src="/images/scalikejdbc.png" /></p>
 
-<p>Skinny-ORM is naturally characterized by avoding N+1 queries because associations are resolved by join queries. </p>
+<p>A key feature of Skinny-ORM is that it avoids N+1 queries because associations are resolved by join queries. </p>
 
-<p><code>#belongsTo</code>, <code>#hasOne</code> and <code>#hasMany(Through)</code> associations are converted into join queries, so you don&rsquo;t need to take care about performance problems caused by so many N+1 queries any more. </p>
+<p><code>#belongsTo</code>, <code>#hasOne</code> and <code>#hasMany(Through)</code> associations are converted into join queries, so you don&rsquo;t need to worry about performance problems caused by N+1 queries. </p>
 
-<p>Furthermore, the <code>#byDefault</code> option allows you resolving assocations anytime. If you don&rsquo;t always need some association, miss the <code>#byDefault</code> and just use <code>#joins</code> method such as <code>Team.joins(Team.members).findById(123)</code> on demand.</p>
+<p>Furthermore, the <code>#byDefault</code> option allows you to resolve assocations anytime. If you don&rsquo;t always need some association, miss the <code>#byDefault</code> and just use <code>#joins</code> method such as <code>Team.joins(Team.members).findById(123)</code> on demand.</p>
 
-<p>On the other hand, it&rsquo;s impossible to resolve all the nested attributes&#39; relationships by single join query. If you need to resolve nested relationships, you can retrieve them with eager loading by using <code>#includes</code> method.</p>
+<p>On the other hand, it&rsquo;s impossible to resolve all the nested attributes&#39; relationships by a single join query. If you need to resolve nested relationships, you can retrieve them with eager loading by using <code>#includes</code> method.</p>
 
 <hr/>
 
-<h4 id="toc_2">The Best way to learn</h4>
+<h4 id="the-best-way-to-learn">The Best way to learn</h4>
 
-<p>The best way to learn is seeing the following examamples. </p>
+<p>The best way to learn is by reading the following examamples. </p>
 
 <p>Table definitions: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala</a></p>
 
@@ -100,23 +83,28 @@
 
 <p>Usage: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala</a></p>
 
-<p>If you have some questions or feedbacks, feel free to ask Skinny team or users in the mailing list.</p>
+<p>If you have any questions or feedback, feel free to ask the Skinny team or users in the mailing list.</p>
 
 <p><a href="https://groups.google.com/forum/#!forum/skinny-framework">https://groups.google.com/forum/#!forum/skinny-framework</a></p>
 
 <hr/>
 
-<h3 id="toc_3">Your First Mapper</h3>
+<h3 id="your-first-mapper">Your First Mapper</h3>
 
 <hr/>
 
-<h4 id="toc_4">Easy to use and powerful</h4>
+<h4 id="easy-to-use-and-powerful">Easy to use and powerful</h4>
 
-<p>Skinny-ORM is much powerful, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
+<p>Skinny-ORM is very powerful, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny._</span>
+<span class="kn">import</span> <span class="nn">skinny.orm._</span>
+<span class="kn">import</span> <span class="nn">scalikejdbc._</span><span class="o">,</span> <span class="n">SQLInterpolation</span><span class="o">.</span><span class="na">_</span>
+<span class="kn">import</span> <span class="nn">org.joda.time._</span>
+
+<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
   <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
     <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span>
@@ -132,7 +120,7 @@
 <span class="c1">// find by primary key</span>
 <span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
+<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// find many</span>
@@ -142,16 +130,28 @@
 <span class="c1">// in clause</span>
 <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">in</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)))</span>
 
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
+<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
+
+<span class="c1">// will return 345, 234, 123 in order</span>
+<span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
+<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> 
+  <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">desc</span><span class="o">).</span><span class="na">offset</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">apply</span><span class="o">()</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// find by condition</span>
 
 <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAllBy</span><span class="o">(</span>
-  <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupName</span><span class="o">,</span> <span class="s">&quot;scalajp&quot;</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">delete</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span>
+  <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupName</span><span class="o">,</span> <span class="s">"scalajp"</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">delete</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span>
 
 <span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span>
-  <span class="err">&#39;</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">&quot;scalajp&quot;</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
+  <span class="err">'</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">"scalajp"</span><span class="o">,</span> <span class="err">'</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
+
+<span class="c1">// use Pagination instead. Easier to understand than limit/offset</span>
+<span class="n">val</span> <span class="n">members</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+  <span class="o">.</span><span class="na">paginate</span><span class="o">(</span><span class="n">Pagination</span><span class="o">.</span><span class="na">page</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">per</span><span class="o">(</span><span class="mi">20</span><span class="o">))</span>
+  <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">desc</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// count</span>
@@ -159,48 +159,52 @@
 <span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
 <span class="n">Order</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">shopId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 
-<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">&#39;</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">shopId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">cancelled</span><span class="o">,</span> <span class="kc">false</span><span class="o">)).</span><span class="na">distinctCount</span><span class="o">(</span><span class="err">&#39;</span><span class="n">customerId</span><span class="o">)</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">'</span><span class="n">shopId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">cancelled</span><span class="o">,</span> <span class="kc">false</span><span class="o">)).</span><span class="na">distinctCount</span><span class="o">(</span><span class="err">'</span><span class="n">customerId</span><span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// calcuations</span>
 <span class="c1">// min, max, average and sum</span>
 
-<span class="n">Order</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="err">&#39;</span><span class="n">amount</span><span class="o">)</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="err">'</span><span class="n">amount</span><span class="o">)</span>
 
-<span class="n">Product</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
-<span class="n">Product</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">ge</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">createdAt</span><span class="o">,</span> <span class="n">startDate</span><span class="o">)).</span><span class="na">max</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
-<span class="n">Product</span><span class="o">.</span><span class="na">average</span><span class="o">(</span><span class="err">&#39;</span><span class="n">price</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">ge</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">createdAt</span><span class="o">,</span> <span class="n">startDate</span><span class="o">)).</span><span class="na">max</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">average</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
 
-<span class="n">Product</span><span class="o">.</span><span class="na">calculate</span><span class="o">(</span><span class="n">sqls</span><span class="s">&quot;original_func(${p.userId})&quot;</span><span class="o">)</span>
+<span class="n">Product</span><span class="o">.</span><span class="na">calculate</span><span class="o">(</span><span class="n">sqls</span><span class="s">"original_func(${p.userId})"</span><span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// create with strong parameters</span>
 
-<span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;Bob&quot;</span><span class="o">)</span>
-<span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
+<span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Bob"</span><span class="o">)</span>
+<span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// create with unsafe parameters</span>
 
+<span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
+<span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithNamedValues</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
+
 <span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
-  <span class="err">&#39;</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
-  <span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Chris&quot;</span><span class="o">,</span>
-  <span class="err">&#39;</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
+  <span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
+  <span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Chris"</span><span class="o">,</span>
+  <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
 <span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// update with strong parameters</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
+
+<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// update with unsafe parameters</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">&#39;</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">&quot;Alice&quot;</span><span class="o">)</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
 
 <span class="c1">// update by condition</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">updateBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">)).</span><span class="na">withAttribtues</span><span class="o">(</span><span class="err">&#39;</span><span class="n">groupId</span> <span class="o">-&gt;</span> <span class="mi">234</span><span class="o">)</span>
+<span class="n">Member</span><span class="o">.</span><span class="na">updateBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">)).</span><span class="na">withAttribtues</span><span class="o">(</span><span class="err">'</span><span class="n">groupId</span> <span class="o">-&gt;</span> <span class="mi">234</span><span class="o">)</span>
 
 <span class="c1">// ------------</span>
 <span class="c1">// delete</span>
@@ -213,7 +217,7 @@
 
 <hr/>
 
-<h3 id="toc_5">Associations</h3>
+<h3 id="associations">Associations</h3>
 
 <hr/>
 
@@ -226,19 +230,19 @@
 
 <p><a href="http://scalikejdbc.org/documentation/query-inspector.html">http://scalikejdbc.org/documentation/query-inspector.html</a></p>
 
-<p>Typically defining associations are fundamentally not so simple, so you might be confused when specifying these definitions. Understanding how ScalikeJDBC&rsquo;s join queries and One-to-X APIs work may be a short cut.</p>
+<p>Typically defining associations are fundamentally not so simple, so you might be confused when specifying these definitions. Understanding how ScalikeJDBC&rsquo;s join queries and One-to-X APIs work may be useful.</p>
 
 <p><a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
 
 <hr/>
 
-<h4 id="toc_6">BelongsTo</h4>
+<h4 id="belongsto">BelongsTo</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>belongs_to</code> assocation:</p>
 
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association">http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association</a></p>
 
-<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
 <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
   <span class="nl">mentorId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">mentor:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
@@ -260,9 +264,9 @@
   <span class="o">).</span><span class="na">byDefault</span>
 
   <span class="c1">// when you cannot use defaultAlias, use this instead</span>
-  <span class="n">val</span> <span class="n">mentorAlais</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;mentor&quot;</span><span class="o">)</span>
+  <span class="n">val</span> <span class="n">mentorAlais</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"mentor"</span><span class="o">)</span>
   <span class="n">val</span> <span class="n">mentor</span> <span class="o">=</span> <span class="n">belongToWithAlias</span><span class="o">(</span>
-    <span class="c1">// in this case, &quot;mentor&quot; alias will be used in join query</span>
+    <span class="c1">// in this case, "mentor" alias will be used in join query</span>
     <span class="n">right</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">mentorAlias</span><span class="o">,</span>
     <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">mentor</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">mentor</span> <span class="o">=</span> <span class="n">mentor</span><span class="o">))</span>
     <span class="c1">// mentor will be resolved only when calling #joins </span>
@@ -288,13 +292,13 @@
 
 <hr/>
 
-<h4 id="toc_7">HasOne</h4>
+<h4 id="hasone">HasOne</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>has_one</code> assocation:</p>
 
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
 
-<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Name</span><span class="p">(</span><span class="nl">first:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">last:</span> <span class="n">String</span><span class="o">)</span>
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Name</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
@@ -319,13 +323,13 @@
 </pre>
 <hr/>
 
-<h4 id="toc_8">HasMany</h4>
+<h4 id="hasmany">HasMany</h4>
 
 <p>Same as ActiveRecord&rsquo;s <code>has_many</code> assocation:</p>
 
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-many-association">http://guides.rubyonrails.org/association_basics.html#the-has-many-association</a></p>
 
-<p>We need to specify some types, so definitions are not so simple as ActiveRecord, it&rsquo;s easy to understand nad simple enough.</p>
+<p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">members:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> 
   <span class="nl">companyId:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Long</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
@@ -339,7 +343,7 @@
   <span class="c1">// basic settings ...</span>
 
   <span class="n">val</span> <span class="n">membersRef</span> <span class="o">=</span> <span class="n">hasMany</span><span class="o">[</span><span class="n">Member</span><span class="o">](</span>
-    <span class="c1">// association&#39;s SkinnyMapper and alias</span>
+    <span class="c1">// association's SkinnyMapper and alias</span>
     <span class="n">many</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">membersAlias</span><span class="o">,</span>
     <span class="c1">// defines join condition by using aliases</span>
     <span class="n">on</span> <span class="o">=</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="n">m</span><span class="o">.</span><span class="na">companyId</span><span class="o">),</span>
@@ -355,8 +359,8 @@
 <span class="c1">// join table definition</span>
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">MemberSkill</span><span class="p">(</span><span class="nl">memberId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">skillId:</span> <span class="n">Long</span><span class="o">)</span>
 <span class="n">object</span> <span class="n">MemberSkill</span> <span class="kd">extends</span> <span class="n">SkinnyJoinTable</span><span class="o">[</span><span class="n">MemberSkill</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;members_skills&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;ms&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"members_skills"</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"ms"</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// hasManyThrough</span>
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -390,7 +394,7 @@
 </pre>
 <hr/>
 
-<h4 id="toc_9">What&rsquo;s more</h4>
+<h4 id="what&#39;s-more">What&rsquo;s more</h4>
 
 <p>You can find more examples here:</p>
 
@@ -405,41 +409,41 @@
 
 <hr/>
 
-<h4 id="toc_10">Entity Equality</h4>
+<h4 id="entity-equality">Entity Equality</h4>
 
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
-<p>In this case, entity should be defined like this (Skinny 0.9.21 or ScalikeJDBC 1.7.3 is required):</p>
+<p>In this case, entities should be defined like this (Skinny 0.9.21 or ScalikeJDBC 1.7.3 is required):</p>
 <pre class="highlight java"><span class="kd">class</span> <span class="nf">LegacyData</span><span class="p">(</span><span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="n">val</span> <span class="nl">c2:</span> <span class="n">String</span><span class="o">,</span> <span class="n">val</span> <span class="nl">c3:</span> <span class="n">Int</span><span class="o">,</span> <span class="o">...,</span> <span class="n">val</span> <span class="nl">c23:</span> <span class="n">Int</span><span class="o">)</span>
   <span class="kd">extends</span> <span class="n">scalikejdbc</span><span class="o">.</span><span class="na">EntityEquality</span> <span class="o">{</span>
   <span class="c1">// override val entityIdentity = id</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">entityIdentity</span> <span class="o">=</span> <span class="n">s</span><span class="s">&quot;$id $c2 $c3 ... $c23&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">entityIdentity</span> <span class="o">=</span> <span class="n">s</span><span class="s">"$id $c2 $c3 ... $c23"</span>
 <span class="o">}</span>
 
 <span class="n">object</span> <span class="n">LegacyData</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">LegacyData</span><span class="o">]</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
 </pre>
-<p>If you missed above implementation, one-to-many relationships doesn&rsquo;t work as you expect.</p>
+<p>If you don&rsquo;t implement like this, one-to-many relationships won&rsquo;t work as you expect.</p>
 
-<p>See also detail explanation here: <a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
-
-<hr/>
-
-<h3 id="toc_11">Eager Loading</h3>
+<p>See also the detailed explanation here: <a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
 
 <hr/>
 
-<p>When you use eager loading by <code>includes</code> API, define both of <code>belongsTo</code> and <code>includes</code>. </p>
+<h3 id="eager-loading">Eager Loading</h3>
 
-<p>Note: nested entities&rsquo;s eager loading is not supported yet.</p>
+<hr/>
+
+<p>When you enable eager loading using the <code>includes</code> API, you need to define both <code>belongsTo</code> and <code>includes</code>. </p>
+
+<p>Note: eager loading of nested entities is not supported yet.</p>
 
 <p>Indeed, it&rsquo;s not incredibly simple. But we believe that what it does is so clear that you can easily write the definition.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn&#39;t work as expected</span>
-  <span class="c1">// when &quot;val company&quot; is defined in Scala 2.10.x.</span>
-  <span class="c1">// If you suffered that, use &quot;val companyOpt&quot; &quot;companyRef&quot; and so on instead.</span>
+  <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn't work as expected</span>
+  <span class="c1">// when "val company" is defined in Scala 2.10.x.</span>
+  <span class="c1">// If you suffer from this issue, use "val companyOpt" "companyRef" and so on instead.</span>
   <span class="n">val</span> <span class="n">companyOpt</span> <span class="o">=</span> <span class="o">{</span>
     <span class="c1">// normal belongsTo</span>
     <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
@@ -470,40 +474,40 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
 </pre>
-<p>Note: when your entities have same associations (e.g. Company has Employee, Country and Employee has Country), avoiding to use default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We have a plan to provide more kind error message for such cases until version 1.0.0.</p>
+<p>Note: when your entities have the same associations (e.g. Company has Employee, Country and Employee have Country), avoiding using the default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We plan to provide more useful error messages for such cases in version 1.0.0.</p>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_12">Other Configurations</h3>
+<h3 id="other-configurations">Other Configurations</h3>
 
 <hr/>
 
 <p>Skinny ORM provides the folllowing settings to overwrite.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">GroupMember</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// default: &#39;default</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">connectionPoolName</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">legacydb</span>
+  <span class="c1">// default: 'default</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">connectionPoolName</span> <span class="o">=</span> <span class="err">'</span><span class="n">legacydb</span>
 
   <span class="c1">// default: None </span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">schemaName</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="s">&quot;public&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">schemaName</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="s">"public"</span><span class="o">)</span>
 
   <span class="c1">// Basically tableName is loaded from jdbc metadata and cached on the JVM</span>
   <span class="c1">// However, if the name of object/class which extends SkinnyMapper is not the camelCase of table name,</span>
   <span class="c1">// you need to override tableName by yourself.</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;group_members&quot;</span> <span class="c1">// default: group_member </span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"group_members"</span> <span class="c1">// default: group_member </span>
 
   <span class="c1">// Basically columnNames are loaded from jdbc metadata and cached on the JVM</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">columnNames</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="s">&quot;birthday&quot;</span><span class="o">,</span> <span class="s">&quot;created_at&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">columnNames</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">,</span> <span class="s">"birthday"</span><span class="o">,</span> <span class="s">"created_at"</span><span class="o">)</span>
 
   <span class="c1">// field name which represents the (single) primary key column</span>
-  <span class="c1">// default: &quot;id&quot;</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">&quot;uid&quot;</span> 
+  <span class="c1">// default: "id"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">"uid"</span> 
 
   <span class="c1">// with SkinnyCRUDMapper[GroupMember]</span>
-  <span class="c1">// createWithAttributes will try returing generated id if true</span>
+  <span class="c1">// createWithAttributes will try to return generated id if true</span>
   <span class="c1">// default: true</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">useAutoIncrementPrimaryKey</span> <span class="o">=</span> <span class="kc">false</span>
 
@@ -513,59 +517,59 @@
   <span class="n">override</span> <span class="n">def</span> <span class="n">defaultScopeForUpdateOperations</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">column</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">))</span>
 
   <span class="c1">// with TimestampsFeature[GroupMember]</span>
-  <span class="c1">// default: &quot;createdAt&quot;</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">&quot;createdTimestamp&quot;</span>
+  <span class="c1">// default: "createdAt"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">"createdTimestamp"</span>
 
   <span class="c1">// with TimestampsFeature[GroupMember]</span>
-  <span class="c1">// default: &quot;updatedAt&quot;</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;updatedTimestamp&quot;</span>
+  <span class="c1">// default: "updatedAt"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">"updatedTimestamp"</span>
 
   <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] </span>
-  <span class="c1">// default: &quot;lockTimestamp&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">&quot;lockedAt&quot;</span>
+  <span class="c1">// default: "lockTimestamp"</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">"lockedAt"</span>
 
   <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]</span>
-  <span class="c1">// default: &quot;lockVersion&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">lockVersionFieldName</span> <span class="o">=</span> <span class="s">&quot;ver&quot;</span>
+  <span class="c1">// default: "lockVersion"</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">lockVersionFieldName</span> <span class="o">=</span> <span class="s">"ver"</span>
 
   <span class="c1">// with SoftDeleteWithBooleanFeature[GroupMember]</span>
-  <span class="c1">// default: &quot;isDeleted&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">isDeletedFieldName</span> <span class="o">=</span> <span class="s">&quot;deleted&quot;</span>
+  <span class="c1">// default: "isDeleted"</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">isDeletedFieldName</span> <span class="o">=</span> <span class="s">"deleted"</span>
 
   <span class="c1">// with SoftDeleteWithTimestampFeature[GroupMember]</span>
-  <span class="c1">// default: &quot;deletedAt&quot;</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;deletedTimestamp&quot;</span>
+  <span class="c1">// default: "deletedAt"</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">"deletedTimestamp"</span>
 
 <span class="o">}</span>
 </pre>
 <hr/>
 
-<h3 id="toc_13">Dynamic Table Name</h3>
+<h3 id="dynamic-table-name">Dynamic Table Name</h3>
 
 <hr/>
 
-<p><code>#withTableName</code> enables using another table name only for current query.</p>
+<p><code>#withTableName</code> enables using another table name only for the current query.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Order</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Order</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;o&quot;</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">&quot;orders&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"o"</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"orders"</span>
 <span class="o">}</span>
 
 <span class="c1">// default: orders</span>
 <span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
 
 <span class="c1">// other table: orders_2012</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">&quot;orders_2012&quot;</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
+<span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">"orders_2012"</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
 </pre>
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
 
 <hr/>
 
-<h3 id="toc_14">Adding Methods</h3>
+<h3 id="adding-methods">Adding Methods</h3>
 
 <hr/>
 
-<p>If you need to add methods, just write methods that use <code>#findBy</code>, <code>#countBy</code> or ScalikeJDBC&#39; APIs directly.</p>
+<p>If you need to add methods, just write methods that use <code>#findBy</code>, <code>#countBy</code> or ScalikeJDBC&rsquo;s APIs directly.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="kd">private</span><span class="o">[</span><span class="k">this</span><span class="o">]</span> <span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">defaultAlias</span>
 
@@ -574,36 +578,36 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<p>If you&rsquo;re using ORM with Skinny Framework,
+<p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
 <pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
 <span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">ctx</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="k">new</span> <span class="n">TxPerRequestFilter</span><span class="o">,</span> <span class="s">&quot;/*&quot;</span><span class="o">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="k">new</span> <span class="n">TxPerRequestFilter</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
-<p>And then your ORM models can retrieve current DB session as thread-local value per request, so you don&rsquo;t need to pass <code>DBSession</code> value as an implicit parameter in each method. </p>
+<p>And then your ORM models can retrieve the current DB session as a thread-local value per request, so you don&rsquo;t need to pass <code>DBSession</code> value as an implicit parameter in each method. </p>
 <pre class="highlight java"><span class="n">def</span> <span class="nf">findAllByGroupId</span><span class="p">(</span><span class="nl">groupId:</span> <span class="n">Long</span><span class="o">):</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">)</span>
 </pre>
-<p>On the other hand, if you work with multiple threads for single HTTP request, you should be aware that the thread-local db session won&rsquo;t be shared.</p>
+<p>On the other hand, if you work with multiple threads for single HTTP request, you should be aware that the thread-local DB session won&rsquo;t be shared.</p>
 
 <hr/>
 
-<h3 id="toc_15">Using Non-Numerical or Typed Primary Key</h3>
+<h3 id="using-non-numerical-or-typed-primary-key">Using Non-Numerical or Typed Primary Key</h3>
 
 <hr/>
 
-<p>SkinnyMapper expects Long (bigint) value named <code>id</code> for primary key column.</p>
+<p>SkinnyMapper expects a Long (bigint) value named <code>id</code> for primary key column.</p>
 
-<p>If your application uses non-numerical primary key for some reasons, use <code>****WithId</code> traits instead. In this case, you must implement <code>idToRawValue</code> and <code>rawValueToId</code> methods.</p>
+<p>If your application uses a non-numerical primary key for some reason, use <code>****WithId</code> traits instead. In this case, you must implement <code>idToRawValue</code> and <code>rawValueToId</code> methods.</p>
 
-<p>If you need <code>MemberId</code> class for primary key, it&rsquo;s also easy to implement.</p>
+<p>If you need to use a complex object (e.g. <code>MemberId</code> class) as a primary key, it&rsquo;s also easy to implement.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">MemberId</span><span class="p">(</span><span class="nl">value:</span> <span class="n">Long</span><span class="o">)</span>
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">MemberId</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="n">MemberId</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
   <span class="n">override</span> <span class="n">def</span> <span class="n">idToRawValue</span><span class="o">(</span><span class="nl">id:</span> <span class="n">MemberId</span><span class="o">)</span> <span class="o">=</span> <span class="n">id</span><span class="o">.</span><span class="na">value</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">MemberId</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">toLong</span><span class="o">)</span>
@@ -628,36 +632,36 @@
   <span class="o">}</span>
 
   <span class="n">override</span> <span class="n">def</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">&quot;companies&quot;</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">&quot;company&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">"companies"</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">"company"</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">&quot;updatedAt&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;url&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
   <span class="o">)</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">createFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">&quot;url&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">&quot;updatedAt&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">updateParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">updateForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
-    <span class="n">paramKey</span><span class="o">(</span><span class="s">&quot;url&quot;</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
   <span class="o">)</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">updateFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">&quot;url&quot;</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
 <span class="o">}</span>
 </pre>
-<p>If you use alternative Id generator instead of RDB&rsquo;s auto-incremental value, set <code>useExternalIdGenerator</code> as true and implement <code>generateId</code> method.</p>
+<p>If you use an alternative Id generator instead of the RDB&rsquo;s auto-incremental value, set <code>useExternalIdGenerator</code> as true and implement the <code>generateId</code> method.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">uuid:</span> <span class="n">UUID</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="n">UUID</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> 
   <span class="n">with</span> <span class="n">SoftDeleteWithBooleanFeatureWithId</span><span class="o">[</span><span class="n">UUID</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">&quot;m&quot;</span><span class="o">)</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">&quot;uuid&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">"uuid"</span>
 
-  <span class="c1">// use alternative id generator instead of DB&#39;s auto-increment</span>
+  <span class="c1">// use alternative id generator instead of DB's auto-increment</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">useExternalIdGenerator</span> <span class="o">=</span> <span class="kc">true</span>
   <span class="n">override</span> <span class="n">def</span> <span class="n">generateId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span>
 
@@ -670,29 +674,27 @@
   <span class="o">)</span>
 <span class="o">}</span>
 
-<span class="n">val</span> <span class="nl">m:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Memmber</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">&quot;.....&quot;</span><span class="o">))</span>
+<span class="n">val</span> <span class="nl">m:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Memmber</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"....."</span><span class="o">))</span>
 </pre>
 <p>Don&rsquo;t worry. Skinny-ORM does well at resolving associations even if you use custom primary keys.</p>
 
 <hr/>
 
-<h3 id="toc_16">ActiveRecord-like Timestamps</h3>
+<h3 id="activerecord-like-timestamps">ActiveRecord-like Timestamps</h3>
 
 <hr/>
 
 <p><code>timetamps</code> from ActiveRecord is available as the <code>TimestampsFeature</code> trait. </p>
 
 <p>By default, this trait expects two columns on the table - <code>created_at timestamp not null</code> and <code>updated_at timestamp</code>. If you need customizing, override *FieldName methods as follows.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
-  <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
-  <span class="nl">updatedAt:</span> <span class="n">Option</span><span class="o">[</span><span class="n">DateTime</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
+<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span> <span class="nl">updatedAt:</span> <span class="n">DateTime</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="n">with</span> <span class="n">TimestampsFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="c1">// created_timestamp</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">&quot;createdTimestamp&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">"createdTimestamp"</span>
   <span class="c1">// updated_timestamp</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;updatedTimestamp&quot;</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">"updatedTimestamp"</span>
 <span class="o">}</span>
 </pre>
 <p>Source code: 
@@ -700,7 +702,7 @@
 
 <hr/>
 
-<h3 id="toc_17">Soft Deletion</h3>
+<h3 id="soft-deletion">Soft Deletion</h3>
 
 <hr/>
 
@@ -711,7 +713,7 @@
   <span class="n">with</span> <span class="n">SoftDeleteWithTimestampFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="c1">// deleted_timestamp timestamp</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">&quot;deletedTimestamp&quot;</span>
+  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">"deletedTimestamp"</span>
 <span class="o">}</span>
 </pre>
 <p>Source code: 
@@ -722,7 +724,7 @@
 
 <hr/>
 
-<h3 id="toc_18">Optimistic Lock</h3>
+<h3 id="optimistic-lock">Optimistic Lock</h3>
 
 <hr/>
 
@@ -741,17 +743,17 @@
 
 <hr/>
 
-<h3 id="toc_19">FactoryGirl</h3>
+<h3 id="factorygirl">FactoryGirl</h3>
 
 <hr/>
 
-<p>Easy-to-use fixture tool named FactoryGirl makes your testing more comfortable.</p>
+<p>An easy-to-use fixture tool named FactoryGirl makes testing easy.</p>
 
 <p>See in detail here: <a href="/documentation/factory-girl.html">FactoryGirl</a></p>
 
             <hr/>
             <div class="alert alert-info small"> 
-              If this webpage has typo or something wrong, Please report or fix. <a href="/contribution.html">How?</a>
+              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 <a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -760,7 +762,7 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>
 
