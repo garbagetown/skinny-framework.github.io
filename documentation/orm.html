@@ -750,6 +750,59 @@
 
 <p>See in detail here: <a href="/documentation/factory-girl.html">FactoryGirl</a></p>
 
+<hr/>
+
+<h2 id="faq">FAQ</h2>
+
+<hr/>
+
+<h3 id="unexpectednullvalueexception">UnexpectedNullValueException</h3>
+
+<p>If you see the following exception, your application code using Skinny ORM has a bug. This is not a framework bug.</p>
+<pre class="highlight plaintext">Caused by: scalikejdbc.UnexpectedNullValueException: null
+  at scalikejdbc.TypeBinder$.scalikejdbc$TypeBinder$$throwExceptionIfNull(TypeBinder.scala:140) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
+  at scalikejdbc.TypeBinder$$anonfun$38.apply(TypeBinder.scala:82) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
+  at scalikejdbc.TypeBinder$$anonfun$38.apply(TypeBinder.scala:82) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
+...
+</pre>
+<h4 id="typical-example">Typical Example</h4>
+
+<p>Typically, the following code will throw UnexpectedNullValueException when the <code>groupId</code> is null.</p>
+<pre class="highlight plaintext">create table member (
+  id serial primary key,
+  name varchar(256) not null,
+  groupId integer
+  created_at timestamp not null
+  updated_at timestamp not null
+);
+</pre><pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
+  <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
+  <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
+  <span class="nl">groupId:</span> <span class="n">Int</span><span class="o">,</span>
+  <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
+  <span class="nl">updatedAT:</span> <span class="n">DateTime</span><span class="o">)</span>
+
+<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="n">with</span> <span class="n">TimestampsFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+
+  <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
+    <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span> 
+    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
+    <span class="n">groupId</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">int</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">groupId</span><span class="o">),</span> <span class="c1">// nullable but scala.Int is not nullable!!!</span>
+    <span class="n">createdAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
+    <span class="n">updatedAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
+  <span class="o">)</span>
+<span class="o">}</span>
+</pre>
+<p>You must update <code>Member</code> class as follows:</p>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
+  <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
+  <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
+  <span class="c1">//groupId: Int,</span>
+  <span class="nl">groupId:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">],</span>
+  <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
+  <span class="nl">updatedAT:</span> <span class="n">DateTime</span><span class="o">)</span>
+</pre>
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
