@@ -12,10 +12,11 @@
   </head>
   <body>
     <div class="container">
-    <div class="navbar navbar-default" role="navigation">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Skinny Framework</a>
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -41,16 +42,15 @@
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
-            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    <hr/>
         <div class="col-sm-12">
           <div class="content">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
             <h2 id="validator">Validator</h2>
 
 <hr/>
@@ -93,6 +93,7 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>Then you can use it like this:</p>
 <pre class="highlight java"><span class="n">val</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="o">(</span>
   <span class="n">param</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span>
@@ -104,6 +105,7 @@
 <span class="n">error</span><span class="o">.</span><span class="na">name</span> <span class="c1">// -&gt; "required"</span>
 <span class="n">error</span><span class="o">.</span><span class="na">messageParmas</span> <span class="c1">// -&gt; List("name")</span>
 </pre>
+
 <p>A validation rule which accepts value when using such as <code>minLength(6)</code> is like this:</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">minLength</span><span class="p">(</span><span class="nl">min:</span> <span class="n">Int</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">ValidationRule</span> <span class="o">{</span>
   <span class="n">def</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"minLength"</span>
@@ -119,6 +121,7 @@
   <span class="n">param</span><span class="o">(</span><span class="s">"password"</span> <span class="o">-&gt;</span> <span class="s">"xxxx"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">6</span><span class="o">)</span>
 <span class="o">)</span>
 </pre>
+
 <p>Basic usage involves combining validation rules with <code>&amp;</code>. If a failure is found, by default the rest of the validation rules will be skipped. <code>checkAll</code> executes all the validations even if some of them already failed.</p>
 
 <hr/>
@@ -149,6 +152,7 @@
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"age"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">numeric</span>
 <span class="o">)</span>
 </pre>
+
 <hr/>
 
 <h3 id="error-messages">Error Messages</h3>
@@ -160,6 +164,7 @@
 <span class="n">error</span><span class="o">.</span><span class="na">name</span> <span class="c1">// -&gt; required</span>
 <span class="n">error</span><span class="o">.</span><span class="na">messageParmas</span> <span class="c1">// -&gt; List("name")</span>
 </pre>
+
 <p><code>skinny.validator.Messages</code> loads error messages from *.conf or *.properties.</p>
 
 <p>This is <code>src/main/resources/messages.conf</code> example:</p>
@@ -168,6 +173,7 @@
   minLength="{0} length must be greater than or equal to {1}"
 }
 </pre>
+
 <p>Now <code>Messages</code> can load error messages for validation errors named &ldquo;required&rdquo; or &ldquo;minLength&rdquo;. The name comes from <code>ValidationRule#name</code>.</p>
 <pre class="highlight java"><span class="n">val</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">Messages</span><span class="o">.</span><span class="na">loadFromConfig</span><span class="o">()</span>
 <span class="c1">// val messages = Messages.loadFromConfig("messages2") // loads messages2.conf</span>
@@ -180,6 +186,7 @@
 <span class="n">messages</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"minLength"</span><span class="o">,</span> <span class="n">Seq</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="mi">6</span><span class="o">))</span> 
 <span class="c1">// -&gt; Some("password length must be greater than or equal to 6")</span>
 </pre>
+
 <hr/>
 
 <h3 id="how-it-works-in-skinny-apps">How It Works in Skinny apps</h3>
@@ -217,6 +224,7 @@
   <span class="c1">// or using #fold</span>
 <span class="o">}</span>
 </pre>
+
 <p>See also:</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/ParamType.scala">common/src/main/scala/skinny/ParamType.scala</a></p>
@@ -227,8 +235,23 @@
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
-<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 
           </div>
         </div>

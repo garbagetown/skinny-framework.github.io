@@ -12,10 +12,11 @@
   </head>
   <body>
     <div class="container">
-    <div class="navbar navbar-default" role="navigation">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Skinny Framework</a>
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -41,17 +42,20 @@
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
-            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    <hr/>
         <div class="col-sm-12">
           <div class="content">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
             <p><img alt="Logo" src="/images/logo.png" /></p>
+
+<iframe src="http://ghbtns.com/github-btn.html?user=skinny-framework&repo=skinny-framework&type=watch&count=true&size=large" height="30" width="140" frameborder="0" scrolling="0" style="width:140px; height: 30px;" allowTransparency="true"></iframe>
+
+<iframe src="http://ghbtns.com/github-btn.html?user=skinny-framework&repo=skinny-framework&type=fork&count=true&size=large" height="30" width="140" frameborder="0" scrolling="0" style="width:140px; height: 30px;" allowTransparency="true"></iframe>
 
 <h1 id="skinny-framework">Skinny Framework</h1>
 
@@ -59,7 +63,9 @@
 
 <p>Skinny is a full-stack web app framework built on <a href="http://scalatra.org">Scalatra</a>.</p>
 
-<p>To put it simply, Skinny framework&rsquo;s concept is <strong>Scala on Rails</strong>. Skinny is highly inspired by <a href="http://rubyonrails.org/">Ruby on Rails</a> and it is optimized for sustainable productivity for ordinary Servlet-based app development.</p>
+<p>To put it simply, Skinny framework&rsquo;s concept is <strong>Scala on Rails</strong>. Skinny is highly inspired by <a href="http://rubyonrails.org/">Ruby on Rails</a> and it is optimized for sustainable productivity for Servlet-based web app development.</p>
+
+<p>What&rsquo;s more, Skinny&rsquo;s components are basically independent from Skinny app environment. If you prefer using only Skinny ORM, Validator module or else, it&rsquo;s also possible. We hope Skinny components help developers that use other frameworks too.</p>
 
 <hr/>
 
@@ -83,7 +89,7 @@
 
 <hr/>
 
-<h2 id="try-skinny-framework-now!">Try Skinny Framework now!</h2>
+<h2 id="try-it-right-now">Try It Right Now</h2>
 
 <hr/>
 
@@ -91,28 +97,33 @@
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.0-RC10-4/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.0-RC11/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create our first Skinny app by using the scaffold generator.</p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
 </pre>
+
 <p>If you prefer Scalate templates precompilation, specify <code>-precompile</code> option too.</p>
 <pre class="highlight shell">./skinny run -precompile
 </pre>
+
 <p>And then, access <code>http://localhost:8080/members</code>.</p>
 
 <p>You can also run the generated tests.</p>
 <pre class="highlight plaintext">./skinny db:migrate test
 ./skinny test
 </pre>
+
 <p>Now let&rsquo;s create a war file for deployment to a Servlet container.</p>
 <pre class="highlight shell">./skinny package
 </pre>
+
 <p>It&rsquo;s also possible to build a standalone runnable jar file (with embedded Jetty server).</p>
 <pre class="highlight shell">./skinny package:standalone
 </pre>
+
 <hr/>
 
 <h3 id="try-by-using-yeoman-generator">Try by using Yeoman generator</h3>
@@ -132,6 +143,7 @@ mkdir skinny-app
 yo skinny
 ./skinny run
 </pre>
+
 <hr/>
 
 <h3 id="integrating-with-existing-scalatra-apps">Integrating with existing Scalatra apps</h3>
@@ -142,22 +154,24 @@ yo skinny
 
 <p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-assets"       % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-framework"    % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-task"         % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-test"         % "1.0.0-RC10-4" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC10-4" % "test"
+  "org.skinny-framework" %% "skinny-assets"       % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-framework"    % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-task"         % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-test"         % "1.0.0-RC11" % "test",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC11" % "test"
 )
 </pre>
+
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-orm"          % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-validator"    % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC10-4" % "test"
+  "org.skinny-framework" %% "skinny-orm"          % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-validator"    % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC11" % "test"
 )
 </pre>
+
 <hr/>
 
 <h2 id="skinny&#39;s-components-overview">Skinny&rsquo;s Components Overview</h2>
@@ -193,6 +207,7 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p><code>SkinnyResource</code>, which is similar to Rails ActiveResource, is also available. It&rsquo;s a pretty DRY way to define RESTful resources.</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">CompaniesController</span> <span class="kd">extends</span> <span class="n">SkinnyResource</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
@@ -204,6 +219,7 @@ yo skinny
   <span class="o">...</span>
 <span class="o">}</span>
 </pre>
+
 <p><code>Company</code> object should implement <code>skinny.SkinnyModel</code> APIs and you should prepare some view templates under <code>src/main/webapp/WEB-INF/views/members/</code>.</p>
 
 <p>See in detail: <a href="/documentation/controller-and-routes.html">Controller &amp; Routes</a></p>
@@ -230,6 +246,7 @@ yo skinny
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
+
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
 <pre class="highlight java"><span class="c1">// find by primary key</span>
 <span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
@@ -251,6 +268,7 @@ yo skinny
 <span class="c1">// delete</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 </pre>
+
 <p>See in detail: <a href="/documentation/orm.html">O/R Mapper</a></p>
 
 <hr/>
@@ -264,6 +282,7 @@ yo skinny
 <p><img alt="Flyway Logo" src="/images/flyway.png" /></p>
 <pre class="highlight shell">./skinny db:migrate <span class="o">[</span>env]
 </pre>
+
 <p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
 
 <p>See in detail: <a href="/documentation/db-migration.html">DB Migration</a></p>
@@ -288,6 +307,7 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>The render method expects that <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> exists.</p>
 <pre class="highlight plaintext">&lt;%=@val members: Seq[model.Member] %&gt;
 &lt;hr/&gt;
@@ -295,6 +315,7 @@ yo skinny
   ${member.name}
 #end
 </pre>
+
 <p>Scalate supports many template engines. For example, if you want to write your template using Jade, save it as <code>src/main/webapp/WEB-INF/views/members/index.html.jade</code> instead.</p>
 
 <p>See in detail: <a href="/documentation/view-templates.html">View Templates</a></p>
@@ -328,6 +349,7 @@ yo skinny
     |"""</span><span class="o">.</span><span class="na">stripMargin</span>
   <span class="o">}.</span><span class="na">deliver</span><span class="o">()</span>
 </pre>
+
 <p>See in detail: <a href="/documentation/mail.html">Mail</a></p>
 
 <hr/>
@@ -344,11 +366,12 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.0-RC10-4",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.0-RC10-4" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-assets"    % "1.0.0-RC11",
+  "org.skinny-framework" %% "skinny-test"      % "1.0.0-RC11" % "test"
 )
 </pre>
+
 <p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, LESS and Sass.</p>
 <pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
 <span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
@@ -357,6 +380,7 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>AssetsController supports Last-Modified header and returns status 304 correctly if the requested file isn&rsquo;t changed. </p>
 
 <p>However, precompiling the assets is highly recommended in production (<code>./skinny package</code> does that).</p>
@@ -380,6 +404,7 @@ yo skinny
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>See in detail: <a href="/documentation/testing.html">Testing</a></p>
 
 <hr/>
@@ -396,12 +421,36 @@ yo skinny
 
 <span class="n">val</span> <span class="n">company1</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
 </pre>
+
 <p>Configuration is not in yaml files but a typesafe-config conf file. In this example, <code>src/test/resources/factories.conf</code> looks like this:</p>
 <pre class="highlight plaintext">company {
   name="Typesafe"
 }
 </pre>
+
 <p>See in detail: <a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+
+<hr/>
+
+<h3 id="skinny-framework-team-and-you">Skinny Framework Team and You</h3>
+
+<hr/>
+
+<p>Skinny Framework team is passionately working on this project.</p>
+
+<p><a href="https://github.com/orgs/skinny-framework/members">https://github.com/orgs/skinny-framework/members</a></p>
+
+<p>If you&rsquo;re interested in Skinny development, pull requests are always welcome.</p>
+
+<p><a href="/contribution.html">How to contribute</a></p>
+
+<hr/>
+
+<h3 id="build-status">Build Status</h3>
+
+<hr/>
+
+<p><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></p>
 
 <hr/>
 
@@ -417,8 +466,23 @@ yo skinny
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
-<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 
           </div>
         </div>

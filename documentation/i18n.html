@@ -12,10 +12,11 @@
   </head>
   <body>
     <div class="container">
-    <div class="navbar navbar-default" role="navigation">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Skinny Framework</a>
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -41,16 +42,15 @@
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
-            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    <hr/>
         <div class="col-sm-12">
           <div class="content">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
             <h2 id="i18n">i18n</h2>
 
 <hr/>
@@ -79,6 +79,7 @@
 
 <span class="o">}</span>
 </pre>
+
 <hr/>
 
 <h3 id="current-locale-value-in-sessions">Current Locale Value in Sessions</h3>
@@ -95,6 +96,7 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>See the example project here.</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/tree/develop/example">https://github.com/skinny-framework/skinny-framework/tree/develop/example</a></p>
@@ -127,6 +129,7 @@ new="New"
 edit="Edit"
 delete="Delete"
 </pre>
+
 <p>When locale is set, <code>src/main/resources/messages_{locale}.conf</code> instead of <code>messages.conf</code>.</p>
 
 <p>The following example is <code>messages_ja.conf</code> for Japanese.</p>
@@ -151,6 +154,7 @@ new="追加"
 edit="変更"
 delete="削除"
 </pre>
+
 <hr/>
 
 <h3 id="i18n-in-view-templates">i18n in View Templates</h3>
@@ -162,12 +166,14 @@ delete="削除"
 ${i18n.get("submit")}
 ${i18n.get("project.name")}
 </pre>
+
 <p>The above example expects the following <code>src/main/resources/messages_{locale}.conf</code>.</p>
 <pre class="highlight plaintext">submit="Submit"
 project {
   name="Project Name"
 }
 </pre>
+
 <hr/>
 
 <h3 id="integration-with-skinny-validator">Integration with Skinny Validator</h3>
@@ -185,19 +191,36 @@ project {
   <span class="n">def</span> <span class="n">isValid</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">v</span> <span class="o">!=</span> <span class="kc">null</span>
 <span class="o">}</span>
 </pre>
+
 <p>So validation error message should be defined in <code>messages.conf</code> like this:</p>
 <pre class="highlight plaintext">error {
   notNull="{0} must not be null"
 }
 </pre>
+
 <p>That&rsquo;s all!</p>
 
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
-<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 
           </div>
         </div>

@@ -12,10 +12,11 @@
   </head>
   <body>
     <div class="container">
-    <div class="navbar navbar-default" role="navigation">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Skinny Framework</a>
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -41,16 +42,15 @@
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
-            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    <hr/>
         <div class="col-sm-12">
           <div class="content">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
             <h2 id="orm">ORM</h2>
 
 <hr/>
@@ -113,6 +113,7 @@
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
+
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
 <pre class="highlight java"><span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
 
@@ -212,6 +213,7 @@
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 </pre>
+
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala</a></p>
 
@@ -277,6 +279,7 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">mentor</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with mentor</span>
 </pre>
+
 <p>In this case, following table is expected:</p>
 <pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
@@ -288,6 +291,7 @@
   <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
 </pre>
+
 <p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
 
 <hr/>
@@ -311,6 +315,7 @@
   <span class="o">).</span><span class="na">byDefault</span>
 <span class="o">}</span>
 </pre>
+
 <p>In this case, following tables are expected:</p>
 <pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span>
@@ -321,6 +326,7 @@
   <span class="k">last</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
 </pre>
+
 <hr/>
 
 <h4 id="hasmany">HasMany</h4>
@@ -374,6 +380,7 @@
 <span class="o">}</span>
 <span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skillsRef</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span> <span class="c1">// with skills</span>
 </pre>
+
 <p>In this case, following tables are expected:</p>
 <pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
@@ -392,6 +399,7 @@
   <span class="n">skill_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
 </pre>
+
 <hr/>
 
 <h4 id="what&#39;s-more">What&rsquo;s more</h4>
@@ -424,6 +432,7 @@
   <span class="o">...</span>
 <span class="o">}</span>
 </pre>
+
 <p>If you don&rsquo;t implement like this, one-to-many relationships won&rsquo;t work as you expect.</p>
 
 <p>See also the detailed explanation here: <a href="http://scalikejdbc.org/documentation/one-to-x.html">http://scalikejdbc.org/documentation/one-to-x.html</a></p>
@@ -461,6 +470,7 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">companyOpt</span><span class="o">).</span><span class="na">findAll</span><span class="o">()</span>
 </pre>
+
 <p>Yet another example:</p>
 <pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="n">val</span> <span class="n">skills</span> <span class="o">=</span>
@@ -473,6 +483,7 @@
 
 <span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
 </pre>
+
 <p>Note: when your entities have the same associations (e.g. Company has Employee, Country and Employee have Country), avoiding using the default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We plan to provide more useful error messages for such cases in version 1.0.0.</p>
 
 <p>Source code: 
@@ -541,6 +552,7 @@
 
 <span class="o">}</span>
 </pre>
+
 <hr/>
 
 <h3 id="dynamic-table-name">Dynamic Table Name</h3>
@@ -559,6 +571,7 @@
 <span class="c1">// other table: orders_2012</span>
 <span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">"orders_2012"</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
 </pre>
+
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
 
@@ -577,6 +590,7 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
 <pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
@@ -586,9 +600,11 @@
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
+
 <p>And then your ORM models can retrieve the current DB session as a thread-local value per request, so you don&rsquo;t need to pass <code>DBSession</code> value as an implicit parameter in each method. </p>
 <pre class="highlight java"><span class="n">def</span> <span class="nf">findAllByGroupId</span><span class="p">(</span><span class="nl">groupId:</span> <span class="n">Long</span><span class="o">):</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">)</span>
 </pre>
+
 <p>On the other hand, if you work with multiple threads for single HTTP request, you should be aware that the thread-local DB session won&rsquo;t be shared.</p>
 
 <hr/>
@@ -617,6 +633,7 @@
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
+
 <p>And your SkinnyResource will be like this:</p>
 <pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
 <span class="kn">import</span> <span class="nn">skinny._</span>
@@ -651,6 +668,7 @@
     <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
 <span class="o">}</span>
 </pre>
+
 <p>If you use an alternative Id generator instead of the RDB&rsquo;s auto-incremental value, set <code>useExternalIdGenerator</code> as true and implement the <code>generateId</code> method.</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">uuid:</span> <span class="n">UUID</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
 
@@ -675,6 +693,7 @@
 
 <span class="n">val</span> <span class="nl">m:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Memmber</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"....."</span><span class="o">))</span>
 </pre>
+
 <p>Don&rsquo;t worry. Skinny-ORM does well at resolving associations even if you use custom primary keys.</p>
 
 <hr/>
@@ -696,6 +715,7 @@
   <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">"updatedTimestamp"</span>
 <span class="o">}</span>
 </pre>
+
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala</a></p>
 
@@ -715,6 +735,7 @@
   <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">"deletedTimestamp"</span>
 <span class="o">}</span>
 </pre>
+
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala</a></p>
 
@@ -734,6 +755,7 @@
   <span class="n">with</span> <span class="n">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
 <span class="c1">// lock_version bigint</span>
 </pre>
+
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
 
@@ -765,6 +787,7 @@
   at scalikejdbc.TypeBinder$$anonfun$38.apply(TypeBinder.scala:82) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
 ...
 </pre>
+
 <h4 id="typical-example">Typical Example</h4>
 
 <p>Typically, the following code will throw UnexpectedNullValueException when the <code>groupId</code> is null.</p>
@@ -775,7 +798,8 @@
   created_at timestamp not null
   updated_at timestamp not null
 );
-</pre><pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
+</pre>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
   <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
   <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
   <span class="nl">groupId:</span> <span class="n">Int</span><span class="o">,</span>
@@ -794,6 +818,7 @@
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
+
 <p>You must update <code>Member</code> class as follows:</p>
 <pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
   <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
@@ -803,12 +828,28 @@
   <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
   <span class="nl">updatedAT:</span> <span class="n">DateTime</span><span class="o">)</span>
 </pre>
+
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
-<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 
           </div>
         </div>

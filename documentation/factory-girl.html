@@ -12,10 +12,11 @@
   </head>
   <body>
     <div class="container">
-    <div class="navbar navbar-default" role="navigation">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Skinny Framework</a>
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -41,16 +42,15 @@
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users Group</a></li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">GitHub</a></li>
-            <li><a href="https://travis-ci.org/skinny-framework/skinny-framework"><img src="https://travis-ci.org/skinny-framework/skinny-framework.png" alt="Build Status"></a></li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
+    <hr/>
         <div class="col-sm-12">
           <div class="content">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
             <h2 id="factorygirl">FactoryGirl</h2>
 
 <hr/>
@@ -62,8 +62,9 @@
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module is quite useful when testing your apps.</p>
 
 <p>FactoryGirl depends on only Skinny ORM. You can use FactoryGirl even in your Play2 apps!</p>
-<pre class="highlight plaintext">libraryDependencies += "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC10-4" % "test"
+<pre class="highlight plaintext">libraryDependencies += "org.skinny-framework" %% "skinny-factory-girl" % "1.0.0-RC11" % "test"
 </pre>
+
 <hr/>
 
 <h3 id="usage">Usage</h3>
@@ -104,6 +105,7 @@
 <span class="n">val</span> <span class="n">factory</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withVariables</span><span class="o">(</span><span class="err">'</span><span class="n">countryId</span> <span class="o">-&gt;</span> <span class="n">country</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
 <span class="n">val</span> <span class="n">member</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">companyId</span> <span class="o">-&gt;</span> <span class="n">company1</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">)</span>
 </pre>
+
 <p>In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
 <pre class="highlight plaintext">countryyy {
   name="Japan"
@@ -122,6 +124,7 @@ skill {
   name="Scala Programming"
 }
 </pre>
+
 <hr/>
 
 <h3 id="string-interpolation-is-available">String interpolation is available</h3>
@@ -132,6 +135,7 @@ skill {
   memberCode="xyz-${System.currentTimeMillis}"
 }
 </pre>
+
 <p>You cannot embed complex Scala code or modules referenced from the test code. If you need to do so, use variables.</p>
 
 <hr/>
@@ -152,12 +156,14 @@ skill {
   <span class="n">countryId</span><span class="o">=</span><span class="s">"#{cntId}"</span>
 <span class="o">}</span>
 </pre>
+
 <h4 id="foospec.scala">FooSpec.scala</h4>
 <pre class="highlight java"><span class="n">val</span> <span class="n">countryId</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Country</span><span class="o">).</span><span class="na">create</span><span class="o">().</span><span class="na">id</span>
 <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withVariables</span><span class="o">(</span><span class="err">'</span><span class="n">cntId</span> <span class="o">-&gt;</span> <span class="n">countryId</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
 
 <span class="c1">// will use name: Alice, countryId: 234</span>
 </pre>
+
 <hr/>
 
 <h3 id="withattributes">withAttributes</h3>
@@ -170,6 +176,7 @@ skill {
   country="USA"
 }
 </pre>
+
 <h4 id="somespec.scala">SomeSpec.scala</h4>
 <pre class="highlight java"><span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">'</span><span class="n">country</span> <span class="o">-&gt;</span> <span class="s">"Japan"</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
 <span class="c1">// will use name: Alice, country: Japan</span>
@@ -177,6 +184,7 @@ skill {
 <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Member</span><span class="o">).</span><span class="na">create</span><span class="o">(</span><span class="err">'</span><span class="n">country</span> <span class="o">-&gt;</span> <span class="s">"Japan"</span><span class="o">)</span>
 <span class="c1">// do the same thing!</span>
 </pre>
+
 <hr/>
 
 <h3 id="more-examples">More Examples</h3>
@@ -191,8 +199,23 @@ skill {
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
-<a href="https://twitter.com/SkinnyFramework" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @SkinnyFramework</a>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 
           </div>
         </div>
