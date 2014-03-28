@@ -59,13 +59,128 @@
 
 <hr/>
 
-<p>You can use Scalatra&rsquo;s great test support with Skinny. Some optional features are provided by the skinny-test library.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
-  <span class="n">addFilter</span><span class="o">(</span><span class="n">MembersController</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
+<p>Skinny Framework puts emphaiss on testable application development and provides toolkit for testing.</p>
+
+<hr/>
+
+<h3 id="how-to-run-tests">How to run tests</h3>
+
+<hr/>
+
+<p>Simply use skinny command or sbt directly.</p>
+<pre class="highlight plaintext"># run all the tests
+./skinny test
+
+# run single test
+./skinny testOnly model.MemberSpec
+
+# run only failed tests
+./skinny testQuick
+
+# run mutiple tests under controller package when changes are detected
+./skinny ~testOnly controller.*Spec
+</pre>
+
+<hr/>
+
+<h3 id="orm-tests">ORM Tests</h3>
+
+<hr/>
+
+<p>Here is some examples:</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/tree/develop/orm/src/test/scala/blog">https://github.com/skinny-framework/skinny-framework/tree/develop/orm/src/test/scala/blog</a></p>
+<pre class="highlight java"><span class="kn">package</span> <span class="n">model</span>
+
+<span class="kn">import</span> <span class="nn">skinny.test._</span>
+<span class="kn">import</span> <span class="nn">org.scalatest.fixture.FunSpec</span>
+<span class="kn">import</span> <span class="nn">scalikejdbc._</span><span class="o">,</span> <span class="n">SQLInterpolation</span><span class="o">.</span><span class="na">_</span>
+<span class="kn">import</span> <span class="nn">scalikejdbc.scalatest._</span>
+<span class="kn">import</span> <span class="nn">org.joda.time._</span>
+
+<span class="kd">class</span> <span class="nc">MemberSpec</span> <span class="kd">extends</span> <span class="n">FunSpec</span> <span class="n">with</span> <span class="n">AutoRollback</span> <span class="o">{</span>
+
+  <span class="n">override</span> <span class="n">def</span> <span class="n">fixture</span><span class="o">(</span><span class="n">implicit</span> <span class="nl">session:</span> <span class="n">DBSession</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// do fixtures stuff</span>
+  <span class="o">}</span>
+
+  <span class="n">describe</span><span class="o">(</span><span class="s">"Member"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">it</span><span class="o">(</span><span class="s">"should find all entities"</span><span class="o">)</span> <span class="o">{</span> <span class="n">implicit</span> <span class="n">session</span> <span class="o">=&gt;</span>
+      <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">().</span><span class="na">size</span> <span class="n">should</span> <span class="n">be</span> <span class="o">&gt;(</span><span class="mi">0</span><span class="o">)</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+
+<p>NOTICE: <code>AllRollback</code> feature is supported by ScalikeJDBC. And this trait is incompatible with ScalaTest 2.x. Furthermore, Scalatra 2.2.x is also incompatible with ScalaTest 2.x. If you&rsquo;d like to use ScalaTest 2.x, use Scalatra 2.3.0.RC1 and ScalikeJDBC 2.0.0-SNAPSHOT for now (This situation will be fixed in Skinny 1.1).</p>
+
+<hr/>
+
+<h3 id="mocked-controller-tests">Mocked Controller Tests</h3>
+
+<hr/>
+
+<p>Skinny provides <code>MockController</code> trait for light-weight controller tests.</p>
+<pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
+
+<span class="kd">class</span> <span class="nc">RootController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="n">render</span><span class="o">(</span><span class="s">"/root/index"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="kn">import</span> <span class="nn">org.scalatest._</span>
+<span class="kn">import</span> <span class="nn">org.scalatest.matchers.ShouldMatchers</span>
+<span class="kn">import</span> <span class="nn">skinny.test.MockController</span>
+
+<span class="kd">class</span> <span class="nc">RootControllerSpec</span> <span class="kd">extends</span> <span class="n">FunSpec</span> <span class="n">with</span> <span class="n">ShouldMatchers</span> <span class="o">{</span>
+
+  <span class="n">describe</span><span class="o">(</span><span class="s">"RootController"</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">it</span><span class="o">(</span><span class="s">"shows top page"</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">val</span> <span class="n">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RootController</span> <span class="n">with</span> <span class="n">MockController</span>
+      <span class="n">controller</span><span class="o">.</span><span class="na">index</span>
+      <span class="n">controller</span><span class="o">.</span><span class="na">contentType</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="s">"text/html; charset=utf-8"</span><span class="o">)</span>
+      <span class="n">controller</span><span class="o">.</span><span class="na">renderCall</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">_</span><span class="o">.</span><span class="na">path</span><span class="o">)</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="n">Some</span><span class="o">(</span><span class="s">"/root/index"</span><span class="o">))</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+</pre>
+
+<p>Be aware of following points when you use <code>MockController</code>:</p>
+
+<hr/>
+
+<h4 id="mockcontroller-cannot-handle-org.scalatra.haltexception">MockController cannot handle org.scalatra.HaltException</h4>
+
+<p>HaltExcpetion is very exceptional operation by Scalatra. HaltException is not an Exception but a Throwbale. Furthermore, it mutes all the stack traces.</p>
+
+<p>When you call <code>halt</code> method or <code>redirect</code> method, HaltException will be thrown.</p>
+
+<p>We recommend you using <code>redirect302</code> instead because it is excellent with <code>MockController</code> testing.</p>
+
+<hr/>
+
+<h3 id="integration-tests">Integration Tests</h3>
+
+<hr/>
+
+<p>Scalatra provides a great test toolkit with embedded Jetty server and easy-to-use DSL. Of course, you can use them without any problem.</p>
+
+<p>Below is an integration test example with scalatra-test.</p>
+<pre class="highlight java"><span class="kn">package</span> <span class="kt">int</span><span class="n">egrationtest</span>
+
+<span class="kn">import</span> <span class="nn">org.scalatra.test.scalatest._</span>
+<span class="kn">import</span> <span class="nn">skinny.test.SkinnyTestSupport</span>
+<span class="kn">import</span> <span class="nn">_root_.controller.Controllers</span>
+
+<span class="kd">class</span> <span class="nc">IntegrationTestSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
+  <span class="n">addFilter</span><span class="o">(</span><span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
 
   <span class="n">it</span> <span class="n">should</span> <span class="s">"show index page"</span> <span class="n">in</span> <span class="o">{</span>
     <span class="n">withSession</span><span class="o">(</span><span class="s">"userId"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">get</span><span class="o">(</span><span class="s">"/members"</span><span class="o">)</span> <span class="o">{</span> <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> <span class="o">}</span>
+      <span class="n">get</span><span class="o">(</span><span class="s">"/members"</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="n">status</span> <span class="n">should</span> <span class="n">equal</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span> 
+        <span class="n">body</span> <span class="n">should</span> <span class="n">contain</span><span class="o">(</span><span class="s">"something"</span><span class="o">)</span>
+      <span class="o">}</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -73,12 +188,18 @@
 
 <hr/>
 
-<h3 id="how-to-run-tests">How to run tests</h3>
+<h3 id="coverage-report">Coverage Report</h3>
 
-<p>Simply use skinny command or sbt directly.</p>
-<pre class="highlight plaintext">./skinny test
-./skinny test-only models.MemberSpec
-</pre>
+<hr/>
+
+<p class="alert alert-warning">
+<b>WARNING:</b> There is a known issue that scoverage doesn&rsquo;t work perfectly with Skinny ORM.
+Now we&rsquo;re working on this issue with Scoverage team.
+<br/>
+<a href="https://github.com/skinny-framework/skinny-framework/issues/97">
+https://github.com/skinny-framework/skinny-framework/issues/97
+</a>
+</p>
 
 <p>If you need a code coverage report, use <code>scoverage:test</code> instead. </p>
 
@@ -86,15 +207,15 @@
 <pre class="highlight plaintext">./skinny test:coverage
 </pre>
 
-<p>WARNING: There is a known issue that scoverage doesn&rsquo;t work perfectly with Skinny ORM.</p>
+<hr/>
 
-<p>Now we&rsquo;re working on this issue with Scoverage team.</p>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/issues/97">https://github.com/skinny-framework/skinny-framework/issues/97</a></p>
+<h3 id="more-exampels">More Exampels</h3>
 
 <hr/>
 
-<p>You can see some examples here:</p>
+<p>It&rsquo;s the fastest way to learn is seeing generated tests by scaffold commmand. </p>
+
+<p>And also some examples here may be helpful for you:</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/tree/master/example/src/test/scala">example/src/test/scala</a></p>
 

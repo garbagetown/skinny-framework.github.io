@@ -92,7 +92,7 @@
 </pre>
 
 <p>You can pass configuration via system properties. Otherwise, it&rsquo;s also possible to use environment variables.</p>
-<pre class="highlight plaintext">java -jar -Dskinny.port=9000 -Dskinny.env=production \
+<pre class="highlight plaintext">java -jar -Dskinny.port=9000 -Dskinny.env=production -Dskinny.prefix=/foo/ \
   standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
 </pre>
 
@@ -126,6 +126,14 @@
 <hr/>
 
 <p>This value is only for stand alone apps. Default value is 8080. You can customize the port number on which the stand alone app server listens.</p>
+
+<hr/>
+
+<h4 id="skinny.prefix-or-skinny_prefix">skinny.prefix or SKINNY_PREFIX</h4>
+
+<hr/>
+
+<p>This value is only for stand alone apps. Default value is &ldquo;/&rdquo;. You can customize the context path for the servlet app.</p>
 
 <hr/>
 

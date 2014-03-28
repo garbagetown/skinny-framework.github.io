@@ -132,90 +132,92 @@ yo skinny
 
 <p>The following tree shows the directories and files in skinny-blank-app project. Using this directory layout is recommended.</p>
 <pre class="highlight shell">.
+├── Procfile <span class="c"># for Heroku deployment</span>
 ├── README.md
 ├── bin
 │   └── sbt-launch.jar <span class="c"># global sbt script in PATH is given priority over this</span>
-├── build              <span class="c"># packaging war file uses this directory</span>
 ├── build.sbt
+├── heroku <span class="c"># for Heroku deployment</span>
+│   ├── common.sh
+│   ├── run
+│   ├── skinny
+│   └── stage
 ├── project
 │   ├── Build.scala
 │   ├── build.properties
 │   └── plugins.sbt
-├── sbt        <span class="c"># global sbt script in PATH is given priority over this</span>
-├── sbt.bat    <span class="c"># global sbt script in PATH is given priority over this</span>
-├── skinny     <span class="c"># skinny command for Mac/Linux users</span>
-├── skinny.bat <span class="c"># skinny command for Windows users</span>
+├── sbt      <span class="c"># Skinny uses this sbt command</span>
+├── sbt.bat  <span class="c"># Skinny uses this sbt command</span>
+├── skinny     <span class="c"># skinny command for Mac OS X, Linux</span>
+├── skinny.bat <span class="c"># skinny command for Windows</span>
 ├── src
 │   ├── main
 │   │   ├── resources
-│   │   │   ├── application.conf <span class="c"># app configuration</span>
-│   │   │   ├── logback.xml      <span class="c"># logging configuration</span>
-│   │   │   └── messages.conf    <span class="c"># error messages, i18n</span>
+│   │   │   ├── application.conf
+│   │   │   ├── logback.xml
+│   │   │   └── messages.conf
 │   │   ├── scala
-│   │   │   ├── ScalatraBootstrap.scala   <span class="c"># should be here and should be this name for Scalatra</span>
-│   │   │   ├── controller                <span class="c"># this package can be changed</span>
+│   │   │   ├── ScalatraBootstrap.scala <span class="c"># Scalatra convention</span>
+│   │   │   ├── controller
 │   │   │   │   ├── ApplicationController.scala
-│   │   │   │   ├── Controllers.scala     <span class="c"># a preferred way to collect controllers with routes</span>
+│   │   │   │   ├── Controllers.scala
 │   │   │   │   └── RootController.scala
-│   │   │   ├── lib   <span class="c"># same as Rails's lib directory</span>
-│   │   │   ├── model <span class="c"># Skinny ORM models or other models</span>
+│   │   │   ├── lib
+│   │   │   ├── model
+│   │   │   │   └── package.scala
 │   │   │   └── templates
-│   │   │       └── ScalatePackage.scala <span class="c"># should be here and should this name for Scalate</span>
+│   │   │       └── ScalatePackage.scala <span class="c"># Scalate convention</span>
 │   │   └── webapp
-│   │       ├── WEB-INF
-│   │       │   ├── assets
-│   │       │   │   ├── coffee
-│   │       │   │   jsx
-│   │       │   │   less
-│   │       │   │   scss
-│   │       │   ├── layouts
-│   │       │   │   └── default.jade <span class="c"># layout file (ssp, scaml and mustache are also OK)</span>
-│   │       │   ├── views
-│   │       │   │   ├── error
-│   │       │   │   │   ├── 403.html.jade
-│   │       │   │   │   ├── 403.html.scaml
-│   │       │   │   │   ├── 403.html.ssp
-│   │       │   │   │   ├── 404.html.jade
-│   │       │   │   │   ├── 404.html.scaml
-│   │       │   │   │   ├── 404.html.ssp
-│   │       │   │   │   ├── 406.html.jade
-│   │       │   │   │   ├── 406.html.scaml
-│   │       │   │   │   ├── 406.html.ssp
-│   │       │   │   │   ├── 500.html.jade
-│   │       │   │   │   ├── 500.html.scaml
-│   │       │   │   │   ├── 500.html.ssp
-│   │       │   │   │   ├── 503.html.jade
-│   │       │   │   │   ├── 503.html.scaml
-│   │       │   │   │   └── 503.html.ssp
-│   │       │   │   └── root
-│   │       │   │       └── index.html.ssp <span class="c"># render("/root/index") expects this file</span>
-│   │       │   └── web.xml
-│   │       └── assets
-│   │           └── js
+│   │       └── WEB-INF
+│   │           ├── assets
+│   │           │   ├── build.sbt
+│   │           │   ├── coffee <span class="c"># Put coffee scripts here</span>
+│   │           │   ├── jsx    <span class="c"># Put React JSX templates here</span>
+│   │           │   ├── less   <span class="c"># Put LESS files here</span>
+│   │           │   ├── scala  <span class="c"># Put Scala.js code here</span>
+│   │           │   └── scss   <span class="c"># Put sass/scss files here</span>
+│   │           ├── layouts
+│   │           │   └── default.ssp <span class="c"># layout template</span>
+│   │           ├── views
+│   │           │   ├── error
+│   │           │   │   ├── 403.html.jade
+│   │           │   │   ├── 403.html.mustache
+│   │           │   │   ├── 403.html.scaml
+│   │           │   │   ├── 403.html.ssp
+│   │           │   │   ├── 404.html.jade
+│   │           │   │   ├── 404.html.mustache
+│   │           │   │   ├── 404.html.scaml
+│   │           │   │   ├── 404.html.ssp
+│   │           │   │   ├── 406.html.jade
+│   │           │   │   ├── 406.html.mustache
+│   │           │   │   ├── 406.html.scaml
+│   │           │   │   ├── 406.html.ssp
+│   │           │   │   ├── 500.html.jade
+│   │           │   │   ├── 500.html.mustache
+│   │           │   │   ├── 500.html.scaml
+│   │           │   │   ├── 500.html.ssp
+│   │           │   │   ├── 503.html.jade
+│   │           │   │   ├── 503.html.mustache
+│   │           │   │   ├── 503.html.scaml
+│   │           │   │   └── 503.html.ssp
+│   │           │   └── root
+│   │           │       └── index.html.ssp <span class="c"># default top page</span>
+│   │           └── web.xml <span class="c"># because this is on the Servlet</span>
 │   └── <span class="nb">test</span>
 │       ├── resources
-│       │   ├── factories.conf <span class="c"># FactoryGirl's configuration</span>
-│       │   └── logback.xml    <span class="c"># logging in Test</span>
+│       │   ├── factories.conf <span class="c"># for FactoryGirl</span>
+│       │   └── logback.xml
 │       └── scala
-│           └── controller
-│               └── RootControllerSpec.scala
+│           ├── controller
+│           │   └── RootControllerSpec.scala <span class="c"># testing with MockController</span>
+│           └── integrationtest
+│               └── RootController_IntegrationTestSpec.scala <span class="c"># testing with embedded Jetty (scalatra-test)</span>
+├── system.properties <span class="c"># for Heroku deployment</span>
 └── task
     └── src
         └── main
             └── scala
-                └── TaskRunner.scala <span class="c"># if you add new tasks, modify this </span>
-</pre>
-
-<hr/>
-
-<h3 id="tips-for-developers">Tips for Developers</h3>
-
-<hr/>
-
-<h4 id="avoiding-sbt&#39;s-frequent-oomerror">Avoiding sbt&rsquo;s frequent OOMError</h4>
-
-<p>Skinny Framework uses xsbt-web-plugin. <code>skinny run</code> with sbt plugin invokes Jetty and detects source code changes and re-compiles and restarts Jetty server. Eventually, you will see OutOfMemoryError (PermGen) after refreshing several times. To reduce this pain, specify sbt options like this:</p>
-<pre class="highlight plaintext">SBT_OPTS="-XX:+CMSClassUnloadingEnabled -Xmx2048M -XX:MaxPermSize=512M"
+                └── TaskRunner.scala <span class="c"># when you add new tasks, modify this code</span>
 </pre>
 
             <hr/>
