@@ -75,7 +75,8 @@
 </pre>
 
 <p>The render method expects that <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> exists.</p>
-<pre class="highlight plaintext">&lt;%@val members: Seq[model.Member] %&gt;
+<pre class="highlight plaintext">&lt;%@val s: skinny.Skinny %&gt;
+&lt;%@val members: Seq[model.Member] %&gt;
 &lt;h3&gt;Members&lt;/h3&gt;
 &lt;hr/&gt;
 &lt;table class="table table-bordered"&gt;
@@ -93,10 +94,10 @@
     &lt;td&gt;${member.name}&lt;/td&gt;
     &lt;td&gt;
       &lt;!-- Using Scalatra reverse routes is recommended --&gt;
-      &lt;a href="${url(MembersController.editUrl, "id" -&gt; member.id.toString)}" 
+      &lt;a href="${s.url(MembersController.editUrl, "id" -&gt; member.id)}" 
          class="btn btn-info"&gt;Edit&lt;/a&gt;
       &lt;a data-method="delete" data-confirm="Are you sure?" 
-         href="${url(MembersControlller.deleteUrl, "id" -&gt; member.id.toString)}" 
+         href="${s.url(MembersControlller.deleteUrl, "id" -&gt; member.id)}" 
          class="btn btn-danger"&gt;Delete&lt;/a&gt;
 
       &lt;!-- Primitive HTML coding is also possible --&gt;
@@ -141,7 +142,8 @@
 </pre>
 
 <p>For instance, if you use Jade instead, the above code will look like this. Scaml is very similar.</p>
-<pre class="highlight plaintext">-@val members: Seq[model.Member] 
+<pre class="highlight plaintext">-@val s: skinny.Skinny
+-@val members: Seq[model.Member] 
 h3 Members
 hr
 table(class="table table-bordered")
@@ -156,8 +158,8 @@ table(class="table table-bordered")
       td #{member.id}
       td #{member.name}
       td
-        a(href={url(MembersController.editUrl, "id" -&gt; member.id.toString)} class="btn btn-info") Edit
-        a(data-method="delete" data-confirm="Are you sure?" href={url(MembersControlller.deleteUrl, "id" -&gt; member.id.toString)} class="btn btn-danger") Delete
+        a(href={s.url(MembersController.editUrl, "id" -&gt; member.id)} class="btn btn-info") Edit
+        a(data-method="delete" data-confirm="Are you sure?" href={s.url(MembersControlller.deleteUrl, "id" -&gt; member.id)} class="btn btn-danger") Delete
         a(href={s"/members/${member.id}/edit"} class="btn btn-info") Edit
         a(data-method="delete" data-confirm="Are you sure?" href={s"/members/${member.id}"} class="btn btn-danger") Delete
 </pre>
@@ -173,7 +175,7 @@ table(class="table table-bordered")
 <p><a href="http://freemarker.org/">http://freemarker.org/</a></p>
 
 <p>First, add <code>skinny-freemarker</code> to your library-dependencies.</p>
-<pre class="highlight plaintext">libraryDependencies += "org.skinny-framewrok" %% "skinny-freemarker" % "1.0.1"
+<pre class="highlight plaintext">libraryDependencies += "org.skinny-framewrok" %% "skinny-freemarker" % "1.0.2"
 </pre>
 
 <p>Mixin <code>FreeMarkerTemplateEngineFeature</code> to your controllers.</p>
@@ -202,7 +204,7 @@ table(class="table table-bordered")
 <p><a href="http://www.thymeleaf.org/">http://www.thymeleaf.org/</a></p>
 
 <p>First, add <code>skinny-thymeleaf</code> to your library-dependencies.</p>
-<pre class="highlight plaintext">libraryDependencies += "org.skinny-framewrok" %% "skinny-thymeleaf" % "1.0.1"
+<pre class="highlight plaintext">libraryDependencies += "org.skinny-framewrok" %% "skinny-thymeleaf" % "1.0.2"
 </pre>
 
 <p>Mixin <code>ThymeleafTemplateEngineFeature</code> to your controllers.</p>
