@@ -166,6 +166,32 @@ table(class="table table-bordered")
 
 <hr/>
 
+<h4 id="layouts">Layouts</h4>
+
+<hr/>
+
+<p>To avoid unnecessary repetition and ease maintenance, you may want to extract common parts of your Scalate templates into &lsquo;layouts&rsquo;. See the <a href="http://scalate.fusesource.org/documentation/user-guide.html#layouts">Scalate documentation</a> for more details.</p>
+
+<p>If you do not specify which layout to use, Skinny will look for a &lsquo;default&rsquo; layout at <code>WEB-INF/layouts/default.{extension}</code>. (Note that the layout does not necessarily have to use the same template language as the template.)</p>
+
+<p>If you want to use a custom layout for a particular action, use the <code>layout</code> method in your controller:</p>
+<pre class="highlight plaintext">class MyController extends SkinnyController {
+
+    get("/foo") {
+        layout("custom.ssp")
+        render("foo") // Renders WEB-INF/views/foo.html.ssp using layout WEB-INF/layouts/custom.ssp
+    }
+
+    get("/bar") {
+        // Alternatively, you can pass the layout as a template attribute like this
+        render("bar", "layout" -&gt; "/WEB-INF/layouts/custom.ssp")
+    }
+
+}
+</pre>
+
+<hr/>
+
 <h3 id="freemarker">FreeMarker</h3>
 
 <hr/>
