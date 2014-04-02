@@ -97,9 +97,14 @@
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.2/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.3/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <p>Let&rsquo;s create our first Skinny app by using the scaffold generator.</p>
+
+<p><small>
+<b>WARNING:</b> If you&rsquo;re going try with &ldquo;users&rdquo;, use &ldquo;accounts&rdquo; or &ldquo;members&rdquo; instead.
+&ldquo;users&rdquo; also exists in H2 information_schema. This may become a pitfall if you aren&rsquo;t conscious.
+</small></p>
 <pre class="highlight shell">./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
@@ -154,21 +159,21 @@ yo skinny
 
 <p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-assets"       % "1.0.2",
-  "org.skinny-framework" %% "skinny-framework"    % "1.0.2",
-  "org.skinny-framework" %% "skinny-task"         % "1.0.2",
-  "org.skinny-framework" %% "skinny-test"         % "1.0.2" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.2" % "test"
+  "org.skinny-framework" %% "skinny-assets"       % "1.0.3",
+  "org.skinny-framework" %% "skinny-framework"    % "1.0.3",
+  "org.skinny-framework" %% "skinny-task"         % "1.0.3",
+  "org.skinny-framework" %% "skinny-test"         % "1.0.3" % "test",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.3" % "test"
 )
 </pre>
 
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-orm"          % "1.0.2",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.0.2",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.0.2",
-  "org.skinny-framework" %% "skinny-validator"    % "1.0.2",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.2" % "test"
+  "org.skinny-framework" %% "skinny-orm"          % "1.0.3",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.0.3",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.0.3",
+  "org.skinny-framework" %% "skinny-validator"    % "1.0.3",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.3" % "test"
 )
 </pre>
 
@@ -366,9 +371,9 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.2",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.2",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.2" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.0.3",
+  "org.skinny-framework" %% "skinny-assets"    % "1.0.3",
+  "org.skinny-framework" %% "skinny-test"      % "1.0.3" % "test"
 )
 </pre>
 
