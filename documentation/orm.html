@@ -302,7 +302,7 @@
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Name</span><span class="p">(</span><span class="nl">first:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">last:</span> <span class="n">String</span><span class="o">)</span>
+<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Name</span><span class="p">(</span><span class="nl">first:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">last:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">memberId:</span> <span class="n">Long</span><span class="o">)</span>
 <span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Name</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
 
 <span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
