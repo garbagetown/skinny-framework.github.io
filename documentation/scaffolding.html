@@ -39,6 +39,7 @@
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
@@ -66,7 +67,8 @@
 <br/>
 &ldquo;users&rdquo; also exists in H2 information_schema. This may become a pitfall if you aren&rsquo;t conscious.
 </p>
-<pre class="highlight plaintext">./skinny g scaffold members member name:String "nickname:String:varchar(64)" birthday:Option[LocalDate]
+<pre class="highlight plaintext"># If you're a zsh user, try "noglob ./skinny g scaffold ..."
+./skinny g scaffold members member name:String "nickname:String:varchar(64)" birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
 </pre>

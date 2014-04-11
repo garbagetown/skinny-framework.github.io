@@ -39,6 +39,7 @@
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
                 <li><a href="/contribution.html">Contribution</a></li>
               </ul>
             </li>
@@ -266,7 +267,7 @@
 
   <span class="c1">// when you cannot use defaultAlias, use this instead</span>
   <span class="n">val</span> <span class="n">mentorAlais</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"mentor"</span><span class="o">)</span>
-  <span class="n">val</span> <span class="n">mentor</span> <span class="o">=</span> <span class="n">belongToWithAlias</span><span class="o">(</span>
+  <span class="n">val</span> <span class="n">mentor</span> <span class="o">=</span> <span class="n">belongsToWithAlias</span><span class="o">(</span>
     <span class="c1">// in this case, "mentor" alias will be used in join query</span>
     <span class="n">right</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">mentorAlias</span><span class="o">,</span>
     <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">mentor</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">mentor</span> <span class="o">=</span> <span class="n">mentor</span><span class="o">))</span>
