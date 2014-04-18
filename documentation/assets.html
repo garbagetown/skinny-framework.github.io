@@ -7,7 +7,7 @@
     <title>Assets Support - Skinny Framework</title>
     <script type="text/javascript" src="//codeorigin.jquery.com/jquery-1.11.0.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
-    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
@@ -64,9 +64,9 @@
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.6",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.6",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.6" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.0.8",
+  "org.skinny-framework" %% "skinny-assets"    % "1.0.8",
+  "org.skinny-framework" %% "skinny-test"      % "1.0.8" % "test"
 )
 </pre>
 
@@ -191,38 +191,6 @@ React.renderComponent(
 <p><b>Important notice!</b></p>
 
 <p>Scala.js is still experimental! Although this is a project of LAMP/EPFL for which we will continue to provide best-effort improvements and bug fixes, it is not supported by Typesafe, and not part of any of their support contracts. You have been warned!</p>
-
-<p>So Skinny&rsquo;s Scala.js is still optional. You need to change the following settings before working with Scala.js</p>
-
-<h3 id="project/plugins.sbt">project/plugins.sbt</h3>
-
-<p>Activate scalajs-sbt-plugin. Following version may be old. Check the latest version.</p>
-<pre class="highlight java"><span class="c1">// --------</span>
-<span class="c1">// Scala.js</span>
-<span class="c1">// http://www.scala-js.org/</span>
-<span class="c1">//addSbtPlugin("org.scala-lang.modules.scalajs" % "scalajs-sbt-plugin" % "0.3")</span>
-</pre>
-
-<h3 id="project/build.scala">project/Build.scala</h3>
-
-<p>Activate scalaJS project settings. Following version may be old. Check the latest version.</p>
-<pre class="highlight java">  <span class="c1">// -------------------------------------------------------</span>
-  <span class="c1">// Scala.JS Trial</span>
-  <span class="c1">// -------------------------------------------------------</span>
-<span class="cm">/*
-  lazy val scalaJS = Project(id = "scalajs", base = file("src/main/webapp/WEB-INF/assets"),
-    settings = Defaults.defaultSettings ++ Seq(
-      name := "application", // JavaScript file name
-      unmanagedSourceDirectories in Compile &lt;+= baseDirectory(_ / "scala"),
-      libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %% "scalajs-dom"                    % "0.2",
-        "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % "0.3" % "test"
-      ),
-      crossTarget in Compile &lt;&lt;= baseDirectory(_ / ".." / ".." / "assets" / "js")
-    )
-  )
-*/</span>
-</pre>
 
 <h3 id="how-to-work-with-scala.js">How to work with Scala.js</h3>
 
