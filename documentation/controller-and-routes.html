@@ -625,7 +625,15 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="file-upload">File Upload</h4>
 
 <hr/>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">FileUploadSupport</span> <span class="o">{</span>
+
+<div class="alert alert-warning small">
+<b>WARNING:</b> Extend not SkinnyController but SkinnyServlet. You cannot use FileUploadFeature with SkinnyController.
+</div>
+<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.SkinnyServlet</span>
+<span class="kn">import</span> <span class="nn">skinny.controller.feature.FileUploadFeature</span>
+
+<span class="c1">// SkinnySerlvet!!!</span>
+<span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyServlet</span> <span class="n">with</span> <span class="n">FileUploadFeature</span> <span class="o">{</span>
 
   <span class="n">def</span> <span class="n">upload</span> <span class="o">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"file"</span><span class="o">)</span> <span class="n">match</span> <span class="o">{</span>
     <span class="k">case</span> <span class="n">Some</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="o">=&gt;</span>
