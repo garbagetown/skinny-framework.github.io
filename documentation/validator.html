@@ -82,42 +82,42 @@
 <p>That&rsquo;s all.</p>
 
 <p>The following is an example from the built-in validations.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.validator._</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
 
-<span class="n">object</span> <span class="n">required</span> <span class="kd">extends</span> <span class="nf">required</span><span class="p">(</span><span class="kc">true</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">required</span> <span class="k">extends</span> <span class="n">required</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
 
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">required</span><span class="p">(</span><span class="nl">trim:</span> <span class="n">Boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">ValidationRule</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"required"</span>
-  <span class="n">def</span> <span class="n">isValid</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="o">!</span><span class="n">isEmpty</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">trim</span><span class="o">)</span> <span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">trim</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="k">else</span> <span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">required</span><span class="o">(</span><span class="n">trim</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"required"</span>
+  <span class="k">def</span> <span class="n">isValid</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="o">!</span><span class="n">isEmpty</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">trim</span><span class="o">)</span> <span class="n">v</span><span class="o">.</span><span class="n">toString</span><span class="o">.</span><span class="n">trim</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">else</span> <span class="n">v</span><span class="o">.</span><span class="n">toString</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
 
 <p>Then you can use it like this:</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="o">(</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">Validator</span><span class="o">(</span>
   <span class="n">param</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span>
 <span class="o">)</span>
-<span class="n">validator</span><span class="o">.</span><span class="na">hasErrors</span> <span class="c1">// true</span>
-
-<span class="n">val</span> <span class="nl">errorsForName:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Error</span><span class="o">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="na">errors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">error:</span> <span class="n">Error</span> <span class="o">=</span> <span class="n">errorsForName</span><span class="o">.</span><span class="na">head</span>
-<span class="n">error</span><span class="o">.</span><span class="na">name</span> <span class="c1">// -&gt; "required"</span>
-<span class="n">error</span><span class="o">.</span><span class="na">messageParmas</span> <span class="c1">// -&gt; List("name")</span>
-</pre>
+<span class="n">validator</span><span class="o">.</span><span class="n">hasErrors</span> <span class="c1">// true
+</span>
+<span class="k">val</span> <span class="n">errorsForName</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Error</span><span class="o">]</span> <span class="k">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">error</span><span class="k">:</span> <span class="kt">Error</span> <span class="o">=</span> <span class="n">errorsForName</span><span class="o">.</span><span class="n">head</span>
+<span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="c1">// -&gt; "required"
+</span><span class="n">error</span><span class="o">.</span><span class="n">messageParmas</span> <span class="c1">// -&gt; List("name")
+</span></pre>
 
 <p>A validation rule which accepts value when using such as <code>minLength(6)</code> is like this:</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">minLength</span><span class="p">(</span><span class="nl">min:</span> <span class="n">Int</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">ValidationRule</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"minLength"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">messageParams</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="n">min</span><span class="o">.</span><span class="na">toString</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">minLength</span><span class="o">(</span><span class="n">min</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"minLength"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">messageParams</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">min</span><span class="o">.</span><span class="n">toString</span><span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">isValid</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">isEmpty</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">||</span> <span class="o">{</span>
-    <span class="n">toHasSize</span><span class="o">(</span><span class="n">v</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">_</span><span class="o">.</span><span class="na">size</span> <span class="o">&gt;=</span> <span class="n">min</span><span class="o">).</span><span class="na">getOrElse</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;=</span> <span class="n">min</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">isValid</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="n">isEmpty</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">||</span> <span class="o">{</span>
+    <span class="n">toHasSize</span><span class="o">(</span><span class="n">v</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;=</span> <span class="n">min</span><span class="o">).</span><span class="n">getOrElse</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="n">toString</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;=</span> <span class="n">min</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="n">val</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">Validator</span><span class="o">(</span>
+<span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">Validator</span><span class="o">(</span>
   <span class="n">param</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"xxxx"</span><span class="o">)</span> <span class="n">is</span> <span class="n">checkAll</span><span class="o">(</span><span class="n">required</span><span class="o">,</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">6</span><span class="o">)),</span>
   <span class="n">param</span><span class="o">(</span><span class="s">"password"</span> <span class="o">-&gt;</span> <span class="s">"xxxx"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">6</span><span class="o">)</span>
 <span class="o">)</span>
@@ -146,9 +146,9 @@
 <p>skinny-validator provides <code>Validator</code> and <code>MapValidator</code>. You already see <code>Validator</code> in above code. This one accepts parameters when defining validation rules.</p>
 
 <p><code>MapValidator</code> is another one which accepts <code>Map[String, Any]</code> object as parameters. Usually <code>MapValidator</code> is more useful in web applications.</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="s">"age"</span> <span class="o">-&gt;</span> <span class="mi">20</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">params</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="s">"age"</span> <span class="o">-&gt;</span> <span class="mi">20</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">MapValidator</span><span class="o">(</span><span class="n">params</span><span class="o">)(</span>
+<span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">MapValidator</span><span class="o">(</span><span class="n">params</span><span class="o">)(</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span><span class="o">,</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"age"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">numeric</span>
 <span class="o">)</span>
@@ -161,10 +161,10 @@
 <hr/>
 
 <p>skinny-validator&rsquo;s <code>Error</code> looks like this:</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">error</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="na">errors</span><span class="o">.</span><span class="na">head</span>
-<span class="n">error</span><span class="o">.</span><span class="na">name</span> <span class="c1">// -&gt; required</span>
-<span class="n">error</span><span class="o">.</span><span class="na">messageParmas</span> <span class="c1">// -&gt; List("name")</span>
-</pre>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">error</span> <span class="k">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">head</span>
+<span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="c1">// -&gt; required
+</span><span class="n">error</span><span class="o">.</span><span class="n">messageParmas</span> <span class="c1">// -&gt; List("name")
+</span></pre>
 
 <p><code>skinny.validator.Messages</code> loads error messages from *.conf or *.properties.</p>
 
@@ -176,17 +176,17 @@
 </pre>
 
 <p>Now <code>Messages</code> can load error messages for validation errors named &ldquo;required&rdquo; or &ldquo;minLength&rdquo;. The name comes from <code>ValidationRule#name</code>.</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">Messages</span><span class="o">.</span><span class="na">loadFromConfig</span><span class="o">()</span>
-<span class="c1">// val messages = Messages.loadFromConfig("messages2") // loads messages2.conf</span>
-<span class="c1">// val messages = Messages.loadFromProperties() // loads messages.properties</span>
-<span class="c1">// val messages_ja = Messages.loadFromConfig(locale = Option(locale)) // loads messages_ja.conf</span>
-
-<span class="n">messages</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"required"</span><span class="o">,</span> <span class="n">Seq</span><span class="o">(</span><span class="s">"name"</span><span class="o">))</span> 
-<span class="c1">// -&gt; Some("name is required")</span>
-
-<span class="n">messages</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"minLength"</span><span class="o">,</span> <span class="n">Seq</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="mi">6</span><span class="o">))</span> 
-<span class="c1">// -&gt; Some("password length must be greater than or equal to 6")</span>
-</pre>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">messages</span> <span class="k">=</span> <span class="nc">Messages</span><span class="o">.</span><span class="n">loadFromConfig</span><span class="o">()</span>
+<span class="c1">// val messages = Messages.loadFromConfig("messages2") // loads messages2.conf
+// val messages = Messages.loadFromProperties() // loads messages.properties
+// val messages_ja = Messages.loadFromConfig(locale = Option(locale)) // loads messages_ja.conf
+</span>
+<span class="n">messages</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"required"</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">"name"</span><span class="o">))</span> 
+<span class="c1">// -&gt; Some("name is required")
+</span>
+<span class="n">messages</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"minLength"</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="mi">6</span><span class="o">))</span> 
+<span class="c1">// -&gt; Some("password length must be greater than or equal to 6")
+</span></pre>
 
 <hr/>
 
@@ -199,31 +199,31 @@
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala">framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala</a></p>
 
 <p>The following is an example with Skinny Framework:</p>
-<pre class="highlight java"><span class="c1">// withDate joins birthdayYear, birthdayMonth and birthdayDay into single birthday</span>
-<span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
+<pre class="highlight scala"><span class="c1">// withDate joins birthdayYear, birthdayMonth and birthdayDay into single birthday
+</span><span class="k">def</span> <span class="n">createParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
 
-<span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+<span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">checkAll</span><span class="o">(</span><span class="n">minLength</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">20</span><span class="o">)),</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateFormat</span><span class="o">,</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"point"</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span>
 <span class="o">)</span>
 
-<span class="n">def</span> <span class="n">createStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-  <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
-  <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">LocalDate</span><span class="o">,</span>
-  <span class="s">"point"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Int</span>
+<span class="k">def</span> <span class="n">createStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+  <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">LocalDate</span><span class="o">,</span>
+  <span class="s">"point"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">Int</span>
 <span class="o">)</span>
 
-<span class="n">def</span> <span class="n">create</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="na">validate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createNewModel</span><span class="o">(</span><span class="n">createParams</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="n">createStrongParameters</span><span class="o">))</span>
+<span class="k">def</span> <span class="n">create</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="n">validate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">id</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">createNewModel</span><span class="o">(</span><span class="n">createParams</span><span class="o">.</span><span class="n">permit</span><span class="o">(</span><span class="n">createStrongParameters</span><span class="o">))</span>
     <span class="n">redirect</span><span class="o">(</span><span class="n">s</span><span class="s">"/members/${id}"</span><span class="o">)</span>
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="c1">// error messages is set as "errorMessages" and "keyAndErrorMessages"</span>
-    <span class="n">render</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)</span>
+    <span class="c1">// error messages is set as "errorMessages" and "keyAndErrorMessages"
+</span>    <span class="n">render</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)</span>
   <span class="o">}</span>
-  <span class="c1">// or using #fold</span>
-<span class="o">}</span>
+  <span class="c1">// or using #fold
+</span><span class="o">}</span>
 </pre>
 
 <p>See also:</p>

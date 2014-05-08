@@ -71,12 +71,12 @@
 <h3 id="default-locale">Default Locale</h3>
 
 <hr/>
-<pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
-<span class="kn">import</span> <span class="nn">skinny._</span>
-<span class="kn">import</span> <span class="nn">skinny.filter._</span>
-<span class="n">trait</span> <span class="n">ApplicationController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">ErrorPageFilter</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.filter._</span>
+<span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">ErrorPageFilter</span> <span class="o">{</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultLocale</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">Locale</span><span class="o">(</span><span class="s">"ja"</span><span class="o">))</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultLocale</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">Locale</span><span class="o">(</span><span class="s">"ja"</span><span class="o">))</span>
 
 <span class="o">}</span>
 </pre>
@@ -88,12 +88,12 @@
 <hr/>
 
 <p>You can store users&#39; locale in Servlet sessions or Skinny sessions.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">SettingsController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">SettingsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
 
-  <span class="n">def</span> <span class="n">updateLocale</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">locale</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">String</span><span class="o">](</span><span class="s">"locale"</span><span class="o">).</span><span class="na">orNull</span><span class="o">[</span><span class="n">String</span><span class="o">]</span>
-    <span class="n">setCurrentLocale</span><span class="o">(</span><span class="n">locale</span><span class="o">)</span> <span class="c1">// can get via currentLocale: Option[Locale]</span>
-    <span class="n">redirect</span><span class="o">(</span><span class="s">"somewher"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">updateLocale</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">locale</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">"locale"</span><span class="o">).</span><span class="n">orNull</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
+    <span class="n">setCurrentLocale</span><span class="o">(</span><span class="n">locale</span><span class="o">)</span> <span class="c1">// can get via currentLocale: Option[Locale]
+</span>    <span class="n">redirect</span><span class="o">(</span><span class="s">"somewher"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -186,10 +186,10 @@ project {
 <p>The error message which is defined with <code>error</code> prefix and validator&rsquo;s <code>name</code> will be used.</p>
 
 <p>For instance, this validator&rsquo;s name is <code>notNull</code>,</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.validator._</span>
-<span class="n">object</span> <span class="n">notNull</span> <span class="kd">extends</span> <span class="n">ValidationRule</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"notNull"</span>
-  <span class="n">def</span> <span class="n">isValid</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">v</span> <span class="o">!=</span> <span class="kc">null</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
+<span class="k">object</span> <span class="nc">notNull</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"notNull"</span>
+  <span class="k">def</span> <span class="n">isValid</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="n">v</span> <span class="o">!=</span> <span class="kc">null</span>
 <span class="o">}</span>
 </pre>
 

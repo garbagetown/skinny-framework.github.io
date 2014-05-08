@@ -63,58 +63,58 @@
 <p><img alt="Scalatra" src="/images/scalatra.png" /></p>
 
 <p><code>SkinnyController</code> is a trait which extends <code>ScalatraFilter</code> and includes various useful components out-of-the-box.</p>
-<pre class="highlight java"><span class="c1">// src/main/scala/controller/MembersController.scala</span>
-<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection enabled</span>
-
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// set 'members' in the request scope, then you can use it in views</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+<pre class="highlight scala"><span class="c1">// src/main/scala/controller/MembersController.scala
+</span><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection enabled
+</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// set 'members' in the request scope, then you can use it in views
+</span>    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span> <span class="o">-&gt;</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 
-  <span class="n">def</span> <span class="n">newOne</span> <span class="o">=</span> <span class="n">render</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">newOne</span> <span class="k">=</span> <span class="n">render</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">params</span><span class="o">,</span>
+  <span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">params</span><span class="o">,</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">minLength</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"countryId"</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span>
   <span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">createFormParams</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span>
-    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> 
-    <span class="s">"countryId"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">Long</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">createFormParams</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">permit</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span> 
+    <span class="s">"countryId"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">Long</span><span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">create</span> <span class="o">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="na">validate</span><span class="o">())</span> <span class="o">{</span>
-    <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">createFormParams</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">create</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">createForm</span><span class="o">.</span><span class="n">validate</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nc">Member</span><span class="o">.</span><span class="n">createWithPermittedAttributes</span><span class="o">(</span><span class="n">createFormParams</span><span class="o">)</span>
     <span class="n">redirect</span><span class="o">(</span><span class="s">"/members"</span><span class="o">)</span>
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)</span>
   <span class="o">}</span>
 
-  <span class="c1">// searches both query params and path params</span>
-  <span class="n">def</span> <span class="n">show</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">"id"</span><span class="o">).</span><span class="na">map</span> <span class="o">{</span> <span class="n">id</span> <span class="o">=&gt;</span>
-    <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">).</span><span class="na">map</span> <span class="o">{</span> <span class="n">member</span> <span class="o">=&gt;</span>
+  <span class="c1">// searches both query params and path params
+</span>  <span class="k">def</span> <span class="n">show</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">"id"</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="n">id</span> <span class="k">=&gt;</span>
+    <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="n">id</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="n">member</span> <span class="k">=&gt;</span>
       <span class="n">set</span><span class="o">(</span><span class="s">"member"</span> <span class="o">-&gt;</span> <span class="n">member</span><span class="o">)</span>
-    <span class="o">}.</span><span class="na">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
-  <span class="o">}.</span><span class="na">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+    <span class="o">}.</span><span class="n">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+  <span class="o">}.</span><span class="n">getOrElse</span> <span class="n">haltWithBody</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
 
 <span class="o">}</span>
 
-<span class="c1">// src/main/scala/controller/Controllers.scala</span>
-<span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
-  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">newUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">createUrl</span> <span class="o">=</span> <span class="n">post</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">create</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id"</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
+<span class="c1">// src/main/scala/controller/Controllers.scala
+</span><span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
+  <span class="k">object</span> <span class="nc">members</span> <span class="k">extends</span> <span class="nc">MembersController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">indexUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'index)</span>
+    <span class="k">val</span> <span class="n">newUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)(</span><span class="n">newOne</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'new)</span>
+    <span class="k">val</span> <span class="n">createUrl</span> <span class="k">=</span> <span class="n">post</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">create</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'create)</span>
+    <span class="k">val</span> <span class="n">showUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id"</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'show)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// register routes</span>
-    <span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+<span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// register routes
+</span>    <span class="nc">Controllers</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -142,14 +142,14 @@
 <p><a href="http://www.scalatra.org/2.2/guides/http/reverse-routes.html">http://www.scalatra.org/2.2/guides/http/reverse-routes.html</a></p>
 
 <p>In controllers:</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">oldPage</span> <span class="o">=</span> <span class="n">redirect</span><span class="o">(</span><span class="n">url</span><span class="o">(</span><span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">.</span><span class="na">indexUrl</span><span class="o">))</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">oldPage</span> <span class="k">=</span> <span class="n">redirect</span><span class="o">(</span><span class="n">url</span><span class="o">(</span><span class="nc">Controllers</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">indexUrl</span><span class="o">))</span>
 <span class="o">}</span>
 
-<span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
-  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
-    <span class="n">val</span> <span class="n">showUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id"</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">show</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
+  <span class="k">object</span> <span class="nc">members</span> <span class="k">extends</span> <span class="nc">MembersController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">indexUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'index)</span>
+    <span class="k">val</span> <span class="n">showUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id"</span><span class="o">)(</span><span class="n">show</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'show)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -205,39 +205,39 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <p>Then you get the following code. If you need to customize, override some parts of SkinnyResource:</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
-<pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
+<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 
-<span class="kn">import</span> <span class="nn">skinny._</span>
-<span class="kn">import</span> <span class="nn">skinny.validator._</span>
-<span class="kn">import</span> <span class="nn">model.Member</span>
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.validator._</span>
+<span class="k">import</span> <span class="nn">model.Member</span>
 
-<span class="n">object</span> <span class="n">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyResource</span> <span class="o">{</span>
-  <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection</span>
+<span class="k">object</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection
+</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">Member</span> <span class="c1">// SkinnyModel for this controller
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">resourcesName</span> <span class="k">=</span> <span class="s">"members"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourceName</span> <span class="k">=</span> <span class="s">"member"</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Member</span> <span class="c1">// SkinnyModel for this controller</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">"members"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">"member"</span>
-
-  <span class="c1">// parameters &amp; validations for creation</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+  <span class="c1">// parameters &amp; validations for creation
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">createParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateFormat</span>
   <span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
-    <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">LocalDate</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">LocalDate</span>
   <span class="o">)</span>
 
-  <span class="c1">// parameters &amp; validations for modification</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
+  <span class="c1">// parameters &amp; validations for modification
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">updateParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">dateFormat</span>
   <span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span>
-    <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">LocalDate</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"birthday"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">LocalDate</span>
   <span class="o">)</span>
 
 <span class="o">}</span>
@@ -334,30 +334,30 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h5 id="skinny&#39;s-beforeaction/afteraction-filters">Skinny&rsquo;s beforeAction/afterAction filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
 
-  <span class="c1">// Scalatra filters</span>
-  <span class="n">before</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// might affect other controllers</span>
-  <span class="n">after</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+  <span class="c1">// Scalatra filters
+</span>  <span class="n">before</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// might affect other controllers
+</span>  <span class="n">after</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
-  <span class="c1">// Skinny filters</span>
-  <span class="n">beforeAction</span><span class="o">(</span><span class="n">only</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">,</span> <span class="err">'</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
+  <span class="c1">// Skinny filters
+</span>  <span class="n">beforeAction</span><span class="o">(</span><span class="n">only</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="ss">'index,</span> <span class="ss">'new)</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">"before"</span><span class="o">)</span>
   <span class="o">}</span>
-  <span class="n">afterAction</span><span class="o">(</span><span class="n">except</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">))</span> <span class="o">{</span>
+  <span class="n">afterAction</span><span class="o">(</span><span class="n">except</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="ss">'new)</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">println</span><span class="o">(</span><span class="s">"after"</span><span class="o">)</span>
   <span class="o">}</span>
 
-  <span class="c1">//actions</span>
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">...</span>
-  <span class="n">def</span> <span class="n">newInput</span> <span class="o">=</span> <span class="o">...</span>
-  <span class="n">def</span> <span class="n">edit</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="c1">//actions
+</span>  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="n">newInput</span> <span class="k">=</span> <span class="o">...</span>
+  <span class="k">def</span> <span class="n">edit</span> <span class="k">=</span> <span class="o">...</span>
 
-  <span class="c1">// routes</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>      <span class="c1">// before, after</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)(</span><span class="n">newInput</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="k">new</span><span class="o">)</span>   <span class="c1">// before</span>
-  <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id/edit"</span><span class="o">)(</span><span class="n">edit</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">edit</span><span class="o">)</span> <span class="c1">// after</span>
-
+  <span class="c1">// routes
+</span>  <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'index)</span>      <span class="c1">// before, after
+</span>  <span class="n">get</span><span class="o">(</span><span class="s">"/members/new"</span><span class="o">)(</span><span class="n">newInput</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'new)</span>   <span class="c1">// before
+</span>  <span class="n">get</span><span class="o">(</span><span class="s">"/members/:id/edit"</span><span class="o">)(</span><span class="n">edit</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'edit)</span> <span class="c1">// after
+</span>
 <span class="o">}</span>
 </pre>
 
@@ -372,23 +372,23 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <p>Contrary to your expectations, Scalatra doesn&rsquo;t run all the handlers for after and error. Only the first one would be applied and the others are just ignored. We think it&rsquo;s difficult to be aware of this specification (it&rsquo;s not a bug but by design). So SkinnyFilter&rsquo;s before/after/error handlers are always applied. </p>
 
 <p>For instance, in skinny-blank-app, ErrrorPageFilter is applied to ApplicationController. </p>
-<pre class="highlight java"><span class="n">trait</span> <span class="n">ApplicationController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
-  <span class="n">with</span> <span class="n">ErrorPageFilter</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span>
+  <span class="k">with</span> <span class="nc">ErrorPageFilter</span> <span class="o">{</span>
 
 <span class="o">}</span>
 </pre>
 
 <p>ErrorPageFilter is as follows. It&rsquo;s pretty easy to customize such a filter (e.g. adding error notification) as follows.</p>
-<pre class="highlight java"><span class="n">trait</span> <span class="n">ErrorPageFilter</span> <span class="kd">extends</span> <span class="n">SkinnyRenderingFilter</span> <span class="o">{</span>
-  <span class="c1">// appends error filter in order</span>
-  <span class="n">addRenderingErrorFilter</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="nl">e:</span> <span class="n">Throwable</span> <span class="o">=&gt;</span>
-      <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">trait</span> <span class="nc">ErrorPageFilter</span> <span class="k">extends</span> <span class="nc">SkinnyRenderingFilter</span> <span class="o">{</span>
+  <span class="c1">// appends error filter in order
+</span>  <span class="n">addRenderingErrorFilter</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span>
+      <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span>
       <span class="k">try</span> <span class="o">{</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="n">status</span> <span class="k">=</span> <span class="mi">500</span>
         <span class="n">render</span><span class="o">(</span><span class="s">"/error/500"</span><span class="o">)</span>
       <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="nl">e:</span> <span class="n">Exception</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">e</span>
+        <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Exception</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">e</span>
       <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -397,25 +397,25 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <p>It just outputs error logging, set status as 500 and renders &ldquo;/error/500.html.ssp&rdquo; or similar templates. <code>SkinnyRenderingFilter</code> is a sub-trait of <code>SkinnyFilter</code>. <code>SkinnyFilter</code>&rsquo;s response value is always ignored. But <code>SkinnyRenderingFilter</code> can return a response body like above.</p>
 
 <p>The second example is <code>TxPerRequestFilter</code> which enables you to apply the open-session-in-view pattern to your apps.</p>
-<pre class="highlight java"><span class="n">trait</span> <span class="n">TxPerRequestFilter</span> <span class="kd">extends</span> <span class="n">SkinnyFilter</span> <span class="n">with</span> <span class="n">Logging</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="nl">cp:</span> <span class="n">ConnectionPool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>
+<pre class="highlight scala"><span class="k">trait</span> <span class="nc">TxPerRequestFilter</span> <span class="k">extends</span> <span class="nc">SkinnyFilter</span> <span class="k">with</span> <span class="nc">Logging</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">cp</span><span class="k">:</span> <span class="kt">ConnectionPool</span> <span class="o">=</span> <span class="nc">ConnectionPool</span><span class="o">.</span><span class="n">get</span><span class="o">()</span>
 
-  <span class="n">def</span> <span class="n">begin</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">db</span> <span class="o">=</span> <span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">cp</span><span class="o">.</span><span class="na">borrow</span><span class="o">())</span>
-    <span class="n">db</span><span class="o">.</span><span class="na">begin</span><span class="o">()</span>
+  <span class="k">def</span> <span class="n">begin</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">db</span> <span class="k">=</span> <span class="nc">ThreadLocalDB</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="n">cp</span><span class="o">.</span><span class="n">borrow</span><span class="o">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">begin</span><span class="o">()</span>
   <span class="o">}</span>
 
-  <span class="c1">// will handle exceptions occurred in controllers</span>
-  <span class="n">addErrorFilter</span> <span class="o">{</span> <span class="k">case</span> <span class="nl">e:</span> <span class="n">Throwable</span> <span class="o">=&gt;</span>
-    <span class="n">Option</span><span class="o">(</span><span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">load</span><span class="o">()).</span><span class="na">foreach</span> <span class="o">{</span> <span class="n">db</span> <span class="o">=&gt;</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="na">isTxNotActive</span><span class="o">)</span> <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="n">_</span><span class="o">.</span><span class="na">rollbackIfActive</span><span class="o">())</span>
+  <span class="c1">// will handle exceptions occurred in controllers
+</span>  <span class="n">addErrorFilter</span> <span class="o">{</span> <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span>
+    <span class="nc">Option</span><span class="o">(</span><span class="nc">ThreadLocalDB</span><span class="o">.</span><span class="n">load</span><span class="o">()).</span><span class="n">foreach</span> <span class="o">{</span> <span class="n">db</span> <span class="k">=&gt;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="n">isTxNotActive</span><span class="o">)</span> <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="k">_</span><span class="o">.</span><span class="n">rollbackIfActive</span><span class="o">())</span>
     <span class="o">}</span>
   <span class="o">}</span>
 
-  <span class="n">def</span> <span class="n">commit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">db</span> <span class="o">=</span> <span class="n">ThreadLocalDB</span><span class="o">.</span><span class="na">load</span><span class="o">()</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="na">isTxNotActive</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="n">_</span><span class="o">.</span><span class="na">commit</span><span class="o">())</span>
+  <span class="k">def</span> <span class="n">commit</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">db</span> <span class="k">=</span> <span class="nc">ThreadLocalDB</span><span class="o">.</span><span class="n">load</span><span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">db</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">db</span><span class="o">.</span><span class="n">isTxNotActive</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">using</span><span class="o">(</span><span class="n">db</span><span class="o">)(</span><span class="k">_</span><span class="o">.</span><span class="n">commit</span><span class="o">())</span>
     <span class="o">}</span>
   <span class="o">}</span>
 
@@ -443,11 +443,11 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="params">params</h4>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">id:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">"id"</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">getAsOrElse</span><span class="o">[</span><span class="n">Long</span><span class="o">](</span><span class="s">"id"</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="s">"id"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAsOrElse</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">"id"</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="nl">ids:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Seq</span><span class="o">[</span><span class="n">Int</span><span class="o">]]</span> <span class="o">=</span> <span class="n">multiParams</span><span class="o">.</span><span class="na">getAs</span><span class="o">[</span><span class="n">Int</span><span class="o">](</span><span class="s">"ids"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">ids</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="k">=</span> <span class="n">multiParams</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="s">"ids"</span><span class="o">)</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraParams">/api/index.html#org.scalatra.ScalatraParams</a></p>
@@ -459,15 +459,15 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="multiparams(&quot;splat&quot;)">multiParams(&ldquo;splat&rdquo;)</h4>
-<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">"/say/*/to/*"</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches "GET /say/hello/to/world"</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">"splat"</span><span class="o">)</span> <span class="c1">// == Seq("hello", "world")</span>
-<span class="o">}</span>
+<pre class="highlight scala"><span class="n">get</span><span class="o">(</span><span class="s">"/say/*/to/*"</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Matches "GET /say/hello/to/world"
+</span>  <span class="n">multiParams</span><span class="o">(</span><span class="s">"splat"</span><span class="o">)</span> <span class="c1">// == Seq("hello", "world")
+</span><span class="o">}</span>
 
 <span class="n">get</span><span class="o">(</span><span class="s">"/download/*.*"</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches "GET /download/path/to/file.xml"</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">"splat"</span><span class="o">)</span> <span class="c1">// == Seq("path/to/file", "xml")</span>
-<span class="o">}</span>
+  <span class="c1">// Matches "GET /download/path/to/file.xml"
+</span>  <span class="n">multiParams</span><span class="o">(</span><span class="s">"splat"</span><span class="o">)</span> <span class="c1">// == Seq("path/to/file", "xml")
+</span><span class="o">}</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
@@ -477,10 +477,10 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="multiparams(&quot;captures&quot;)">multiParams(&ldquo;captures&rdquo;)</h4>
-<pre class="highlight java"><span class="n">get</span><span class="o">(</span><span class="s">"""^\/f(.*)/b(.*)"""</span><span class="o">.</span><span class="na">r</span><span class="o">)</span> <span class="o">{</span>
-  <span class="c1">// Matches "GET /foo/bar"</span>
-  <span class="n">multiParams</span><span class="o">(</span><span class="s">"captures"</span><span class="o">)</span> <span class="c1">// == Seq("oo", "ar")</span>
-<span class="o">}</span>
+<pre class="highlight scala"><span class="n">get</span><span class="o">(</span><span class="s">"""^\/f(.*)/b(.*)"""</span><span class="o">.</span><span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+  <span class="c1">// Matches "GET /foo/bar"
+</span>  <span class="n">multiParams</span><span class="o">(</span><span class="s">"captures"</span><span class="o">)</span> <span class="c1">// == Seq("oo", "ar")
+</span><span class="o">}</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
@@ -492,15 +492,15 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="cookies">Cookies</h4>
 
 <hr/>
-<pre class="highlight java"><span class="n">def</span> <span class="n">hello</span> <span class="o">=</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">def</span> <span class="n">hello</span> <span class="k">=</span> <span class="o">{</span>
   <span class="n">cookies</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
   <span class="n">cookies</span> <span class="o">-=</span> <span class="s">"name"</span>
 <span class="o">}</span>
 
-<span class="n">def</span> <span class="n">helloWithOptions</span> <span class="o">=</span> <span class="o">{</span>
-  <span class="n">implicit</span> <span class="n">val</span> <span class="n">options</span> <span class="o">=</span> <span class="n">CookieOptions</span><span class="o">(</span><span class="n">secure</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
-  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
-  <span class="n">cookies</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)(</span><span class="n">options</span><span class="o">)</span>
+<span class="k">def</span> <span class="n">helloWithOptions</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="n">options</span> <span class="k">=</span> <span class="nc">CookieOptions</span><span class="o">(</span><span class="n">secure</span> <span class="k">=</span> <span class="kc">true</span><span class="o">)</span>
+  <span class="n">cookies</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)</span>
+  <span class="n">cookies</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span><span class="o">)(</span><span class="n">options</span><span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
@@ -513,12 +513,12 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="request/response-headers">Request/Response Headers</h4>
 
 <hr/>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">request</span><span class="o">.</span><span class="n">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
-<pre class="highlight java"><span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
-<span class="n">response</span><span class="o">.</span><span class="na">headers</span> <span class="o">-=</span> <span class="s">"name"</span>
+<pre class="highlight scala"><span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">-=</span> <span class="s">"name"</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichResponse">/api/index.html#org.scalatra.servlet.RichResponse</a></p>
@@ -528,8 +528,8 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="session">Session</h4>
 
 <hr/>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">v:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="c1">// or session('name)</span>
-<span class="n">session</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="c1">// or session('name)
+</span><span class="n">session</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
 <span class="n">session</span> <span class="o">-=</span> <span class="s">"name"</span>
 </pre>
 
@@ -542,29 +542,29 @@ So your apps are not naturally stateless when using vanilla Scalatra.</p>
 When you enable SkinnySession, these features also start using SkinnySession instead of Servlet session attributes.</p>
 
 <p>ScalatraBootstrap.scala:</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">scalikejdbc._</span>
-<span class="kn">import</span> <span class="nn">skinny.session.SkinnySessionInitializer</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="kd">extends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// Database queries will be increased</span>
-    <span class="n">GlobalSettings</span><span class="o">.</span><span class="na">loggingSQLAndTime</span> <span class="o">=</span> <span class="n">LoggingSQLAndTimeSettings</span><span class="o">(</span>
-      <span class="n">singleLineMode</span> <span class="o">=</span> <span class="kc">true</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">scalikejdbc._</span>
+<span class="k">import</span> <span class="nn">skinny.session.SkinnySessionInitializer</span>
+<span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// Database queries will be increased
+</span>    <span class="nc">GlobalSettings</span><span class="o">.</span><span class="n">loggingSQLAndTime</span> <span class="k">=</span> <span class="nc">LoggingSQLAndTimeSettings</span><span class="o">(</span>
+      <span class="n">singleLineMode</span> <span class="k">=</span> <span class="kc">true</span>
     <span class="o">)</span>
-    <span class="n">ctx</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="n">SkinnySessionInitializer</span><span class="o">],</span> <span class="s">"/*"</span><span class="o">)</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">SkinnySessionInitializer</span><span class="o">],</span> <span class="s">"/*"</span><span class="o">)</span>
 
-    <span class="n">Controllers</span><span class="o">.</span><span class="na">root</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
-    <span class="n">AssetsController</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+    <span class="nc">Controllers</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+    <span class="nc">AssetsController</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
 
 <p>controller/RootController.scala:</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">RootController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="n">with</span> <span class="n">SkinnySessionFilter</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">SkinnySessionFilter</span> <span class="o">{</span>
 
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="nl">v:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Any</span><span class="o">]</span> <span class="o">=</span> <span class="n">skinnySession</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
-    <span class="n">skinnySession</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">)</span>
-    <span class="n">skinnySession</span><span class="o">.</span><span class="na">deleteAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="n">skinnySession</span><span class="o">.</span><span class="n">getAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
+    <span class="n">skinnySession</span><span class="o">.</span><span class="n">setAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">)</span>
+    <span class="n">skinnySession</span><span class="o">.</span><span class="n">deleteAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -600,9 +600,9 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <hr/>
 
 <p>Notice: Flash uses servlet sessions by default. Be aware of sticky session mode.</p>
-<pre class="highlight java"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">=</span> <span class="n">value</span>
+<pre class="highlight scala"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
 <span class="n">flash</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
-<span class="n">flash</span><span class="o">.</span><span class="na">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
+<span class="n">flash</span><span class="o">.</span><span class="n">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
 </pre>
 
 <p><a href="http://www.scalatra.org/guides/http/flash.html">/guides/http/flash.html</a></p>
@@ -614,9 +614,9 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="request-body">Request Body</h4>
 
 <hr/>
-<pre class="highlight java"><span class="n">val</span> <span class="nl">body:</span> <span class="n">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">body</span>
-<span class="n">val</span> <span class="nl">stream:</span> <span class="n">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">inputStream</span> <span class="c1">// raw HTTP POST data</span>
-</pre>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">body</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span>
+<span class="k">val</span> <span class="n">stream</span><span class="k">:</span> <span class="kt">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">inputStream</span> <span class="c1">// raw HTTP POST data
+</span></pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
 
@@ -629,22 +629,22 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <div class="alert alert-warning small">
 <b>WARNING:</b> Extend not SkinnyController but SkinnyServlet. You cannot use FileUploadFeature with SkinnyController.
 </div>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.SkinnyServlet</span>
-<span class="kn">import</span> <span class="nn">skinny.controller.feature.FileUploadFeature</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.SkinnyServlet</span>
+<span class="k">import</span> <span class="nn">skinny.controller.feature.FileUploadFeature</span>
 
-<span class="c1">// SkinnySerlvet!!!</span>
-<span class="kd">class</span> <span class="nc">FilesController</span> <span class="kd">extends</span> <span class="n">SkinnyServlet</span> <span class="n">with</span> <span class="n">FileUploadFeature</span> <span class="o">{</span>
+<span class="c1">// SkinnySerlvet!!!
+</span><span class="k">class</span> <span class="nc">FilesController</span> <span class="k">extends</span> <span class="nc">SkinnyServlet</span> <span class="k">with</span> <span class="nc">FileUploadFeature</span> <span class="o">{</span>
 
-  <span class="n">def</span> <span class="n">upload</span> <span class="o">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"file"</span><span class="o">)</span> <span class="n">match</span> <span class="o">{</span>
-    <span class="k">case</span> <span class="n">Some</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="o">=&gt;</span>
-      <span class="n">Ok</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">Map</span><span class="o">(</span>
-        <span class="s">"Content-Type"</span>        <span class="o">-&gt;</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">contentType</span><span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="s">"application/octet-stream"</span><span class="o">)),</span>
-        <span class="s">"Content-Disposition"</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="s">"attachment; filename=\""</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">name</span> <span class="o">+</span> <span class="s">"\""</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">upload</span> <span class="k">=</span> <span class="n">fileParams</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"file"</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">file</span><span class="o">)</span> <span class="k">=&gt;</span>
+      <span class="nc">Ok</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="n">get</span><span class="o">(),</span> <span class="nc">Map</span><span class="o">(</span>
+        <span class="s">"Content-Type"</span>        <span class="o">-&gt;</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="n">contentType</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">"application/octet-stream"</span><span class="o">)),</span>
+        <span class="s">"Content-Disposition"</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="s">"attachment; filename=\""</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">"\""</span><span class="o">)</span>
       <span class="o">))</span>
-    <span class="k">case</span> <span class="n">None</span> <span class="o">=&gt;</span>
-      <span class="n">BadRequest</span><span class="o">(</span><span class="n">displayPage</span><span class="o">(</span>
+    <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span>
+      <span class="nc">BadRequest</span><span class="o">(</span><span class="n">displayPage</span><span class="o">(</span>
         <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-          <span class="n">Hey</span><span class="o">!</span> <span class="n">You</span> <span class="n">forgot</span> <span class="n">to</span> <span class="n">select</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
+          <span class="nc">Hey</span><span class="o">!</span> <span class="nc">You</span> <span class="n">forgot</span> <span class="n">to</span> <span class="n">select</span> <span class="n">a</span> <span class="n">file</span><span class="o">.</span>
         <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;))</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -659,14 +659,14 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="response-handling">Response handling</h4>
 
 <hr/>
-<pre class="highlight java"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
-<span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="o">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">),</span> <span class="n">reason</span> <span class="o">=</span> <span class="s">"why"</span><span class="o">)</span>
+<pre class="highlight scala"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+<span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="k">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">),</span> <span class="n">reason</span> <span class="k">=</span> <span class="s">"why"</span><span class="o">)</span>
 
-<span class="n">redirect</span><span class="o">(</span><span class="s">"/top"</span><span class="o">)</span> <span class="c1">// 302</span>
-<span class="n">redirect301</span><span class="o">(</span><span class="s">"/new_url"</span><span class="o">)</span> <span class="c1">// 301</span>
-<span class="n">redirect302</span><span class="o">(</span><span class="s">"/somewhere"</span><span class="o">)</span> <span class="c1">// 302</span>
-<span class="n">redirect303</span><span class="o">(</span><span class="s">"/complete"</span><span class="o">)</span> <span class="c1">// 303</span>
-</pre>
+<span class="n">redirect</span><span class="o">(</span><span class="s">"/top"</span><span class="o">)</span> <span class="c1">// 302
+</span><span class="n">redirect301</span><span class="o">(</span><span class="s">"/new_url"</span><span class="o">)</span> <span class="c1">// 301
+</span><span class="n">redirect302</span><span class="o">(</span><span class="s">"/somewhere"</span><span class="o">)</span> <span class="c1">// 302
+</span><span class="n">redirect303</span><span class="o">(</span><span class="s">"/complete"</span><span class="o">)</span> <span class="c1">// 303
+</span></pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ScalatraBase">/api/index.html#org.scalatra.ScalatraBase</a></p>
 
@@ -685,7 +685,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <p>Notice: Scalatra CSRF protection implementation uses servlet sessions by default. Be aware of sticky session mode.</p>
 
 <p>Define <code>protectFromForgery</code> in controller/RootController.scala:</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">RootController</span> <span class="kd">extends</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
 
 <span class="o">}</span>

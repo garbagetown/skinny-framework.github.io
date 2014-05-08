@@ -63,35 +63,35 @@
 <p>Skinny&rsquo;s WorkerService is a simple wrapper of Java built-in <code>ExecutorService</code> and prepared in Skinny apps by default. </p>
 
 <p>You can access it as <code>skinnyWorkerService</code> in <code>ScalatraBootstrap.scala</code> and just call scheduling methods.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny._</span>
-<span class="kn">import</span> <span class="nn">skinny.worker._</span>
-<span class="kn">import</span> <span class="nn">skinny.controller._</span>
-<span class="kn">import</span> <span class="nn">_root_.controller._</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.worker._</span>
+<span class="k">import</span> <span class="nn">skinny.controller._</span>
+<span class="k">import</span> <span class="nn">_root_.controller._</span>
 
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="kd">extends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span> 
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span> 
 
-    <span class="n">val</span> <span class="n">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SkinnyWorker</span> <span class="o">{</span>
-      <span class="n">def</span> <span class="n">execute</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">worker</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">SkinnyWorker</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="n">execute</span> <span class="k">=</span> <span class="o">{</span>
         <span class="n">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">)</span>
       <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="c1">// will be invoked every 300 milliseconds</span>
-    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="na">everyFixedMilliseconds</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">300</span><span class="o">)</span>
-    <span class="c1">// will be invoked every 10 seconds</span>
-    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="na">everyFixedSeconds</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
-    <span class="c1">// will be invoked every 4 minutes</span>
-    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="na">everyFixedMinutes</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
-    <span class="c1">// will be invoked at 01:30, 02:30, ....</span>
-    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="na">hourly</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">30</span><span class="o">)</span>
-    <span class="c1">// will be invoked at 09:20 AM everyday</span>
-    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="na">daily</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+    <span class="c1">// will be invoked every 300 milliseconds
+</span>    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="n">everyFixedMilliseconds</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">300</span><span class="o">)</span>
+    <span class="c1">// will be invoked every 10 seconds
+</span>    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="n">everyFixedSeconds</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+    <span class="c1">// will be invoked every 4 minutes
+</span>    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="n">everyFixedMinutes</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>
+    <span class="c1">// will be invoked at 01:30, 02:30, ....
+</span>    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="n">hourly</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">30</span><span class="o">)</span>
+    <span class="c1">// will be invoked at 09:20 AM everyday
+</span>    <span class="n">skinnyWorkerService</span><span class="o">.</span><span class="n">daily</span><span class="o">(</span><span class="n">worker</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
 
-    <span class="c1">// Routes</span>
-    <span class="o">...</span>
-    <span class="n">Controllers</span><span class="o">.</span><span class="na">root</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+    <span class="c1">// Routes
+</span>    <span class="o">...</span>
+    <span class="nc">Controllers</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
 
   <span class="o">}</span>
 
@@ -101,19 +101,19 @@
 <p><code>SkinnyWorker</code>&rsquo;s rule is very simple. <code>SkinnyWorker</code> object is a <code>java.lang.Runnable</code> one.</p>
 
 <p>And developers just implement the abstract <code>def execute(): Unit</code> method.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.worker._</span>
-<span class="kn">import</span> <span class="nn">model._</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.worker._</span>
+<span class="k">import</span> <span class="nn">model._</span>
 
-<span class="kd">class</span> <span class="nc">SampleWorker</span> <span class="kd">extends</span> <span class="n">SkinnyWorker</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">SampleWorker</span> <span class="k">extends</span> <span class="nc">SkinnyWorker</span> <span class="o">{</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">execute</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// If an exception is thrwon from this method, </span>
-    <span class="n">ImportantOperation</span><span class="o">.</span><span class="na">run</span><span class="o">()</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">execute</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// If an exception is thrwon from this method, 
+</span>    <span class="nc">ImportantOperation</span><span class="o">.</span><span class="n">run</span><span class="o">()</span>
   <span class="o">}</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">handle</span><span class="o">(</span><span class="nl">t:</span> <span class="n">Throwable</span><span class="o">)</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// handles exceptions from execute method</span>
-    <span class="n">ErrorMailer</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">t</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">handle</span><span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// handles exceptions from execute method
+</span>    <span class="nc">ErrorMailer</span><span class="o">.</span><span class="n">send</span><span class="o">(</span><span class="n">t</span><span class="o">)</span>
   <span class="o">}</span>
 
 <span class="o">}</span>

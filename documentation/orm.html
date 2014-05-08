@@ -97,121 +97,121 @@
 <h4 id="easy-to-use-and-powerful">Easy to use and powerful</h4>
 
 <p>Skinny-ORM is very powerful, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.orm._</span>
-<span class="kn">import</span> <span class="nn">scalikejdbc._</span><span class="o">,</span> <span class="n">SQLInterpolation</span><span class="o">.</span><span class="na">_</span>
-<span class="kn">import</span> <span class="nn">org.joda.time._</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.orm._</span>
+<span class="k">import</span> <span class="nn">scalikejdbc._</span><span class="o">,</span> <span class="nc">SQLInterpolation</span><span class="o">.</span><span class="k">_</span>
+<span class="k">import</span> <span class="nn">org.joda.time._</span>
 
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
-    <span class="n">createdAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">createdAt</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">n</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
+    <span class="n">id</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">id</span><span class="o">),</span>
+    <span class="n">name</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
+    <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdAt</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">defaultAlias</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// find by primary key</span>
-<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
+<span class="c1">// ------------
+// find by primary key
+</span><span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
+<span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'id </span><span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="n">apply</span><span class="o">().</span><span class="n">headOption</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// find many</span>
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">()</span>
+<span class="c1">// ------------
+// find many
+</span><span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">()</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// in clause</span>
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">in</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)))</span>
+<span class="c1">// ------------
+// in clause
+</span><span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">in</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">,</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)))</span>
 
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'id </span><span class="o">-&gt;</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="c1">// will return 345, 234, 123 in order</span>
-<span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> 
-  <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">))</span>
-    <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">desc</span><span class="o">).</span><span class="na">offset</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">apply</span><span class="o">()</span>
+<span class="c1">// will return 345, 234, 123 in order
+</span><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">defaultAlias</span>
+<span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> 
+  <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'id </span><span class="o">-&gt;</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">))</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">desc</span><span class="o">).</span><span class="n">offset</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="n">limit</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+    <span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// find by condition</span>
+<span class="c1">// ------------
+// find by condition
+</span>
+<span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAllBy</span><span class="o">(</span>
+  <span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupName</span><span class="o">,</span> <span class="s">"scalajp"</span><span class="o">).</span><span class="n">and</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">delete</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span>
 
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAllBy</span><span class="o">(</span>
-  <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupName</span><span class="o">,</span> <span class="s">"scalajp"</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">delete</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span>
+  <span class="ss">'groupName </span><span class="o">-&gt;</span> <span class="s">"scalajp"</span><span class="o">,</span> <span class="ss">'deleted </span><span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span>
-  <span class="err">'</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">"scalajp"</span><span class="o">,</span> <span class="err">'</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
+<span class="c1">// use Pagination instead. Easier to understand than limit/offset
+</span><span class="k">val</span> <span class="n">members</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+  <span class="o">.</span><span class="n">paginate</span><span class="o">(</span><span class="nc">Pagination</span><span class="o">.</span><span class="n">page</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="n">per</span><span class="o">(</span><span class="mi">20</span><span class="o">))</span>
+  <span class="o">.</span><span class="n">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">desc</span><span class="o">).</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="c1">// use Pagination instead. Easier to understand than limit/offset</span>
-<span class="n">val</span> <span class="n">members</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
-  <span class="o">.</span><span class="na">paginate</span><span class="o">(</span><span class="n">Pagination</span><span class="o">.</span><span class="na">page</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">per</span><span class="o">(</span><span class="mi">20</span><span class="o">))</span>
-  <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">desc</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
+<span class="c1">// ------------
+// count
+</span>
+<span class="nc">Order</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
+<span class="nc">Order</span><span class="o">.</span><span class="n">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">deletedAt</span><span class="o">).</span><span class="n">and</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">shopId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// count</span>
+<span class="nc">Order</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'deletedAt </span><span class="o">-&gt;</span> <span class="nc">None</span><span class="o">,</span> <span class="ss">'shopId </span><span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="n">count</span><span class="o">()</span>
+<span class="nc">Order</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="n">cancelled</span><span class="o">,</span> <span class="kc">false</span><span class="o">)).</span><span class="n">distinctCount</span><span class="o">(</span><span class="ss">'customerId)</span>
 
-<span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">countBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">).</span><span class="na">and</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">shopId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+<span class="c1">// ------------
+// calcuations
+// min, max, average and sum
+</span>
+<span class="nc">Order</span><span class="o">.</span><span class="n">sum</span><span class="o">(</span><span class="ss">'amount)</span>
 
-<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">deletedAt</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="o">,</span> <span class="err">'</span><span class="n">shopId</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">cancelled</span><span class="o">,</span> <span class="kc">false</span><span class="o">)).</span><span class="na">distinctCount</span><span class="o">(</span><span class="err">'</span><span class="n">customerId</span><span class="o">)</span>
+<span class="nc">Product</span><span class="o">.</span><span class="n">min</span><span class="o">(</span><span class="ss">'price)</span>
+<span class="nc">Product</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">ge</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="n">createdAt</span><span class="o">,</span> <span class="n">startDate</span><span class="o">)).</span><span class="n">max</span><span class="o">(</span><span class="ss">'price)</span>
+<span class="nc">Product</span><span class="o">.</span><span class="n">average</span><span class="o">(</span><span class="ss">'price)</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// calcuations</span>
-<span class="c1">// min, max, average and sum</span>
+<span class="nc">Product</span><span class="o">.</span><span class="n">calculate</span><span class="o">(</span><span class="n">sqls</span><span class="s">"original_func(${p.userId})"</span><span class="o">)</span>
 
-<span class="n">Order</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="err">'</span><span class="n">amount</span><span class="o">)</span>
+<span class="c1">// ------------
+// create with strong parameters
+</span>
+<span class="k">val</span> <span class="n">params</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Bob"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">id</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">createWithPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="n">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">))</span>
 
-<span class="n">Product</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
-<span class="n">Product</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">ge</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">createdAt</span><span class="o">,</span> <span class="n">startDate</span><span class="o">)).</span><span class="na">max</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
-<span class="n">Product</span><span class="o">.</span><span class="na">average</span><span class="o">(</span><span class="err">'</span><span class="n">price</span><span class="o">)</span>
+<span class="c1">// ------------
+// create with unsafe parameters
+</span>
+<span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">defaultAlias</span>
+<span class="k">val</span> <span class="n">id</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">createWithNamedValues</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
 
-<span class="n">Product</span><span class="o">.</span><span class="na">calculate</span><span class="o">(</span><span class="n">sqls</span><span class="s">"original_func(${p.userId})"</span><span class="o">)</span>
-
-<span class="c1">// ------------</span>
-<span class="c1">// create with strong parameters</span>
-
-<span class="n">val</span> <span class="n">params</span> <span class="o">=</span> <span class="n">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Bob"</span><span class="o">)</span>
-<span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
-
-<span class="c1">// ------------</span>
-<span class="c1">// create with unsafe parameters</span>
-
-<span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">defaultAlias</span>
-<span class="n">val</span> <span class="n">id</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">createWithNamedValues</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
-
-<span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
-  <span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
-  <span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Chris"</span><span class="o">,</span>
-  <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span>
+  <span class="ss">'id </span><span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
+  <span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Chris"</span><span class="o">,</span>
+  <span class="ss">'createdAt </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span>
 <span class="o">)</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// update with strong parameters</span>
+<span class="c1">// ------------
+// update with strong parameters
+</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="n">withPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="n">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">))</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withPermittedAttributes</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">permit</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">))</span>
+<span class="c1">// ------------
+// update with unsafe parameters
+</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
 
-<span class="c1">// ------------</span>
-<span class="c1">// update with unsafe parameters</span>
+<span class="c1">// update by condition
+</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">updateBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">)).</span><span class="n">withAttribtues</span><span class="o">(</span><span class="ss">'groupId </span><span class="o">-&gt;</span> <span class="mi">234</span><span class="o">)</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
-
-<span class="c1">// update by condition</span>
-
-<span class="n">Member</span><span class="o">.</span><span class="na">updateBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">)).</span><span class="na">withAttribtues</span><span class="o">(</span><span class="err">'</span><span class="n">groupId</span> <span class="o">-&gt;</span> <span class="mi">234</span><span class="o">)</span>
-
-<span class="c1">// ------------</span>
-<span class="c1">// delete</span>
-
-<span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
+<span class="c1">// ------------
+// delete
+</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
 </pre>
 
 <p>Source code: 
@@ -245,40 +245,40 @@
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association">http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
-<span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
-  <span class="nl">mentorId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">mentor:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
-  <span class="nl">companyId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">mentorId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">mentor</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">companyId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">company</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// basic settings ...</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...
+</span>
+  <span class="c1">// If byDefault is called, this join condition is enabled by default
+</span>  <span class="n">belongsTo</span><span class="o">[</span><span class="kt">Company</span><span class="o">](</span><span class="nc">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">company</span> <span class="k">=</span> <span class="n">c</span><span class="o">)).</span><span class="n">byDefault</span>
 
-  <span class="c1">// If byDefault is called, this join condition is enabled by default</span>
-  <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span><span class="n">Company</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">c</span><span class="o">)).</span><span class="na">byDefault</span>
+  <span class="c1">// or more explanatory
+</span>  <span class="n">belongsTo</span><span class="o">[</span><span class="kt">Company</span><span class="o">](</span>
+    <span class="c1">// entity mapper on the right side
+</span>    <span class="c1">// in this case, default alias will be used in join query
+</span>    <span class="n">right</span> <span class="k">=</span> <span class="nc">Company</span><span class="o">,</span> 
+    <span class="c1">// function to merge association to main entity
+</span>    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">company</span> <span class="k">=</span> <span class="n">company</span><span class="o">)</span>
+  <span class="o">).</span><span class="n">byDefault</span>
 
-  <span class="c1">// or more explanatory</span>
-  <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
-    <span class="c1">// entity mapper on the right side</span>
-    <span class="c1">// in this case, default alias will be used in join query</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="n">Company</span><span class="o">,</span> 
-    <span class="c1">// function to merge association to main entity</span>
-    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">company</span><span class="o">)</span>
-  <span class="o">).</span><span class="na">byDefault</span>
-
-  <span class="c1">// when you cannot use defaultAlias, use this instead</span>
-  <span class="n">val</span> <span class="n">mentorAlais</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"mentor"</span><span class="o">)</span>
-  <span class="n">val</span> <span class="n">mentor</span> <span class="o">=</span> <span class="n">belongsToWithAlias</span><span class="o">(</span>
-    <span class="c1">// in this case, "mentor" alias will be used in join query</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">mentorAlias</span><span class="o">,</span>
-    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">mentor</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">mentor</span> <span class="o">=</span> <span class="n">mentor</span><span class="o">))</span>
-    <span class="c1">// mentor will be resolved only when calling #joins </span>
-    <span class="cm">/*.byDefault */</span> 
+  <span class="c1">// when you cannot use defaultAlias, use this instead
+</span>  <span class="k">val</span> <span class="n">mentorAlais</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"mentor"</span><span class="o">)</span>
+  <span class="k">val</span> <span class="n">mentor</span> <span class="k">=</span> <span class="n">belongsToWithAlias</span><span class="o">(</span>
+    <span class="c1">// in this case, "mentor" alias will be used in join query
+</span>    <span class="n">right</span> <span class="k">=</span> <span class="nc">Member</span> <span class="o">-&gt;</span> <span class="n">mentorAlias</span><span class="o">,</span>
+    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">mentor</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">mentor</span> <span class="k">=</span> <span class="n">mentor</span><span class="o">))</span>
+    <span class="c1">// mentor will be resolved only when calling #joins 
+</span>    <span class="cm">/*.byDefault */</span> 
 <span class="o">}</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without mentor</span>
-
-<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">mentor</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with mentor</span>
-</pre>
+<span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without mentor
+</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">joins</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">mentor</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with mentor
+</span></pre>
 
 <p>In this case, following table is expected:</p>
 <pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
@@ -303,16 +303,16 @@
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Name</span><span class="p">(</span><span class="nl">first:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">last:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">memberId:</span> <span class="n">Long</span><span class="o">)</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Name</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Name</span><span class="o">(</span><span class="n">first</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">last</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">memberId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Name</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// basic settings ...</span>
-
-  <span class="n">val</span> <span class="n">name</span> <span class="o">=</span> <span class="n">hasOne</span><span class="o">[</span><span class="n">Name</span><span class="o">](</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="n">Name</span><span class="o">,</span> 
-    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">)</span>
-  <span class="o">).</span><span class="na">byDefault</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...
+</span>
+  <span class="k">val</span> <span class="n">name</span> <span class="k">=</span> <span class="n">hasOne</span><span class="o">[</span><span class="kt">Name</span><span class="o">](</span>
+    <span class="n">right</span> <span class="k">=</span> <span class="nc">Name</span><span class="o">,</span> 
+    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">name</span> <span class="k">=</span> <span class="n">name</span><span class="o">)</span>
+  <span class="o">).</span><span class="n">byDefault</span>
 <span class="o">}</span>
 </pre>
 
@@ -336,50 +336,50 @@
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-many-association">http://guides.rubyonrails.org/association_basics.html#the-has-many-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">members:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span><span class="o">)</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> 
-  <span class="nl">companyId:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Long</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span> <span class="nl">company:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">,</span>
-  <span class="nl">skills:</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Skill</span><span class="o">]</span> <span class="o">=</span> <span class="n">Nil</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">members</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> 
+  <span class="n">companyId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span> <span class="n">company</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">skills</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Skill</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span>
 <span class="o">)</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">Skill</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Skill</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
-<span class="c1">// -----------------------</span>
-<span class="c1">// hasMany example</span>
-<span class="n">object</span> <span class="n">Company</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// basic settings ...</span>
-
-  <span class="n">val</span> <span class="n">membersRef</span> <span class="o">=</span> <span class="n">hasMany</span><span class="o">[</span><span class="n">Member</span><span class="o">](</span>
-    <span class="c1">// association's SkinnyMapper and alias</span>
-    <span class="n">many</span> <span class="o">=</span> <span class="n">Member</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">membersAlias</span><span class="o">,</span>
-    <span class="c1">// defines join condition by using aliases</span>
-    <span class="n">on</span> <span class="o">=</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">id</span><span class="o">,</span> <span class="n">m</span><span class="o">.</span><span class="na">companyId</span><span class="o">),</span>
-    <span class="c1">// function to merge associations to main entity</span>
-    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">company</span><span class="o">,</span> <span class="n">members</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">company</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">members</span> <span class="o">=</span> <span class="n">members</span><span class="o">)</span>
+<span class="c1">// -----------------------
+// hasMany example
+</span><span class="k">object</span> <span class="nc">Company</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...
+</span>
+  <span class="k">val</span> <span class="n">membersRef</span> <span class="k">=</span> <span class="n">hasMany</span><span class="o">[</span><span class="kt">Member</span><span class="o">](</span>
+    <span class="c1">// association's SkinnyMapper and alias
+</span>    <span class="n">many</span> <span class="k">=</span> <span class="nc">Member</span> <span class="o">-&gt;</span> <span class="nc">Member</span><span class="o">.</span><span class="n">membersAlias</span><span class="o">,</span>
+    <span class="c1">// defines join condition by using aliases
+</span>    <span class="n">on</span> <span class="k">=</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="n">id</span><span class="o">,</span> <span class="n">m</span><span class="o">.</span><span class="n">companyId</span><span class="o">),</span>
+    <span class="c1">// function to merge associations to main entity
+</span>    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">company</span><span class="o">,</span> <span class="n">members</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">company</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">members</span> <span class="k">=</span> <span class="n">members</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
-<span class="n">Company</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Company</span><span class="o">.</span><span class="na">membersRef</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with members</span>
-
-<span class="c1">// -----------------------</span>
-<span class="c1">// hasManyThrough example</span>
-
-<span class="c1">// join table definition</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">MemberSkill</span><span class="p">(</span><span class="nl">memberId:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">skillId:</span> <span class="n">Long</span><span class="o">)</span>
-<span class="n">object</span> <span class="n">MemberSkill</span> <span class="kd">extends</span> <span class="n">SkinnyJoinTable</span><span class="o">[</span><span class="n">MemberSkill</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"members_skills"</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"ms"</span><span class="o">)</span>
+<span class="nc">Company</span><span class="o">.</span><span class="n">joins</span><span class="o">(</span><span class="nc">Company</span><span class="o">.</span><span class="n">membersRef</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with members
+</span>
+<span class="c1">// -----------------------
+// hasManyThrough example
+</span>
+<span class="c1">// join table definition
+</span><span class="k">case</span> <span class="k">class</span> <span class="nc">MemberSkill</span><span class="o">(</span><span class="n">memberId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">skillId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">MemberSkill</span> <span class="k">extends</span> <span class="nc">SkinnyJoinTable</span><span class="o">[</span><span class="kt">MemberSkill</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">val</span> <span class="n">tableName</span> <span class="k">=</span> <span class="s">"members_skills"</span>
+  <span class="k">override</span> <span class="k">val</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"ms"</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="c1">// hasManyThrough</span>
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="c1">// basic settings ...</span>
-
-  <span class="n">val</span> <span class="n">skillsRef</span> <span class="o">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
-    <span class="n">through</span> <span class="o">=</span> <span class="n">MemberSkill</span><span class="o">,</span> 
-    <span class="n">many</span> <span class="o">=</span> <span class="n">Skill</span><span class="o">,</span> 
-    <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">skills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">)</span>
+<span class="c1">// hasManyThrough
+</span><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// basic settings ...
+</span>
+  <span class="k">val</span> <span class="n">skillsRef</span> <span class="k">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="kt">Skill</span><span class="o">](</span>
+    <span class="n">through</span> <span class="k">=</span> <span class="nc">MemberSkill</span><span class="o">,</span> 
+    <span class="n">many</span> <span class="k">=</span> <span class="nc">Skill</span><span class="o">,</span> 
+    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">skills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">joins</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skillsRef</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span> <span class="c1">// with skills</span>
-</pre>
+<span class="nc">Member</span><span class="o">.</span><span class="n">joins</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">skillsRef</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span> <span class="c1">// with skills
+</span></pre>
 
 <p>In this case, following tables are expected:</p>
 <pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
@@ -422,13 +422,13 @@
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
 <p>In this case, entities should be defined like this (Skinny 0.9.21 or ScalikeJDBC 1.7.3 is required):</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">LegacyData</span><span class="p">(</span><span class="n">val</span> <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="n">val</span> <span class="nl">c2:</span> <span class="n">String</span><span class="o">,</span> <span class="n">val</span> <span class="nl">c3:</span> <span class="n">Int</span><span class="o">,</span> <span class="o">...,</span> <span class="n">val</span> <span class="nl">c23:</span> <span class="n">Int</span><span class="o">)</span>
-  <span class="kd">extends</span> <span class="n">scalikejdbc</span><span class="o">.</span><span class="na">EntityEquality</span> <span class="o">{</span>
-  <span class="c1">// override val entityIdentity = id</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">entityIdentity</span> <span class="o">=</span> <span class="n">s</span><span class="s">"$id $c2 $c3 ... $c23"</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">LegacyData</span><span class="o">(</span><span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="k">val</span> <span class="n">c2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="k">val</span> <span class="n">c3</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="o">...,</span> <span class="k">val</span> <span class="n">c23</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+  <span class="k">extends</span> <span class="n">scalikejdbc</span><span class="o">.</span><span class="nc">EntityEquality</span> <span class="o">{</span>
+  <span class="c1">// override val entityIdentity = id
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">entityIdentity</span> <span class="k">=</span> <span class="n">s</span><span class="s">"$id $c2 $c3 ... $c23"</span>
 <span class="o">}</span>
 
-<span class="n">object</span> <span class="n">LegacyData</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">LegacyData</span><span class="o">]</span> <span class="o">{</span>
+<span class="k">object</span> <span class="nc">LegacyData</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">LegacyData</span><span class="o">]</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
 </pre>
@@ -448,41 +448,41 @@
 <p>Note: eager loading of nested entities is not supported yet.</p>
 
 <p>Indeed, it&rsquo;s not incredibly simple. But we believe that what it does is so clear that you can easily write the definition.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn't work as expected</span>
-  <span class="c1">// when "val company" is defined in Scala 2.10.x.</span>
-  <span class="c1">// If you suffer from this issue, use "val companyOpt" "companyRef" and so on instead.</span>
-  <span class="n">val</span> <span class="n">companyOpt</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="c1">// normal belongsTo</span>
-    <span class="n">belongsTo</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
-      <span class="n">right</span> <span class="o">=</span> <span class="n">Company</span><span class="o">,</span>
-      <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">company</span><span class="o">))</span>
-    <span class="c1">// eager loading operation for this one-to-one relation</span>
-    <span class="o">.</span><span class="na">includes</span><span class="o">[</span><span class="n">Company</span><span class="o">](</span>
-      <span class="n">merge</span> <span class="o">=</span> <span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">companies</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">members</span><span class="o">.</span><span class="na">map</span> <span class="o">{</span> <span class="n">m</span> <span class="o">=&gt;</span>
-        <span class="n">companies</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">company</span><span class="o">.</span><span class="na">exists</span><span class="o">(</span><span class="n">_</span><span class="o">.</span><span class="na">id</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
-          <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">company</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">c</span><span class="o">)))</span>
-          <span class="o">.</span><span class="na">getOrElse</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+  <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn't work as expected
+</span>  <span class="c1">// when "val company" is defined in Scala 2.10.x.
+</span>  <span class="c1">// If you suffer from this issue, use "val companyOpt" "companyRef" and so on instead.
+</span>  <span class="k">val</span> <span class="n">companyOpt</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// normal belongsTo
+</span>    <span class="n">belongsTo</span><span class="o">[</span><span class="kt">Company</span><span class="o">](</span>
+      <span class="n">right</span> <span class="k">=</span> <span class="nc">Company</span><span class="o">,</span>
+      <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">company</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">company</span> <span class="k">=</span> <span class="n">company</span><span class="o">))</span>
+    <span class="c1">// eager loading operation for this one-to-one relation
+</span>    <span class="o">.</span><span class="n">includes</span><span class="o">[</span><span class="kt">Company</span><span class="o">](</span>
+      <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">companies</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">members</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">m</span> <span class="k">=&gt;</span>
+        <span class="n">companies</span><span class="o">.</span><span class="n">find</span><span class="o">(</span><span class="n">c</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">company</span><span class="o">.</span><span class="n">exists</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="n">id</span><span class="o">))</span>
+          <span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">c</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">company</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">c</span><span class="o">)))</span>
+          <span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
       <span class="o">})</span>
   <span class="o">}</span>
 <span class="o">}</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">companyOpt</span><span class="o">).</span><span class="na">findAll</span><span class="o">()</span>
+<span class="nc">Member</span><span class="o">.</span><span class="n">includes</span><span class="o">(</span><span class="n">companyOpt</span><span class="o">).</span><span class="n">findAll</span><span class="o">()</span>
 </pre>
 
 <p>Yet another example:</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">val</span> <span class="n">skills</span> <span class="o">=</span>
-    <span class="n">hasManyThrough</span><span class="o">[</span><span class="n">Skill</span><span class="o">](</span>
-      <span class="n">MemberSkill</span><span class="o">,</span> <span class="n">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">skills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">)</span>
-    <span class="o">).</span><span class="na">includes</span><span class="o">[</span><span class="n">Skill</span><span class="o">]((</span><span class="n">ms</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">ms</span><span class="o">.</span><span class="na">map</span> <span class="o">{</span> <span class="n">m</span> <span class="o">=&gt;</span>
-      <span class="n">m</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span><span class="n">kills</span> <span class="o">=</span> <span class="n">skills</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">_</span><span class="o">.</span><span class="na">memberId</span><span class="o">.</span><span class="na">exists</span><span class="o">(</span><span class="n">_</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">)))</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">skills</span> <span class="k">=</span>
+    <span class="n">hasManyThrough</span><span class="o">[</span><span class="kt">Skill</span><span class="o">](</span>
+      <span class="nc">MemberSkill</span><span class="o">,</span> <span class="nc">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">skills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">)</span>
+    <span class="o">).</span><span class="n">includes</span><span class="o">[</span><span class="kt">Skill</span><span class="o">]((</span><span class="n">ms</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">ms</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">m</span> <span class="k">=&gt;</span>
+      <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">kills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">memberId</span><span class="o">.</span><span class="n">exists</span><span class="o">(</span><span class="k">_</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">)))</span>
     <span class="o">})</span>
 <span class="o">}</span>
 
-<span class="n">Member</span><span class="o">.</span><span class="na">includes</span><span class="o">(</span><span class="n">Member</span><span class="o">.</span><span class="na">skills</span><span class="o">).</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills</span>
-</pre>
+<span class="nc">Member</span><span class="o">.</span><span class="n">includes</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">skills</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills
+</span></pre>
 
 <p>Note: when your entities have the same associations (e.g. Company has Employee, Country and Employee have Country), avoiding using the default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We plan to provide more useful error messages for such cases in version 1.0.0.</p>
 
@@ -496,59 +496,59 @@
 <hr/>
 
 <p>Skinny ORM provides the folllowing settings to overwrite.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">GroupMember</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">GroupMember</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// default: 'default</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">connectionPoolName</span> <span class="o">=</span> <span class="err">'</span><span class="n">legacydb</span>
+  <span class="c1">// default: 'default
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">connectionPoolName</span> <span class="k">=</span> <span class="ss">'legacydb
+</span>
+  <span class="c1">// default: None 
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">schemaName</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">"public"</span><span class="o">)</span>
 
-  <span class="c1">// default: None </span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">schemaName</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="s">"public"</span><span class="o">)</span>
+  <span class="c1">// Basically tableName is loaded from jdbc metadata and cached on the JVM
+</span>  <span class="c1">// However, if the name of object/class which extends SkinnyMapper is not the camelCase of table name,
+</span>  <span class="c1">// you need to override tableName by yourself.
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">tableName</span> <span class="k">=</span> <span class="s">"group_members"</span> <span class="c1">// default: group_member 
+</span>
+  <span class="c1">// Basically columnNames are loaded from jdbc metadata and cached on the JVM
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">columnNames</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">,</span> <span class="s">"birthday"</span><span class="o">,</span> <span class="s">"created_at"</span><span class="o">)</span>
 
-  <span class="c1">// Basically tableName is loaded from jdbc metadata and cached on the JVM</span>
-  <span class="c1">// However, if the name of object/class which extends SkinnyMapper is not the camelCase of table name,</span>
-  <span class="c1">// you need to override tableName by yourself.</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"group_members"</span> <span class="c1">// default: group_member </span>
+  <span class="c1">// field name which represents the (single) primary key column
+</span>  <span class="c1">// default: "id"
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">primaryKeyFieldName</span> <span class="k">=</span> <span class="s">"uid"</span> 
 
-  <span class="c1">// Basically columnNames are loaded from jdbc metadata and cached on the JVM</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">columnNames</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">,</span> <span class="s">"birthday"</span><span class="o">,</span> <span class="s">"created_at"</span><span class="o">)</span>
+  <span class="c1">// with SkinnyCRUDMapper[GroupMember]
+</span>  <span class="c1">// createWithAttributes will try to return generated id if true
+</span>  <span class="c1">// default: true
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">useAutoIncrementPrimaryKey</span> <span class="k">=</span> <span class="kc">false</span>
 
-  <span class="c1">// field name which represents the (single) primary key column</span>
-  <span class="c1">// default: "id"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">"uid"</span> 
+  <span class="c1">// with SkinnyCRUDMapper[GroupMember]
+</span>  <span class="c1">// default scope for update operations
+</span>  <span class="c1">// default: None
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultScopeForUpdateOperations</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">isNull</span><span class="o">(</span><span class="n">column</span><span class="o">.</span><span class="n">deletedAt</span><span class="o">))</span>
 
-  <span class="c1">// with SkinnyCRUDMapper[GroupMember]</span>
-  <span class="c1">// createWithAttributes will try to return generated id if true</span>
-  <span class="c1">// default: true</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">useAutoIncrementPrimaryKey</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="c1">// with TimestampsFeature[GroupMember]
+</span>  <span class="c1">// default: "createdAt"
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">createdAtFieldName</span> <span class="k">=</span> <span class="s">"createdTimestamp"</span>
 
-  <span class="c1">// with SkinnyCRUDMapper[GroupMember]</span>
-  <span class="c1">// default scope for update operations</span>
-  <span class="c1">// default: None</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultScopeForUpdateOperations</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">column</span><span class="o">.</span><span class="na">deletedAt</span><span class="o">))</span>
+  <span class="c1">// with TimestampsFeature[GroupMember]
+</span>  <span class="c1">// default: "updatedAt"
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">updatedAtFieldName</span> <span class="k">=</span> <span class="s">"updatedTimestamp"</span>
 
-  <span class="c1">// with TimestampsFeature[GroupMember]</span>
-  <span class="c1">// default: "createdAt"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">"createdTimestamp"</span>
+  <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] 
+</span>  <span class="c1">// default: "lockTimestamp"
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">lockTimestampFieldName</span> <span class="k">=</span> <span class="s">"lockedAt"</span>
 
-  <span class="c1">// with TimestampsFeature[GroupMember]</span>
-  <span class="c1">// default: "updatedAt"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">"updatedTimestamp"</span>
+  <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]
+</span>  <span class="c1">// default: "lockVersion"
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">lockVersionFieldName</span> <span class="k">=</span> <span class="s">"ver"</span>
 
-  <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] </span>
-  <span class="c1">// default: "lockTimestamp"</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">lockTimestampFieldName</span> <span class="o">=</span> <span class="s">"lockedAt"</span>
+  <span class="c1">// with SoftDeleteWithBooleanFeature[GroupMember]
+</span>  <span class="c1">// default: "isDeleted"
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">isDeletedFieldName</span> <span class="k">=</span> <span class="s">"deleted"</span>
 
-  <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]</span>
-  <span class="c1">// default: "lockVersion"</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">lockVersionFieldName</span> <span class="o">=</span> <span class="s">"ver"</span>
-
-  <span class="c1">// with SoftDeleteWithBooleanFeature[GroupMember]</span>
-  <span class="c1">// default: "isDeleted"</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">isDeletedFieldName</span> <span class="o">=</span> <span class="s">"deleted"</span>
-
-  <span class="c1">// with SoftDeleteWithTimestampFeature[GroupMember]</span>
-  <span class="c1">// default: "deletedAt"</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">"deletedTimestamp"</span>
+  <span class="c1">// with SoftDeleteWithTimestampFeature[GroupMember]
+</span>  <span class="c1">// default: "deletedAt"
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 
 <span class="o">}</span>
 </pre>
@@ -560,16 +560,16 @@
 <hr/>
 
 <p><code>#withTableName</code> enables using another table name only for the current query.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Order</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Order</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"o"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">tableName</span> <span class="o">=</span> <span class="s">"orders"</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Order</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Order</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"o"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">tableName</span> <span class="k">=</span> <span class="s">"orders"</span>
 <span class="o">}</span>
 
-<span class="c1">// default: orders</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">count</span><span class="o">()</span>
+<span class="c1">// default: orders
+</span><span class="nc">Order</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
 
-<span class="c1">// other table: orders_2012</span>
-<span class="n">Order</span><span class="o">.</span><span class="na">withTableName</span><span class="o">(</span><span class="s">"orders_2012"</span><span class="o">).</span><span class="na">count</span><span class="o">()</span>
+<span class="c1">// other table: orders_2012
+</span><span class="nc">Order</span><span class="o">.</span><span class="n">withTableName</span><span class="o">(</span><span class="s">"orders_2012"</span><span class="o">).</span><span class="n">count</span><span class="o">()</span>
 </pre>
 
 <p>Source code: 
@@ -582,27 +582,27 @@
 <hr/>
 
 <p>If you need to add methods, just write methods that use <code>#findBy</code>, <code>#countBy</code> or ScalikeJDBC&rsquo;s APIs directly.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="kd">private</span><span class="o">[</span><span class="k">this</span><span class="o">]</span> <span class="n">val</span> <span class="n">m</span> <span class="o">=</span> <span class="n">defaultAlias</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="n">defaultAlias</span>
 
-  <span class="n">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="nl">groupId:</span> <span class="n">Long</span><span class="o">)(</span><span class="n">implicit</span> <span class="nl">s:</span> <span class="n">DBSession</span> <span class="o">=</span> <span class="n">autoSession</span><span class="o">):</span> <span class="n">Seq</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">))</span>
+  <span class="k">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="n">groupId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span> <span class="o">=</span> <span class="n">autoSession</span><span class="o">)</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">))</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
 
 <p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
-<pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">ctx</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="k">new</span> <span class="n">TxPerRequestFilter</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
+<pre class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="k">new</span> <span class="nc">TxPerRequestFilter</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
 
 <p>And then your ORM models can retrieve the current DB session as a thread-local value per request, so you don&rsquo;t need to pass <code>DBSession</code> value as an implicit parameter in each method. </p>
-<pre class="highlight java"><span class="n">def</span> <span class="nf">findAllByGroupId</span><span class="p">(</span><span class="nl">groupId:</span> <span class="n">Long</span><span class="o">):</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="n">groupId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">)</span>
 </pre>
 
 <p>On the other hand, if you work with multiple threads for single HTTP request, you should be aware that the thread-local DB session won&rsquo;t be shared.</p>
@@ -618,80 +618,80 @@
 <p>If your application uses a non-numerical primary key for some reason, use <code>****WithId</code> traits instead. In this case, you must implement <code>idToRawValue</code> and <code>rawValueToId</code> methods.</p>
 
 <p>If you need to use a complex object (e.g. <code>MemberId</code> class) as a primary key, it&rsquo;s also easy to implement.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">MemberId</span><span class="p">(</span><span class="nl">value:</span> <span class="n">Long</span><span class="o">)</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">MemberId</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">MemberId</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">MemberId</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="n">MemberId</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="kt">MemberId</span>, <span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">idToRawValue</span><span class="o">(</span><span class="nl">id:</span> <span class="n">MemberId</span><span class="o">)</span> <span class="o">=</span> <span class="n">id</span><span class="o">.</span><span class="na">value</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="nl">v:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">MemberId</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">toString</span><span class="o">.</span><span class="na">toLong</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">idToRawValue</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">MemberId</span><span class="o">)</span> <span class="k">=</span> <span class="n">id</span><span class="o">.</span><span class="n">value</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="nc">MemberId</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="n">toString</span><span class="o">.</span><span class="n">toLong</span><span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">m:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">id</span><span class="o">)),</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">m</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
+    <span class="n">id</span> <span class="k">=</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">)),</span>
+    <span class="n">name</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
 <p>And your SkinnyResource will be like this:</p>
-<pre class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
-<span class="kn">import</span> <span class="nn">skinny._</span>
-<span class="kn">import</span> <span class="nn">skinny.validator._</span>
-<span class="kn">import</span> <span class="nn">model._</span>
+<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.validator._</span>
+<span class="k">import</span> <span class="nn">model._</span>
 
-<span class="n">object</span> <span class="n">CompaniesController</span> <span class="kd">extends</span> <span class="n">SkinnyResourceWithId</span><span class="o">[</span><span class="n">CompanyId</span><span class="o">]</span> <span class="n">with</span> <span class="n">ApplicationController</span> <span class="o">{</span>
+<span class="k">object</span> <span class="nc">CompaniesController</span> <span class="k">extends</span> <span class="nc">SkinnyResourceWithId</span><span class="o">[</span><span class="kt">CompanyId</span><span class="o">]</span> <span class="k">with</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
 
-  <span class="n">implicit</span> <span class="n">override</span> <span class="n">val</span> <span class="n">scalatraParamsIdTypeConverter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TypeConverter</span><span class="o">[</span><span class="n">String</span><span class="o">,</span> <span class="n">CompanyId</span><span class="o">]</span> <span class="o">{</span>
-    <span class="n">def</span> <span class="n">apply</span><span class="o">(</span><span class="nl">s:</span> <span class="n">String</span><span class="o">):</span> <span class="n">Option</span><span class="o">[</span><span class="n">CompanyId</span><span class="o">]</span> <span class="o">=</span> <span class="n">Option</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="na">map</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="na">rawValueToId</span><span class="o">)</span>
+  <span class="k">implicit</span> <span class="k">override</span> <span class="k">val</span> <span class="n">scalatraParamsIdTypeConverter</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TypeConverter</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">CompanyId</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">CompanyId</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Option</span><span class="o">(</span><span class="n">s</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="n">rawValueToId</span><span class="o">)</span>
   <span class="o">}</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">"companies"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">"company"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">Company</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourcesName</span> <span class="k">=</span> <span class="s">"companies"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourceName</span> <span class="k">=</span> <span class="s">"company"</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
   <span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateParams</span> <span class="o">=</span> <span class="n">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="na">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateForm</span> <span class="o">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDateTime</span><span class="o">(</span><span class="s">"updatedAt"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">64</span><span class="o">),</span>
     <span class="n">paramKey</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">128</span><span class="o">)</span>
   <span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updateFormStrongParameters</span> <span class="o">=</span> <span class="n">Seq</span><span class="o">(</span>
-    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="n">ParamType</span><span class="o">.</span><span class="na">String</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span> <span class="s">"url"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
 <p>If you use an alternative Id generator instead of the RDB&rsquo;s auto-incremental value, set <code>useExternalIdGenerator</code> as true and implement the <code>generateId</code> method.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">uuid:</span> <span class="n">UUID</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">uuid</span><span class="k">:</span> <span class="kt">UUID</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="n">UUID</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> 
-  <span class="n">with</span> <span class="n">SoftDeleteWithBooleanFeatureWithId</span><span class="o">[</span><span class="n">UUID</span><span class="o">,</span> <span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="kt">UUID</span>, <span class="kt">Member</span><span class="o">]</span> 
+  <span class="k">with</span> <span class="nc">SoftDeleteWithBooleanFeatureWithId</span><span class="o">[</span><span class="kt">UUID</span>, <span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">primaryKeyFieldName</span> <span class="o">=</span> <span class="s">"uuid"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">primaryKeyFieldName</span> <span class="k">=</span> <span class="s">"uuid"</span>
 
-  <span class="c1">// use alternative id generator instead of DB's auto-increment</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">useExternalIdGenerator</span> <span class="o">=</span> <span class="kc">true</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">generateId</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span>
+  <span class="c1">// use alternative id generator instead of DB's auto-increment
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">useExternalIdGenerator</span> <span class="k">=</span> <span class="kc">true</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">generateId</span> <span class="k">=</span> <span class="nc">UUID</span><span class="o">.</span><span class="n">randomUUID</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">idToRawValue</span><span class="o">(</span><span class="nl">id:</span> <span class="n">UUID</span><span class="o">)</span> <span class="o">=</span> <span class="n">id</span><span class="o">.</span><span class="na">toString</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="nl">value:</span> <span class="n">Any</span><span class="o">)</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">toString</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">idToRawValue</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">UUID</span><span class="o">)</span> <span class="k">=</span> <span class="n">id</span><span class="o">.</span><span class="n">toString</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="nc">UUID</span><span class="o">.</span><span class="n">fromString</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="n">toString</span><span class="o">)</span>
 
-  <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">m:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
-    <span class="n">uuid</span> <span class="o">=</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">uuid</span><span class="o">)),</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
+  <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">m</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
+    <span class="n">uuid</span> <span class="k">=</span> <span class="n">rawValueToId</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">uuid</span><span class="o">)),</span>
+    <span class="n">name</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
 
-<span class="n">val</span> <span class="nl">m:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Memmber</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">UUID</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="s">"....."</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">m</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Memmber</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="nc">UUID</span><span class="o">.</span><span class="n">fromString</span><span class="o">(</span><span class="s">"....."</span><span class="o">))</span>
 </pre>
 
 <p>Don&rsquo;t worry. Skinny-ORM does well at resolving associations even if you use custom primary keys.</p>
@@ -705,14 +705,14 @@
 <p><code>timetamps</code> from ActiveRecord is available as the <code>TimestampsFeature</code> trait. </p>
 
 <p>By default, this trait expects two columns on the table - <code>created_at timestamp not null</code> and <code>updated_at timestamp</code>. If you need customizing, override *FieldName methods as follows.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span> <span class="nl">updatedAt:</span> <span class="n">DateTime</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="n">with</span> <span class="n">TimestampsFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// created_timestamp</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">createdAtFieldName</span> <span class="o">=</span> <span class="s">"createdTimestamp"</span>
-  <span class="c1">// updated_timestamp</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">updatedAtFieldName</span> <span class="o">=</span> <span class="s">"updatedTimestamp"</span>
+  <span class="c1">// created_timestamp
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">createdAtFieldName</span> <span class="k">=</span> <span class="s">"createdTimestamp"</span>
+  <span class="c1">// updated_timestamp
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">updatedAtFieldName</span> <span class="k">=</span> <span class="s">"updatedTimestamp"</span>
 <span class="o">}</span>
 </pre>
 
@@ -728,11 +728,11 @@
 <p>Soft delete support is also available. </p>
 
 <p>By default, <code>deleted_at timestamp</code> column or <code>is_deleted boolean not null</code> is expected.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-  <span class="n">with</span> <span class="n">SoftDeleteWithTimestampFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">SoftDeleteWithTimestampFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
-  <span class="c1">// deleted_timestamp timestamp</span>
-  <span class="n">override</span> <span class="n">val</span> <span class="n">deletedAtFieldName</span> <span class="o">=</span> <span class="s">"deletedTimestamp"</span>
+  <span class="c1">// deleted_timestamp timestamp
+</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 <span class="o">}</span>
 </pre>
 
@@ -751,10 +751,10 @@
 <p>Furthermore, optimistic lock is also available. </p>
 
 <p>By default, <code>lock_version bigint not null</code> or <code>lock_timestamp timestamp</code> is expected</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-  <span class="n">with</span> <span class="n">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span>
-<span class="c1">// lock_version bigint</span>
-</pre>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+<span class="c1">// lock_version bigint
+</span></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
@@ -799,34 +799,34 @@
   updated_at timestamp not null
 );
 </pre>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
-  <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
-  <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
-  <span class="nl">groupId:</span> <span class="n">Int</span><span class="o">,</span>
-  <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
-  <span class="nl">updatedAT:</span> <span class="n">DateTime</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
+  <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
+  <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">groupId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
+  <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span>
+  <span class="n">updatedAT</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="n">with</span> <span class="n">TimestampsFeature</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span> 
-    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
-    <span class="n">groupId</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">int</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">groupId</span><span class="o">),</span> <span class="c1">// nullable but scala.Int is not nullable!!!</span>
-    <span class="n">createdAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
-    <span class="n">updatedAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">n</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
+    <span class="n">id</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">id</span><span class="o">),</span> 
+    <span class="n">name</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
+    <span class="n">groupId</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">int</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">groupId</span><span class="o">),</span> <span class="c1">// nullable but scala.Int is not nullable!!!
+</span>    <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
+    <span class="n">updatedAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
 <p>You must update <code>Member</code> class as follows:</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span>
-  <span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span>
-  <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span>
-  <span class="c1">//groupId: Int,</span>
-  <span class="nl">groupId:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Int</span><span class="o">],</span>
-  <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">,</span>
-  <span class="nl">updatedAT:</span> <span class="n">DateTime</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
+  <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
+  <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="c1">//groupId: Int,
+</span>  <span class="n">groupId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span>
+  <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span>
+  <span class="n">updatedAT</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 </pre>
 
             <hr/>

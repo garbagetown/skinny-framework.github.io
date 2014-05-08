@@ -89,11 +89,11 @@
 </pre>
 
 <p>After a while, you will get a standalone jar file. </p>
-<pre class="highlight plaintext">java -jar standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
+<pre class="highlight shell">java -jar standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
 </pre>
 
 <p>You can pass configuration via system properties. Otherwise, it&rsquo;s also possible to use environment variables.</p>
-<pre class="highlight plaintext">java -jar -Dskinny.port=9000 -Dskinny.env=production -Dskinny.prefix=/foo/ \
+<pre class="highlight shell">java -jar -Dskinny.port<span class="o">=</span>9000 -Dskinny.env<span class="o">=</span>production -Dskinny.prefix<span class="o">=</span>/foo/ <span class="se">\</span>
   standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
 </pre>
 

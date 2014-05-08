@@ -71,32 +71,32 @@
 <hr/>
 
 <p>To understand how to use SkinnyMailer, try the following code on the Scala REPL (<code>./skinny console</code>)</p>
-<pre class="highlight java"><span class="c1">// https://support.google.com/accounts/answer/185833</span>
-<span class="n">val</span> <span class="n">yourGmail</span> <span class="o">=</span> <span class="s">"*****@gmail.com"</span>
-<span class="n">val</span> <span class="n">yourPassword</span> <span class="o">=</span> <span class="s">"*****"</span>
+<pre class="highlight scala"><span class="c1">// https://support.google.com/accounts/answer/185833
+</span><span class="k">val</span> <span class="n">yourGmail</span> <span class="k">=</span> <span class="s">"*****@gmail.com"</span>
+<span class="k">val</span> <span class="n">yourPassword</span> <span class="k">=</span> <span class="s">"*****"</span>
 
-<span class="kn">import</span> <span class="nn">skinny.mailer._</span>
+<span class="k">import</span> <span class="nn">skinny.mailer._</span>
 
-<span class="c1">// Prepare configuration for GMail SMTP</span>
-<span class="n">val</span> <span class="n">config</span> <span class="o">=</span> <span class="n">SkinnyMailerConfig</span><span class="o">.</span><span class="na">default</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
-  <span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
-  <span class="n">defaultFrom</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
-  <span class="n">transportProtocol</span> <span class="o">=</span> <span class="s">"smtps"</span><span class="o">,</span>
-  <span class="n">smtp</span> <span class="o">=</span> <span class="n">SkinnyMailerSmtpConfig</span><span class="o">.</span><span class="na">default</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="s">"smtp.gmail.com"</span><span class="o">,</span>
-    <span class="n">port</span> <span class="o">=</span> <span class="mi">465</span><span class="o">,</span>
-    <span class="n">authEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">Some</span><span class="o">(</span><span class="n">yourPassword</span><span class="o">)</span>
+<span class="c1">// Prepare configuration for GMail SMTP
+</span><span class="k">val</span> <span class="n">config</span> <span class="k">=</span> <span class="nc">SkinnyMailerConfig</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span>
+  <span class="n">debug</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span>
+  <span class="n">defaultFrom</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
+  <span class="n">transportProtocol</span> <span class="k">=</span> <span class="s">"smtps"</span><span class="o">,</span>
+  <span class="n">smtp</span> <span class="k">=</span> <span class="nc">SkinnyMailerSmtpConfig</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span>
+    <span class="n">host</span> <span class="k">=</span> <span class="s">"smtp.gmail.com"</span><span class="o">,</span>
+    <span class="n">port</span> <span class="k">=</span> <span class="mi">465</span><span class="o">,</span>
+    <span class="n">authEnabled</span> <span class="k">=</span> <span class="kc">true</span><span class="o">,</span>
+    <span class="n">user</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">),</span>
+    <span class="n">password</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">yourPassword</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">)</span>
 
-<span class="c1">// create a SkinnyMailer</span>
-<span class="n">val</span> <span class="n">GMail</span> <span class="o">=</span> <span class="n">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
+<span class="c1">// create a SkinnyMailer
+</span><span class="k">val</span> <span class="nc">GMail</span> <span class="k">=</span> <span class="nc">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
 
-<span class="c1">// Simply sending a text mail</span>
-<span class="n">GMail</span><span class="o">.</span>
-  <span class="nf">to</span><span class="p">(</span><span class="n">yourGmail</span><span class="o">).</span>
+<span class="c1">// Simply sending a text mail
+</span><span class="nc">GMail</span><span class="o">.</span>
+  <span class="n">to</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
   <span class="n">cc</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
   <span class="n">subject</span><span class="o">(</span><span class="s">"SkinnyMailer GMail Test"</span><span class="o">).</span>
   <span class="n">body</span> <span class="o">{</span>
@@ -104,12 +104,12 @@
     |
     |Blah-blah-blah...
     |
-  """</span><span class="o">.</span><span class="na">stripMargin</span>
-  <span class="o">}.</span><span class="na">deliver</span><span class="o">()</span>
+  """</span><span class="o">.</span><span class="n">stripMargin</span>
+  <span class="o">}.</span><span class="n">deliver</span><span class="o">()</span>
 
-<span class="c1">// Sending HTML email with attachments</span>
-<span class="n">GMail</span><span class="o">.</span>
-  <span class="nf">to</span><span class="p">(</span><span class="n">yourGmail</span><span class="o">).</span>
+<span class="c1">// Sending HTML email with attachments
+</span><span class="nc">GMail</span><span class="o">.</span>
+  <span class="n">to</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
   <span class="n">cc</span><span class="o">(</span><span class="n">yourGmail</span><span class="o">).</span>
   <span class="n">subject</span><span class="o">(</span><span class="s">"SkinnyMailer GMail Test 2"</span><span class="o">).</span>
   <span class="n">htmlBody</span><span class="o">(</span><span class="s">"&lt;hr/&gt;&lt;b&gt;HTML&lt;/b&gt; sample!&lt;br/&gt;&lt;hr/&gt;"</span><span class="o">).</span>

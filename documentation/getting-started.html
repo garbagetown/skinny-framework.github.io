@@ -115,6 +115,59 @@
 
 <hr/>
 
+<h3 id="what-should-i-do-first?">What should I do first?</h3>
+
+<hr/>
+
+<p>Skinny app development is very simple. When you create new pages, all the things you should do is below:</p>
+
+<hr/>
+
+<h4 id="create-new-skinnycontroller-under-conroller-package">Create new <code>SkinnyController</code> under <code>conroller</code> package</h4>
+
+<p>You can create a controller by hand or by using generator.</p>
+<pre class="highlight plaintext">% ./skinny g controller help
+
+ *** Skinny Generator Task ***
+
+  "src/main/scala/controller/ApplicationController.scala" skipped.
+  "src/main/scala/controller/HelpController.scala" created.
+  "src/main/scala/controller/Controllers.scala" modified.
+  "src/test/scala/controller/HelpControllerSpec.scala" created.
+
+</pre>
+
+<hr/>
+
+<h4 id="add-routing-definition-to-controller.controllers">Add routing definition to <code>controller.Controllers</code></h4>
+
+<p>When you use generator, this will be done by generator. </p>
+<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
+
+  <span class="k">object</span> <span class="nc">root</span> <span class="k">extends</span> <span class="nc">RootController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">indexUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'index)</span>
+  <span class="o">}</span>
+
+  <span class="k">def</span> <span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+
+<hr/>
+
+<h4 id="add-view-templates-for-render-methods">Add view templates for <code>render</code> methods</h4>
+
+<p>Add Scalate (ssp, scaml, jade, mustache) or FreeMarker, Thymeleaf templates under <code>src/main/webapp/WEB-INF/views</code>.</p>
+
+<p>The above <code>HelpController</code> expects <code>src/main/webapp/WEB-INF/views/help/index.html.ssp</code>.</p>
+
+<p>When you forgot creating view templates, Skinny Framework will create template file for you when accessing the URL for the first time.</p>
+
+<hr/>
+
 <h3 id="simple-example">Simple Example</h3>
 
 <hr/>

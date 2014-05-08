@@ -106,13 +106,13 @@ If you&rsquo;re already familiar with Scala and your <code>sbt.ivy.home</code> d
 
 <hr/>
 
-<h4 id="skinny-blank-app-with-deps.zip-(85mb)">skinny-blank-app-with-deps.zip (85MB)</h4>
+<h4 id="skinny-blank-app-with-deps.zip-(80mb)">skinny-blank-app-with-deps.zip (80MB)</h4>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.11/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.13/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
 
 <h4 id="skinny-blank-app.zip-(1mb)">skinny-blank-app.zip (1MB)</h4>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.11/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.13/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <hr/>
 
@@ -179,21 +179,21 @@ yo skinny
 
 <p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-assets"       % "1.0.11",
-  "org.skinny-framework" %% "skinny-framework"    % "1.0.11",
-  "org.skinny-framework" %% "skinny-task"         % "1.0.11",
-  "org.skinny-framework" %% "skinny-test"         % "1.0.11" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.11" % "test"
+  "org.skinny-framework" %% "skinny-assets"       % "1.0.13",
+  "org.skinny-framework" %% "skinny-framework"    % "1.0.13",
+  "org.skinny-framework" %% "skinny-task"         % "1.0.13",
+  "org.skinny-framework" %% "skinny-test"         % "1.0.13" % "test",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.13" % "test"
 )
 </pre>
 
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-orm"          % "1.0.11",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.0.11",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.0.11",
-  "org.skinny-framework" %% "skinny-validator"    % "1.0.11",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.11" % "test"
+  "org.skinny-framework" %% "skinny-orm"          % "1.0.13",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.0.13",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.0.13",
+  "org.skinny-framework" %% "skinny-validator"    % "1.0.13",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.13" % "test"
 )
 </pre>
 
@@ -212,34 +212,34 @@ yo skinny
 <p><img alt="Scalatra" src="/images/scalatra.png" /></p>
 
 <p><code>SkinnyController</code> is a trait which extends <code>ScalatraFilter</code> and includes various useful components out-of-the-box. </p>
-<pre class="highlight java"><span class="c1">// src/main/scala/controller/MembersController.scala</span>
-<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span> <span class="o">-&gt;</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span> <span class="c1">// can call this in views</span>
-    <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
+<pre class="highlight scala"><span class="c1">// src/main/scala/controller/MembersController.scala
+</span><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span> <span class="o">-&gt;</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span> <span class="c1">// can call this in views
+</span>    <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-<span class="c1">// src/main/scala/controller/Controllers.scala</span>
-<span class="n">object</span> <span class="n">Controllers</span> <span class="o">{</span>
-  <span class="n">object</span> <span class="n">members</span> <span class="kd">extends</span> <span class="n">MembersController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-    <span class="n">val</span> <span class="n">indexUrl</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">index</span><span class="o">)</span>
+<span class="c1">// src/main/scala/controller/Controllers.scala
+</span><span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
+  <span class="k">object</span> <span class="nc">members</span> <span class="k">extends</span> <span class="nc">MembersController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">indexUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/members/?"</span><span class="o">)(</span><span class="n">index</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'index)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-<span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Controllers</span><span class="o">.</span><span class="na">members</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+<span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Controllers</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
 
 <p><code>SkinnyResource</code>, which is similar to Rails ActiveResource, is also available. It&rsquo;s a pretty DRY way to define RESTful resources.</p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">CompaniesController</span> <span class="kd">extends</span> <span class="n">SkinnyResource</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">CompaniesController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
 
-  <span class="n">override</span> <span class="n">def</span> <span class="n">model</span> <span class="o">=</span> <span class="n">Company</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourcesName</span> <span class="o">=</span> <span class="s">"companies"</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">resourceName</span> <span class="o">=</span> <span class="s">"company"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">Company</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourcesName</span> <span class="k">=</span> <span class="s">"companies"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourceName</span> <span class="k">=</span> <span class="s">"company"</span>
 
   <span class="o">...</span>
 <span class="o">}</span>
@@ -260,38 +260,38 @@ yo skinny
 <p><img alt="Logo" src="/images/scalikejdbc.png" /></p>
 
 <p>Skinny-ORM does a lot of work under the hood, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Member</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">createdAt:</span> <span class="n">DateTime</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
-<span class="n">object</span> <span class="n">Member</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">defaultAlias</span> <span class="o">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">extract</span><span class="o">(</span><span class="nl">rs:</span> <span class="n">WrappedResultSet</span><span class="o">,</span> <span class="nl">n:</span> <span class="n">ResultName</span><span class="o">[</span><span class="n">Member</span><span class="o">])</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Member</span><span class="o">(</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">id</span><span class="o">),</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">name</span><span class="o">),</span>
-    <span class="n">createdAt</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="na">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">createdAt</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">n</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
+    <span class="n">id</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">long</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">id</span><span class="o">),</span>
+    <span class="n">name</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
+    <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdAt</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
 </pre>
 
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
-<pre class="highlight java"><span class="c1">// find by primary key</span>
-<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
-<span class="n">val</span> <span class="nl">member:</span> <span class="n">Option</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="na">apply</span><span class="o">().</span><span class="na">headOption</span>
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="n">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="na">apply</span><span class="o">()</span>
+<pre class="highlight scala"><span class="c1">// find by primary key
+</span><span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'id </span><span class="o">-&gt;</span> <span class="mi">123</span><span class="o">).</span><span class="n">apply</span><span class="o">().</span><span class="n">headOption</span>
+<span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'id </span><span class="o">-&gt;</span> <span class="nc">Seq</span><span class="o">(</span><span class="mi">123</span><span class="o">,</span> <span class="mi">234</span><span class="o">,</span> <span class="mi">345</span><span class="o">)).</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="c1">// find many</span>
-<span class="n">val</span> <span class="nl">members:</span> <span class="n">List</span><span class="o">[</span><span class="n">Member</span><span class="o">]</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">()</span>
-<span class="n">val</span> <span class="n">groupMembers</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="err">'</span><span class="n">groupName</span> <span class="o">-&gt;</span> <span class="s">"Scala Users"</span><span class="o">,</span> <span class="err">'</span><span class="n">deleted</span> <span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="na">apply</span><span class="o">()</span>
+<span class="c1">// find many
+</span><span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">groupMembers</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'groupName </span><span class="o">-&gt;</span> <span class="s">"Scala Users"</span><span class="o">,</span> <span class="ss">'deleted </span><span class="o">-&gt;</span> <span class="kc">false</span><span class="o">).</span><span class="n">apply</span><span class="o">()</span>
 
-<span class="c1">// create with unsafe parameters</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">createWithAttributes</span><span class="o">(</span>
-  <span class="err">'</span><span class="n">id</span> <span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
-  <span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Chris"</span><span class="o">,</span>
-  <span class="err">'</span><span class="n">createdAt</span> <span class="o">-&gt;</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span>
+<span class="c1">// create with unsafe parameters
+</span><span class="nc">Member</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span>
+  <span class="ss">'id </span><span class="o">-&gt;</span> <span class="mi">123</span><span class="o">,</span>
+  <span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Chris"</span><span class="o">,</span>
+  <span class="ss">'createdAt </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span>
 <span class="o">)</span>
-<span class="c1">// update with unsafe parameters</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="na">withAttributes</span><span class="o">(</span><span class="err">'</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
-<span class="c1">// delete</span>
-<span class="n">Member</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
+<span class="c1">// update with unsafe parameters
+</span><span class="nc">Member</span><span class="o">.</span><span class="n">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
+<span class="c1">// delete
+</span><span class="nc">Member</span><span class="o">.</span><span class="n">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 </pre>
 
 <p>See in detail: <a href="/documentation/orm.html">O/R Mapper</a></p>
@@ -325,9 +325,9 @@ yo skinny
 <p>Template paths should be of the form <code>{path}.{format}.{extension}</code>. Expected {format} are <code>html</code>, <code>json</code>, <code>js</code> and <code>xml</code>.</p>
 
 <p>For instance, assuming your controller code looks like this:</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -352,17 +352,17 @@ yo skinny
 <hr/>
 
 <p>SkinnyMailer makes sending emails pretty easy.</p>
-<pre class="highlight java"><span class="n">val</span> <span class="n">config</span> <span class="o">=</span> <span class="n">SkinnyMailerConfigdefault</span><span class="o">.</span><span class="na">copy</span><span class="o">(</span>
-  <span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">config</span> <span class="k">=</span> <span class="nc">SkinnyMailerConfigdefault</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span>
+  <span class="n">debug</span> <span class="k">=</span> <span class="kc">true</span>
 <span class="o">)</span>
-<span class="n">val</span> <span class="n">mailer</span> <span class="o">=</span> <span class="n">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">mailer</span> <span class="k">=</span> <span class="nc">SkinnyMailer</span><span class="o">(</span><span class="n">config</span><span class="o">)</span>
 
 <span class="n">mailer</span>
-  <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="s">"info@skinny-framework.org"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">to</span><span class="o">(</span><span class="s">"you@example.com"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">cc</span><span class="o">(</span><span class="s">"support@skinny-framework.org"</span><span class="o">,</span> <span class="s">"xxx@example.com"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">subject</span><span class="o">(</span><span class="s">"Skinny Framework 1.0.0 is out!"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">body</span> <span class="o">{</span>
+  <span class="o">.</span><span class="n">from</span><span class="o">(</span><span class="s">"info@skinny-framework.org"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">to</span><span class="o">(</span><span class="s">"you@example.com"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">cc</span><span class="o">(</span><span class="s">"support@skinny-framework.org"</span><span class="o">,</span> <span class="s">"xxx@example.com"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">subject</span><span class="o">(</span><span class="s">"Skinny Framework 1.0.0 is out!"</span><span class="o">)</span>
+  <span class="o">.</span><span class="n">body</span> <span class="o">{</span>
     <span class="s">"""Hi all,
     |
     |We're very proud to announce that Skinny Framework version 1.0.0 is relaesed.
@@ -371,8 +371,8 @@ yo skinny
     |
     |Best,
     |Skinny Framework Team
-    |"""</span><span class="o">.</span><span class="na">stripMargin</span>
-  <span class="o">}.</span><span class="na">deliver</span><span class="o">()</span>
+    |"""</span><span class="o">.</span><span class="n">stripMargin</span>
+  <span class="o">}.</span><span class="n">deliver</span><span class="o">()</span>
 </pre>
 
 <p>See in detail: <a href="/documentation/mail.html">Mail</a></p>
@@ -391,17 +391,17 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.11",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.11",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.11" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.0.13",
+  "org.skinny-framework" %% "skinny-assets"    % "1.0.13",
+  "org.skinny-framework" %% "skinny-test"      % "1.0.13" % "test"
 )
 </pre>
 
 <p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, LESS and Sass.</p>
-<pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">AssetsController</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+<pre class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">AssetsController</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -419,8 +419,8 @@ yo skinny
 <hr/>
 
 <p>You can use Scalatra&rsquo;s great test support. Some extra optional features are provided by the skinny-test library.</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">ControllerSpec</span> <span class="kd">extends</span> <span class="n">ScalatraFlatSpec</span> <span class="n">with</span> <span class="n">SkinnyTestSupport</span> <span class="o">{</span>
-  <span class="n">addFilter</span><span class="o">(</span><span class="n">MembersController</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">ControllerSpec</span> <span class="k">extends</span> <span class="nc">ScalatraFlatSpec</span> <span class="k">with</span> <span class="nc">SkinnyTestSupport</span> <span class="o">{</span>
+  <span class="n">addFilter</span><span class="o">(</span><span class="nc">MembersController</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
 
   <span class="n">it</span> <span class="n">should</span> <span class="s">"show index page"</span> <span class="n">in</span> <span class="o">{</span>
     <span class="n">withSession</span><span class="o">(</span><span class="s">"userId"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span> <span class="o">{</span>
@@ -439,12 +439,12 @@ yo skinny
 <hr/>
 
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module will be quite useful when testing your apps.</p>
-<pre class="highlight java"><span class="k">case</span> <span class="kd">class</span> <span class="nf">Company</span><span class="p">(</span><span class="nl">id:</span> <span class="n">Long</span><span class="o">,</span> <span class="nl">name:</span> <span class="n">String</span><span class="o">)</span>
-<span class="n">object</span> <span class="n">Company</span> <span class="kd">extends</span> <span class="n">SkinnyCRUDMapper</span><span class="o">[</span><span class="n">Company</span><span class="o">]</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">extract</span> <span class="o">...</span>
+<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">Company</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">extract</span> <span class="o">...</span>
 <span class="o">}</span>
 
-<span class="n">val</span> <span class="n">company1</span> <span class="o">=</span> <span class="n">FactoryGirl</span><span class="o">(</span><span class="n">Company</span><span class="o">).</span><span class="na">create</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">company1</span> <span class="k">=</span> <span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Company</span><span class="o">).</span><span class="n">create</span><span class="o">()</span>
 </pre>
 
 <p>Configuration is not in yaml files but a typesafe-config conf file. In this example, <code>src/test/resources/factories.conf</code> looks like this:</p>

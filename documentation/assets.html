@@ -64,17 +64,17 @@
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.11",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.11",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.11" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.0.13",
+  "org.skinny-framework" %% "skinny-assets"    % "1.0.13",
+  "org.skinny-framework" %% "skinny-test"      % "1.0.13" % "test"
 )
 </pre>
 
 <p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, LESS and Sass.</p>
-<pre class="highlight java"><span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">AssetsController</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+<pre class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">AssetsController</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -225,25 +225,25 @@ React.renderComponent(
 <p>If you need other script support, you can add compilers to AssetsController.</p>
 
 <p>AssetsController: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/assets/src/main/scala/skinny/controller/AssetsController.scala">assets/src/main/scala/skinny/controller/AssetsController.scala</a></p>
-<pre class="highlight java"><span class="n">object</span> <span class="n">TypeScriptAssetCompiler</span> <span class="kd">extends</span> <span class="n">AssetCompiler</span> <span class="o">{</span>
-  <span class="kd">private</span><span class="o">[</span><span class="k">this</span><span class="o">]</span> <span class="n">val</span> <span class="n">compiler</span> <span class="o">=</span> <span class="n">TypeScriptCompiler</span><span class="o">()</span>
-  <span class="n">def</span> <span class="n">dir</span><span class="o">(</span><span class="nl">basePath:</span> <span class="n">String</span><span class="o">)</span> <span class="o">=</span> <span class="n">s</span><span class="s">"${basePath}/ts"</span>
-  <span class="n">def</span> <span class="n">extension</span> <span class="o">=</span> <span class="s">"ts"</span>
-  <span class="n">def</span> <span class="n">compile</span><span class="o">(</span><span class="nl">source:</span> <span class="n">String</span><span class="o">)</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">source</span><span class="o">)</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">TypeScriptAssetCompiler</span> <span class="k">extends</span> <span class="nc">AssetCompiler</span> <span class="o">{</span>
+  <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">compiler</span> <span class="k">=</span> <span class="nc">TypeScriptCompiler</span><span class="o">()</span>
+  <span class="k">def</span> <span class="n">dir</span><span class="o">(</span><span class="n">basePath</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">s</span><span class="s">"${basePath}/ts"</span>
+  <span class="k">def</span> <span class="n">extension</span> <span class="k">=</span> <span class="s">"ts"</span>
+  <span class="k">def</span> <span class="n">compile</span><span class="o">(</span><span class="n">source</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">compiler</span><span class="o">.</span><span class="n">compile</span><span class="o">(</span><span class="n">source</span><span class="o">)</span>
 <span class="o">}</span>
 
-<span class="kd">class</span> <span class="nc">MyAssetsController</span> <span class="kd">extends</span> <span class="n">AssetsController</span> <span class="o">{</span>
-  <span class="n">registerJsCompiler</span><span class="o">(</span><span class="n">TypeScriptAssetCompiler</span><span class="o">)</span>
+<span class="k">class</span> <span class="nc">MyAssetsController</span> <span class="k">extends</span> <span class="nc">AssetsController</span> <span class="o">{</span>
+  <span class="n">registerJsCompiler</span><span class="o">(</span><span class="nc">TypeScriptAssetCompiler</span><span class="o">)</span>
 <span class="o">}</span>
-<span class="n">object</span> <span class="n">MyAssetsController</span> <span class="kd">extends</span> <span class="n">MyAssetsController</span> <span class="n">with</span> <span class="n">Routes</span> <span class="o">{</span>
-  <span class="n">get</span><span class="o">(</span><span class="n">s</span><span class="s">"${jsRootPath}/*"</span><span class="o">)(</span><span class="n">js</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">js</span><span class="o">)</span>
-  <span class="n">get</span><span class="o">(</span><span class="n">s</span><span class="s">"${cssRootPath}/*"</span><span class="o">)(</span><span class="n">css</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="err">'</span><span class="n">css</span><span class="o">)</span>
+<span class="k">object</span> <span class="nc">MyAssetsController</span> <span class="k">extends</span> <span class="nc">MyAssetsController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+  <span class="n">get</span><span class="o">(</span><span class="n">s</span><span class="s">"${jsRootPath}/*"</span><span class="o">)(</span><span class="n">js</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'js)</span>
+  <span class="n">get</span><span class="o">(</span><span class="n">s</span><span class="s">"${cssRootPath}/*"</span><span class="o">)(</span><span class="n">css</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'css)</span>
 <span class="o">}</span>
 
-<span class="c1">// src/main/scala/ScalatraBootstrap.scala</span>
-<span class="kd">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="n">SkinnyLifeCycle</span> <span class="o">{</span>
-  <span class="n">override</span> <span class="n">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="nl">ctx:</span> <span class="n">ServletContext</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">MyAssetsController</span><span class="o">.</span><span class="na">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
+<span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">MyAssetsController</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
 </pre>

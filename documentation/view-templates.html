@@ -67,9 +67,9 @@
 <p>Template paths should be of the form <code>{path}.{format}.{extension}</code>. Expected {format} are <code>html</code>, <code>json</code>, <code>js</code> and <code>xml</code>.</p>
 
 <p>For instance, assuming your controller code looks like this:</p>
-<pre class="highlight java"><span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span> <span class="o">{</span>
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -200,13 +200,13 @@ table(class="table table-bordered")
 </pre>
 
 <p>Mixin <code>FreeMarkerTemplateEngineFeature</code> to your controllers.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.controller.feature.FreeMarkerTemplateEngineFeature</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.controller.feature.FreeMarkerTemplateEngineFeature</span>
 
-<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
-  <span class="n">with</span> <span class="n">FreeMarkerTemplateEngineFeature</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span>
+  <span class="k">with</span> <span class="nc">FreeMarkerTemplateEngineFeature</span> <span class="o">{</span>
 
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
@@ -229,13 +229,13 @@ table(class="table table-bordered")
 </pre>
 
 <p>Mixin <code>ThymeleafTemplateEngineFeature</code> to your controllers.</p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.controller.feature.ThymeleafTemplateEngineFeature</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.controller.feature.ThymeleafTemplateEngineFeature</span>
 
-<span class="kd">class</span> <span class="nc">MembersController</span> <span class="kd">extends</span> <span class="n">SkinnyController</span>
-  <span class="n">with</span> <span class="n">ThymeleafTemplateEngineFeature</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span>
+  <span class="k">with</span> <span class="nc">ThymeleafTemplateEngineFeature</span> <span class="o">{</span>
 
-  <span class="n">def</span> <span class="n">index</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="n">Member</span><span class="o">.</span><span class="na">findAll</span><span class="o">())</span>
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="n">set</span><span class="o">(</span><span class="s">"members"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
     <span class="n">render</span><span class="o">(</span><span class="s">"/members/index"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
