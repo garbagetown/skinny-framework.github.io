@@ -704,6 +704,44 @@ When you enable SkinnySession, these features also start using SkinnySession ins
     %script(type="text/javascript" src={uri("/assets/js/skinny.js")})
 </pre>
 
+<hr/>
+
+<h4 id="check-execution-time">Check execution time</h4>
+
+<hr/>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTime</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// will output "[SLOW EXECUTION DETECTED] Elapsed time: 10 millis"
+</span></pre>
+
+<p>In controllers, you can add request info:</p>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTimeWithRequest</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+<span class="o">}</span>
+</pre>
+
+<hr/>
+
+<h4 id="read-your-own-configuration-values">Read your own configuration values</h4>
+
+<hr/>
+<pre class="highlight plaintext">development {
+  defaultLabel="foo"
+  timeout {
+    connect=1000
+    read=3000
+  }
+  memcached=["server1:11211", "server2:11211"]
+}
+</pre>
+
+<p>Read the server names like this:</p>
+<pre class="highlight scala"><span class="k">val</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringConfigValue</span><span class="o">(</span><span class="s">"defaultLabel"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">connectTimeout</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">intConfigValue</span><span class="o">(</span><span class="s">"timeout.connect"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">memcachedServers</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">]]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringSeqConfigValue</span><span class="o">(</span><span class="s">"memcached"</span><span class="o">)</span>
+</pre>
+
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
