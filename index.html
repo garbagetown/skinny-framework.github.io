@@ -110,11 +110,11 @@ If you&rsquo;re already familiar with Scala and your <code>sbt.ivy.home</code> d
 
 <h4 id="skinny-blank-app-with-deps.zip-(100mb)">skinny-blank-app-with-deps.zip (100MB)</h4>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.18/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.1.0/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
 
 <h4 id="skinny-blank-app.zip-(1mb)">skinny-blank-app.zip (1MB)</h4>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.0.18/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.1.0/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <hr/>
 
@@ -181,23 +181,74 @@ yo skinny
 
 <p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-assets"       % "1.0.18",
-  "org.skinny-framework" %% "skinny-framework"    % "1.0.18",
-  "org.skinny-framework" %% "skinny-task"         % "1.0.18",
-  "org.skinny-framework" %% "skinny-test"         % "1.0.18" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.18" % "test"
+  "org.skinny-framework" %% "skinny-assets"       % "1.1.0",
+  "org.skinny-framework" %% "skinny-framework"    % "1.1.0",
+  "org.skinny-framework" %% "skinny-task"         % "1.1.0",
+  "org.skinny-framework" %% "skinny-test"         % "1.1.0" % "test",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.1.0" % "test"
 )
 </pre>
 
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-orm"          % "1.0.18",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.0.18",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.0.18",
-  "org.skinny-framework" %% "skinny-validator"    % "1.0.18",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.0.18" % "test"
+  "org.skinny-framework" %% "skinny-orm"          % "1.1.0",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.1.0",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.1.0",
+  "org.skinny-framework" %% "skinny-validator"    % "1.1.0",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.1.0" % "test"
 )
 </pre>
+
+<hr/>
+
+<h3 id="1.1-migration-guide-for-1.0.x-users">1.1 Migration Guide for 1.0.x Users</h3>
+
+<hr/>
+
+<p>Skinny 1.1 APIs are basically compatible with Skinny 1.0 though the release includes basic dependencies&#39; major upgrades. 
+If your app depends on the dependencies directly (not via Skinny APIs), you may need to update your code.</p>
+
+<ul>
+<li>All the components run on Scala 2.11 or Scala 2.10 (Skinny 1.0: Scala 2.10)</li>
+<li>Web framework Runs on Java 7 or higher (Skinny 1.0: Java 6 or higher) </li>
+<li>Web framework is compatible with Servlet API 3.1 (Skinny 1.0: Servlet 3.0)</li>
+<li>Web framework depends on Scalatra 2.3 (Skinny 1.0: Scalatra 2.2)</li>
+<li>ORM depends on ScalikeJDBC 2.0 (Skinny 1.0: ScalikeJDBC 1.8)</li>
+<li>Migration command depends on Flyway 3.0 (Skinny 1.0: Flyway 2.3)</li>
+<li>Test support depends on ScalaTest 2.2 (Skinny 1.0: ScalaTest 1.9)</li>
+</ul>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0</a></p>
+
+<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
+
+<hr/>
+
+<h4 id="&quot;org.scalatest.matchers.shouldmatchers&quot;-is-deprecated">&ldquo;org.scalatest.matchers.ShouldMatchers&rdquo; is deprecated</h4>
+
+<p>Use &ldquo;org.scalatest.Matchers&rdquo; instead. Sorry to say this.</p>
+
+<hr/>
+
+<h4 id="importing-&quot;scalikejdbc.sqlinterpolation._&quot;-is-deprecated">importing &ldquo;scalikejdbc.SQLInterpolation._&rdquo; is deprecated</h4>
+
+<p>Just import only &ldquo;scalikejdbc._&rdquo;.</p>
+
+<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0">https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0</a></p>
+
+<hr/>
+
+<h4 id="skinny-package&#39;s-scalate-precompilation-error">skinny package&rsquo;s Scalate precompilation error</h4>
+
+<p>Since Scalate 1.7.0, Skinny&rsquo;s blank app project&rsquo;s settings fail to execute <code>package</code> command.</p>
+<pre class="highlight plaintext">default_ssp.scala:7: $_scalate_$default_ssp is already defined as object $_scalate_$default_ssp
+</pre>
+
+<p>Remove scalateSettings if your build settings loads it twice.</p>
+
+<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87">https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87</a></p>
 
 <hr/>
 
@@ -393,9 +444,9 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.0.18",
-  "org.skinny-framework" %% "skinny-assets"    % "1.0.18",
-  "org.skinny-framework" %% "skinny-test"      % "1.0.18" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.1.0",
+  "org.skinny-framework" %% "skinny-assets"    % "1.1.0",
+  "org.skinny-framework" %% "skinny-test"      % "1.1.0" % "test"
 )
 </pre>
 
