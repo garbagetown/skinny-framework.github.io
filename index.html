@@ -210,7 +210,7 @@ If your app depends on the dependencies directly (not via Skinny APIs), you may 
 
 <ul>
 <li>All the components run on Scala 2.11 or Scala 2.10 (Skinny 1.0: Scala 2.10)</li>
-<li>Web framework Runs on Java 7 or higher (Skinny 1.0: Java 6 or higher) </li>
+<li>Web framework runs on Java 7 or higher (Skinny 1.0: Java 6 or higher) </li>
 <li>Web framework is compatible with Servlet API 3.1 (Skinny 1.0: Servlet 3.0)</li>
 <li>Web framework depends on Scalatra 2.3 (Skinny 1.0: Scalatra 2.2)</li>
 <li>ORM depends on ScalikeJDBC 2.0 (Skinny 1.0: ScalikeJDBC 1.8)</li>
@@ -232,11 +232,23 @@ If your app depends on the dependencies directly (not via Skinny APIs), you may 
 
 <hr/>
 
-<h4 id="importing-&quot;scalikejdbc.sqlinterpolation._&quot;-is-deprecated">importing &ldquo;scalikejdbc.SQLInterpolation._&rdquo; is deprecated</h4>
+<h4 id="importing-&quot;scalikejdbc.sqlinterpolation._&quot;-is-deprecated">Importing &ldquo;scalikejdbc.SQLInterpolation._&rdquo; is deprecated</h4>
 
 <p>Just import only &ldquo;scalikejdbc._&rdquo;.</p>
 
 <p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0">https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0</a></p>
+
+<hr/>
+
+<h4 id="renamed-joda-time-apis-due-to-jsr-310">Renamed joda-time APIs due to JSR-310</h4>
+
+<p><code>WrappedResultSet#dateTime</code>, <code>#localDate</code>, <code>#localTime</code> and <code>#localDateTime</code> are deprecated and <code>#jodaDateTime</code> and #jodaXXX are added.</p>
+
+<p>See also the issue: <a href="https://github.com/scalikejdbc/scalikejdbc/issues/222">https://github.com/scalikejdbc/scalikejdbc/issues/222</a></p>
+
+<p>Other changes in ScalikeJDBC 2.0:</p>
+
+<p><a href="https://github.com/scalikejdbc/scalikejdbc/blob/develop/notes/2.0.0.markdown">https://github.com/scalikejdbc/scalikejdbc/blob/develop/notes/2.0.0.markdown</a></p>
 
 <hr/>
 
