@@ -113,6 +113,8 @@ implicit val session = AutoSession
       password="sa"
       poolInitialSize=2
       poolMaxSize=10
+      poolValidationQuery="select 1 as one"
+      poolFactoryName="commons-dbcp"
     }
   }
 }
