@@ -715,7 +715,7 @@ implicit val session = AutoSession
     <span class="n">hasManyThrough</span><span class="o">[</span><span class="kt">Skill</span><span class="o">](</span>
       <span class="nc">MemberSkill</span><span class="o">,</span> <span class="nc">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">skills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">)</span>
     <span class="o">).</span><span class="n">includes</span><span class="o">[</span><span class="kt">Skill</span><span class="o">]((</span><span class="n">ms</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">ms</span><span class="o">.</span><span class="n">map</span> <span class="o">{</span> <span class="n">m</span> <span class="k">=&gt;</span>
-      <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">kills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">memberId</span><span class="o">.</span><span class="n">exists</span><span class="o">(</span><span class="k">_</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">)))</span>
+      <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">skills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">memberId</span><span class="o">.</span><span class="n">exists</span><span class="o">(</span><span class="k">_</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="o">)))</span>
     <span class="o">})</span>
 <span class="o">}</span>
 
@@ -734,7 +734,13 @@ implicit val session = AutoSession
 <hr/>
 
 <p>Skinny ORM provides the folllowing settings to overwrite.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">GroupMember</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">GroupMember</span> 
+  <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">OptimisticLockWithTimestampFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> 
+  <span class="k">with</span> <span class="nc">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">SoftDeleteWithBooleanFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">SoftDeleteWithTimestampFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="c1">// default: 'default
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">connectionPoolName</span> <span class="k">=</span> <span class="ss">'legacydb
@@ -754,39 +760,39 @@ implicit val session = AutoSession
 </span>  <span class="c1">// default: "id"
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">primaryKeyFieldName</span> <span class="k">=</span> <span class="s">"uid"</span> 
 
-  <span class="c1">// with SkinnyCRUDMapper[GroupMember]
+  <span class="c1">// with SkinnyCRUDMapper[Member]
 </span>  <span class="c1">// createWithAttributes will try to return generated id if true
 </span>  <span class="c1">// default: true
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">useAutoIncrementPrimaryKey</span> <span class="k">=</span> <span class="kc">false</span>
 
-  <span class="c1">// with SkinnyCRUDMapper[GroupMember]
+  <span class="c1">// with SkinnyCRUDMapper[Member]
 </span>  <span class="c1">// default scope for update operations
 </span>  <span class="c1">// default: None
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">defaultScopeForUpdateOperations</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">isNull</span><span class="o">(</span><span class="n">column</span><span class="o">.</span><span class="n">deletedAt</span><span class="o">))</span>
 
-  <span class="c1">// with TimestampsFeature[GroupMember]
+  <span class="c1">// with TimestampsFeature[Member]
 </span>  <span class="c1">// default: "createdAt"
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">createdAtFieldName</span> <span class="k">=</span> <span class="s">"createdTimestamp"</span>
 
-  <span class="c1">// with TimestampsFeature[GroupMember]
+  <span class="c1">// with TimestampsFeature[Member]
 </span>  <span class="c1">// default: "updatedAt"
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">updatedAtFieldName</span> <span class="k">=</span> <span class="s">"updatedTimestamp"</span>
 
-  <span class="c1">// with OptimisticLockWithTimestampFeature[GroupMember] 
+  <span class="c1">// with OptimisticLockWithTimestampFeature[Member] 
 </span>  <span class="c1">// default: "lockTimestamp"
-</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">lockTimestampFieldName</span> <span class="k">=</span> <span class="s">"lockedAt"</span>
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">lockTimestampFieldName</span> <span class="k">=</span> <span class="s">"lockedAt"</span>
 
-  <span class="c1">// with OptimisticLockWithVersionFeature[GroupMember]
+  <span class="c1">// with OptimisticLockWithVersionFeature[Member]
 </span>  <span class="c1">// default: "lockVersion"
-</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">lockVersionFieldName</span> <span class="k">=</span> <span class="s">"ver"</span>
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">lockVersionFieldName</span> <span class="k">=</span> <span class="s">"ver"</span>
 
-  <span class="c1">// with SoftDeleteWithBooleanFeature[GroupMember]
+  <span class="c1">// with SoftDeleteWithBooleanFeature[Member]
 </span>  <span class="c1">// default: "isDeleted"
-</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">isDeletedFieldName</span> <span class="k">=</span> <span class="s">"deleted"</span>
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">isDeletedFieldName</span> <span class="k">=</span> <span class="s">"deleted"</span>
 
-  <span class="c1">// with SoftDeleteWithTimestampFeature[GroupMember]
+  <span class="c1">// with SoftDeleteWithTimestampFeature[Member]
 </span>  <span class="c1">// default: "deletedAt"
-</span>  <span class="k">override</span> <span class="k">val</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 
 <span class="o">}</span>
 </pre>
