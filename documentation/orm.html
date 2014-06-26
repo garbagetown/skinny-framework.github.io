@@ -88,9 +88,9 @@
 
 <h4 id="build.sbt">build.sbt</h4>
 <pre class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.1.0"</span><span class="o">,</span>
-  <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.178"</span><span class="o">,</span>
-  <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.2"</span>
+  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.1.1"</span><span class="o">,</span>
+  <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.+"</span><span class="o">,</span>
+  <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.+"</span>
 <span class="o">)</span>
 
 <span class="c1">// will be executed when invoking sbt console
@@ -943,6 +943,32 @@ implicit val session = AutoSession
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala</a></p>
+
+<hr/>
+
+<h3 id="skinnyrecord">SkinnyRecord</h3>
+
+<hr/>
+
+<p><code>SkinnyRecord</code> is a trait which extends entity classes. When an entity is a <code>SkinnyRecord</code>, it acts like a Rails ActiveRecord object.</p>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span> 
+  <span class="k">extends</span> <span class="nc">SkinnyRecord</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">def</span> <span class="n">skinnyCRUDMapper</span> <span class="k">=</span> <span class="nc">Member</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="n">id</span><span class="o">).</span><span class="n">map</span> <span class="o">{</span> <span class="n">member</span> <span class="k">=&gt;</span>
+  <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">name</span> <span class="k">=</span> <span class="s">"Kaz"</span><span class="o">).</span><span class="n">save</span><span class="o">()</span>
+  <span class="n">member</span><span class="o">.</span><span class="n">destory</span><span class="o">()</span>
+<span class="o">}</span>
+</pre>
+
+<p>Source code: 
+<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala</a></p>
 
 <hr/>
 
