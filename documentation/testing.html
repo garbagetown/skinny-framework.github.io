@@ -93,17 +93,15 @@
 <p><a href="https://github.com/skinny-framework/skinny-framework/tree/1.1.x/orm/src/test/scala/blog">https://github.com/skinny-framework/skinny-framework/tree/1.1.x/orm/src/test/scala/blog</a></p>
 <pre class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
 
-<span class="k">import</span> <span class="nn">skinny._</span>
-<span class="k">import</span> <span class="nn">skinny.test._</span>
-<span class="k">import</span> <span class="nn">org.scalatest.fixture.FunSpec</span>
-<span class="k">import</span> <span class="nn">scalikejdbc._</span><span class="o">,</span> <span class="nc">SQLInterpolation</span><span class="o">.</span><span class="k">_</span>
-<span class="k">import</span> <span class="nn">scalikejdbc.scalatest._</span>
 <span class="k">import</span> <span class="nn">org.joda.time._</span>
 <span class="k">import</span> <span class="nn">org.scalatest._</span>
-<span class="k">import</span> <span class="nn">org.scalatest.matchers.ShouldMatchers</span>
+<span class="k">import</span> <span class="nn">org.scalatest.fixture.FunSpec</span>
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.test._</span>
+<span class="k">import</span> <span class="nn">scalikejdbc._</span>
+<span class="k">import</span> <span class="nn">scalikejdbc.scalatest._</span>
 
-
-<span class="k">class</span> <span class="nc">MemberSpec</span> <span class="k">extends</span> <span class="nc">FunSpec</span> <span class="k">with</span> <span class="nc">AutoRollback</span> <span class="k">with</span> <span class="nc">ShouldMatchers</span> <span class="k">with</span> <span class="nc">DBSettings</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">MemberSpec</span> <span class="k">extends</span> <span class="nc">FunSpec</span> <span class="k">with</span> <span class="nc">AutoRollback</span> <span class="k">with</span> <span class="nc">Matchers</span> <span class="k">with</span> <span class="nc">DBSettings</span> <span class="o">{</span>
 
   <span class="k">override</span> <span class="k">def</span> <span class="n">fixture</span><span class="o">(</span><span class="k">implicit</span> <span class="n">session</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// do fixtures stuff
@@ -133,11 +131,10 @@
 <span class="o">}</span>
 
 <span class="k">import</span> <span class="nn">org.scalatest._</span>
-<span class="k">import</span> <span class="nn">org.scalatest.matchers.ShouldMatchers</span>
 <span class="k">import</span> <span class="nn">skinny.DBSettings</span>
 <span class="k">import</span> <span class="nn">skinny.test.MockController</span>
 
-<span class="k">class</span> <span class="nc">RootControllerSpec</span> <span class="k">extends</span> <span class="nc">FunSpec</span> <span class="k">with</span> <span class="nc">ShouldMatchers</span> <span class="k">with</span> <span class="nc">DBSettings</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">RootControllerSpec</span> <span class="k">extends</span> <span class="nc">FunSpec</span> <span class="k">with</span> <span class="nc">Matchers</span> <span class="k">with</span> <span class="nc">DBSettings</span> <span class="o">{</span>
 
   <span class="n">describe</span><span class="o">(</span><span class="s">"RootController"</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">it</span><span class="o">(</span><span class="s">"shows top page"</span><span class="o">)</span> <span class="o">{</span>
@@ -179,9 +176,8 @@
 <span class="k">import</span> <span class="nn">skinny.test.SkinnyTestSupport</span>
 <span class="k">import</span> <span class="nn">_root_.controller.Controllers</span>
 <span class="k">import</span> <span class="nn">org.scalatest._</span>
-<span class="k">import</span> <span class="nn">org.scalatest.matchers.ShouldMatchers</span>
 
-<span class="k">class</span> <span class="nc">IntegrationTestSpec</span> <span class="k">extends</span> <span class="nc">ScalatraFlatSpec</span> <span class="k">with</span> <span class="nc">ShouldMatchers</span> <span class="k">with</span> <span class="nc">SkinnyTestSupport</span> <span class="k">with</span>  <span class="nc">DBSettings</span> <span class="o">{</span>
+<span class="k">class</span> <span class="nc">IntegrationTestSpec</span> <span class="k">extends</span> <span class="nc">ScalatraFlatSpec</span> <span class="k">with</span> <span class="nc">Matchers</span> <span class="k">with</span> <span class="nc">SkinnyTestSupport</span> <span class="k">with</span>  <span class="nc">DBSettings</span> <span class="o">{</span>
   <span class="n">addFilter</span><span class="o">(</span><span class="nc">Controllers</span><span class="o">.</span><span class="n">members</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
 
   <span class="n">it</span> <span class="n">should</span> <span class="s">"show index page"</span> <span class="n">in</span> <span class="o">{</span>

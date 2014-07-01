@@ -227,6 +227,33 @@
 
 <hr/>
 
+<h4 id="using-your-favorite-orm-with-skinnyresource">Using your favorite ORM with SkinnyResource</h4>
+
+<hr/>
+
+<p>Skinny ORM&rsquo;S CRUDMappper implements <code>skinny.SkinnyModel</code>&rsquo;s methods. If you&rsquo;d like to use other ORM or DB library, you can do that by implementing <code>SkinnyModel</code> trait.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/common/src/main/scala/skinny/SkinnyModel.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/common/src/main/scala/skinny/SkinnyModel.scala</a></p>
+<pre class="highlight scala"><span class="k">object</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="k">with</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">SlickBackendMapper</span>
+
+<span class="o">...</span>
+</pre>
+
+<hr/>
+
+<h4 id="skinnyresource&#39;s-paginaation-for-oracle,-ms-sqlserver">SkinnyResource&rsquo;s paginaation for Oracle, MS SQLServer</h4>
+
+<hr/>
+
+<p>Skinny ORM doesn&rsquo;t support Oracle DB or MS SQLServer&rsquo;s pagenation. You should override <code>SkinnyModel#findModels(pageSize: Int, pageNo: Int): List[Model]</code> method for your RDBMS. </p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/common/src/main/scala/skinny/SkinnyModel.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/common/src/main/scala/skinny/SkinnyModel.scala</a></p>
+
+<hr/>
+
 <h3 id="reverse-scaffold-generator">Reverse Scaffold Generator</h3>
 
 <hr/>
