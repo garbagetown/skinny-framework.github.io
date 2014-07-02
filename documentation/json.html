@@ -36,6 +36,7 @@
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
                 <li><a href="/documentation/testing.html">Testing</a></li>
                 <li><a href="/documentation/packaging.html">Packaging</a></li>
@@ -78,31 +79,31 @@
 </ul>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/feature/JSONFeature.scala">framework/src/main/scala/skinny/controller/feature/JSONFeature.scala</a></p>
-<pre class="highlight java"><span class="kn">import</span> <span class="nn">skinny.util.JSONStringOps._</span>
+<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.util.JSONStringOps._</span>
 
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">UserResponse</span><span class="p">(</span><span class="nl">user:</span> <span class="n">User</span><span class="o">)</span>
-<span class="k">case</span> <span class="kd">class</span> <span class="nf">User</span><span class="p">(</span><span class="nl">name:</span> <span class="n">String</span><span class="o">,</span> <span class="nl">age:</span> <span class="n">Int</span><span class="o">,</span> <span class="nl">email:</span> <span class="n">String</span><span class="o">,</span> 
-  <span class="nl">isAlive:</span> <span class="n">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="nl">friend:</span> <span class="n">Option</span><span class="o">[</span><span class="n">User</span><span class="o">]</span> <span class="o">=</span> <span class="n">None</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">UserResponse</span><span class="o">(</span><span class="n">user</span><span class="k">:</span> <span class="kt">User</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">User</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">age</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">email</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
+  <span class="n">isAlive</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">friend</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="n">jsonString</span> <span class="o">=</span>
+<span class="k">val</span> <span class="n">jsonString</span> <span class="k">=</span>
   <span class="s">"""{
-    |  "</span><span class="n">user</span><span class="s">": {
-    |    "</span><span class="n">name</span><span class="s">" : "</span><span class="n">toto</span><span class="s">",
-    |    "</span><span class="n">age</span><span class="s">" : 25,
-    |    "</span><span class="n">email</span><span class="s">" : "</span><span class="n">toto</span><span class="nd">@jmail</span><span class="o">.</span><span class="na">com</span><span class="s">",
-    |    "</span><span class="n">isAlive</span><span class="s">" : true,
-    |    "</span><span class="n">friend</span><span class="s">" : {
-    |      "</span><span class="n">name</span><span class="s">" : "</span><span class="n">tata</span><span class="s">",
-    |      "</span><span class="n">age</span><span class="s">" : 20,
-    |      "</span><span class="n">email</span><span class="s">" : "</span><span class="n">tata</span><span class="nd">@coldmail</span><span class="o">.</span><span class="na">com</span><span class="s">"
+    |  "user": {
+    |    "name" : "toto",
+    |    "age" : 25,
+    |    "email" : "toto@jmail.com",
+    |    "isAlive" : true,
+    |    "friend" : {
+    |      "name" : "tata",
+    |      "age" : 20,
+    |      "email" : "tata@coldmail.com"
     |    }
     |  }
     |}
-  """</span><span class="o">.</span><span class="na">stripMargin</span>
+  """</span><span class="o">.</span><span class="n">stripMargin</span>
 
-<span class="n">val</span> <span class="nl">userResponse:</span> <span class="n">Option</span><span class="o">[</span><span class="n">UserResponse</span><span class="o">]</span> <span class="o">=</span> <span class="n">fromJSONString</span><span class="o">[</span><span class="n">UserResponse</span><span class="o">](</span><span class="n">jsonString</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">userResponse</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">]</span> <span class="k">=</span> <span class="n">fromJSONString</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">](</span><span class="n">jsonString</span><span class="o">)</span>
 
-<span class="n">val</span> <span class="n">jsonString2</span> <span class="o">=</span> <span class="n">userResponse</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">r</span> <span class="o">=&gt;</span> <span class="n">toJSONString</span><span class="o">(</span><span class="n">r</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">jsonString2</span> <span class="k">=</span> <span class="n">userResponse</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">toJSONString</span><span class="o">(</span><span class="n">r</span><span class="o">))</span>
 </pre>
 
 <p>See also: <a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala">framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala</a></p>
