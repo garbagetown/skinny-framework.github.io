@@ -59,6 +59,14 @@
 
 <hr/>
 
+<h3 id="setup">Setup</h3>
+
+<hr/>
+<pre class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-http-client"</span> <span class="o">%</span> <span class="s">"&lt;%= @skinny_version %&gt;"</span>
+</pre>
+
+<hr/>
+
 <h3 id="simple-usage">Simple Usage</h3>
 
 <hr/>
@@ -67,11 +75,9 @@
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/http-client/src/test/scala/skinny/http/HTTPSpec.scala">http-client/src/test/scala/skinny/http/HTTPSpec.scala</a></p>
 <pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.http._</span>
-<span class="k">import</span> <span class="nn">scala.concurrent.Await</span>
-<span class="k">import</span> <span class="nn">scala.concurrent.duration._</span>
 
 <span class="c1">// GET
-</span><span class="k">val</span> <span class="n">response</span><span class="k">:</span> <span class="kt">Response</span> <span class="o">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://localhost:8077/api?foo=bar"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="n">response</span><span class="k">:</span> <span class="kt">Response</span> <span class="o">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://example.com/api?foo=bar"</span><span class="o">)</span>
 
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Response</span><span class="o">(</span>
   <span class="n">status</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
@@ -90,54 +96,54 @@
 
 <span class="c1">// GET with QueryParams
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://localhost:8177/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://localhost:8277/"</span><span class="o">).</span><span class="n">queryParams</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://localhost:8278/"</span><span class="o">).</span><span class="n">queryParam</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">).</span><span class="n">queryParam</span><span class="o">(</span><span class="s">"bar"</span> <span class="o">-&gt;</span> <span class="s">"baz"</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">).</span><span class="n">queryParams</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">).</span><span class="n">queryParam</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">).</span><span class="n">queryParam</span><span class="o">(</span><span class="s">"bar"</span> <span class="o">-&gt;</span> <span class="s">"baz"</span><span class="o">))</span>
 
 <span class="c1">// GET with charset
-</span><span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://localhost:8377/?foo=bar"</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"http://example.com/?foo=bar"</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">)</span>
 
 <span class="c1">// Async GET
 </span>
-<span class="k">val</span> <span class="n">response</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">Response</span><span class="o">]</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://localhost:8077/?foo=bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://localhost:8177/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://localhost:8278/"</span><span class="o">).</span><span class="n">queryParams</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">))</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://localhost:8377/?foo=bar"</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span><span class="k">:</span> <span class="kt">scala.concurrent.Future</span><span class="o">[</span><span class="kt">Response</span><span class="o">]</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://example.com/?foo=bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="nc">Request</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">).</span><span class="n">queryParams</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncGet</span><span class="o">(</span><span class="s">"http://example.com/?foo=bar"</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">)</span>
 
 <span class="c1">// POST
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">post</span><span class="o">(</span><span class="s">"http://localhost:8187/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">post</span><span class="o">(</span><span class="s">"http://localhost:8287/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">postMultipart</span><span class="o">(</span><span class="s">"http://localhost:8888/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">TextInput</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">post</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">post</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">postMultipart</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">TextInput</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)))</span>
 
 <span class="k">val</span> <span class="n">file</span> <span class="k">=</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="nc">File</span><span class="o">(</span><span class="s">"http-client/src/test/resources/sample.txt"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">postMultipart</span><span class="o">(</span><span class="s">"http://localhost:8888/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">FileInput</span><span class="o">(</span><span class="n">file</span><span class="o">,</span> <span class="s">"text/plain"</span><span class="o">)))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">postMultipart</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">FileInput</span><span class="o">(</span><span class="n">file</span><span class="o">,</span> <span class="s">"text/plain"</span><span class="o">)))</span>
 
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPost</span><span class="o">(</span><span class="s">"http://localhost:8187/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPost</span><span class="o">(</span><span class="s">"http://localhost:8287/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPostMultipart</span><span class="o">(</span><span class="s">"http://localhost:8888/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">TextInput</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)))</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPost</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPost</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPostMultipart</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="nc">FormData</span><span class="o">(</span><span class="s">"toResponse"</span><span class="o">,</span> <span class="nc">TextInput</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)))</span>
 
 <span class="c1">// PUT
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="s">"http://localhost:8186/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="s">"http://localhost:8285/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPut</span><span class="o">(</span><span class="s">"http://localhost:8186/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPut</span><span class="o">(</span><span class="s">"http://localhost:8286/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">put</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPut</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo=bar"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncPut</span><span class="o">(</span><span class="s">"http://example.com/"</span><span class="o">,</span> <span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">)</span>
 
 <span class="c1">// DELETE
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">delete</span><span class="o">(</span><span class="s">"http://localhost:8485/resource"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncDelete</span><span class="o">(</span><span class="s">"http://localhost:8486/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">delete</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncDelete</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
 
 <span class="c1">// TRACE
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">trace</span><span class="o">(</span><span class="s">"http://localhost:8585/resource"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncTrace</span><span class="o">(</span><span class="s">"http://localhost:8586/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">trace</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncTrace</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
 
 <span class="c1">// OPTIONS
 </span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">options</span><span class="o">(</span><span class="s">"http://localhost:8685/resource"</span><span class="o">)</span>
-<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncOptions</span><span class="o">(</span><span class="s">"http://localhost:8686/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">options</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">response</span> <span class="k">=</span> <span class="nc">HTTP</span><span class="o">.</span><span class="n">asyncOptions</span><span class="o">(</span><span class="s">"http://example.com/resource"</span><span class="o">)</span>
 </pre>
 
             <hr/>
