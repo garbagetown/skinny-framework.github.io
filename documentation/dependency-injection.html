@@ -133,7 +133,9 @@
 
   <span class="k">def</span> <span class="n">appName</span> <span class="k">=</span> <span class="n">inject</span><span class="o">[</span><span class="kt">AppName</span><span class="o">].</span><span class="n">value</span> <span class="c1">// "My First Skinny App"
 </span>
-  <span class="k">def</span> <span class="n">env</span> <span class="k">=</span> <span class="n">inject</span><span class="o">[</span><span class="kt">SkinnyEnv</span><span class="o">].</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">"xxx"</span><span class="o">)</span> <span class="c1">// "development"
+  <span class="c1">// SkinnyEnv and SkinnyConfig are available by default 
+</span>  <span class="c1">// though you can do the same thing by using companion objects
+</span>  <span class="k">def</span> <span class="n">env</span> <span class="k">=</span> <span class="n">inject</span><span class="o">[</span><span class="kt">SkinnyEnv</span><span class="o">].</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">"xxx"</span><span class="o">)</span> <span class="c1">// "development"
 </span><span class="o">}</span>
 </pre>
 
