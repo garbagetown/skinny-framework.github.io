@@ -150,6 +150,22 @@
 ./skinny db:migrate
 </pre>
 
+<hr/>
+
+<h3 id="faq">FAQ</h3>
+
+<hr/>
+
+<h4 id="how-to-access-schema_version-table?">How to access schema_version table?</h4>
+
+<p>Flyway creates a table named <code>&quot;schema_version&quot;</code> for H2 database. </p>
+<pre class="highlight scala"><span class="n">sql</span><span class="s">"""select "version" from "schema_version" """</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="mi">1</span><span class="o">)).</span><span class="n">list</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
+</pre>
+
+<p>FYI:</p>
+
+<p><a href="http://stackoverflow.com/questions/13850499/flyway-and-h2-why-are-the-schema-version-table-and-columns-lower-case-and-case">http://stackoverflow.com/questions/13850499/flyway-and-h2-why-are-the-schema-version-table-and-columns-lower-case-and-case</a></p>
+
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
