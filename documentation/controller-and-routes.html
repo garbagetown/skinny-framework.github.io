@@ -36,6 +36,7 @@
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
                 <li><a href="/documentation/http-client.html">HTTP Client</a></li>
                 <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
@@ -195,7 +196,7 @@ a(href={s.url(Controllers.members.showUrl, "id" -&gt; member.id)}) Show detail
 
 <p>SkinnyResource is also useful as a controller sample. If you&rsquo;re a Skinny beginner, take a look at its code.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
 
 <p>SkinnyResourceActions has action methods for the resource and SkinnyResourceRoutes defines routings for the resource.
 If you&rsquo;d like to customize routings (e.g. use only creation and deletion), just mixin only SkinnyResourceActions and define routings by yourself.</p>
@@ -206,7 +207,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <p>Then you get the following code. If you need to customize, override some parts of SkinnyResource:</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
 <pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 
 <span class="k">import</span> <span class="nn">skinny._</span>
@@ -294,7 +295,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <pre class="highlight plaintext">&lt;%@val s: skinny.Skinny %&gt;
 </pre>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/Skinny.scala">framework/src/main/scala/skinny/Skinny.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/Skinny.scala">framework/src/main/scala/skinny/Skinny.scala</a></p>
 
 <ul>
 <li>params: Params</li>
@@ -335,7 +336,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 
 <h5 id="skinny&#39;s-beforeaction/afteraction-filters">Skinny&rsquo;s beforeAction/afterAction filters</h5>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
 <pre class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
 
   <span class="c1">// Scalatra filters
@@ -674,7 +675,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.ActionResult">/index.html#org.scalatra.ActionResult</a></p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala">/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala">/framework/src/main/scala/skinny/controller/feature/ExplicitRedirectFeature.scala</a></p>
 
 <p><a href="https://github.com/scalatra/scalatra/blob/2.2.x_2.10/core/src/main/scala/org/scalatra/ActionResult.scala">/core/src/main/scala/org/scalatra/ActionResult.scala</a></p>
 
@@ -742,6 +743,75 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <pre class="highlight scala"><span class="k">val</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringConfigValue</span><span class="o">(</span><span class="s">"defaultLabel"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">connectTimeout</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">intConfigValue</span><span class="o">(</span><span class="s">"timeout.connect"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">memcachedServers</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">]]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringSeqConfigValue</span><span class="o">(</span><span class="s">"memcached"</span><span class="o">)</span>
+</pre>
+
+<hr/>
+
+<h4 id="awaiting-several-futures-within-action-method">Awaiting several Futures within action method</h4>
+
+<hr/>
+
+<p>The following is a simple dashboard application which collects serveral futures within the <code>index</code> method.</p>
+
+<p>Since Skinny 1.2.0, you can easily access request and requestScope from Futures by using futureWithRequest block.</p>
+<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+
+<span class="k">import</span> <span class="nn">org.joda.time._</span>
+<span class="k">import</span> <span class="nn">service._</span>
+<span class="k">import</span> <span class="nn">scala.concurrent._</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.duration._</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+<span class="k">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">DashboardOps</span><span class="o">(</span><span class="n">controller</span><span class="k">:</span> <span class="kt">DashboardController</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">setCurrentUser</span><span class="o">(</span><span class="k">implicit</span> <span class="n">req</span><span class="k">:</span> <span class="kt">HttpServletRequest</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="c1">// implicit request is not ambiguous here
+</span>    <span class="k">val</span> <span class="n">userId</span> <span class="k">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">currentUserId</span><span class="o">.</span><span class="n">getOrElse</span><span class="o">(</span><span class="n">controller</span><span class="o">.</span><span class="n">halt</span><span class="o">(</span><span class="mi">401</span><span class="o">))</span>
+    <span class="n">controller</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">"currentUser"</span> <span class="o">-&gt;</span> <span class="n">controller</span><span class="o">.</span><span class="n">adminUserService</span><span class="o">.</span><span class="n">getCurrentUser</span><span class="o">(</span><span class="n">userId</span><span class="o">))</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">class</span> <span class="nc">DashboardController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+
+  <span class="k">val</span> <span class="n">adminUserService</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AdminUserService</span>
+  <span class="k">val</span> <span class="n">accessService</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AccessLogService</span>
+  <span class="k">val</span> <span class="n">alertService</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">AlertService</span>
+  <span class="k">val</span> <span class="n">ops</span> <span class="k">=</span> <span class="nc">DashboardOps</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+
+  <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">scope</span><span class="k">:</span> <span class="kt">scala.collection.concurrent.Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="n">requestScope</span><span class="o">()</span>
+
+    <span class="n">awaitFutures</span><span class="o">(</span><span class="mf">5.</span><span class="n">seconds</span><span class="o">)(</span>
+      <span class="c1">// simply define operation inside of this controller
+</span>      <span class="n">futureWithRequest</span> <span class="o">{</span> <span class="k">implicit</span> <span class="n">req</span> <span class="k">=&gt;</span>
+        <span class="c1">//set("hourlyStats", accessService.getHourlyStatsForGraph(new LocalDate))
+</span>        <span class="n">set</span><span class="o">(</span><span class="s">"hourlyStats"</span><span class="o">,</span> <span class="n">accessService</span><span class="o">.</span><span class="n">getHourlyStatsForGraph</span><span class="o">(</span><span class="k">new</span> <span class="nc">LocalDate</span><span class="o">))(</span><span class="n">req</span><span class="o">)</span>
+
+        <span class="c1">// [error] example/src/main/scala/controller/DashboardController.scala:43: ambiguous implicit values:
+</span>        <span class="c1">// [error]  both value req of type javax.servlet.http.HttpServletRequest
+</span>        <span class="c1">// [error]  and method request in class DashboardController of type =&gt; javax.servlet.http.HttpServletRequest
+</span>        <span class="c1">// [error]  match expected type javax.servlet.http.HttpServletRequest
+</span>        <span class="c1">// [error]         set("hourlyStats", accessService.getHourlyStatsForGraph(new LocalDate))
+</span>        <span class="c1">// [error]            ^
+</span>        <span class="c1">// [error] one error found
+</span>      <span class="o">},</span>
+
+      <span class="c1">// separate operation to outside of this controller
+</span>      <span class="n">futureWithRequest</span><span class="o">(</span><span class="n">req</span> <span class="k">=&gt;</span> <span class="n">ops</span><span class="o">.</span><span class="n">setCurrentUser</span><span class="o">(</span><span class="n">req</span><span class="o">)),</span>
+
+      <span class="c1">// just use Future directly
+</span>      <span class="nc">Future</span> <span class="o">{</span>
+        <span class="c1">// When using Future directly, you must be aware of Scalatra's DynamicScope's thread local request.
+</span>        <span class="c1">// In this case, you cannot use request here. requestScope, session and so on 
+</span>        <span class="c1">// should be captured outside of this Future block.
+</span>        <span class="n">scope</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="s">"alerts"</span><span class="o">,</span> <span class="n">alertService</span><span class="o">.</span><span class="n">findAll</span><span class="o">())</span>
+      <span class="o">}</span>
+    <span class="o">)</span>
+    <span class="n">render</span><span class="o">(</span><span class="s">"/dashboard/index"</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">private</span><span class="o">[</span><span class="kt">controller</span><span class="o">]</span> <span class="k">def</span> <span class="n">currentUserId</span><span class="o">(</span><span class="k">implicit</span> <span class="n">req</span><span class="k">:</span> <span class="kt">HttpServletRequest</span><span class="o">)</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="n">session</span><span class="o">(</span><span class="n">req</span><span class="o">).</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">"userId"</span><span class="o">)</span>
+<span class="o">}</span>
 </pre>
 
             <hr/>

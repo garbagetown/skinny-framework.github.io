@@ -36,6 +36,7 @@
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
                 <li><a href="/documentation/http-client.html">HTTP Client</a></li>
                 <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
@@ -135,9 +136,9 @@ implicit val session = AutoSession
 <p>You can find examples here: </p>
 
 <ul>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/test/scala/skinny/orm/CreateTables.scala">DDL</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/test/scala/skinny/orm/models.scala">Model Definitions</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">Model usages</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/CreateTables.scala">DDL</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">Model Definitions</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/SkinnyORMSpec.scala">Model usages</a></li>
 </ul>
 
 <p>If you have any questions or feedback, feel free to ask the Skinny team or users in the mailing list.</p>
@@ -146,7 +147,7 @@ implicit val session = AutoSession
 
 <hr/>
 
-<h4 id="skinnymapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyMapper.scala">SkinnyMapper</a></h4>
+<h4 id="skinnymapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyMapper.scala">SkinnyMapper</a></h4>
 
 <hr/>
 
@@ -154,8 +155,8 @@ implicit val session = AutoSession
 
 <ul>
 <li>Primary key should be single and long numeric</li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
 </ul>
 
 <p>Entity case class and mapper companion object should be like this:</p>
@@ -180,15 +181,15 @@ implicit val session = AutoSession
 
 <hr/>
 
-<h4 id="skinnycrudmapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyCRUDMapper.scala">SkinnyCRUDMapper</a></h4>
+<h4 id="skinnycrudmapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyCRUDMapper.scala">SkinnyCRUDMapper</a></h4>
 
 <hr/>
 
 <ul>
 <li>Primary key should be single and long numeric</li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">CRUD Operation APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">CRUD Operation APIs</a></li>
 </ul>
 
 <p>The difference from SkinnyMapper is that insert/update/delete operations are available.</p>
@@ -211,7 +212,7 @@ implicit val session = AutoSession
 
 <hr/>
 
-<h4 id="skinnycrudmapperwithid"><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyCRUDMapperWithId.scala">SkinnyCRUDMapperWithId</a></h4>
+<h4 id="skinnycrudmapperwithid"><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyCRUDMapperWithId.scala">SkinnyCRUDMapperWithId</a></h4>
 
 <hr/>
 
@@ -270,7 +271,7 @@ implicit val session = AutoSession
 
 <hr/>
 
-<h4 id="skinnynoidmapper,-skinnynoidcrudmapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyNoIdMapper.scala">SkinnyNoIdMapper</a>, <a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyNoIdCRUDMapper.scala">SkinnyNoIdCRUDMapper</a></h4>
+<h4 id="skinnynoidmapper,-skinnynoidcrudmapper"><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyNoIdMapper.scala">SkinnyNoIdMapper</a>, <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyNoIdCRUDMapper.scala">SkinnyNoIdCRUDMapper</a></h4>
 
 <hr/>
 
@@ -280,9 +281,9 @@ implicit val session = AutoSession
 
 <ul>
 <li>This trait doesn&rsquo;t mind the table has no primary key or compound primary keys</li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
-<li><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">CRUD Operation APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/FinderFeature.scala">Finder APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
+<li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">CRUD Operation APIs</a></li>
 </ul>
 <pre class="highlight scala"><span class="n">sql</span><span class="s">"create table useless_data(a varchar(16) not null, b bigint, created_timestamp timestamp not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 
@@ -301,7 +302,7 @@ implicit val session = AutoSession
 
 <hr/>
 
-<h4 id="skinnyjointable"><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyJoinTable.scala">SkinnyJoinTable</a></h4>
+<h4 id="skinnyjointable"><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyJoinTable.scala">SkinnyJoinTable</a></h4>
 
 <hr/>
 
@@ -462,7 +463,7 @@ implicit val session = AutoSession
 </pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala</a></p>
 
 <hr/>
 
@@ -473,7 +474,7 @@ implicit val session = AutoSession
 <p>If you need to join other tables, just add <code>belongsTo</code>, <code>hasOne</code> or <code>hasMany(Through)</code> to the companion. </p>
 
 <p>Examples: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/test/scala/skinny/orm/models.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/test/scala/skinny/orm/models.scala</a></p>
 
 <p>Be aware of Skinny ORM&rsquo;s concept that basically joins tables to resolve associations to reduce N+1 queries. We recommend enabling query logging for development.</p>
 
@@ -545,7 +546,7 @@ implicit val session = AutoSession
 <span class="p">);</span>
 </pre>
 
-<p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
+<p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
 
 <hr/>
 
@@ -731,7 +732,7 @@ implicit val session = AutoSession
 <p>Note: when your entities have the same associations (e.g. Company has Employee, Country and Employee have Country), avoiding using the default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We plan to provide more useful error messages for such cases in version 1.0.0.</p>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/IncludesFeature.scala</a></p>
 
 <hr/>
 
@@ -823,7 +824,7 @@ implicit val session = AutoSession
 </pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
 
 <hr/>
 
@@ -842,7 +843,7 @@ implicit val session = AutoSession
 </pre>
 
 <p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
 <pre class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
 </span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
@@ -905,7 +906,7 @@ implicit val session = AutoSession
 </pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala</a></p>
 
 <hr/>
 
@@ -925,10 +926,10 @@ implicit val session = AutoSession
 </pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala</a></p>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithTimestampFeature.scala</a></p>
 
 <hr/>
 
@@ -945,10 +946,10 @@ implicit val session = AutoSession
 </span></pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithTimestampFeature.scala</a></p>
 
 <hr/>
 
@@ -974,7 +975,7 @@ implicit val session = AutoSession
 </pre>
 
 <p>Source code: 
-<a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala">https://github.com/skinny-framework/skinny-framework/blob/1.1.x/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala</a></p>
+<a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala</a></p>
 
 <hr/>
 

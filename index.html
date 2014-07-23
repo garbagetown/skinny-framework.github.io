@@ -36,6 +36,7 @@
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
                 <li><a href="/documentation/http-client.html">HTTP Client</a></li>
                 <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
@@ -202,6 +203,21 @@ yo skinny
   "org.skinny-framework" %% "skinny-factory-girl" % "1.1.8" % "test"
 )
 </pre>
+
+<hr/>
+
+<h3 id="1.2-migration-guide-for-1.1.x-users">1.2 Migration Guide for 1.1.x Users</h3>
+
+<hr/>
+
+<p>APIs are basically compatible. If you don&rsquo;t have some extensions that depend on <code>LocaleFeature</code>, <code>RequestScopeFeature</code> and <code>SkinnySessionFilter</code> methods, 
+your app will work fine without changing your code.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0</a></p>
+
+<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
 
 <hr/>
 
@@ -490,6 +506,33 @@ yo skinny
 <p>However, precompiling the assets is highly recommended in production (<code>./skinny package</code> does that).</p>
 
 <p>See in detail: <a href="/documentation/assets.html">Assets Support</a></p>
+
+<hr/>
+
+<h3 id="angular.js-friendly-server-side">Angular.js Friendly Server Side</h3>
+
+<hr/>
+
+<p><img alt="Angular Logo" src="/images/angularjs.png" /></p>
+
+<p>By using <code>AngularXHRServerFeature</code> trait, your controllers will be Angular.js friendly JSON API provider.</p>
+<pre class="highlight scala"><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nc">SkinnyApiResource</span> <span class="k">with</span> <span class="nc">AngularXHRServerFeature</span> <span class="o">{</span>
+  <span class="c1">// Enable Angular's XSRF protection
+</span>  <span class="n">protectFromForgery</span><span class="o">()</span>
+
+  <span class="c1">// JSON request body will be merged into Scalatra params automatically
+</span>  <span class="c1">// ...
+</span>
+<span class="o">}</span>
+</pre>
+
+<p>And your ngResource is like this:</p>
+<pre class="highlight javascript"><span class="nx">app</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'Article'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'$resource'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$resource</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">$resource</span><span class="p">(</span><span class="s1">'/api/articles/:id.json'</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{});</span>
+<span class="p">}]);</span>
+</pre>
+
+<p>See in detail: <a href="/documentation/angular.html">Angular Support</a></p>
 
 <hr/>
 

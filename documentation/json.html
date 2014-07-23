@@ -36,6 +36,7 @@
                 <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
                 <li><a href="/documentation/db-migration.html">DB Migration</a></li>
                 <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
                 <li><a href="/documentation/http-client.html">HTTP Client</a></li>
                 <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
                 <li><a href="/documentation/tasks.html">Tasks</a></li>
@@ -71,7 +72,7 @@
 <li>def fromJSONString[A](json: String)(implicit mf: Manifest[A]): Option[A] </li>
 </ul>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/util/JSONStringOps.scala">framework/src/main/scala/skinny/util/JSONStringOps.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/util/JSONStringOps.scala">framework/src/main/scala/skinny/util/JSONStringOps.scala</a></p>
 
 <p>The following methods come from <code>JSONFeature</code> trait.</p>
 
@@ -79,7 +80,7 @@
 <li>def responseAsJSON(entity: Any, charset: Option[String] = Some(&ldquo;utf-8&rdquo;), prettify: Boolean = false): String</li>
 </ul>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/main/scala/skinny/controller/feature/JSONFeature.scala">framework/src/main/scala/skinny/controller/feature/JSONFeature.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/JSONFeature.scala">framework/src/main/scala/skinny/controller/feature/JSONFeature.scala</a></p>
 <pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.util.JSONStringOps._</span>
 
 <span class="k">case</span> <span class="k">class</span> <span class="nc">UserResponse</span><span class="o">(</span><span class="n">user</span><span class="k">:</span> <span class="kt">User</span><span class="o">)</span>
@@ -107,7 +108,7 @@
 <span class="k">val</span> <span class="n">jsonString2</span> <span class="k">=</span> <span class="n">userResponse</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">toJSONString</span><span class="o">(</span><span class="n">r</span><span class="o">))</span>
 </pre>
 
-<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/blob/1.1.x/framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala">framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala</a></p>
+<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala">framework/src/test/scala/skinny/util/JSONStringOpsSpec.scala</a></p>
 
 <p>If you need more complex operations, use <a href="https://github.com/json4s/json4s">json4s</a> directly.</p>
 
