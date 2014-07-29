@@ -3,18 +3,17 @@
   <head>
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>i18n - Skinny Framework</title>
     <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-      <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
@@ -50,9 +49,35 @@
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <hr/>
+        </nav>
+
+        <div class="col-sm-12 content">
+            <hr/>
+            <ul class="list-inline small">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+            </ul>
+        </div>
+        <hr/>
         <div class="col-sm-12">
           <div class="content">
             <h2 id="i18n">i18n</h2>
@@ -74,7 +99,7 @@
 <h3 id="default-locale">Default Locale</h3>
 
 <hr/>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.filter._</span>
 <span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">ErrorPageFilter</span> <span class="o">{</span>
@@ -82,7 +107,7 @@
   <span class="k">override</span> <span class="k">def</span> <span class="n">defaultLocale</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="nc">Locale</span><span class="o">(</span><span class="s">"ja"</span><span class="o">))</span>
 
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -91,7 +116,7 @@
 <hr/>
 
 <p>You can store users&#39; locale in Servlet sessions or Skinny sessions.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">SettingsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">SettingsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
 
   <span class="k">def</span> <span class="n">updateLocale</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">locale</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">"locale"</span><span class="o">).</span><span class="n">orNull</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
@@ -99,7 +124,7 @@
 </span>    <span class="n">redirect</span><span class="o">(</span><span class="s">"somewher"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>See the example project here.</p>
 
@@ -112,7 +137,7 @@
 <hr/>
 
 <p>By default, defaultLocale is None. In this case, <code>src/main/resources/messages.conf</code> will be used.</p>
-<pre class="highlight plaintext">error {
+<pre><code class="highlight plaintext">error {
   required="{0} is required"
   length="{0} length must be {1}"
   .....
@@ -132,12 +157,12 @@ detail="Detail"
 new="New"
 edit="Edit"
 delete="Delete"
-</pre>
+</code></pre>
 
 <p>When locale is set, <code>src/main/resources/messages_{locale}.conf</code> instead of <code>messages.conf</code>.</p>
 
 <p>The following example is <code>messages_ja.conf</code> for Japanese.</p>
-<pre class="highlight plaintext">error {
+<pre><code class="highlight plaintext">error {
   required="{0} を入力してください"
   length="{0} は {1} 文字で入力してください"
   .....
@@ -157,7 +182,7 @@ detail="詳細"
 new="追加"
 edit="変更"
 delete="削除"
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -166,17 +191,17 @@ delete="削除"
 <hr/>
 
 <p>Simply use <code>skinny.I18n</code> instance. Current <code>skinny.I18n</code> instance is always available as <code>i18n</code> in view templates.</p>
-<pre class="highlight plaintext">&lt;%@val i18n: skinny.I18n %&gt;
+<pre><code class="highlight plaintext">&lt;%@val i18n: skinny.I18n %&gt;
 ${i18n.get("submit")}
 ${i18n.get("project.name")}
-</pre>
+</code></pre>
 
 <p>The above example expects the following <code>src/main/resources/messages_{locale}.conf</code>.</p>
-<pre class="highlight plaintext">submit="Submit"
+<pre><code class="highlight plaintext">submit="Submit"
 project {
   name="Project Name"
 }
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -189,18 +214,18 @@ project {
 <p>The error message which is defined with <code>error</code> prefix and validator&rsquo;s <code>name</code> will be used.</p>
 
 <p>For instance, this validator&rsquo;s name is <code>notNull</code>,</p>
-<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
+<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
 <span class="k">object</span> <span class="nc">notNull</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"notNull"</span>
   <span class="k">def</span> <span class="n">isValid</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="n">v</span> <span class="o">!=</span> <span class="kc">null</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>So validation error message should be defined in <code>messages.conf</code> like this:</p>
-<pre class="highlight plaintext">error {
+<pre><code class="highlight plaintext">error {
   notNull="{0} must not be null"
 }
-</pre>
+</code></pre>
 
 <p>That&rsquo;s all!</p>
 
@@ -209,6 +234,11 @@ project {
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -218,13 +248,6 @@ project {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</a>
 
           </div>
         </div>

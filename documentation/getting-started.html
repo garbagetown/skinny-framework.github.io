@@ -3,18 +3,17 @@
   <head>
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>Getting Started - Skinny Framework</title>
     <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-      <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
@@ -50,9 +49,35 @@
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <hr/>
+        </nav>
+
+        <div class="col-sm-12 content">
+            <hr/>
+            <ul class="list-inline small">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+            </ul>
+        </div>
+        <hr/>
         <div class="col-sm-12">
           <div class="content">
             <h2 id="getting-started">Getting Started</h2>
@@ -70,8 +95,8 @@
 <p>Download latest <code>skinny-blank-app(-with-deps).zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
-<pre class="highlight shell">./skinny run
-</pre>
+<pre><code class="highlight shell">./skinny run
+</code></pre>
 
 <p>And then, access <code>http://localhost:8080/</code> and the app should return 200 OK.</p>
 
@@ -87,34 +112,34 @@
 <b>WARNING:</b> If you&rsquo;re going try with &ldquo;users&rdquo;, use &ldquo;accounts&rdquo; or &ldquo;members&rdquo; instead.
 &ldquo;users&rdquo; also exists in H2 information_schema. This may become a pitfall if you aren&rsquo;t conscious.
 </small></p>
-<pre class="highlight shell"><span class="c"># If you're a zsh user, try "noglob ./skinny g scaffold ..."</span>
+<pre><code class="highlight shell"><span class="c"># If you're a zsh user, try "noglob ./skinny g scaffold ..."</span>
 ./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
-</pre>
+</code></pre>
 
 <p>FYI: It&rsquo;s also possible to specify the column data type for each field. However you will need to add the length validation code to MembersController yourself.</p>
-<pre class="highlight shell">./skinny g scaffold members member <span class="s2">"name:String:varchar(128)"</span>
-</pre>
+<pre><code class="highlight shell">./skinny g scaffold members member <span class="s2">"name:String:varchar(128)"</span>
+</code></pre>
 
 <p>And then, access <code>http://localhost:8080/members</code>.</p>
 
 <p>See in detail here: <a href="/documentation/scaffolding.html">Scaffolding</a></p>
 
 <p>You can also run the generated tests.</p>
-<pre class="highlight plaintext">./skinny db:migrate test
+<pre><code class="highlight plaintext">./skinny db:migrate test
 ./skinny test
-</pre>
+</code></pre>
 
 <p>If you just need a controller, run the generator like this:</p>
-<pre class="highlight shell">./skinny g controller <span class="nb">help</span>
-</pre>
+<pre><code class="highlight shell">./skinny g controller <span class="nb">help</span>
+</code></pre>
 
 <p>And then, access <code>http://localhost:8080/help</code>.</p>
 
 <p>Finally, let&rsquo;s create a war file to deploy.</p>
-<pre class="highlight shell">./skinny package
-</pre>
+<pre><code class="highlight shell">./skinny package
+</code></pre>
 
 <hr/>
 
@@ -129,7 +154,7 @@
 <h4 id="create-new-skinnycontroller-under-conroller-package">Create new <code>SkinnyController</code> under <code>conroller</code> package</h4>
 
 <p>You can create a controller by hand or by using generator.</p>
-<pre class="highlight plaintext">% ./skinny g controller help
+<pre><code class="highlight plaintext">% ./skinny g controller help
 
  *** Skinny Generator Task ***
 
@@ -138,14 +163,14 @@
   "src/main/scala/controller/Controllers.scala" modified.
   "src/test/scala/controller/HelpControllerSpec.scala" created.
 
-</pre>
+</code></pre>
 
 <hr/>
 
 <h4 id="add-routing-definition-to-controller.controllers">Add routing definition to <code>controller.Controllers</code></h4>
 
 <p>When you use generator, this will be done by generator. </p>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
 
@@ -157,7 +182,7 @@
     <span class="n">root</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -188,14 +213,14 @@
 <p><img alt="Yeoman" src="/images/yeoman.png" /></p>
 
 <p>If you&rsquo;re familiar with <a href="http://yeoman.io">Yeoman</a>, a generator for <a href="https://github.com/skinny-framework/skinny-framework">Skinny framework</a> is available.</p>
-<pre class="highlight shell"><span class="c"># brew instsall node</span>
+<pre><code class="highlight shell"><span class="c"># brew instsall node</span>
 npm install -g yo
 npm install -g generator-skinny
 mkdir skinny-app
 <span class="nb">cd </span>skinny-app
 yo skinny
 ./skinny run
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -204,7 +229,7 @@ yo skinny
 <hr/>
 
 <p>The following tree shows the directories and files in skinny-blank-app project. Using this directory layout is recommended.</p>
-<pre class="highlight shell">.
+<pre><code class="highlight shell">.
 ├── README.md
 ├── bin
 │   └── sbt-launch.jar <span class="c"># global sbt script in PATH is given priority over this</span>
@@ -289,13 +314,18 @@ yo skinny
         └── main
             └── scala
                 └── TaskRunner.scala <span class="c"># when you add new tasks, modify this code</span>
-</pre>
+</code></pre>
 
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -305,13 +335,6 @@ yo skinny
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</a>
 
           </div>
         </div>

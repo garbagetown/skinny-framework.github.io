@@ -3,18 +3,17 @@
   <head>
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>ORM - Skinny Framework</title>
     <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-      <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
@@ -50,9 +49,35 @@
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <hr/>
+        </nav>
+
+        <div class="col-sm-12 content">
+            <hr/>
+            <ul class="list-inline small">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+            </ul>
+        </div>
+        <hr/>
         <div class="col-sm-12">
           <div class="content">
             <h2 id="orm">ORM</h2>
@@ -90,8 +115,8 @@
 <hr/>
 
 <h4 id="build.sbt">build.sbt</h4>
-<pre class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.2.3"</span><span class="o">,</span>
+<pre><code class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.2.4"</span><span class="o">,</span>
   <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.+"</span><span class="o">,</span>
   <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.+"</span>
 <span class="o">)</span>
@@ -104,10 +129,10 @@ import org.joda.time._
 skinny.DBSettings.initialize()
 implicit val session = AutoSession
 """</span>
-</pre>
+</code></pre>
 
 <h4 id="src/main/resources/application.conf">src/main/resources/application.conf</h4>
-<pre class="highlight plaintext">development {
+<pre><code class="highlight plaintext">development {
   db {
     default {
       driver="org.h2.Driver"
@@ -121,7 +146,7 @@ implicit val session = AutoSession
     }
   }
 }
-</pre>
+</code></pre>
 
 <p>Now you can try the following example code on <code>sbt console</code> (the Scala REPL).</p>
 
@@ -160,7 +185,7 @@ implicit val session = AutoSession
 </ul>
 
 <p>Entity case class and mapper companion object should be like this:</p>
-<pre class="highlight scala"><span class="c1">// create member table
+<pre><code class="highlight scala"><span class="c1">// create member table
 </span><span class="n">sql</span><span class="s">"create table member (id serial, name varchar(64), created_at timestamp)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 
 <span class="c1">// When you're trying on the Scala REPL, use :paste mode
@@ -172,12 +197,12 @@ implicit val session = AutoSession
     <span class="n">name</span>      <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
     <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdAt</span><span class="o">))</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>And you can use Findre and Querying as follows:</p>
-<pre class="highlight scala"><span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">).</span><span class="n">apply</span><span class="o">()</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -193,14 +218,14 @@ implicit val session = AutoSession
 </ul>
 
 <p>The difference from SkinnyMapper is that insert/update/delete operations are available.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 <span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>The usage is like this:</p>
-<pre class="highlight scala"><span class="c1">// create
+<pre><code class="highlight scala"><span class="c1">// create
 </span><span class="nc">Member</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="ss">'createdAt </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">)</span>
 <span class="c1">// update
 </span><span class="nc">Member</span><span class="o">.</span><span class="n">updateById</span><span class="o">(</span><span class="mi">123</span><span class="o">).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Bob"</span><span class="o">)</span>
@@ -208,7 +233,7 @@ implicit val session = AutoSession
 <span class="c1">// delete
 </span><span class="nc">Member</span><span class="o">.</span><span class="n">deleteById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
 <span class="nc">Member</span><span class="o">.</span><span class="n">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">name</span><span class="o">,</span> <span class="s">"Alice"</span><span class="o">))</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -221,7 +246,7 @@ implicit val session = AutoSession
 <p>When your table has a non-numeric primary key or you&rsquo;d like to make numeric primary key typed such as <code>case class MemberId(value: Long)</code>, use <code>Skinny(CRUD)MapperWithId</code> traits instead. In this case, you must implement <code>idToRawValue</code> and <code>rawValueToId</code> methods.</p>
 
 <p>If you need to use a complex object (e.g. <code>MemberId</code> class) as a primary key, it&rsquo;s also easy to implement.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">MemberId</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">MemberId</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Member2</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">MemberId</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
 <span class="k">object</span> <span class="nc">Member2</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="kt">MemberId</span>, <span class="kt">Member2</span><span class="o">]</span> <span class="o">{</span>
@@ -235,10 +260,10 @@ implicit val session = AutoSession
     <span class="n">name</span>      <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
     <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdAt</span><span class="o">))</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>The usage is like this:</p>
-<pre class="highlight scala"><span class="c1">// create
+<pre><code class="highlight scala"><span class="c1">// create
 </span><span class="nc">Member2</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="ss">'createdAt </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">)</span>
 <span class="c1">// update
 </span><span class="nc">Member2</span><span class="o">.</span><span class="n">updateById</span><span class="o">(</span><span class="nc">MemberId</span><span class="o">(</span><span class="mi">123</span><span class="o">)).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Bob"</span><span class="o">)</span>
@@ -246,10 +271,10 @@ implicit val session = AutoSession
 <span class="c1">// delete
 </span><span class="nc">Member2</span><span class="o">.</span><span class="n">deleteById</span><span class="o">(</span><span class="nc">MemberId</span><span class="o">(</span><span class="mi">123</span><span class="o">))</span>
 <span class="nc">Member2</span><span class="o">.</span><span class="n">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">name</span><span class="o">,</span> <span class="s">"Alice"</span><span class="o">))</span>
-</pre>
+</code></pre>
 
 <p>And your SkinnyResource will be like this:</p>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.validator._</span>
 <span class="k">import</span> <span class="nn">model._</span>
@@ -267,7 +292,7 @@ implicit val session = AutoSession
 
   <span class="c1">// ...
 </span><span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -285,7 +310,7 @@ implicit val session = AutoSession
 <li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/QueryingFeature.scala">Querying APIs</a></li>
 <li><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">CRUD Operation APIs</a></li>
 </ul>
-<pre class="highlight scala"><span class="n">sql</span><span class="s">"create table useless_data(a varchar(16) not null, b bigint, created_timestamp timestamp not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
+<pre><code class="highlight scala"><span class="n">sql</span><span class="s">"create table useless_data(a varchar(16) not null, b bigint, created_timestamp timestamp not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 
 <span class="k">case</span> <span class="k">class</span> <span class="nc">UselessData</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">],</span> <span class="n">createdTimestamp</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 <span class="k">object</span> <span class="nc">UselessData</span> <span class="k">extends</span> <span class="nc">SkinnyNoIdCRUDMapper</span><span class="o">[</span><span class="kt">UselessData</span><span class="o">]</span> <span class="o">{</span>
@@ -293,12 +318,12 @@ implicit val session = AutoSession
   <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">n</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">UselessData</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">UselessData</span><span class="o">(</span>
     <span class="n">a</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">a</span><span class="o">),</span> <span class="n">b</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">b</span><span class="o">),</span> <span class="n">createdTimestamp</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdTimestamp</span><span class="o">))</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>The usage is like this:</p>
-<pre class="highlight scala"><span class="nc">UselessData</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'a </span><span class="o">-&gt;</span> <span class="s">"foo"</span><span class="o">,</span> <span class="ss">'b </span><span class="o">-&gt;</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">123</span><span class="o">),</span> <span class="ss">'createdTimestamp </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="nc">UselessData</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'a </span><span class="o">-&gt;</span> <span class="s">"foo"</span><span class="o">,</span> <span class="ss">'b </span><span class="o">-&gt;</span> <span class="nc">Some</span><span class="o">(</span><span class="mi">123</span><span class="o">),</span> <span class="ss">'createdTimestamp </span><span class="o">-&gt;</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">)</span>
 <span class="nc">UselessData</span><span class="o">.</span><span class="n">findAll</span><span class="o">()</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -307,7 +332,7 @@ implicit val session = AutoSession
 <hr/>
 
 <p>&ldquo;join table&rdquo; is used for representing relationship between tables. Here is a simple examples:</p>
-<pre class="highlight scala"><span class="n">sql</span><span class="s">"create table account (id serial, name varchar(128) not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
+<pre><code class="highlight scala"><span class="n">sql</span><span class="s">"create table account (id serial, name varchar(128) not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 <span class="n">sql</span><span class="s">"create table email (id serial, email varchar(256) not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 <span class="n">sql</span><span class="s">"create table account_email (account_id bigint not null, email_id bigint not null)"</span><span class="o">.</span><span class="n">execute</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 
@@ -335,14 +360,14 @@ implicit val session = AutoSession
 <span class="k">object</span> <span class="nc">AccountEmail</span> <span class="k">extends</span> <span class="nc">SkinnyJoinTable</span><span class="o">[</span><span class="kt">AccountEmail</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"ae"</span><span class="o">)</span>
 <span class="o">}</span> 
-</pre>
+</code></pre>
 
 <p>The usage is like this:</p>
-<pre class="highlight scala"><span class="nc">Email</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'email </span><span class="o">-&gt;</span> <span class="s">"alice@example.com"</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="nc">Email</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'email </span><span class="o">-&gt;</span> <span class="s">"alice@example.com"</span><span class="o">)</span>
 <span class="nc">Account</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">)</span>
 <span class="nc">AccountEmail</span><span class="o">.</span><span class="n">createWithAttributes</span><span class="o">(</span><span class="ss">'accountId </span><span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="ss">'emailId </span><span class="o">-&gt;</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nc">Account</span><span class="o">.</span><span class="n">findAll</span><span class="o">()</span> <span class="c1">// with emails
-</span></pre>
+</span></code></pre>
 
 <hr/>
 
@@ -351,7 +376,7 @@ implicit val session = AutoSession
 <hr/>
 
 <p>Skinny-ORM is very powerful, so you don&rsquo;t need to write much code. Your first model class and companion are here.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 <span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"m"</span><span class="o">)</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">n</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Member</span><span class="o">])</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span>
@@ -360,10 +385,10 @@ implicit val session = AutoSession
     <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">createdAt</span><span class="o">)</span>
   <span class="o">)</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>That&rsquo;s all! Now you can use the following APIs.</p>
-<pre class="highlight scala"><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">defaultAlias</span>
+<pre><code class="highlight scala"><span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">defaultAlias</span>
 
 <span class="c1">// ------------
 // find by primary key
@@ -460,7 +485,7 @@ implicit val session = AutoSession
 </span>
 <span class="nc">Member</span><span class="o">.</span><span class="n">deleteById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span>
 <span class="nc">Member</span><span class="o">.</span><span class="n">deleteBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="mi">123</span><span class="o">))</span>
-</pre>
+</code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/CRUDFeature.scala</a></p>
@@ -495,7 +520,7 @@ implicit val session = AutoSession
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association">http://guides.rubyonrails.org/association_basics.html#the-belongs-to-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
   <span class="n">mentorId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">mentor</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
   <span class="c1">// Naming convention: {className}+{primaryKeyFieldName}
@@ -532,10 +557,10 @@ implicit val session = AutoSession
 <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// without mentor
 </span>
 <span class="nc">Member</span><span class="o">.</span><span class="n">joins</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">mentor</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with mentor
-</span></pre>
+</span></code></pre>
 
 <p>In this case, following table is expected:</p>
-<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
+<pre><code class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
   <span class="n">company_id</span> <span class="n">bigint</span><span class="p">,</span>
   <span class="n">mentor_id</span> <span class="n">bigint</span>
@@ -544,7 +569,7 @@ implicit val session = AutoSession
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
   <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
-</pre>
+</code></pre>
 
 <p>Find more here: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/AssociationsFeature.scala</a></p>
 
@@ -559,7 +584,7 @@ implicit val session = AutoSession
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-one-association">http://guides.rubyonrails.org/association_basics.html#the-has-one-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Name</span><span class="o">(</span><span class="n">first</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">last</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">memberId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Name</span><span class="o">(</span><span class="n">first</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">last</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">memberId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Name</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
 
 <span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -570,10 +595,10 @@ implicit val session = AutoSession
     <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">name</span> <span class="k">=</span> <span class="n">name</span><span class="o">)</span>
   <span class="o">).</span><span class="n">byDefault</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>In this case, following tables are expected:</p>
-<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
+<pre><code class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">members</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
 <span class="k">create</span> <span class="k">table</span> <span class="k">names</span> <span class="p">(</span>
@@ -581,7 +606,7 @@ implicit val session = AutoSession
   <span class="k">first</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
   <span class="k">last</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -594,7 +619,7 @@ implicit val session = AutoSession
 <p><a href="http://guides.rubyonrails.org/association_basics.html#the-has-many-association">http://guides.rubyonrails.org/association_basics.html#the-has-many-association</a></p>
 
 <p>We need to specify some types, so definitions are not as simple as ActiveRecord, but it&rsquo;s easy to understand and simple enough.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">members</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">members</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> 
   <span class="n">companyId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span> <span class="n">company</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
   <span class="n">skills</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Skill</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span>
@@ -637,10 +662,10 @@ implicit val session = AutoSession
   <span class="o">)</span>
 <span class="o">}</span>
 <span class="nc">Member</span><span class="o">.</span><span class="n">joins</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">skillsRef</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">234</span><span class="o">)</span> <span class="c1">// with skills
-</span></pre>
+</span></code></pre>
 
 <p>In this case, following tables are expected:</p>
-<pre class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
+<pre><code class="highlight sql"><span class="k">create</span> <span class="k">table</span> <span class="n">companies</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigint</span> <span class="n">auto_increment</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
   <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
@@ -656,7 +681,7 @@ implicit val session = AutoSession
   <span class="n">member_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
   <span class="n">skill_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span>
 <span class="p">);</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -667,7 +692,7 @@ implicit val session = AutoSession
 <p>Basically using case classes for entities is recommended. As you know, Scala (until 2.11) has 22 limitation, so you may need to use normal classes for entities to treat tables that have more than 22 columns.</p>
 
 <p>In this case, entities should be defined like this (Skinny 0.9.21 or ScalikeJDBC 1.7.3 is required):</p>
-<pre class="highlight scala"><span class="k">class</span> <span class="nc">LegacyData</span><span class="o">(</span><span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="k">val</span> <span class="n">c2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="k">val</span> <span class="n">c3</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="o">...,</span> <span class="k">val</span> <span class="n">c23</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">LegacyData</span><span class="o">(</span><span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="k">val</span> <span class="n">c2</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="k">val</span> <span class="n">c3</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="o">...,</span> <span class="k">val</span> <span class="n">c23</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
   <span class="k">extends</span> <span class="n">scalikejdbc</span><span class="o">.</span><span class="nc">EntityEquality</span> <span class="o">{</span>
   <span class="c1">// override val entityIdentity = id
 </span>  <span class="k">override</span> <span class="k">val</span> <span class="n">entityIdentity</span> <span class="k">=</span> <span class="n">s</span><span class="s">"$id $c2 $c3 ... $c23"</span>
@@ -676,7 +701,7 @@ implicit val session = AutoSession
 <span class="k">object</span> <span class="nc">LegacyData</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">LegacyData</span><span class="o">]</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>If you don&rsquo;t implement like this, one-to-many relationships won&rsquo;t work as you expect.</p>
 
@@ -693,7 +718,7 @@ implicit val session = AutoSession
 <p>Note: eager loading of nested entities is not supported yet.</p>
 
 <p>Indeed, it&rsquo;s not incredibly simple. But we believe that what it does is so clear that you can easily write the definition.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="c1">// Unfortunately the combination of Scala macros and type-dynamic sometimes doesn't work as expected
 </span>  <span class="c1">// when "val company" is defined in Scala 2.10.x.
@@ -714,10 +739,10 @@ implicit val session = AutoSession
 <span class="o">}</span>
 
 <span class="nc">Member</span><span class="o">.</span><span class="n">includes</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">companyOpt</span><span class="o">).</span><span class="n">findAll</span><span class="o">()</span>
-</pre>
+</code></pre>
 
 <p>Yet another example:</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">val</span> <span class="n">skills</span> <span class="k">=</span>
     <span class="n">hasManyThrough</span><span class="o">[</span><span class="kt">Skill</span><span class="o">](</span>
       <span class="nc">MemberSkill</span><span class="o">,</span> <span class="nc">Skill</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="n">skills</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">skills</span> <span class="k">=</span> <span class="n">skills</span><span class="o">)</span>
@@ -727,7 +752,7 @@ implicit val session = AutoSession
 <span class="o">}</span>
 
 <span class="nc">Member</span><span class="o">.</span><span class="n">includes</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="n">skills</span><span class="o">).</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span> <span class="c1">// with skills
-</span></pre>
+</span></code></pre>
 
 <p>Note: when your entities have the same associations (e.g. Company has Employee, Country and Employee have Country), avoiding using the default alias for the associations is recommended because that may cause invalid join query generation when you use eager loading. We plan to provide more useful error messages for such cases in version 1.0.0.</p>
 
@@ -741,7 +766,7 @@ implicit val session = AutoSession
 <hr/>
 
 <p>Skinny ORM provides the folllowing settings to overwrite.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">GroupMember</span> 
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">GroupMember</span> 
   <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
   <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
   <span class="k">with</span> <span class="nc">OptimisticLockWithTimestampFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> 
@@ -802,7 +827,7 @@ implicit val session = AutoSession
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -811,7 +836,7 @@ implicit val session = AutoSession
 <hr/>
 
 <p><code>#withTableName</code> enables using another table name only for the current query.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Order</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Order</span><span class="o">]</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Order</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Order</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"o"</span><span class="o">)</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">tableName</span> <span class="k">=</span> <span class="s">"orders"</span>
 <span class="o">}</span>
@@ -821,7 +846,7 @@ implicit val session = AutoSession
 
 <span class="c1">// other table: orders_2012
 </span><span class="nc">Order</span><span class="o">.</span><span class="n">withTableName</span><span class="o">(</span><span class="s">"orders_2012"</span><span class="o">).</span><span class="n">count</span><span class="o">()</span>
-</pre>
+</code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/DynamicTableNameFeature.scala</a></p>
@@ -833,33 +858,33 @@ implicit val session = AutoSession
 <hr/>
 
 <p>If you need to add methods, just write methods that use <code>#findBy</code>, <code>#countBy</code> or ScalikeJDBC&rsquo;s APIs directly.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
   <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">m</span> <span class="k">=</span> <span class="n">defaultAlias</span>
 
   <span class="k">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="n">groupId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span> <span class="o">=</span> <span class="n">autoSession</span><span class="o">)</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
     <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">))</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applciations.</p>
-<pre class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+<pre><code class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
 </span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="k">new</span> <span class="nc">TxPerRequestFilter</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>And then your ORM models can retrieve the current DB session as a thread-local value per request, so you don&rsquo;t need to pass <code>DBSession</code> value as an implicit parameter in each method. </p>
-<pre class="highlight scala"><span class="k">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="n">groupId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">))</span>
-</pre>
+<pre><code class="highlight scala"><span class="k">def</span> <span class="n">findAllByGroupId</span><span class="o">(</span><span class="n">groupId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="n">findAllBy</span><span class="o">(</span><span class="n">sqls</span><span class="o">.</span><span class="n">eq</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupId</span><span class="o">,</span> <span class="n">groupId</span><span class="o">))</span>
+</code></pre>
 
 <p>On the other hand, if you work with multiple threads for single HTTP request, you should be aware that the thread-local DB session won&rsquo;t be shared.</p>
 
 <p>If you use an alternative Id generator instead of the RDB&rsquo;s auto-incremental value, set <code>useExternalIdGenerator</code> as true and implement the <code>generateId</code> method.</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">uuid</span><span class="k">:</span> <span class="kt">UUID</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">uuid</span><span class="k">:</span> <span class="kt">UUID</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
 <span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapperWithId</span><span class="o">[</span><span class="kt">UUID</span>, <span class="kt">Member</span><span class="o">]</span> 
   <span class="k">with</span> <span class="nc">SoftDeleteWithBooleanFeatureWithId</span><span class="o">[</span><span class="kt">UUID</span>, <span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
@@ -881,7 +906,7 @@ implicit val session = AutoSession
 <span class="o">}</span>
 
 <span class="k">val</span> <span class="n">m</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Memmber</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="nc">UUID</span><span class="o">.</span><span class="n">fromString</span><span class="o">(</span><span class="s">"....."</span><span class="o">))</span>
-</pre>
+</code></pre>
 
 <p>Don&rsquo;t worry. Skinny-ORM does well at resolving associations even if you use custom primary keys.</p>
 
@@ -894,7 +919,7 @@ implicit val session = AutoSession
 <p><code>timetamps</code> from ActiveRecord is available as the <code>TimestampsFeature</code> trait. </p>
 
 <p>By default, this trait expects two columns on the table - <code>created_at timestamp not null</code> and <code>updated_at timestamp</code>. If you need customizing, override *FieldName methods as follows.</p>
-<pre class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
+<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
 
 <span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
@@ -903,7 +928,7 @@ implicit val session = AutoSession
   <span class="c1">// updated_timestamp
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">updatedAtFieldName</span> <span class="k">=</span> <span class="s">"updatedTimestamp"</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/TimestampsFeature.scala</a></p>
@@ -917,13 +942,13 @@ implicit val session = AutoSession
 <p>Soft delete support is also available. </p>
 
 <p>By default, <code>deleted_at timestamp</code> column or <code>is_deleted boolean not null</code> is expected.</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
   <span class="k">with</span> <span class="nc">SoftDeleteWithTimestampFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="c1">// deleted_timestamp timestamp
 </span>  <span class="k">override</span> <span class="k">val</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/SoftDeleteWithBooleanFeature.scala</a></p>
@@ -940,10 +965,10 @@ implicit val session = AutoSession
 <p>Furthermore, optimistic lock is also available. </p>
 
 <p>By default, <code>lock_version bigint not null</code> or <code>lock_timestamp timestamp</code> is expected</p>
-<pre class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
+<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
   <span class="k">with</span> <span class="nc">OptimisticLockWithVersionFeature</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span>
 <span class="c1">// lock_version bigint
-</span></pre>
+</span></code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/feature/OptimisticLockWithVersionFeature.scala</a></p>
@@ -958,7 +983,7 @@ implicit val session = AutoSession
 <hr/>
 
 <p><code>SkinnyRecord</code> is a trait which extends entity classes. When an entity is a <code>SkinnyRecord</code>, it acts like a Rails ActiveRecord object.</p>
-<pre class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span> 
+<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span> <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span> 
   <span class="k">extends</span> <span class="nc">SkinnyRecord</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
 
   <span class="k">def</span> <span class="n">skinnyCRUDMapper</span> <span class="k">=</span> <span class="nc">Member</span>
@@ -972,7 +997,7 @@ implicit val session = AutoSession
   <span class="n">member</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">name</span> <span class="k">=</span> <span class="s">"Kaz"</span><span class="o">).</span><span class="n">save</span><span class="o">()</span>
   <span class="n">member</span><span class="o">.</span><span class="n">destory</span><span class="o">()</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>Source code: 
 <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/orm/src/main/scala/skinny/orm/SkinnyRecordBaseWithId.scala</a></p>
@@ -998,25 +1023,25 @@ implicit val session = AutoSession
 <hr/>
 
 <p>If you see the following exception, your application code using Skinny ORM has a bug. This is not a framework bug.</p>
-<pre class="highlight plaintext">Caused by: scalikejdbc.UnexpectedNullValueException: null
+<pre><code class="highlight plaintext">Caused by: scalikejdbc.UnexpectedNullValueException: null
   at scalikejdbc.TypeBinder$.scalikejdbc$TypeBinder$$throwExceptionIfNull(TypeBinder.scala:140) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
   at scalikejdbc.TypeBinder$$anonfun$38.apply(TypeBinder.scala:82) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
   at scalikejdbc.TypeBinder$$anonfun$38.apply(TypeBinder.scala:82) ~[scalikejdbc_2.10-1.7.4.jar:1.7.4]
 ...
-</pre>
+</code></pre>
 
 <h4 id="typical-example">Typical Example</h4>
 
 <p>Typically, the following code will throw UnexpectedNullValueException when the <code>groupId</code> is null.</p>
-<pre class="highlight plaintext">create table member (
+<pre><code class="highlight plaintext">create table member (
   id serial primary key,
   name varchar(256) not null,
   groupId integer
   created_at timestamp not null
   updated_at timestamp not null
 );
-</pre>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
+</code></pre>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
   <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
   <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
   <span class="n">groupId</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span>
@@ -1034,23 +1059,28 @@ implicit val session = AutoSession
     <span class="n">updatedAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">dateTime</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">),</span>
   <span class="o">)</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>You must update <code>Member</code> class as follows:</p>
-<pre class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
+<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Member</span><span class="o">(</span>
   <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
   <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
   <span class="c1">//groupId: Int,
 </span>  <span class="n">groupId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span>
   <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span>
   <span class="n">updatedAT</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">)</span>
-</pre>
+</code></pre>
 
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -1060,13 +1090,6 @@ implicit val session = AutoSession
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</a>
 
           </div>
         </div>

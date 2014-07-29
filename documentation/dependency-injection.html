@@ -3,18 +3,17 @@
   <head>
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>Dependency Injection - Skinny Framework</title>
     <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
     <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-<a href="https://github.com/skinny-framework/skinny-framework"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-      <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
         </div>
@@ -50,9 +49,35 @@
             <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <hr/>
+        </nav>
+
+        <div class="col-sm-12 content">
+            <hr/>
+            <ul class="list-inline small">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+            </ul>
+        </div>
+        <hr/>
         <div class="col-sm-12">
           <div class="content">
             <h2 id="dependency-injection">Dependency Injection</h2>
@@ -92,8 +117,8 @@
 <hr/>
 
 <p><code>skinny-scaldi</code> is an optional module (= not to be enabled by default). Add it to your libraryDependencies.</p>
-<pre class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-scaldi"</span> <span class="o">%</span> <span class="s">"1.2.3"</span>
-</pre>
+<pre><code class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-scaldi"</span> <span class="o">%</span> <span class="s">"1.2.4"</span>
+</code></pre>
 
 <hr/>
 
@@ -104,33 +129,33 @@
 <h4 id="a-module-which-injects-services">A module which injects services</h4>
 
 <p>This is a simple module which injects service objects to controllers or else.</p>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">service</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">service</span>
 <span class="k">trait</span> <span class="nc">EchoService</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">echo</span><span class="o">(</span><span class="n">msg</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
 <span class="o">}</span>
 <span class="k">class</span> <span class="nc">EchoServiceImpl</span> <span class="k">extends</span> <span class="nc">EchoService</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">echo</span><span class="o">(</span><span class="n">msg</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">msg</span>
 <span class="o">}</span>
-</pre>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">module</span>
+</code></pre>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">module</span>
 <span class="k">class</span> <span class="nc">ServicesModule</span> <span class="k">extends</span> <span class="n">scaldi</span><span class="o">.</span><span class="nc">Module</span> <span class="o">{</span>
   <span class="n">bind</span><span class="o">[</span><span class="kt">EchoService</span><span class="o">]</span> <span class="n">to</span> <span class="k">new</span> <span class="nc">EchoServiceImpl</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
 <h4 id="yet-another-module">Yet another module</h4>
 
 <p>The following is another module example.</p>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">AppName</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
-</pre>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">module</span>
+</code></pre>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">module</span>
 <span class="k">class</span> <span class="nc">AppModule</span> <span class="k">extends</span> <span class="n">scaldi</span><span class="o">.</span><span class="nc">Module</span> <span class="o">{</span>
   <span class="n">bind</span><span class="o">[</span><span class="kt">AppName</span><span class="o">]</span> <span class="n">to</span> <span class="nc">AppName</span><span class="o">(</span><span class="s">"My First Skinny App"</span><span class="o">)</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
@@ -141,7 +166,7 @@
 <p>And add modules to <code>src/main/resources/application.conf</code> like this. </p>
 
 <p>Be aware that module in <code>applicationc.conf</code> should be not an object but a class.</p>
-<pre class="highlight plaintext">development {
+<pre><code class="highlight plaintext">development {
   scaldi {
     modules: ["module.ServicesModule", "module.AppModule"]
   }
@@ -151,25 +176,25 @@ test {
     modules: ["module.ServicesModule", "module.AppModule"]
   }
 }
-</pre>
+</code></pre>
 
 <p>The following is the base controller.</p>
-<pre class="highlight scala"><span class="k">import</span> <span class="nn">skinny._</span>
+<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.controller.feature.ScaldiFeature</span>
 
 <span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> 
   <span class="k">with</span> <span class="nc">ScaldiFeature</span> <span class="o">{</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <p>If you&rsquo;d like to replace modules after loading from application.conf, just override <code>scaldiModules: Seq[scaldi.Module]</code>.</p>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Locale</span><span class="o">(</span><span class="n">value</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 <span class="k">object</span> <span class="nc">LocaleModule</span> <span class="k">extends</span> <span class="n">scaldi</span><span class="o">.</span><span class="nc">Module</span> <span class="o">{</span>
   <span class="n">bind</span><span class="o">[</span><span class="kt">Locale</span><span class="o">]</span> <span class="n">to</span> <span class="k">new</span> <span class="nc">Locale</span><span class="o">(</span><span class="s">"ja"</span><span class="o">)</span>
 <span class="o">}</span>
-</pre>
-<pre class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+</code></pre>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> 
   <span class="k">with</span> <span class="nc">ScaldiFeature</span> <span class="o">{</span>
 
@@ -177,14 +202,14 @@ test {
 </span>  <span class="c1">// you can use singleton objects
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">scaldiModules</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="k">new</span> <span class="nc">ServicesModule</span><span class="o">,</span> <span class="nc">LocaleModule</span><span class="o">)</span>
 <span class="o">}</span>
-</pre>
+</code></pre>
 
 <hr/>
 
 <h4 id="using-scaldi-apis">Using Scaldi APIs</h4>
 
 <p>Now you can use Scaldi APIs like <code>inject[A]</code>.</p>
-<pre class="highlight scala"><span class="k">class</span> <span class="nc">InjectedController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">InjectedController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">service</span><span class="k">:</span> <span class="kt">EchoService</span> <span class="o">=</span> <span class="n">inject</span><span class="o">[</span><span class="kt">EchoService</span><span class="o">]</span>
     <span class="n">service</span><span class="o">.</span><span class="n">echo</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">"echo"</span><span class="o">).</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">""</span><span class="o">))</span>
@@ -196,13 +221,18 @@ test {
 </span>  <span class="c1">// though you can do the same thing by using companion objects
 </span>  <span class="k">def</span> <span class="n">env</span> <span class="k">=</span> <span class="n">inject</span><span class="o">[</span><span class="kt">SkinnyEnv</span><span class="o">].</span><span class="n">getOrElse</span><span class="o">(</span><span class="s">"xxx"</span><span class="o">)</span> <span class="c1">// "development"
 </span><span class="o">}</span>
-</pre>
+</code></pre>
 
             <hr/>
             <div class="alert alert-info small"> 
               If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
             </div> 
 
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -212,13 +242,6 @@ test {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</a>
 
           </div>
         </div>
