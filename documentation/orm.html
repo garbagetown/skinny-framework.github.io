@@ -116,7 +116,7 @@
 
 <h4 id="build.sbt">build.sbt</h4>
 <pre><code class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.2.5"</span><span class="o">,</span>
+  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.2.6"</span><span class="o">,</span>
   <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.+"</span><span class="o">,</span>
   <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.+"</span>
 <span class="o">)</span>
@@ -199,7 +199,7 @@ implicit val session = AutoSession
 <span class="o">}</span>
 </code></pre>
 
-<p>And you can use Findre and Querying as follows:</p>
+<p>And you can use Finder and Querying as follows:</p>
 <pre><code class="highlight scala"><span class="k">val</span> <span class="n">member</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="mi">123</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">members</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Member</span><span class="o">.</span><span class="n">where</span><span class="o">(</span><span class="ss">'name </span><span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">).</span><span class="n">apply</span><span class="o">()</span>
 </code></pre>
