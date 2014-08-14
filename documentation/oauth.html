@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>OAuth for Login - Skinny Framework</title>
+    <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        </nav>
+
+        <div class="col-sm-12 content">
+            <hr/>
+            <ul class="list-inline small">
+                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+                <li><a href="/documentation/validator.html">Validator</a></li>
+                <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
+                <li><a href="/documentation/assets.html">Assets Support</a></li>
+                <li><a href="/documentation/mail.html">Mail</a></li>
+                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+                <li><a href="/documentation/i18n.html">i18n</a></li>
+                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+                <li><a href="/documentation/json.html">Working with JSON</a></li>
+                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+                <li><a href="/documentation/tasks.html">Tasks</a></li>
+                <li><a href="/documentation/testing.html">Testing</a></li>
+                <li><a href="/documentation/packaging.html">Packaging</a></li>
+                <li><a href="/documentation/community.html">Community</a></li>
+                <li><a href="/contribution.html">Contribution</a></li>
+            </ul>
+        </div>
+        <hr/>
+        <div class="col-sm-12">
+          <div class="content">
+            <h2 id="oauth-for-login">OAuth for Login</h2>
+
+<hr/>
+
+<p>OAuth 2.0 is widely used for &ldquo;login&rdquo; feature. Skinny Framework provides some modules for that.</p>
+
+<p>Skinny&rsquo;s OAuth 2.0 modules uses Apache Oltu internally.</p>
+
+<p><a href="https://oltu.apache.org/">https://oltu.apache.org/</a></p>
+
+<hr/>
+
+<h3 id="oauth-2.0-(facebook,-github,-google-and-so-on)">OAuth 2.0 (Facebook, GitHub, Google and so on)</h3>
+
+<hr/>
+
+<p><code>skinny-oauth2-controller</code> contains Facebook, GitHub and Google login features.</p>
+
+<p>Add the following depedency in your <code>project/Build.scala</code>.</p>
+<pre><code class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-oauth2-controller"</span> <span class="o">%</span> <span class="s">"1.2.9"</span>
+</code></pre>
+
+<hr/>
+
+<h4 id="facebook">Facebook</h4>
+
+<p>Facebook login API is mostly compatible with OAuth 2.0. See the official documentation here:</p>
+
+<p><a href="https://developers.facebook.com/docs/facebook-login/">https://developers.facebook.com/docs/facebook-login/</a></p>
+<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+
+<span class="k">import</span> <span class="nn">skinny.controller.feature.FacebookLoginFeature</span>
+<span class="k">import</span> <span class="nn">skinny.oauth2.client.facebook.FacebookUser</span>
+
+<span class="k">class</span> <span class="nc">FBAuthController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">FacebookLoginFeature</span> <span class="o">{</span>
+  <span class="c1">// these env variables are expected by default
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_ID_FACEBOOK
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_SECRET_FACEBOOK
+</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">redirectURI</span> <span class="k">=</span> <span class="s">"http://localhost:8080/auth/facebook/callback"</span>
+
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">saveAuthorizedUser</span><span class="o">(</span><span class="n">fbUser</span><span class="k">:</span> <span class="kt">FacebookUser</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">user</span> <span class="k">=</span> <span class="nc">User</span><span class="o">.</span><span class="n">findById</span><span class="o">(</span><span class="n">fbUser</span><span class="o">.</span><span class="n">id</span><span class="o">).</span><span class="n">getOrElse</span> <span class="o">{</span> 
+      <span class="nc">User</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="n">fbUser</span><span class="o">)</span>
+    <span class="o">}</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">setAttribute</span><span class="o">(</span><span class="s">"currentUser"</span><span class="o">,</span> <span class="n">user</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">handleWhenLoginFailed</span><span class="o">()</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">flash</span><span class="o">(</span><span class="s">"warn"</span><span class="o">)</span> <span class="k">=</span> <span class="s">"Login failed. Please try again."</span>
+    <span class="n">redirect302</span><span class="o">(</span><span class="s">"/auth"</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">handleWhenLoginSucceeded</span><span class="o">()</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">flash</span><span class="o">(</span><span class="s">"info"</span><span class="o">)</span> <span class="k">=</span> <span class="s">"You have successfully registered and logged in."</span>
+    <span class="n">redirect302</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
+  <span class="k">object</span> <span class="nc">fbAuth</span> <span class="k">extends</span> <span class="nc">FBAuthController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">facebookLoginUrl</span> <span class="k">=</span> <span class="n">post</span><span class="o">(</span><span class="s">"/auth/facebook"</span><span class="o">)(</span><span class="n">loginRedirect</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'facebookLogin)</span>
+    <span class="k">val</span> <span class="n">facebookLoginCallbackUrl</span> <span class="k">=</span> <span class="n">get</span><span class="o">(</span><span class="s">"/auth/facebook/callback"</span><span class="o">)(</span><span class="n">callback</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="ss">'facebookLogin)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<hr/>
+
+<h4 id="github">GitHub</h4>
+
+<p>Almost same :)</p>
+
+<p>Your developer applications provide OAuth 2.0 authorization. Register new application here.</p>
+
+<p><a href="https://github.com/settings/applications">https://github.com/settings/applications</a></p>
+<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.controller.feature.GitHubLoginFeature</span>
+<span class="k">import</span> <span class="nn">skinny.oauth2.client.github.GitHubUser</span>
+
+<span class="k">class</span> <span class="nc">SessionsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">GitHubLoginFeature</span> <span class="o">{</span>
+  <span class="c1">// these env variables are expected by default
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_ID_GITHUB
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_SECRET_GITHUB
+</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">saveAuthorizedUser</span><span class="o">(</span><span class="n">ghUser</span><span class="k">:</span> <span class="kt">GitHubUser</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<hr/>
+
+<h4 id="google">Google</h4>
+
+<p>Google API supports OAuth 2.0 authorization. Create your API project and gerenate credentials here.</p>
+
+<p><a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
+<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.controller.feature.GoogleLoginFeature</span>
+<span class="k">import</span> <span class="nn">skinny.oauth2.client.google.GoogleUser</span>
+
+<span class="k">class</span> <span class="nc">SessionsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">GoogleLoginFeature</span>
+  <span class="k">with</span> <span class="nc">SkinnySessionOAuth2LoginFeature</span><span class="o">[</span><span class="kt">GoogleUser</span><span class="o">]</span> <span class="k">with</span> <span class="nc">SkinnyFilter</span> <span class="o">{</span>
+
+  <span class="c1">// these env variables are expected by default
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_ID_GOOGLE
+</span>  <span class="c1">// SKINNY_OAUTH2_CLIENT_SECRET_GOOGLE
+</span>
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">saveAuthorizedUser</span><span class="o">(</span><span class="n">ghUser</span><span class="k">:</span> <span class="kt">GoogleUser</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<hr/>
+
+<h3 id="twitter-oauth-1.0a-for-login">Twitter OAuth 1.0a for Login</h3>
+
+<hr/>
+
+<p><a href="https://dev.twitter.com/docs/auth/oauth">https://dev.twitter.com/docs/auth/oauth</a></p>
+
+<p>Your applications are here. Since you cannot register localhost app, edit <code>/etc/hosts</code> for debugging.</p>
+
+<p><a href="https://apps.twitter.com/">https://apps.twitter.com/</a></p>
+
+<p><code>skinny-twitter-controller</code> provides you Twitter login (OAuth 1.0a authorization) and prepared <code>twitter4j.Twitter</code> in controllers.</p>
+
+<p><a href="http://twitter4j.org/en/index.html">http://twitter4j.org/en/index.html</a></p>
+
+<hr/>
+
+<p>Add the following dependency in your <code>project/Build.scala</code>.</p>
+<pre><code class="highlight scala"><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-twitter-controller"</span> <span class="o">%</span> <span class="n">skinnyVersion</span>
+</code></pre>
+
+<hr/>
+
+<p>And just use <code>TwitterLoginFeature</code> trait. </p>
+<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.controller.feature.TwitterLoginFeature</span>
+
+<span class="k">class</span> <span class="nc">SessionsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">TwitterLoginFeature</span> <span class="o">{</span>
+  <span class="c1">// these env variables are expected by default
+</span>  <span class="c1">// SKINNY_OAUTH1_CONSUMER_KEY_TWITTER
+</span>  <span class="c1">// SKINNY_OAUTH1_CONSUMER_SECRET_TWITTER
+</span>
+  <span class="c1">// Twitter API doesn't allow localhost app, edit /etc/hosts
+</span>  <span class="k">override</span> <span class="k">def</span> <span class="n">isLocalDebug</span> <span class="k">=</span> <span class="kc">true</span>
+
+  <span class="k">override</span> <span class="k">protected</span> <span class="k">def</span> <span class="n">saveAuthorizedUser</span><span class="o">(</span><span class="n">twUser</span><span class="k">:</span> <span class="kt">twitter4j.User</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="o">..</span> <span class="o">}</span>
+</code></pre>
+
+            <hr/>
+            <div class="alert alert-info small"> 
+              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
+            </div> 
+
+<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</a>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

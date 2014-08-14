@@ -27,6 +27,7 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
@@ -59,6 +60,7 @@
                 <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
                 <li><a href="/documentation/validator.html">Validator</a></li>
                 <li><a href="/documentation/view-templates.html">View Templates</a></li>
+                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
                 <li><a href="/documentation/assets.html">Assets Support</a></li>
                 <li><a href="/documentation/mail.html">Mail</a></li>
                 <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
@@ -140,13 +142,13 @@ If you&rsquo;re already familiar with Scala and your <code>sbt.ivy.home</code> d
 
 <p>For begineers, this one is highly recommended because you don&rsquo;t need to wait download dependencies.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.2.8/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.2.9/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
 
 <h4 id="2)-skinny-blank-app.zip-(1mb)">2) skinny-blank-app.zip (1MB)</h4>
 
 <p>If you&rsquo;re a heavy Scala user, this one will be suitable for you.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.2.8/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.2.9/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
 <h4 id="3)-homebrew-(brew-tap)">3) Homebrew (brew tap)</h4>
 
@@ -159,6 +161,8 @@ brew install skinny
 skinny new skinny-blank-app
 <span class="nb">cd </span>skinny-blank-app
 </code></pre>
+
+<script type="text/javascript" src="https://asciinema.org/a/11426.js" id="asciicast-11426" async></script>
 
 <hr/>
 
@@ -225,23 +229,23 @@ yo skinny
 
 <p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
 <pre><code class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-assets"       % "1.2.8",
-  "org.skinny-framework" %% "skinny-framework"    % "1.2.8",
-  "org.skinny-framework" %% "skinny-task"         % "1.2.8",
-  "org.skinny-framework" %% "skinny-scaldi"       % "1.2.8",
-  "org.skinny-framework" %% "skinny-test"         % "1.2.8" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.2.8" % "test"
+  "org.skinny-framework" %% "skinny-assets"       % "1.2.9",
+  "org.skinny-framework" %% "skinny-framework"    % "1.2.9",
+  "org.skinny-framework" %% "skinny-task"         % "1.2.9",
+  "org.skinny-framework" %% "skinny-scaldi"       % "1.2.9",
+  "org.skinny-framework" %% "skinny-test"         % "1.2.9" % "test",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.2.9" % "test"
 )
 </code></pre>
 
 <p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre><code class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-orm"          % "1.2.8",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.2.8",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.2.8",
-  "org.skinny-framework" %% "skinny-validator"    % "1.2.8",
-  "org.skinny-framework" %% "skinny-http-client"  % "1.2.8",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.2.8" % "test"
+  "org.skinny-framework" %% "skinny-orm"          % "1.2.9",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.2.9",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.2.9",
+  "org.skinny-framework" %% "skinny-validator"    % "1.2.9",
+  "org.skinny-framework" %% "skinny-http-client"  % "1.2.9",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.2.9" % "test"
 )
 </code></pre>
 
@@ -527,9 +531,9 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre><code class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.2.8",
-  "org.skinny-framework" %% "skinny-assets"    % "1.2.8",
-  "org.skinny-framework" %% "skinny-test"      % "1.2.8" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.2.9",
+  "org.skinny-framework" %% "skinny-assets"    % "1.2.9",
+  "org.skinny-framework" %% "skinny-test"      % "1.2.9" % "test"
 )
 </code></pre>
 
@@ -626,7 +630,7 @@ yo skinny
 
 <p>Skinny Framework team is passionately working on this project.</p>
 
-<p><a href="https://github.com/orgs/skinny-framework/members">https://github.com/orgs/skinny-framework/members</a></p>
+<p><a href="https://github.com/orgs/skinny-framework/people">https://github.com/orgs/skinny-framework/people</a></p>
 
 <p>If you&rsquo;re interested in Skinny development, pull requests are always welcome.</p>
 
