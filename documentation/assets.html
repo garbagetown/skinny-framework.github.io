@@ -93,15 +93,15 @@
 <img alt="Scala.js" src="/images/scalajs.png" /></p>
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
-<pre><code class="highlight plaintext">libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.3.1",
-  "org.skinny-framework" %% "skinny-assets"    % "1.3.1",
-  "org.skinny-framework" %% "skinny-test"      % "1.3.1" % "test"
+<pre class="highlight plaintext"><code>libraryDependencies ++= Seq(
+  "org.skinny-framework" %% "skinny-framework" % "1.3.6",
+  "org.skinny-framework" %% "skinny-assets"    % "1.3.6",
+  "org.skinny-framework" %% "skinny-test"      % "1.3.6" % "test"
 )
 </code></pre>
 
 <p>And then, add <code>AssetsController</code> to routes. Now you can easily use CoffeeScript, LESS and Sass.</p>
-<pre><code class="highlight scala"><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+<pre class="highlight scala"><code><span class="c1">// src/main/scala/ScalatraBootstrap.scala
 </span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="n">exntends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
     <span class="nc">AssetsController</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="n">ctx</span><span class="o">)</span>
@@ -127,7 +127,7 @@
 If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So you don&rsquo;t need to prepare a CoffeeScript compiler in advance.</p>
 
 <p>Easy to start! Just put *.coffee files under <code>WEB-INF/assets/coffee</code>:</p>
-<pre><code class="highlight coffeescript"><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
+<pre class="highlight coffeescript"><code><span class="c1"># src/main/webapp/WEB-INF/assets/coffee/echo.coffee
 </span><span class="nx">echo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">v</span>
 <span class="nx">echo</span> <span class="s">"foo"</span>
 </code></pre>
@@ -148,7 +148,7 @@ If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So yo
 If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So you don&rsquo;t need to prepare a LESS compiler in advance.</p>
 
 <p>Easy to start! Just put *.less files under <code>WEB-INF/assets/less</code>:</p>
-<pre><code class="highlight plaintext">// src/main/webapp/WEB-INF/assets/less/box.less
+<pre class="highlight plaintext"><code>// src/main/webapp/WEB-INF/assets/less/box.less
 @base: #f938ab;
 .box {
   color: saturate(@base, 5%);
@@ -173,7 +173,7 @@ If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So yo
 <p>And then, just put *.scss files under <code>WEB-INF/assets/scss</code> or <code>WEB-INF/assets/sass</code>.</p>
 
 <p>If you use Sass Indented Syntax, put *.sass files under <code>WEB-INF/assets/sass</code>.</p>
-<pre><code class="highlight scss"><span class="c1">// src/main/webapp/WEB-INF/assets/scss/main.scss
+<pre class="highlight scss"><code><span class="c1">// src/main/webapp/WEB-INF/assets/scss/main.scss
 </span><span class="nv">$font-stack</span><span class="p">:</span>    <span class="n">Helvetica</span><span class="o">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
 <span class="nv">$primary-color</span><span class="p">:</span> <span class="mh">#333</span><span class="p">;</span>
 <span class="nt">body</span> <span class="p">{</span>
@@ -198,7 +198,7 @@ If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So yo
 If it&rsquo;s absent, Skinny uses its own compiler on the Rhino JS engine. So you don&rsquo;t need to prepare a JSX compiler in advance.</p>
 
 <p>Easy to start! Just put *.jsx files under <code>WEB-INF/assets/jsx</code>:</p>
-<pre><code class="highlight xml">// src/main/webapp/WEB-INF/assets/jsx/react-example.jsx
+<pre class="highlight xml"><code>// src/main/webapp/WEB-INF/assets/jsx/react-example.jsx
 /** @jsx React.DOM */
 React.renderComponent(
   <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span>,
@@ -229,13 +229,13 @@ React.renderComponent(
 <h4 id="terminal-a">Terminal A</h4>
 
 <p>Just invoke Skinny app.</p>
-<pre><code class="highlight shell">./skinny run
+<pre class="highlight shell"><code>./skinny run
 </code></pre>
 
 <h4 id="terminal-b">Terminal B</h4>
 
 <p>Invoke Scala.js assets watcher process (which is similar to grunt watch).</p>
-<pre><code class="highlight shell">./skinny scalajs:watch
+<pre class="highlight shell"><code>./skinny scalajs:watch
 </code></pre>
 
 <h4 id="put-scala-code-into-assets-directory">Put Scala code into assets directory</h4>
@@ -255,7 +255,7 @@ React.renderComponent(
 <p>If you need other script support, you can add compilers to AssetsController.</p>
 
 <p>AssetsController: <a href="https://github.com/skinny-framework/skinny-framework/blob/develop/assets/src/main/scala/skinny/controller/AssetsController.scala">assets/src/main/scala/skinny/controller/AssetsController.scala</a></p>
-<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">TypeScriptAssetCompiler</span> <span class="k">extends</span> <span class="nc">AssetCompiler</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">object</span> <span class="nc">TypeScriptAssetCompiler</span> <span class="k">extends</span> <span class="nc">AssetCompiler</span> <span class="o">{</span>
   <span class="k">private</span><span class="o">[</span><span class="kt">this</span><span class="o">]</span> <span class="k">val</span> <span class="n">compiler</span> <span class="k">=</span> <span class="nc">TypeScriptCompiler</span><span class="o">()</span>
   <span class="k">def</span> <span class="n">dir</span><span class="o">(</span><span class="n">basePath</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">s</span><span class="s">"${basePath}/ts"</span>
   <span class="k">def</span> <span class="n">extension</span> <span class="k">=</span> <span class="s">"ts"</span>
@@ -287,7 +287,7 @@ React.renderComponent(
 <p>skinny-blank-app has a Gruntfile.js sample. You can run assets watcher right now.</p>
 
 <p>See also: <code>src/main/webapp/WEB-INF/layouts/default.ssp</code> and <code>src/main/webapp/assets/grunt/*</code>.</p>
-<pre><code class="highlight plaintext">npm install
+<pre class="highlight plaintext"><code>npm install
 npm install -g grunt-cli
 grunt
 </code></pre>

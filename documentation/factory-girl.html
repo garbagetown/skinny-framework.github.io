@@ -93,7 +93,7 @@
 <p>Though Skinny&rsquo;s FactoryGirl is not a complete port of <a href="https://github.com/thoughtbot/factory_girl">thoughtbot/factory_girl</a>, this module is quite useful when testing your apps.</p>
 
 <p>FactoryGirl depends on only Skinny ORM. You can use FactoryGirl even in your Play2 apps!</p>
-<pre><code class="highlight plaintext">libraryDependencies += "org.skinny-framework" %% "skinny-factory-girl" % "1.3.1" % "test"
+<pre class="highlight plaintext"><code>libraryDependencies += "org.skinny-framework" %% "skinny-factory-girl" % "1.3.6" % "test"
 </code></pre>
 
 <hr/>
@@ -110,7 +110,7 @@
 </ul>
 
 <h4 id="example-code">Example code</h4>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.orm._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.orm._</span>
 
 <span class="k">case</span> <span class="k">class</span> <span class="nc">Company</span><span class="o">(</span><span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 <span class="k">object</span> <span class="nc">Company</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Company</span><span class="o">]</span> <span class="o">{</span>
@@ -138,7 +138,7 @@
 </code></pre>
 
 <p>In this example, <code>src/test/resources/factories.conf</code> is like this:</p>
-<pre><code class="highlight plaintext">countryyy {
+<pre class="highlight plaintext"><code>countryyy {
   name="Japan"
 }
 member {
@@ -161,7 +161,7 @@ skill {
 <h3 id="string-interpolation-is-available">String interpolation is available</h3>
 
 <p>By default, values in factories.conf is in string interpolation mode.</p>
-<pre><code class="highlight plaintext">member {
+<pre class="highlight plaintext"><code>member {
   luckyNumber="${scala.util.Random.nextInt(64)}"
   memberCode="xyz-${System.currentTimeMillis}"
 }
@@ -182,14 +182,14 @@ skill {
 <p>Attributes passed to this method will be used for replacing variables such as &ldquo;#{userId}&rdquo; in factories.conf.</p>
 
 <h4 id="factories.conf">factories.conf</h4>
-<pre><code class="highlight scala"><span class="n">member</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="n">member</span> <span class="o">{</span>
   <span class="n">name</span><span class="o">=</span><span class="s">"Alice"</span>
   <span class="n">countryId</span><span class="o">=</span><span class="s">"#{cntId}"</span>
 <span class="o">}</span>
 </code></pre>
 
 <h4 id="foospec.scala">FooSpec.scala</h4>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">countryId</span> <span class="k">=</span> <span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Country</span><span class="o">).</span><span class="n">create</span><span class="o">().</span><span class="n">id</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">countryId</span> <span class="k">=</span> <span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Country</span><span class="o">).</span><span class="n">create</span><span class="o">().</span><span class="n">id</span>
 <span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Member</span><span class="o">).</span><span class="n">withVariables</span><span class="o">(</span><span class="ss">'cntId </span><span class="o">-&gt;</span> <span class="n">countryId</span><span class="o">).</span><span class="n">create</span><span class="o">()</span>
 
 <span class="c1">// will use name: Alice, countryId: 234
@@ -202,14 +202,14 @@ skill {
 <p>These attributes will overwrite the values in factories.conf. </p>
 
 <h4 id="factories.conf">factories.conf</h4>
-<pre><code class="highlight plaintext">member {
+<pre class="highlight plaintext"><code>member {
   name="Alice"
   country="USA"
 }
 </code></pre>
 
 <h4 id="somespec.scala">SomeSpec.scala</h4>
-<pre><code class="highlight scala"><span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Member</span><span class="o">).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'country </span><span class="o">-&gt;</span> <span class="s">"Japan"</span><span class="o">).</span><span class="n">create</span><span class="o">()</span>
+<pre class="highlight scala"><code><span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Member</span><span class="o">).</span><span class="n">withAttributes</span><span class="o">(</span><span class="ss">'country </span><span class="o">-&gt;</span> <span class="s">"Japan"</span><span class="o">).</span><span class="n">create</span><span class="o">()</span>
 <span class="c1">// will use name: Alice, country: Japan
 </span>
 <span class="nc">FactoryGirl</span><span class="o">(</span><span class="nc">Member</span><span class="o">).</span><span class="n">create</span><span class="o">(</span><span class="ss">'country </span><span class="o">-&gt;</span> <span class="s">"Japan"</span><span class="o">)</span>

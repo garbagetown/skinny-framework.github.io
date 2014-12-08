@@ -97,7 +97,7 @@
 <p>skinny-blank-app prepares the easy-to-use <code>TaskRunner</code>.</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/yeoman-generator-skinny/app/templates/task/src/main/scala/TaskRunner.scala">task/src/main/scala/TaskRunner.scala</a></p>
-<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">TaskRunner</span> <span class="k">extends</span> <span class="n">skinny</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="nc">TaskLauncher</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">object</span> <span class="nc">TaskRunner</span> <span class="k">extends</span> <span class="n">skinny</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="nc">TaskLauncher</span> <span class="o">{</span>
 
   <span class="c1">// def register(name: String, runner: (List[String]) =&gt; Unit)
 </span>  <span class="n">register</span><span class="o">(</span><span class="s">"assets:precompile"</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
@@ -114,11 +114,11 @@
 <hr/>
 
 <p>Creating tasks is pretty easy. You just need to define a function <code>(List[String]) =&gt; Unit</code>.</p>
-<pre><code class="highlight scala"><span class="n">register</span><span class="o">(</span><span class="s">"echo"</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">params</span> <span class="n">foreach</span> <span class="n">println</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="n">register</span><span class="o">(</span><span class="s">"echo"</span><span class="o">,</span> <span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">params</span> <span class="n">foreach</span> <span class="n">println</span><span class="o">)</span>
 </code></pre>
 
 <p>Run the task:</p>
-<pre><code class="highlight plaintext">sbt "task/run echo foo bar baz"
+<pre class="highlight plaintext"><code>sbt "task/run echo foo bar baz"
 
 [info] Running TaskLancher echo foo bar baz
 foo

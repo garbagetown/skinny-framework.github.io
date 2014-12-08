@@ -101,7 +101,7 @@
 <h3 id="default-locale">Default Locale</h3>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.filter._</span>
 <span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">ErrorPageFilter</span> <span class="o">{</span>
@@ -117,8 +117,8 @@
 
 <hr/>
 
-<p>You can store users&#39; locale in Servlet sessions or Skinny sessions.</p>
-<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">SettingsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+<p>You can store users&rsquo; locale in Servlet sessions or Skinny sessions.</p>
+<pre class="highlight scala"><code><span class="k">object</span> <span class="nc">SettingsController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
 
   <span class="k">def</span> <span class="n">updateLocale</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">locale</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">"locale"</span><span class="o">).</span><span class="n">orNull</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
@@ -139,7 +139,7 @@
 <hr/>
 
 <p>By default, defaultLocale is None. In this case, <code>src/main/resources/messages.conf</code> will be used.</p>
-<pre><code class="highlight plaintext">error {
+<pre class="highlight plaintext"><code>error {
   required="{0} is required"
   length="{0} length must be {1}"
   .....
@@ -164,7 +164,7 @@ delete="Delete"
 <p>When locale is set, <code>src/main/resources/messages_{locale}.conf</code> instead of <code>messages.conf</code>.</p>
 
 <p>The following example is <code>messages_ja.conf</code> for Japanese.</p>
-<pre><code class="highlight plaintext">error {
+<pre class="highlight plaintext"><code>error {
   required="{0} を入力してください"
   length="{0} は {1} 文字で入力してください"
   .....
@@ -193,13 +193,13 @@ delete="削除"
 <hr/>
 
 <p>Simply use <code>skinny.I18n</code> instance. Current <code>skinny.I18n</code> instance is always available as <code>i18n</code> in view templates.</p>
-<pre><code class="highlight plaintext">&lt;%@val i18n: skinny.I18n %&gt;
+<pre class="highlight plaintext"><code>&lt;%@val i18n: skinny.I18n %&gt;
 ${i18n.get("submit")}
 ${i18n.get("project.name")}
 </code></pre>
 
 <p>The above example expects the following <code>src/main/resources/messages_{locale}.conf</code>.</p>
-<pre><code class="highlight plaintext">submit="Submit"
+<pre class="highlight plaintext"><code>submit="Submit"
 project {
   name="Project Name"
 }
@@ -216,7 +216,7 @@ project {
 <p>The error message which is defined with <code>error</code> prefix and validator&rsquo;s <code>name</code> will be used.</p>
 
 <p>For instance, this validator&rsquo;s name is <code>notNull</code>,</p>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.validator._</span>
 <span class="k">object</span> <span class="nc">notNull</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"notNull"</span>
   <span class="k">def</span> <span class="n">isValid</span><span class="o">(</span><span class="n">v</span><span class="k">:</span> <span class="kt">Any</span><span class="o">)</span> <span class="k">=</span> <span class="n">v</span> <span class="o">!=</span> <span class="kc">null</span>
@@ -224,7 +224,7 @@ project {
 </code></pre>
 
 <p>So validation error message should be defined in <code>messages.conf</code> like this:</p>
-<pre><code class="highlight plaintext">error {
+<pre class="highlight plaintext"><code>error {
   notNull="{0} must not be null"
 }
 </code></pre>

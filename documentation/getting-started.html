@@ -97,19 +97,19 @@
 <p>Download latest <code>skinny-blank-app(-with-deps).zip</code> and unzip it, then just run ./skinny command on your terminal. That&rsquo;s all!</p>
 
 <p>If you&rsquo;re a Windows user, don&rsquo;t worry. Use skinny.bat on cmd.exe instead.</p>
-<pre><code class="highlight shell">./skinny run
+<pre class="highlight shell"><code>./skinny run
 </code></pre>
 
 <hr/>
 
-<h3 id="homebrew-(brew-tap)">Homebrew (brew tap)</h3>
+<h3 id="homebrew">Homebrew</h3>
 
 <hr/>
 
 <p>If you&rsquo;re a MacOS X user, try our Homebrew formula out.</p>
 
-<p><a href="https://github.com/skinny-framework/homebrew-alt">https://github.com/skinny-framework/homebrew-alt</a></p>
-<pre><code class="highlight shell">brew tap skinny-framework/alt
+<p><a href="https://github.com/Homebrew/homebrew/blob/master/Library/Formula/skinny.rb">https://github.com/Homebrew/homebrew/blob/master/Library/Formula/skinny.rb</a></p>
+<pre class="highlight shell"><code>brew update
 brew install skinny
 
 skinny new skinny-blank-app
@@ -117,7 +117,11 @@ skinny new skinny-blank-app
 skinny run
 </code></pre>
 
-<script type="text/javascript" src="https://asciinema.org/a/11426.js" id="asciicast-11426" async></script>
+<p>If you sufferred the following error, try <code>brew uninstall node &amp;&amp; brew install node --with-npm</code> (in some cases, also need to <code>rm -rf /usr/local/lib/node_modules</code>).</p>
+
+<pre>npm is required. If you have installed node with `--without-npm` option, reinstall with `--with-npm`.</pre>
+
+<p><script type="text/javascript" src="https://asciinema.org/a/11426.js" id="asciicast-11426" async></script></p>
 
 <hr/>
 
@@ -126,14 +130,14 @@ skinny run
 <hr/>
 
 <p>Let&rsquo;s create our first Skinny app by using the scaffold generator.</p>
-<pre><code class="highlight shell"><span class="c"># If you're a zsh user, try "noglob ./skinny g scaffold ..."</span>
+<pre class="highlight shell"><code><span class="c"># If you're a zsh user, try "noglob ./skinny g scaffold ..."</span>
 ./skinny g scaffold members member name:String activated:Boolean luckyNumber:Option[Long] birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
 </code></pre>
 
 <p>FYI: It&rsquo;s also possible to specify the column data type for each field. However you will need to add the length validation code to MembersController yourself.</p>
-<pre><code class="highlight shell">./skinny g scaffold members member <span class="s2">"name:String:varchar(128)"</span>
+<pre class="highlight shell"><code>./skinny g scaffold members member <span class="s2">"name:String:varchar(128)"</span>
 </code></pre>
 
 <p>And then, access <code>http://localhost:8080/members</code>.</p>
@@ -141,18 +145,18 @@ skinny run
 <p>See in detail here: <a href="/documentation/scaffolding.html">Scaffolding</a></p>
 
 <p>You can also run the generated tests.</p>
-<pre><code class="highlight plaintext">./skinny db:migrate test
+<pre class="highlight plaintext"><code>./skinny db:migrate test
 ./skinny test
 </code></pre>
 
 <p>If you just need a controller, run the generator like this:</p>
-<pre><code class="highlight shell">./skinny g controller <span class="nb">help</span>
+<pre class="highlight shell"><code>./skinny g controller <span class="nb">help</span>
 </code></pre>
 
 <p>And then, access <code>http://localhost:8080/help</code>.</p>
 
 <p>Finally, let&rsquo;s create a war file to deploy.</p>
-<pre><code class="highlight shell">./skinny package
+<pre class="highlight shell"><code>./skinny package
 </code></pre>
 
 <hr/>
@@ -168,7 +172,7 @@ skinny run
 <h4 id="create-new-skinnycontroller-under-conroller-package">Create new <code>SkinnyController</code> under <code>conroller</code> package</h4>
 
 <p>You can create a controller by hand or by using generator.</p>
-<pre><code class="highlight plaintext">% ./skinny g controller help
+<pre class="highlight plaintext"><code>% ./skinny g controller help
 
  *** Skinny Generator Task ***
 
@@ -184,7 +188,7 @@ skinny run
 <h4 id="add-routing-definition-to-controller.controllers">Add routing definition to <code>controller.Controllers</code></h4>
 
 <p>When you use generator, this will be done by generator. </p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">object</span> <span class="nc">Controllers</span> <span class="o">{</span>
 
@@ -202,7 +206,7 @@ skinny run
 
 <h4 id="add-view-templates-for-render-methods">Add view templates for <code>render</code> methods</h4>
 
-<p>Add Scalate (ssp, scaml, jade, mustache) or FreeMarker, Thymeleaf templates under <code>src/main/webapp/WEB-INF/views</code>.</p>
+<p>Add Scalate (ssp, scaml, jade, mustache) or FreeMarker, Thymeleaf, Velocity templates under <code>src/main/webapp/WEB-INF/views</code>.</p>
 
 <p>The above <code>HelpController</code> expects <code>src/main/webapp/WEB-INF/views/help/index.html.ssp</code>.</p>
 
@@ -227,7 +231,7 @@ skinny run
 <p><img alt="Yeoman" src="/images/yeoman.png" /></p>
 
 <p>If you&rsquo;re familiar with <a href="http://yeoman.io">Yeoman</a>, a generator for <a href="https://github.com/skinny-framework/skinny-framework">Skinny framework</a> is available.</p>
-<pre><code class="highlight shell"><span class="c"># brew instsall node</span>
+<pre class="highlight shell"><code><span class="c"># brew instsall node</span>
 npm install -g yo
 npm install -g generator-skinny
 mkdir skinny-app
@@ -243,7 +247,7 @@ yo skinny
 <hr/>
 
 <p>The following tree shows the directories and files in skinny-blank-app project. Using this directory layout is recommended.</p>
-<pre><code class="highlight shell">.
+<pre class="highlight shell"><code>.
 ├── README.md
 ├── bin
 │   └── sbt-launch.jar <span class="c"># global sbt script in PATH is given priority over this</span>

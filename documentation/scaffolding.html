@@ -91,7 +91,7 @@
 <hr/>
 
 <p>Skinny has a powerful scaffold generator. Usage is very simple.</p>
-<pre><code class="highlight plaintext"># If you're a zsh user, try "noglob ./skinny g scaffold ..."
+<pre class="highlight plaintext"><code># If you're a zsh user, try "noglob ./skinny g scaffold ..."
 ./skinny g scaffold members member name:String "nickname:String:varchar(64)" birthday:Option[LocalDate]
 ./skinny db:migrate
 ./skinny run
@@ -104,7 +104,7 @@
 <h4 id="parameters">Parameters</h4>
 
 <p>Scaffold command&rsquo;s parameters are &hellip;</p>
-<pre><code class="highlight plaintext">./skinny g scaffold:{template} {resources} {resource} "{fieldName:paramType(:columnType)}" ...
+<pre class="highlight plaintext"><code>./skinny g scaffold:{template} {resources} {resource} "{fieldName:paramType(:columnType)}" ...
 </code></pre>
 
 <ul>
@@ -116,8 +116,66 @@
 <li>{columnType}: (optional) Database column type. This will be embedded into DB migration file.</li>
 </ul>
 
+<p>If an attribute&rsquo;s {paramType} is an entity type (all unexpected types), the attribute will be converted to association definition.</p>
+<pre class="highlight shell"><code>./skinny g model tweet userId:Long text:String user:Option[User]
+</code></pre>
+
+<p>This command will generate following code:</p>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">model</span>
+
+<span class="k">import</span> <span class="nn">skinny.orm._</span><span class="o">,</span> <span class="n">feature</span><span class="o">.</span><span class="k">_</span>
+<span class="k">import</span> <span class="nn">scalikejdbc._</span>
+<span class="k">import</span> <span class="nn">org.joda.time._</span>
+
+<span class="c1">// If your model has +23 fields, switch this to normal class and mixin scalikejdbc.EntityEquality.
+</span><span class="k">case</span> <span class="k">class</span> <span class="nc">Tweet</span><span class="o">(</span>
+  <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
+  <span class="n">userId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
+  <span class="n">text</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">user</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">createdAt</span><span class="k">:</span> <span class="kt">DateTime</span><span class="o">,</span>
+  <span class="n">updatedAt</span><span class="k">:</span> <span class="kt">DateTime</span>
+<span class="o">)</span>
+
+<span class="k">object</span> <span class="nc">Tweet</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Tweet</span><span class="o">]</span> <span class="k">with</span> <span class="nc">TimestampsFeature</span><span class="o">[</span><span class="kt">Tweet</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">override</span> <span class="k">lazy</span> <span class="k">val</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"t"</span><span class="o">)</span>
+
+  <span class="k">lazy</span> <span class="k">val</span> <span class="n">userRef</span> <span class="k">=</span> <span class="n">belongsTo</span><span class="o">[</span><span class="kt">User</span><span class="o">](</span><span class="nc">User</span><span class="o">,</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">u</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">user</span> <span class="k">=</span> <span class="n">u</span><span class="o">))</span>
+
+  <span class="cm">/*
+   * If you're familiar with ScalikeJDBC/Skinny ORM, using #autoConstruct makes your mapper simpler.
+   * (e.g.)
+   * override def extract(rs: WrappedResultSet, rn: ResultName[Tweet]) = autoConstruct(rs, rn)
+   *
+   * Be aware of excluding associations like this:
+   * (e.g.)
+   * case class Member(id: Long, companyId: Long, company: Option[Company] = None)
+   * object Member extends SkinnyCRUDMapper[Member] {
+   *   override def extract(rs: WrappedResultSet, rn: ResultName[Member]) =
+   *     autoConstruct(rs, rn, "company") // "company" will be skipped
+   * }
+   */</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">rn</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Tweet</span><span class="o">])</span><span class="k">:</span> <span class="kt">Tweet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Tweet</span><span class="o">(</span>
+    <span class="n">id</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">rn</span><span class="o">.</span><span class="n">id</span><span class="o">),</span>
+    <span class="n">userId</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">rn</span><span class="o">.</span><span class="n">userId</span><span class="o">),</span>
+    <span class="n">text</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">rn</span><span class="o">.</span><span class="n">text</span><span class="o">),</span>
+    <span class="n">createdAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">rn</span><span class="o">.</span><span class="n">createdAt</span><span class="o">),</span>
+    <span class="n">updatedAt</span> <span class="k">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="n">rn</span><span class="o">.</span><span class="n">updatedAt</span><span class="o">)</span>
+  <span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>Other assocications can be generated with the following convention.</p>
+
+<ul>
+<li>Option[{Entity}]: belongsTo association</li>
+<li>Seq[{Entity}]: hasMany association</li>
+<li>Seq[{Entity1}{Entity2}]: hasManyThrough association</li>
+</ul>
+
 <p>It&rsquo;s also possible to specify namespace for the resource:</p>
-<pre><code class="highlight plaintext">./skinny g scaffold:{template} {namespace} {resources} {resource} {attributes}...
+<pre class="highlight plaintext"><code>./skinny g scaffold:{template} {namespace} {resources} {resource} {attributes}...
 </code></pre>
 
 <ul>
@@ -133,7 +191,7 @@
 <p>Let&rsquo;s create CRUD pages to manage project members!</p>
 
 <hr/>
-<pre><code class="highlight plaintext">$ ./skinny g scaffold:jade projectMembers projectMember name:String "nickname:Option[String]:varchar(32)" joinedAt:DateTime leaveAt:Option[DateTime]
+<pre class="highlight plaintext"><code>$ ./skinny g scaffold:jade projectMembers projectMember name:String "nickname:Option[String]:varchar(32)" joinedAt:DateTime leaveAt:Option[DateTime]
 
 [info] Running TaskRunner generate:scaffold:jade projectMembers projectMember name:String nickname:Option[String]:varchar(32) joinedAt:DateTime leaveAt:Option[DateTime]
 
@@ -159,7 +217,7 @@
 </code></pre>
 
 <p>With namespace:</p>
-<pre><code class="highlight plaintext">$ ./skinny g scaffold:jade admin.foo members member name:String
+<pre class="highlight plaintext"><code>$ ./skinny g scaffold:jade admin.foo members member name:String
 
 [info] Running TaskRunner generate:scaffold:jade admin.foo members member name:String
 
@@ -188,14 +246,14 @@
 
 <p>After that, do DB migration.
 <hr/></p>
-<pre><code class="highlight plaintext">$ ./skinny db:migrate
+<pre class="highlight plaintext"><code>$ ./skinny db:migrate
 </code></pre>
 
 <hr/>
 
 <p>Run the Skinny app and access <code>http://localhost:8080/project_members</code> from your browser.
 <hr/></p>
-<pre><code class="highlight plaintext">$ ./skinny run
+<pre class="highlight plaintext"><code>$ ./skinny run
 </code></pre>
 
 <hr/>
@@ -216,7 +274,7 @@
 <p>It&rsquo;ll be the fastest way to understand actual files generated by scaffold generator.</p>
 
 <hr/>
-<pre><code class="highlight java"><span class="kn">package</span> <span class="n">controller</span>
+<pre class="highlight java"><code><span class="kn">package</span> <span class="n">controller</span>
 
 <span class="kn">import</span> <span class="nn">skinny._</span>
 <span class="kn">import</span> <span class="nn">skinny.validator._</span>
@@ -258,7 +316,7 @@
 <p>Skinny ORM&rsquo;S CRUDMappper implements <code>skinny.SkinnyModel</code>&rsquo;s methods. If you&rsquo;d like to use other ORM or DB library, you can do that by implementing <code>SkinnyModel</code> trait.</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/SkinnyModel.scala">https://github.com/skinny-framework/skinny-framework/blob/develop/common/src/main/scala/skinny/SkinnyModel.scala</a></p>
-<pre><code class="highlight scala"><span class="k">object</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="k">with</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">object</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="k">with</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
 
   <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">SlickBackendMapper</span>
@@ -285,7 +343,7 @@
 <p>If you&rsquo;re working with existing database, <code>reverse-scaffold</code> command is pretty useful.</p>
 
 <p>When you have <code>project_members</code> table in database,</p>
-<pre><code class="highlight sql"><span class="c1">-- For H2 Database
+<pre class="highlight sql"><code><span class="c1">-- For H2 Database
 </span><span class="k">create</span> <span class="k">table</span> <span class="n">project_members</span> <span class="p">(</span>
   <span class="n">member_id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
   <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
@@ -298,7 +356,7 @@
 <p>Run the <code>reverse-scaffold</code> command like this.</p>
 
 <p>This command uses DB settings in the <code>src/main/resources/application.conf</code>. SkinnyEnv is set as <code>development</code>. </p>
-<pre><code class="highlight plaintext">$ ./skinny g reverse-scaffold:scaml project_members projectMembers projectMember
+<pre class="highlight plaintext"><code>$ ./skinny g reverse-scaffold:scaml project_members projectMembers projectMember
 
 [info] Running TaskRunner generate:reverse-scaffold:scaml project_members projectMembers projectMember
 
@@ -345,7 +403,7 @@
 <h4 id="parameters">Parameters</h4>
 
 <p>Scaffold command&rsquo;s parameters are &hellip;</p>
-<pre><code class="highlight plaintext">./skinny g reverse-scaffold:{template} {tableName} {resources} {resource}
+<pre class="highlight plaintext"><code>./skinny g reverse-scaffold:{template} {tableName} {resources} {resource}
 </code></pre>
 
 <ul>
@@ -354,12 +412,242 @@
 <li>{resources}: Resource name in the plural (camelCase)</li>
 <li>{resource}: Resource name (camelCase)</li>
 </ul>
-<pre><code class="highlight plaintext">./skinny g reverse-scaffold:{template} {namespace} {tableName} {resources} {resource}
+<pre class="highlight plaintext"><code>./skinny g reverse-scaffold:{template} {namespace} {tableName} {resources} {resource}
 </code></pre>
 
 <ul>
 <li>{namespace}: prefix for the resource (e.g. admin.foo.bar)</li>
 </ul>
+
+<hr/>
+
+<h4 id="reverse-*-all-commnds">reverse-*-all commnds</h4>
+
+<p><code>reverse-scaffold-all/reverse-model-all</code> commands generate all the code from existing database.</p>
+<pre class="highlight shell"><code>./skinny g reverse-model-all
+./skinny g reverse-scaffold-all
+</code></pre>
+
+<p>Here is an example DDL.</p>
+<pre class="highlight sql"><code><span class="k">create</span> <span class="k">table</span> <span class="n">user_group</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">url</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">organization</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">url</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">developer</span> <span class="p">(</span>
+  <span class="n">id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
+  <span class="n">nickname</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+  <span class="n">user_group_id</span> <span class="n">bigint</span> <span class="k">references</span> <span class="n">user_group</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">organization_developer</span> <span class="p">(</span>
+  <span class="n">organization_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span> <span class="k">references</span> <span class="n">organization</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+  <span class="n">developer_id</span> <span class="n">bigint</span> <span class="k">not</span> <span class="k">null</span> <span class="k">references</span> <span class="n">developer</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre>
+
+<p>When you run <code>reverse-scaffold-all</code> generator for this dababase schema, skinny command will show you following output.</p>
+<pre class="highlight plaintext"><code>*** Skinny Reverse Engineering Task ***
+
+  Table     : developer
+  ID        : id:Long
+  Resources : developers
+  Resource  : developer
+
+  Columns:
+   - name:String:varchar(512)
+   - nickname:Option[String]:varchar(32)
+   - userGroupId:Option[Long]
+   - userGroup:Option[UserGroup]
+   - organizationDevelopers:Seq[OrganizationDeveloper]
+
+ *** Skinny Generator Task ***
+
+  "sample/src/main/scala/controller/ApplicationController.scala" skipped.
+  "sample/src/main/scala/controller/DevelopersController.scala" created.
+  "sample/src/main/scala/controller/Controllers.scala" modified.
+  "sample/src/test/scala/controller/DevelopersControllerSpec.scala" created.
+  "sample/src/test/scala/integrationtest/DevelopersController_IntegrationTestSpec.scala" created.
+  "sample/src/test/resources/factories.conf" modified.
+  "sample/src/main/scala/model/Developer.scala" created.
+  "sample/src/test/scala/model/DeveloperSpec.scala" created.
+  "sample/src/main/webapp/WEB-INF/views/developers/_form.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/developers/new.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/developers/edit.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/developers/index.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/developers/show.html.ssp" created.
+  "sample/src/main/resources/messages.conf" modified.
+  "sample/src/main/resources/db/migration/V20141207024947__Create_developers_table.sql" created.
+
+
+ *** Skinny Reverse Engineering Task ***
+
+  Table     : organization
+  ID        : id:Long
+  Resources : organizations
+  Resource  : organization
+
+  Columns:
+   - name:String:varchar(100)
+   - url:String:varchar(512)
+   - organizationDevelopers:Seq[OrganizationDeveloper]
+
+ *** Skinny Generator Task ***
+
+  "sample/src/main/scala/controller/ApplicationController.scala" skipped.
+  "sample/src/main/scala/controller/OrganizationsController.scala" created.
+  "sample/src/main/scala/controller/Controllers.scala" modified.
+  "sample/src/test/scala/controller/OrganizationsControllerSpec.scala" created.
+  "sample/src/test/scala/integrationtest/OrganizationsController_IntegrationTestSpec.scala" created.
+  "sample/src/test/resources/factories.conf" modified.
+  "sample/src/main/scala/model/Organization.scala" created.
+  "sample/src/test/scala/model/OrganizationSpec.scala" created.
+  "sample/src/main/webapp/WEB-INF/views/organizations/_form.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/organizations/new.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/organizations/edit.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/organizations/index.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/organizations/show.html.ssp" created.
+  "sample/src/main/resources/messages.conf" modified.
+  "sample/src/main/resources/db/migration/V20141207024947__Create_organizations_table.sql" created.
+
+
+Since this table (organization_developer) has no primary key, generator created only NoIdCRUDMapper file and skipped creating controller and view files.
+
+ *** Skinny Reverse Engineering Task ***
+
+  Table  : organization_developer
+
+  Columns:
+   - organizationId:Long
+   - developerId:Long
+   - developer:Option[Developer]
+   - organization:Option[Organization]
+
+ *** Skinny Generator Task ***
+
+  "sample/src/main/scala/model/OrganizationDeveloper.scala" created.
+  "sample/src/test/scala/model/OrganizationDeveloperSpec.scala" created.
+  "sample/src/main/resources/db/migration/V20141207024947__Create_organizationDevelopers_table.sql" created.
+
+
+ *** Skinny Reverse Engineering Task ***
+
+  Table     : user_group
+  ID        : id:Long
+  Resources : userGroups
+  Resource  : userGroup
+
+  Columns:
+   - name:String:varchar(100)
+   - url:Option[String]:varchar(512)
+   - developers:Seq[Developer]
+
+ *** Skinny Generator Task ***
+
+  "sample/src/main/scala/controller/ApplicationController.scala" skipped.
+  "sample/src/main/scala/controller/UserGroupsController.scala" created.
+  "sample/src/main/scala/controller/Controllers.scala" modified.
+  "sample/src/test/scala/controller/UserGroupsControllerSpec.scala" created.
+  "sample/src/test/scala/integrationtest/UserGroupsController_IntegrationTestSpec.scala" created.
+  "sample/src/test/resources/factories.conf" modified.
+  "sample/src/main/scala/model/UserGroup.scala" created.
+  "sample/src/test/scala/model/UserGroupSpec.scala" created.
+  "sample/src/main/webapp/WEB-INF/views/userGroups/_form.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/userGroups/new.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/userGroups/edit.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/userGroups/index.html.ssp" created.
+  "sample/src/main/webapp/WEB-INF/views/userGroups/show.html.ssp" created.
+  "sample/src/main/resources/messages.conf" modified.
+  "sample/src/main/resources/db/migration/V20141207024947__Create_userGroups_table.sql" created.
+
+</code></pre>
+
+<p>Generated models include association configurations too (only when tables are referenced with foreign keys).</p>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">model</span>
+
+<span class="k">import</span> <span class="nn">skinny.orm._</span><span class="o">,</span> <span class="n">feature</span><span class="o">.</span><span class="k">_</span>
+<span class="k">import</span> <span class="nn">scalikejdbc._</span>
+<span class="k">import</span> <span class="nn">org.joda.time._</span>
+
+<span class="c1">// If your model has +23 fields, switch this to normal class and mixin scalikejdbc.EntityEquality.
+</span><span class="k">case</span> <span class="k">class</span> <span class="nc">Developer</span><span class="o">(</span>
+  <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span>
+  <span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
+  <span class="n">nickname</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">userGroupId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">userGroup</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">UserGroup</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+  <span class="n">organizations</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Organization</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span>
+<span class="o">)</span>
+
+<span class="k">object</span> <span class="nc">Developer</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Developer</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">override</span> <span class="k">lazy</span> <span class="k">val</span> <span class="n">tableName</span> <span class="k">=</span> <span class="s">"developer"</span>
+  <span class="k">override</span> <span class="k">lazy</span> <span class="k">val</span> <span class="n">defaultAlias</span> <span class="k">=</span> <span class="n">createAlias</span><span class="o">(</span><span class="s">"d"</span><span class="o">)</span>
+
+  <span class="k">lazy</span> <span class="k">val</span> <span class="n">userGroupRef</span> <span class="k">=</span> <span class="n">belongsTo</span><span class="o">[</span><span class="kt">UserGroup</span><span class="o">](</span><span class="nc">UserGroup</span><span class="o">,</span> <span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">ug</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">userGroup</span> <span class="k">=</span> <span class="n">ug</span><span class="o">))</span>
+
+  <span class="k">lazy</span> <span class="k">val</span> <span class="n">organizationsRef</span> <span class="k">=</span> <span class="n">hasManyThrough</span><span class="o">[</span><span class="kt">Organization</span><span class="o">](</span>
+    <span class="n">through</span> <span class="k">=</span> <span class="nc">OrganizationDeveloper</span><span class="o">,</span>
+    <span class="n">many</span> <span class="k">=</span> <span class="nc">Organization</span><span class="o">,</span>
+    <span class="n">merge</span> <span class="k">=</span> <span class="o">(</span><span class="n">d</span><span class="o">,</span> <span class="n">os</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="o">(</span><span class="n">organizations</span> <span class="k">=</span> <span class="n">os</span><span class="o">)</span>
+  <span class="o">)</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">extract</span><span class="o">(</span><span class="n">rs</span><span class="k">:</span> <span class="kt">WrappedResultSet</span><span class="o">,</span> <span class="n">rn</span><span class="k">:</span> <span class="kt">ResultName</span><span class="o">[</span><span class="kt">Developer</span><span class="o">])</span><span class="k">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">autoConstruct</span><span class="o">(</span><span class="n">rs</span><span class="o">,</span> <span class="n">rn</span><span class="o">,</span> <span class="s">"userGroup"</span><span class="o">,</span> <span class="s">"organizations"</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>Controllers are created as same as normal scaffold generator.</p>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
+
+<span class="k">import</span> <span class="nn">skinny._</span>
+<span class="k">import</span> <span class="nn">skinny.validator._</span>
+<span class="k">import</span> <span class="nn">_root_.controller._</span>
+<span class="k">import</span> <span class="nn">model.Developer</span>
+
+<span class="k">class</span> <span class="nc">DevelopersController</span> <span class="k">extends</span> <span class="nc">SkinnyResource</span> <span class="k">with</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+  <span class="n">protectFromForgery</span><span class="o">()</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">model</span> <span class="k">=</span> <span class="nc">Developer</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourcesName</span> <span class="k">=</span> <span class="s">"developers"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourceName</span> <span class="k">=</span> <span class="s">"developer"</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">resourcesBasePath</span> <span class="k">=</span> <span class="n">s</span><span class="s">"/${toSnakeCase(resourcesName)}"</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">useSnakeCasedParamKeys</span> <span class="k">=</span> <span class="kc">true</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">viewsDirectoryPath</span> <span class="k">=</span> <span class="n">s</span><span class="s">"/${resourcesName}"</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">32</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"user_group_id"</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span> <span class="o">&amp;</span> <span class="n">longValue</span>
+  <span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">createFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"nickname"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"user_group_id"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">Long</span>
+  <span class="o">)</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">updateParams</span><span class="o">,</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span> <span class="o">&amp;</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">512</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">)</span> <span class="n">is</span> <span class="n">maxLength</span><span class="o">(</span><span class="mi">32</span><span class="o">),</span>
+    <span class="n">paramKey</span><span class="o">(</span><span class="s">"user_group_id"</span><span class="o">)</span> <span class="n">is</span> <span class="n">numeric</span> <span class="o">&amp;</span> <span class="n">longValue</span>
+  <span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="n">updateFormStrongParameters</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+    <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"nickname"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">String</span><span class="o">,</span>
+    <span class="s">"user_group_id"</span> <span class="o">-&gt;</span> <span class="nc">ParamType</span><span class="o">.</span><span class="nc">Long</span>
+  <span class="o">)</span>
+
+<span class="o">}</span>
+</code></pre>
 
             <hr/>
             <div class="alert alert-info small"> 

@@ -112,7 +112,7 @@
 <p>That&rsquo;s all.</p>
 
 <p>The following is an example from the built-in validations.</p>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.validator._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.validator._</span>
 
 <span class="k">object</span> <span class="nc">required</span> <span class="k">extends</span> <span class="n">required</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
 
@@ -126,7 +126,7 @@
 </code></pre>
 
 <p>Then you can use it like this:</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">Validator</span><span class="o">(</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">Validator</span><span class="o">(</span>
   <span class="n">param</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span>
 <span class="o">)</span>
 <span class="n">validator</span><span class="o">.</span><span class="n">hasErrors</span> <span class="c1">// true
@@ -134,11 +134,11 @@
 <span class="k">val</span> <span class="n">errorsForName</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Error</span><span class="o">]</span> <span class="k">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">error</span><span class="k">:</span> <span class="kt">Error</span> <span class="o">=</span> <span class="n">errorsForName</span><span class="o">.</span><span class="n">head</span>
 <span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="c1">// -&gt; "required"
-</span><span class="n">error</span><span class="o">.</span><span class="n">messageParmas</span> <span class="c1">// -&gt; List("name")
+</span><span class="n">error</span><span class="o">.</span><span class="n">messageParams</span> <span class="c1">// -&gt; List("name")
 </span></code></pre>
 
 <p>A validation rule which accepts value when using such as <code>minLength(6)</code> is like this:</p>
-<pre><code class="highlight scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">minLength</span><span class="o">(</span><span class="n">min</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">minLength</span><span class="o">(</span><span class="n">min</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">ValidationRule</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">name</span> <span class="k">=</span> <span class="s">"minLength"</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">messageParams</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">min</span><span class="o">.</span><span class="n">toString</span><span class="o">)</span>
 
@@ -176,7 +176,7 @@
 <p>skinny-validator provides <code>Validator</code> and <code>MapValidator</code>. You already see <code>Validator</code> in above code. This one accepts parameters when defining validation rules.</p>
 
 <p><code>MapValidator</code> is another one which accepts <code>Map[String, Any]</code> object as parameters. Usually <code>MapValidator</code> is more useful in web applications.</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">params</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="s">"age"</span> <span class="o">-&gt;</span> <span class="mi">20</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">params</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"Alice"</span><span class="o">,</span> <span class="s">"age"</span> <span class="o">-&gt;</span> <span class="mi">20</span><span class="o">)</span>
 
 <span class="k">val</span> <span class="n">validator</span> <span class="k">=</span> <span class="nc">MapValidator</span><span class="o">(</span><span class="n">params</span><span class="o">)(</span>
   <span class="n">paramKey</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="n">is</span> <span class="n">required</span><span class="o">,</span>
@@ -191,22 +191,22 @@
 <hr/>
 
 <p>skinny-validator&rsquo;s <code>Error</code> looks like this:</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">error</span> <span class="k">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">head</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">error</span> <span class="k">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">head</span>
 <span class="n">error</span><span class="o">.</span><span class="n">name</span> <span class="c1">// -&gt; required
-</span><span class="n">error</span><span class="o">.</span><span class="n">messageParmas</span> <span class="c1">// -&gt; List("name")
+</span><span class="n">error</span><span class="o">.</span><span class="n">messageParams</span> <span class="c1">// -&gt; List("name")
 </span></code></pre>
 
 <p><code>skinny.validator.Messages</code> loads error messages from *.conf or *.properties.</p>
 
 <p>This is <code>src/main/resources/messages.conf</code> example:</p>
-<pre><code class="highlight plaintext">error {
+<pre class="highlight plaintext"><code>error {
   required="{0} is required"
   minLength="{0} length must be greater than or equal to {1}"
 }
 </code></pre>
 
 <p>Now <code>Messages</code> can load error messages for validation errors named &ldquo;required&rdquo; or &ldquo;minLength&rdquo;. The name comes from <code>ValidationRule#name</code>.</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">messages</span> <span class="k">=</span> <span class="nc">Messages</span><span class="o">.</span><span class="n">loadFromConfig</span><span class="o">()</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">messages</span> <span class="k">=</span> <span class="nc">Messages</span><span class="o">.</span><span class="n">loadFromConfig</span><span class="o">()</span>
 <span class="c1">// val messages = Messages.loadFromConfig("messages2") // loads messages2.conf
 // val messages = Messages.loadFromProperties() // loads messages.properties
 // val messages_ja = Messages.loadFromConfig(locale = Option(locale)) // loads messages_ja.conf
@@ -229,7 +229,7 @@
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala">framework/src/main/scala/skinny/controller/feature/ValidationFeature.scala</a></p>
 
 <p>The following is an example with Skinny Framework:</p>
-<pre><code class="highlight scala"><span class="c1">// withDate joins birthdayYear, birthdayMonth and birthdayDay into single birthday
+<pre class="highlight scala"><code><span class="c1">// withDate joins birthdayYear, birthdayMonth and birthdayDay into single birthday
 </span><span class="k">def</span> <span class="n">createParams</span> <span class="k">=</span> <span class="nc">Params</span><span class="o">(</span><span class="n">params</span><span class="o">).</span><span class="n">withDate</span><span class="o">(</span><span class="s">"birthday"</span><span class="o">)</span>
 
 <span class="k">def</span> <span class="n">createForm</span> <span class="k">=</span> <span class="n">validation</span><span class="o">(</span><span class="n">createParams</span><span class="o">,</span>

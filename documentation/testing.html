@@ -99,7 +99,7 @@
 <hr/>
 
 <p>Simply use skinny command or sbt directly.</p>
-<pre><code class="highlight plaintext"># run all the tests
+<pre class="highlight plaintext"><code># run all the tests
 ./skinny test
 
 # run single test
@@ -121,7 +121,7 @@
 <p>Here is some examples:</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/tree/develop/orm/src/test/scala/blog">https://github.com/skinny-framework/skinny-framework/tree/develop/orm/src/test/scala/blog</a></p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">model</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">model</span>
 
 <span class="k">import</span> <span class="nn">org.joda.time._</span>
 <span class="k">import</span> <span class="nn">org.scalatest._</span>
@@ -154,7 +154,7 @@
 <hr/>
 
 <p>Skinny provides <code>MockController</code> trait for light-weight controller tests.</p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
 
 <span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="n">render</span><span class="o">(</span><span class="s">"/root/index"</span><span class="o">)</span>
@@ -199,7 +199,7 @@
 <p>Scalatra provides a great test toolkit with embedded Jetty server and easy-to-use DSL. Of course, you can use them without any problem.</p>
 
 <p>Below is an integration test example with scalatra-test.</p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">integrationtest</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">integrationtest</span>
 
 <span class="k">import</span> <span class="nn">org.scalatra.test.scalatest._</span>
 <span class="k">import</span> <span class="nn">skinny.DBSettings</span> 
@@ -230,7 +230,7 @@
 <p>If you need a code coverage report, use <code>scoverage:test</code> instead. </p>
 
 <p><a href="https://github.com/scoverage/sbt-scoverage">https://github.com/scoverage/sbt-scoverage</a></p>
-<pre><code class="highlight plaintext">./skinny test:coverage
+<pre class="highlight plaintext"><code>./skinny test:coverage
 </code></pre>
 
 <hr/>

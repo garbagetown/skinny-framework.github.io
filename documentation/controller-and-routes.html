@@ -93,7 +93,7 @@
 <p><img alt="Scalatra" src="/images/scalatra.png" /></p>
 
 <p><code>SkinnyController</code> is a trait which extends <code>ScalatraFilter</code> and includes various useful components out-of-the-box.</p>
-<pre><code class="highlight scala"><span class="c1">// src/main/scala/controller/MembersController.scala
+<pre class="highlight scala"><code><span class="c1">// src/main/scala/controller/MembersController.scala
 </span><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span> <span class="c1">// CSRF protection enabled
 </span>
@@ -150,9 +150,9 @@
 </code></pre>
 
 <p><code>#render</code> expects <code>src/main/webapp/WEB-INF/views/members/index.html.ssp</code> by default.</p>
-<pre><code class="highlight plaintext">render("/members/index")
+<pre class="highlight plaintext"><code>render("/members/index")
 </code></pre>
-<pre><code class="highlight plaintext">&lt;!-- src/main/webapp/WEB-INF/views/members/index.html.ssp --&gt;
+<pre class="highlight plaintext"><code>&lt;!-- src/main/webapp/WEB-INF/views/members/index.html.ssp --&gt;
 &lt;%@val members: Seq[Member]%&gt;
 &lt;ul&gt;
 #for (member &lt;- members)
@@ -172,7 +172,7 @@
 <p><a href="http://www.scalatra.org/2.2/guides/http/reverse-routes.html">http://www.scalatra.org/2.2/guides/http/reverse-routes.html</a></p>
 
 <p>In controllers:</p>
-<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">oldPage</span> <span class="k">=</span> <span class="n">redirect</span><span class="o">(</span><span class="n">url</span><span class="o">(</span><span class="nc">Controllers</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">indexUrl</span><span class="o">))</span>
 <span class="o">}</span>
 
@@ -185,7 +185,7 @@
 </code></pre>
 
 <p>In views:</p>
-<pre><code class="highlight plaintext">// Jade example
+<pre class="highlight plaintext"><code>// Jade example
 a(href={s.url(Controllers.members.showUrl, "id" -&gt; member.id)}) Show detail
 
 </code></pre>
@@ -229,13 +229,13 @@ a(href={s.url(Controllers.members.showUrl, "id" -&gt; member.id)}) Show detail
 If you&rsquo;d like to customize routings (e.g. use only creation and deletion), just mixin only SkinnyResourceActions and define routings by yourself.</p>
 
 <p>You can see a SkinnyResource example using the scaffolding generator.</p>
-<pre><code class="highlight plaintext">./skinny g scaffold members member name:String birthday:LocalDate
+<pre class="highlight plaintext"><code>./skinny g scaffold members member name:String birthday:LocalDate
 </code></pre>
 
 <p>Then you get the following code. If you need to customize, override some parts of SkinnyResource:</p>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/SkinnyResource.scala">framework/src/main/scala/skinny/controller/SkinnyResource.scala</a></p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
 
 <span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.validator._</span>
@@ -274,7 +274,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 </code></pre>
 
 <p>Required view templates:</p>
-<pre><code class="highlight plaintext">src/main/webapp/WEB-INF/views/members/
+<pre class="highlight plaintext"><code>src/main/webapp/WEB-INF/views/members/
 ├── _form.html.ssp
 ├── edit.html.ssp
 ├── index.html.ssp
@@ -319,7 +319,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <p>skinny.Skinny provides getters for basic elements in view templates.</p>
-<pre><code class="highlight plaintext">&lt;%@val s: skinny.Skinny %&gt;
+<pre class="highlight plaintext"><code>&lt;%@val s: skinny.Skinny %&gt;
 </code></pre>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/Skinny.scala">framework/src/main/scala/skinny/Skinny.scala</a></p>
@@ -364,7 +364,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h5 id="skinny&#39;s-beforeaction/afteraction-filters">Skinny&rsquo;s beforeAction/afterAction filters</h5>
 
 <p><a href="https://github.com/skinny-framework/skinny-framework/blob/develop/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala">/framework/src/main/scala/skinny/controller/feature/BeforeAfterActionFeature.scala</a></p>
-<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">class</span> <span class="nc">MembersController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span> <span class="k">with</span> <span class="nc">Routes</span> <span class="o">{</span>
 
   <span class="c1">// Scalatra filters
 </span>  <span class="n">before</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// might affect other controllers
@@ -402,14 +402,14 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <p>Contrary to your expectations, Scalatra doesn&rsquo;t run all the handlers for after and error. Only the first one would be applied and the others are just ignored. We think it&rsquo;s difficult to be aware of this specification (it&rsquo;s not a bug but by design). So SkinnyFilter&rsquo;s before/after/error handlers are always applied. </p>
 
 <p>For instance, in skinny-blank-app, ErrrorPageFilter is applied to ApplicationController. </p>
-<pre><code class="highlight scala"><span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span>
+<pre class="highlight scala"><code><span class="k">trait</span> <span class="nc">ApplicationController</span> <span class="k">extends</span> <span class="nc">SkinnyController</span>
   <span class="k">with</span> <span class="nc">ErrorPageFilter</span> <span class="o">{</span>
 
 <span class="o">}</span>
 </code></pre>
 
 <p>ErrorPageFilter is as follows. It&rsquo;s pretty easy to customize such a filter (e.g. adding error notification) as follows.</p>
-<pre><code class="highlight scala"><span class="k">trait</span> <span class="nc">ErrorPageFilter</span> <span class="k">extends</span> <span class="nc">SkinnyRenderingFilter</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">trait</span> <span class="nc">ErrorPageFilter</span> <span class="k">extends</span> <span class="nc">SkinnyRenderingFilter</span> <span class="o">{</span>
   <span class="c1">// appends error filter in order
 </span>  <span class="n">addRenderingErrorFilter</span> <span class="o">{</span>
     <span class="k">case</span> <span class="n">e</span><span class="k">:</span> <span class="kt">Throwable</span> <span class="o">=&gt;</span>
@@ -427,7 +427,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <p>It just outputs error logging, set status as 500 and renders &ldquo;/error/500.html.ssp&rdquo; or similar templates. <code>SkinnyRenderingFilter</code> is a sub-trait of <code>SkinnyFilter</code>. <code>SkinnyFilter</code>&rsquo;s response value is always ignored. But <code>SkinnyRenderingFilter</code> can return a response body like above.</p>
 
 <p>The second example is <code>TxPerRequestFilter</code> which enables you to apply the open-session-in-view pattern to your apps.</p>
-<pre><code class="highlight scala"><span class="k">trait</span> <span class="nc">TxPerRequestFilter</span> <span class="k">extends</span> <span class="nc">SkinnyFilter</span> <span class="k">with</span> <span class="nc">Logging</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">trait</span> <span class="nc">TxPerRequestFilter</span> <span class="k">extends</span> <span class="nc">SkinnyFilter</span> <span class="k">with</span> <span class="nc">Logging</span> <span class="o">{</span>
   <span class="k">def</span> <span class="n">cp</span><span class="k">:</span> <span class="kt">ConnectionPool</span> <span class="o">=</span> <span class="nc">ConnectionPool</span><span class="o">.</span><span class="n">get</span><span class="o">()</span>
 
   <span class="k">def</span> <span class="n">begin</span> <span class="k">=</span> <span class="o">{</span>
@@ -473,7 +473,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="params">params</h4>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">name</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Int</span><span class="o">](</span><span class="s">"id"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">id</span><span class="k">:</span> <span class="kt">Long</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">getAsOrElse</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">"id"</span><span class="o">,</span> <span class="o">-</span><span class="mi">1L</span><span class="o">)</span>
 
@@ -489,7 +489,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="multiparams(&quot;splat&quot;)">multiParams(&ldquo;splat&rdquo;)</h4>
-<pre><code class="highlight scala"><span class="n">get</span><span class="o">(</span><span class="s">"/say/*/to/*"</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="n">get</span><span class="o">(</span><span class="s">"/say/*/to/*"</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// Matches "GET /say/hello/to/world"
 </span>  <span class="n">multiParams</span><span class="o">(</span><span class="s">"splat"</span><span class="o">)</span> <span class="c1">// == Seq("hello", "world")
 </span><span class="o">}</span>
@@ -507,7 +507,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <hr/>
 
 <h4 id="multiparams(&quot;captures&quot;)">multiParams(&ldquo;captures&rdquo;)</h4>
-<pre><code class="highlight scala"><span class="n">get</span><span class="o">(</span><span class="s">"""^\/f(.*)/b(.*)"""</span><span class="o">.</span><span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="n">get</span><span class="o">(</span><span class="s">"""^\/f(.*)/b(.*)"""</span><span class="o">.</span><span class="n">r</span><span class="o">)</span> <span class="o">{</span>
   <span class="c1">// Matches "GET /foo/bar"
 </span>  <span class="n">multiParams</span><span class="o">(</span><span class="s">"captures"</span><span class="o">)</span> <span class="c1">// == Seq("oo", "ar")
 </span><span class="o">}</span>
@@ -522,7 +522,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="cookies">Cookies</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">def</span> <span class="n">hello</span> <span class="k">=</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">def</span> <span class="n">hello</span> <span class="k">=</span> <span class="o">{</span>
   <span class="n">cookies</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
   <span class="n">cookies</span> <span class="o">-=</span> <span class="s">"name"</span>
 <span class="o">}</span>
@@ -543,11 +543,11 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="request/response-headers">Request/Response Headers</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">request</span><span class="o">.</span><span class="n">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">request</span><span class="o">.</span><span class="n">header</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
 </code></pre>
 
 <p><a href="http://www.scalatra.org/2.2/api/index.html#org.scalatra.servlet.RichRequest">/api/index.html#org.scalatra.servlet.RichRequest</a></p>
-<pre><code class="highlight scala"><span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
+<pre class="highlight scala"><code><span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
 <span class="n">response</span><span class="o">.</span><span class="n">headers</span> <span class="o">-=</span> <span class="s">"name"</span>
 </code></pre>
 
@@ -558,7 +558,7 @@ If you&rsquo;d like to customize routings (e.g. use only creation and deletion),
 <h4 id="session">Session</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="c1">// or session('name)
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="n">session</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span> <span class="c1">// or session('name)
 </span><span class="n">session</span> <span class="o">+=</span> <span class="s">"name"</span> <span class="o">-&gt;</span> <span class="s">"value"</span>
 <span class="n">session</span> <span class="o">-=</span> <span class="s">"name"</span>
 </code></pre>
@@ -572,7 +572,7 @@ So your apps are not naturally stateless when using vanilla Scalatra.</p>
 When you enable SkinnySession, these features also start using SkinnySession instead of Servlet session attributes.</p>
 
 <p>ScalatraBootstrap.scala:</p>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">scalikejdbc._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">scalikejdbc._</span>
 <span class="k">import</span> <span class="nn">skinny.session.SkinnySessionInitializer</span>
 <span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
@@ -589,7 +589,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 </code></pre>
 
 <p>controller/RootController.scala:</p>
-<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">SkinnySessionFilter</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="k">with</span> <span class="nc">SkinnySessionFilter</span> <span class="o">{</span>
 
   <span class="k">def</span> <span class="n">index</span> <span class="k">=</span> <span class="o">{</span>
     <span class="k">val</span> <span class="n">v</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Any</span><span class="o">]</span> <span class="k">=</span> <span class="n">skinnySession</span><span class="o">.</span><span class="n">getAttribute</span><span class="o">(</span><span class="s">"name"</span><span class="o">)</span>
@@ -600,7 +600,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 </code></pre>
 
 <p>DB migration file:</p>
-<pre><code class="highlight sql"><span class="c1">-- H2 Database compatible
+<pre class="highlight sql"><code><span class="c1">-- H2 Database compatible
 </span><span class="k">create</span> <span class="k">table</span> <span class="n">skinny_sessions</span> <span class="p">(</span>
   <span class="n">id</span> <span class="n">bigserial</span> <span class="k">not</span> <span class="k">null</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
   <span class="n">created_at</span> <span class="k">timestamp</span> <span class="k">not</span> <span class="k">null</span><span class="p">,</span>
@@ -630,7 +630,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <hr/>
 
 <p>Notice: Flash uses servlet sessions by default. Be aware of sticky session mode.</p>
-<pre><code class="highlight scala"><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
+<pre class="highlight scala"><code><span class="n">flash</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="k">=</span> <span class="n">value</span>
 <span class="n">flash</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
 <span class="n">flash</span><span class="o">.</span><span class="n">now</span> <span class="o">+=</span> <span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="o">)</span>
 </code></pre>
@@ -644,7 +644,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="request-body">Request Body</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">body</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">body</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span>
 <span class="k">val</span> <span class="n">stream</span><span class="k">:</span> <span class="kt">InputStream</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">inputStream</span> <span class="c1">// raw HTTP POST data
 </span></code></pre>
 
@@ -659,7 +659,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <div class="alert alert-warning small">
 <b>WARNING:</b> Extend not SkinnyController but SkinnyServlet. You cannot use FileUploadFeature with SkinnyController.
 </div>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.SkinnyServlet</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.SkinnyServlet</span>
 <span class="k">import</span> <span class="nn">skinny.controller.feature.FileUploadFeature</span>
 
 <span class="c1">// SkinnySerlvet!!!
@@ -689,7 +689,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="response-handling">Response handling</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="n">halt</span><span class="o">(</span><span class="mi">404</span><span class="o">)</span>
 <span class="n">halt</span><span class="o">(</span><span class="n">status</span> <span class="k">=</span> <span class="mi">400</span><span class="o">,</span> <span class="n">headers</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"foo"</span> <span class="o">-&gt;</span> <span class="s">"bar"</span><span class="o">),</span> <span class="n">reason</span> <span class="k">=</span> <span class="s">"why"</span><span class="o">)</span>
 
 <span class="n">redirect</span><span class="o">(</span><span class="s">"/top"</span><span class="o">)</span> <span class="c1">// 302
@@ -715,14 +715,14 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <p>Notice: Scalatra CSRF protection implementation uses servlet sessions by default. Be aware of sticky session mode.</p>
 
 <p>Define <code>protectFromForgery</code> in controller/RootController.scala:</p>
-<pre><code class="highlight scala"><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">class</span> <span class="nc">RootController</span> <span class="k">extends</span> <span class="nc">ApplicationController</span> <span class="o">{</span>
   <span class="n">protectFromForgery</span><span class="o">()</span>
 
 <span class="o">}</span>
 </code></pre>
 
 <p>Use <code>Skinny.csrfMetaTags</code> in /WEB-INF/layouts/default.jade:</p>
-<pre><code class="highlight plaintext">-@val body: String
+<pre class="highlight plaintext"><code>-@val body: String
 -@val s: skinny.Skinny
 !!! 5
 %html(lang="en")
@@ -739,14 +739,14 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="check-execution-time">Check execution time</h4>
 
 <hr/>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTime</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTime</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
   <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 <span class="o">}</span>
 <span class="c1">// will output "[SLOW EXECUTION DETECTED] Elapsed time: 10 millis"
 </span></code></pre>
 
 <p>In controllers, you can add request info:</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTimeWithRequest</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">warnElapsedTimeWithRequest</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
   <span class="nc">Thread</span><span class="o">.</span><span class="n">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre>
@@ -756,7 +756,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <h4 id="read-your-own-configuration-values">Read your own configuration values</h4>
 
 <hr/>
-<pre><code class="highlight plaintext">development {
+<pre class="highlight plaintext"><code>development {
   defaultLabel="foo"
   timeout {
     connect=1000
@@ -767,7 +767,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 </code></pre>
 
 <p>Read the server names like this:</p>
-<pre><code class="highlight scala"><span class="k">val</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringConfigValue</span><span class="o">(</span><span class="s">"defaultLabel"</span><span class="o">)</span>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">label</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringConfigValue</span><span class="o">(</span><span class="s">"defaultLabel"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">connectTimeout</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">intConfigValue</span><span class="o">(</span><span class="s">"timeout.connect"</span><span class="o">)</span>
 <span class="k">val</span> <span class="n">memcachedServers</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">]]</span> <span class="k">=</span> <span class="nc">SkinnyConfig</span><span class="o">.</span><span class="n">stringSeqConfigValue</span><span class="o">(</span><span class="s">"memcached"</span><span class="o">)</span>
 </code></pre>
@@ -781,7 +781,7 @@ When you enable SkinnySession, these features also start using SkinnySession ins
 <p>The following is a simple dashboard application which collects serveral futures within the <code>index</code> method.</p>
 
 <p>Since Skinny 1.2.0, you can easily access request and requestScope from Futures by using futureWithRequest block.</p>
-<pre><code class="highlight scala"><span class="k">package</span> <span class="nn">controller</span>
+<pre class="highlight scala"><code><span class="k">package</span> <span class="nn">controller</span>
 
 <span class="k">import</span> <span class="nn">org.joda.time._</span>
 <span class="k">import</span> <span class="nn">service._</span>

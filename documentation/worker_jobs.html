@@ -93,7 +93,7 @@
 <p>Skinny&rsquo;s WorkerService is a simple wrapper of Java built-in <code>ExecutorService</code> and prepared in Skinny apps by default. </p>
 
 <p>You can access it as <code>skinnyWorkerService</code> in <code>ScalatraBootstrap.scala</code> and just call scheduling methods.</p>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny._</span>
 <span class="k">import</span> <span class="nn">skinny.worker._</span>
 <span class="k">import</span> <span class="nn">skinny.controller._</span>
 <span class="k">import</span> <span class="nn">_root_.controller._</span>
@@ -131,7 +131,7 @@
 <p><code>SkinnyWorker</code>&rsquo;s rule is very simple. <code>SkinnyWorker</code> object is a <code>java.lang.Runnable</code> one.</p>
 
 <p>And developers just implement the abstract <code>def execute(): Unit</code> method.</p>
-<pre><code class="highlight scala"><span class="k">import</span> <span class="nn">skinny.worker._</span>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.worker._</span>
 <span class="k">import</span> <span class="nn">model._</span>
 
 <span class="k">class</span> <span class="nc">SampleWorker</span> <span class="k">extends</span> <span class="nc">SkinnyWorker</span> <span class="o">{</span>

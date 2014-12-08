@@ -101,7 +101,7 @@
 <hr/>
 
 <p>It&rsquo;s very simple to do that. Just </p>
-<pre><code class="highlight plaintext">./skinny package
+<pre class="highlight plaintext"><code>./skinny package
 </code></pre>
 
 <p>You will see the created war file under <code>build/target/scala_2.10</code>.</p>
@@ -115,15 +115,15 @@
 <hr/>
 
 <p>What&rsquo;s more, you can easily create a stand alone jar file by just running the following command: </p>
-<pre><code class="highlight plaintext">./skinny package:standalone
+<pre class="highlight plaintext"><code>./skinny package:standalone
 </code></pre>
 
 <p>After a while, you will get a standalone jar file. </p>
-<pre><code class="highlight shell">java -jar standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
+<pre class="highlight shell"><code>java -jar standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
 </code></pre>
 
 <p>You can pass configuration via system properties. Otherwise, it&rsquo;s also possible to use environment variables.</p>
-<pre><code class="highlight shell">java -jar -Dskinny.port<span class="o">=</span>9000 -Dskinny.env<span class="o">=</span>production -Dskinny.prefix<span class="o">=</span>/foo/ <span class="se">\</span>
+<pre class="highlight shell"><code>java -jar -Dskinny.port<span class="o">=</span>9000 -Dskinny.env<span class="o">=</span>production -Dskinny.prefix<span class="o">=</span>/foo/ <span class="se">\</span>
   standalone-build/target/scala-2.10/skinny-standalone-app-assembly-0.1.0-SNAPSHOT.jar
 </code></pre>
 
@@ -175,11 +175,11 @@
 <p>Hosting your Skinny app on Heroku is pretty simple.</p>
 
 <p>First, make sure that you have the correct DB driver for the production environment. Since you&rsquo;re using Heroku, most likely you are using PostgreSQL. In that case, you will need to add a dependency that looks like this.</p>
-<pre><code class="highlight plaintext">"org.postgresql"          % "postgresql"          % "9.3-1100-jdbc41" 
+<pre class="highlight plaintext"><code>"org.postgresql"          % "postgresql"          % "9.3-1100-jdbc41" 
 </code></pre>
 
 <p>And then, let&rsquo;s prepare some files for Heroku.</p>
-<pre><code class="highlight plaintext">./skinny heroku:init
+<pre class="highlight plaintext"><code>./skinny heroku:init
 </code></pre>
 
 <hr/>
@@ -191,7 +191,7 @@
 <p>Prerequisites: we assume you have a Heroku account and the Heroku toolbelt is installed. See the <a href="https://devcenter.heroku.com/articles/quickstart">Heroku documentation</a> for more details on getting started with Heroku.</p>
 
 <p>In the root directory of your Skinny app, run the following command.</p>
-<pre><code class="highlight plaintext">$ heroku apps:create {app-name}
+<pre class="highlight plaintext"><code>$ heroku apps:create {app-name}
 </code></pre>
 
 <hr/>
@@ -201,7 +201,7 @@
 <hr/>
 
 <p>Just push your app to git, and Heroku will stage and deploy it.</p>
-<pre><code class="highlight plaintext">$ git init
+<pre class="highlight plaintext"><code>$ git init
 $ git add . -v
 $ git commit
 $ git remote add heroku git@heroku.com:{app-name}.git
@@ -209,7 +209,7 @@ $ git push heroku master
 </code></pre>
 
 <p>Note that this will take a long time, as Heroku has to download the world every time it stages the app.</p>
-<pre><code class="highlight plaintext">$ git push heroku master
+<pre class="highlight plaintext"><code>$ git push heroku master
 Initializing repository, done.
 Counting objects: 80, done.
 Delta compression using up to 4 threads.
@@ -236,11 +236,11 @@ Total 80 (delta 1), reused 0 (delta 0)
 <hr/>
 
 <p>From the root directory of your Skinny app, execute the <code>heroku run</code> command.</p>
-<pre><code class="highlight plaintext">$ heroku run heroku/skinny [args...]
+<pre class="highlight plaintext"><code>$ heroku run heroku/skinny [args...]
 </code></pre>
 
 <p>For example, to perform a DB migration, you would run</p>
-<pre><code class="highlight plaintext">$ heroku run heroku/skinny db:migrate production
+<pre class="highlight plaintext"><code>$ heroku run heroku/skinny db:migrate production
 </code></pre>
 
 <hr/>

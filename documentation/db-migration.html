@@ -101,7 +101,7 @@
 <hr/>
 
 <p>Just run the following command.</p>
-<pre><code class="highlight plaintext">./skinny db:migrate [env] [dbname]
+<pre class="highlight plaintext"><code>./skinny db:migrate [env] [dbname]
 </code></pre>
 
 <p>This command expects <code>src/main/resources/db/migration/V***__***.sql</code> files. </p>
@@ -109,7 +109,7 @@
 <p>Note the double underscore in the filename.</p>
 
 <p>When your migration file is invalid and migration failed, you must do <code>db:repair</code> before retrying the migration.</p>
-<pre><code class="highlight plaintext">./skinny db:repair [env] [dbname]
+<pre class="highlight plaintext"><code>./skinny db:repair [env] [dbname]
 # fix your invalid migration file
 ./skinny db:migrate [env] [dbname]
 </code></pre>
@@ -121,7 +121,7 @@
 <p>If you need to change the location of SQL files or need to migrate several DBs, modify <code>{env}.db.{dbname}.migration.locations</code> in <code>application.conf</code>.</p>
 
 <p>In the following example, db:migrate command scans under <code>src/main/resources/db/migration/development/default</code>.</p>
-<pre><code class="highlight plaintext">development {
+<pre class="highlight plaintext"><code>development {
   db {
     default {
       driver="org.h2.Driver"
@@ -137,7 +137,7 @@
 </code></pre>
 
 <p>Yet another DB migration example:</p>
-<pre><code class="highlight plaintext">development {
+<pre class="highlight plaintext"><code>development {
   db {
     yetanother {
       driver="org.h2.Driver"
@@ -153,7 +153,7 @@
 </code></pre>
 
 <p>Command is like this:</p>
-<pre><code class="highlight plaintext">./skinny db:migrate development yetanother
+<pre class="highlight plaintext"><code>./skinny db:migrate development yetanother
 </code></pre>
 
 <hr/>
@@ -163,14 +163,14 @@
 <hr/>
 
 <p>Scaffolding generates a migration SQL file. Try it with <a href="https://github.com/skinny-framework/skinny-framework/releases">skinny-blank-app.zip</a>!</p>
-<pre><code class="highlight plaintext">./skinny g scaffold:jade members member name:String birthday:LocalDate
+<pre class="highlight plaintext"><code>./skinny g scaffold:jade members member name:String birthday:LocalDate
 </code></pre>
-<pre><code class="highlight plaintext">./skinny db:migrate
+<pre class="highlight plaintext"><code>./skinny db:migrate
 ./skinny db:migrate test
 </code></pre>
 
 <p>When your migration failed, Run <code>db:repair</code> command and fix migration files.</p>
-<pre><code class="highlight plaintext">./skinny db:repair
+<pre class="highlight plaintext"><code>./skinny db:repair
 
 // fix migration files...
 
@@ -187,7 +187,7 @@
 <h4 id="how-to-access-schema_version-table?">How to access schema_version table?</h4>
 
 <p>Flyway creates a table named <code>&quot;schema_version&quot;</code> for H2 database. </p>
-<pre><code class="highlight scala"><span class="n">sql</span><span class="s">"""select "version" from "schema_version" """</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="mi">1</span><span class="o">)).</span><span class="n">list</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
+<pre class="highlight scala"><code><span class="n">sql</span><span class="s">"""select "version" from "schema_version" """</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">string</span><span class="o">(</span><span class="mi">1</span><span class="o">)).</span><span class="n">list</span><span class="o">.</span><span class="n">apply</span><span class="o">()</span>
 </code></pre>
 
 <p>FYI:</p>
