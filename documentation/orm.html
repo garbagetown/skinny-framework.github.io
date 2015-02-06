@@ -118,7 +118,7 @@
 
 <h4 id="build.sbt">build.sbt</h4>
 <pre class="highlight scala"><code><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.3.8"</span><span class="o">,</span>
+  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.3.12"</span><span class="o">,</span>
   <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.+"</span><span class="o">,</span>
   <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.+"</span>
 <span class="o">)</span>
@@ -829,6 +829,58 @@ implicit val session = AutoSession
 </span>  <span class="k">override</span> <span class="k">def</span> <span class="n">deletedAtFieldName</span> <span class="k">=</span> <span class="s">"deletedTimestamp"</span>
 
 <span class="o">}</span>
+</code></pre>
+
+<hr/>
+
+<h3 id="callbacks">Callbacks</h3>
+
+<hr/>
+
+<p>Callbacks allow you to trigger logic before or after record creation, modification and deletion.</p>
+
+<p>You can register multiple handlers to same event. Handlers will be executed in order.</p>
+<pre class="highlight scala"><code><span class="k">object</span> <span class="nc">Member</span> <span class="k">extends</span> <span class="nc">SkinnyCRUDMapper</span><span class="o">[</span><span class="kt">Member</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="c1">// ------------------------
+</span>  <span class="c1">// before/after creation
+</span>  <span class="c1">// ------------------------
+</span>
+  <span class="n">beforeCreate</span><span class="o">((</span><span class="n">session</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">namedValues</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">SQLSyntax</span>, <span class="kt">Any</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+  <span class="c1">// it's possible to register multiple handlers
+</span>  <span class="n">beforeCreate</span><span class="o">((</span><span class="n">session</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">namedValues</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">SQLSyntax</span>, <span class="kt">Any</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// second one
+</span>  <span class="o">})</span>
+
+  <span class="n">afterCreate</span><span class="o">((</span><span class="n">session</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">namedValues</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">SQLSyntax</span>, <span class="kt">Any</span><span class="o">)],</span> <span class="n">generatedId</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Long</span><span class="o">])</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+
+  <span class="c1">// ------------------------
+</span>  <span class="c1">// before/after modification
+</span>  <span class="c1">// ------------------------
+</span>
+  <span class="n">beforeUpdateBy</span><span class="o">((</span><span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">where</span><span class="k">:</span> <span class="kt">SQLSyntax</span><span class="o">,</span> <span class="n">params</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">SQLSyntax</span>, <span class="kt">Any</span><span class="o">)])</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+  <span class="n">afterUpdateBy</span><span class="o">((</span><span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">where</span><span class="k">:</span> <span class="kt">SQLSyntax</span><span class="o">,</span> <span class="n">params</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[(</span><span class="kt">SQLSyntax</span>, <span class="kt">Any</span><span class="o">)],</span> <span class="n">count</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+
+  <span class="c1">// ------------------------
+</span>  <span class="c1">// before/after deletion
+</span>  <span class="c1">// ------------------------
+</span>
+  <span class="n">beforeDeleteBy</span><span class="o">((</span><span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">where</span><span class="k">:</span> <span class="kt">SQLSyntax</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+  <span class="n">afterDeleteBy</span><span class="o">((</span><span class="n">s</span><span class="k">:</span> <span class="kt">DBSession</span><span class="o">,</span> <span class="n">where</span><span class="k">:</span> <span class="kt">SQLSyntax</span><span class="o">,</span> <span class="n">deletedCount</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="c1">// do something here
+</span>  <span class="o">})</span>
+
+<span class="o">}</span> 
 </code></pre>
 
 <hr/>
