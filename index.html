@@ -1,94 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Use title if it's in the page YAML frontmatter -->
-    <title>Skinny Framework</title>
-    <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-    <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
-    <script src="/javascripts/all.js" type="text/javascript"></script>
-  </head>
-  <body>
-    <div class="container-fluid">
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/"><b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span></a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="/documentation" class="dropdown-toggle" data-toggle="dropdown">Documentation&nbsp;<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
-                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
-                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
-                <li><a href="/documentation/validator.html">Validator</a></li>
-                <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
-                <li><a href="/documentation/assets.html">Assets Support</a></li>
-                <li><a href="/documentation/mail.html">Mail</a></li>
-                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
-                <li><a href="/documentation/i18n.html">i18n</a></li>
-                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
-                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
-                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
-                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
-                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
-                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
-                <li><a href="/documentation/tasks.html">Tasks</a></li>
-                <li><a href="/documentation/testing.html">Testing</a></li>
-                <li><a href="/documentation/packaging.html">Packaging</a></li>
-                <li><a href="/documentation/community.html">Community</a></li>
-                <li><a href="/contribution.html">Contribution</a></li>
-              </ul>
-            </li>
-            <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
-            <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-        </nav>
-
-        <div class="col-sm-12 content">
-            <hr/>
-            <ul class="list-inline small">
-                <li><a href="/documentation/getting-started.html">Getting Started</a></li>
-                <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
-                <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
-                <li><a href="/documentation/validator.html">Validator</a></li>
-                <li><a href="/documentation/view-templates.html">View Templates</a></li>
-                <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
-                <li><a href="/documentation/assets.html">Assets Support</a></li>
-                <li><a href="/documentation/mail.html">Mail</a></li>
-                <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
-                <li><a href="/documentation/i18n.html">i18n</a></li>
-                <li><a href="/documentation/orm.html">O/R Mapper</a></li>
-                <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
-                <li><a href="/documentation/db-migration.html">DB Migration</a></li>
-                <li><a href="/documentation/json.html">Working with JSON</a></li>
-                <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
-                <li><a href="/documentation/http-client.html">HTTP Client</a></li>
-                <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
-                <li><a href="/documentation/tasks.html">Tasks</a></li>
-                <li><a href="/documentation/testing.html">Testing</a></li>
-                <li><a href="/documentation/packaging.html">Packaging</a></li>
-                <li><a href="/documentation/community.html">Community</a></li>
-                <li><a href="/contribution.html">Contribution</a></li>
-            </ul>
-        </div>
-        <hr/>
-        <div class="col-sm-12">
-          <div class="content">
-            <h1 id="skinny-framework">Skinny Framework</h1>
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Skinny Framework</title>
+<script type="text/javascript" src="/javascripts/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<link href="/stylesheets/all.css" rel="stylesheet" />
+<script src="/javascripts/all.js"></script>
+<style>
+body { 
+  padding-top: 50px; 
+}
+.side-menu>li>a {
+  padding: 4px 15px 2px 10px;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<header class="navbar navbar-fixed-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <b>Skinny Framework</b> <span class="subtitle">- Rapid Development in Scala -</span>
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+        <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
+        <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="container">
+<div class="row">
+<div class="col-md-10" role="main">
+  <h1 id="skinny-framework">Skinny Framework</h1>
 
 <hr/>
-
-<p><img alt="Logo" src="/images/logo.png" width="200"></p>
-
-<h3 id="github-stats">GitHub Stats</h3>
 
 <iframe src="http://ghbtns.com/github-btn.html?user=skinny-framework&repo=skinny-framework&type=watch&count=true&size=large" height="30" width="140" frameborder="0" scrolling="0" style="width:140px; height: 30px;" allowTransparency="true"></iframe>
 
@@ -96,7 +56,11 @@
 
 <hr/>
 
-<h2 id="what&#39;s-skinny?">What&rsquo;s Skinny?</h2>
+<p><img alt="Logo" src="/images/logo.png" /></p>
+
+<hr/>
+
+<h2 id="what-39-s-skinny">What&rsquo;s Skinny?</h2>
 
 <hr/>
 
@@ -138,19 +102,19 @@ If you&rsquo;re already familiar with Scala and your <code>sbt.ivy.home</code> d
 
 <hr/>
 
-<h4 id="1)-skinny-blank-app-with-deps.zip-(85mb)">1) skinny-blank-app-with-deps.zip (85MB)</h4>
+<h4 id="1-skinny-blank-app-with-deps-zip-90mb">1) skinny-blank-app-with-deps.zip (90MB)</h4>
 
-<p>For begineers, this one is highly recommended because you don&rsquo;t need to wait download dependencies.</p>
+<p>For beginners, this one is highly recommended because you don&rsquo;t need to wait download dependencies.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.3.13/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.3.20/skinny-blank-app-with-deps.zip"><img alt="Download" src="/images/blank-app-with-deps-download.png" /></a></p>
 
-<h4 id="2)-skinny-blank-app.zip-(1mb)">2) skinny-blank-app.zip (1MB)</h4>
+<h4 id="2-skinny-blank-app-zip-1mb">2) skinny-blank-app.zip (1MB)</h4>
 
 <p>If you&rsquo;re a heavy Scala user, this one will be suitable for you.</p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.3.13/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/download/1.3.20/skinny-blank-app.zip"><img alt="Download" src="/images/blank-app-download.png" /></a></p>
 
-<h4 id="3)-homebrew">3) Homebrew</h4>
+<h4 id="3-homebrew">3) Homebrew</h4>
 
 <p>If you&rsquo;re a MacOS X user, take a look at our Homebrew formula.</p>
 
@@ -172,7 +136,7 @@ skinny new skinny-blank-app
 skinny run
 </code></pre>
 
-<p>If you sufferred the following error, try <code>brew uninstall node &amp;&amp; brew install node --with-npm</code> (in some cases, also need to <code>rm -rf /usr/local/lib/node_modules</code>).</p>
+<p>If you suffered the following error, try <code>brew uninstall node &amp;&amp; brew install node --with-npm</code> (in some cases, also need to <code>rm -rf /usr/local/lib/node_modules</code>).</p>
 
 <pre>npm is required. If you have installed node with `--without-npm` option, reinstall with `--with-npm`.</pre>
 
@@ -232,139 +196,42 @@ yo skinny
 
 <hr/>
 
-<p>Actually, an application built with Skinny framework is a normal Scalatra application.</p>
+<p>Actually, an application built with Skinny is also a normal Scalatra application. 
+After preparing a Scalatra app, just add the following dependency to your <code>project/Build.scala</code>. </p>
 
-<p>After preparing the Scalatra app, just add the following dependency to your <code>project/Build.scala</code>.</p>
+<p>These components depends on Scalatra.</p>
 <pre class="highlight plaintext"><code>libraryDependencies ++= Seq(
-  "org.skinny-framework" %  "skinny-logback"            % "1.0.3",
-  "org.skinny-framework" %% "skinny-assets"             % "1.3.13",
-  "org.skinny-framework" %% "skinny-framework"          % "1.3.13",
-  "org.skinny-framework" %% "skinny-task"               % "1.3.13",
-  "org.skinny-framework" %% "skinny-scaldi"             % "1.3.13",
-  "org.skinny-framework" %% "skinny-oauth2-controller"  % "1.3.13",
-  "org.skinny-framework" %% "skinny-twitter-controller" % "1.3.13",
-  "org.skinny-framework" %% "skinny-test"               % "1.3.13" % "test",
-  "org.skinny-framework" %% "skinny-factory-girl"       % "1.3.13" % "test"
+  "org.skinny-framework" %% "skinny-assets"             % "1.3.20",
+  "org.skinny-framework" %% "skinny-framework"          % "1.3.20",
+  "org.skinny-framework" %% "skinny-oauth2-controller"  % "1.3.20",
+  "org.skinny-framework" %% "skinny-twitter-controller" % "1.3.20",
+  "org.skinny-framework" %% "skinny-scaldi"             % "1.3.20",
+  "org.skinny-framework" %% "skinny-test"               % "1.3.20" % "test"
 )
 </code></pre>
 
-<p>If you need only Skinny-ORM or Skinny-Validator, you can use only what you need. Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
+<p>If you need only Skinny-ORM, Skinny-Validator and so on, you can use only what you need. 
+Even if you&rsquo;re using Play2 (or any other framework), these components are available for you as well.</p>
 <pre class="highlight plaintext"><code>libraryDependencies ++= Seq(
-  "org.skinny-framework" %  "skinny-logback"      % "1.0.3",
-  "org.skinny-framework" %% "skinny-orm"          % "1.3.13",
-  "org.skinny-framework" %% "skinny-mailer"       % "1.3.13",
-  "org.skinny-framework" %% "skinny-standalone"   % "1.3.13",
-  "org.skinny-framework" %% "skinny-validator"    % "1.3.13",
-  "org.skinny-framework" %% "skinny-http-client"  % "1.3.13",
-  "org.skinny-framework" %% "skinny-factory-girl" % "1.3.13" % "test"
+  "org.skinny-framework" %  "skinny-logback"      % "1.0.6",
+  "org.skinny-framework" %% "skinny-orm"          % "1.3.20",
+  "org.skinny-framework" %% "skinny-oauth"        % "1.3.20",
+  "org.skinny-framework" %% "skinny-task"         % "1.3.20",
+  "org.skinny-framework" %% "skinny-mailer"       % "1.3.20",
+  "org.skinny-framework" %% "skinny-standalone"   % "1.3.20",
+  "org.skinny-framework" %% "skinny-validator"    % "1.3.20",
+  "org.skinny-framework" %% "skinny-http-client"  % "1.3.20",
+  "org.skinny-framework" %% "skinny-factory-girl" % "1.3.20" % "test"
 )
 </code></pre>
 
 <hr/>
 
-<h3 id="1.3-migration-guide-for-1.2.x-users">1.3 Migration Guide for 1.2.x Users</h3>
+<h2 id="skinny-39-s-components-overview">Skinny&rsquo;s Components Overview</h2>
 
 <hr/>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.3.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.3.0</a></p>
-
-<p>Deprecated joda-time methods in WrappedResultSet are removed. If you you&rsquo;re using <code>rs.dateTime(...)</code>, just rename it to <code>rs.jodaDateTime(...)</code>.</p>
-
-<hr/>
-
-<h3 id="1.2-migration-guide-for-1.1.x-users">1.2 Migration Guide for 1.1.x Users</h3>
-
-<hr/>
-
-<p>APIs are basically compatible. If you don&rsquo;t have some extensions that depend on <code>LocaleFeature</code>, <code>RequestScopeFeature</code> and <code>SkinnySessionFilter</code> methods, 
-your app will work fine without changing your code.</p>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0</a></p>
-
-<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
-
-<hr/>
-
-<h3 id="1.1-migration-guide-for-1.0.x-users">1.1 Migration Guide for 1.0.x Users</h3>
-
-<hr/>
-
-<p>Skinny 1.1 APIs are basically compatible with Skinny 1.0 though the release includes basic dependencies&rsquo; major upgrades. 
-If your app depends on the dependencies directly (not via Skinny APIs), you may need to update your code.</p>
-
-<ul>
-<li>All the components run on Scala 2.11 or Scala 2.10 (Skinny 1.0: Scala 2.10)</li>
-<li>Web framework runs on Java 7 or higher (Skinny 1.0: Java 6 or higher) </li>
-<li>Web framework is compatible with Servlet API 3.1 (Skinny 1.0: Servlet 3.0)</li>
-<li>Web framework depends on Scalatra 2.3 (Skinny 1.0: Scalatra 2.2)</li>
-<li>ORM depends on ScalikeJDBC 2.0 (Skinny 1.0: ScalikeJDBC 1.8)</li>
-<li>Migration command depends on Flyway 3.0 (Skinny 1.0: Flyway 2.3)</li>
-<li>Test support depends on ScalaTest 2.2 (Skinny 1.0: ScalaTest 1.9)</li>
-</ul>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0</a></p>
-
-<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
-
-<hr/>
-
-<h4 id="update-skinny-project-structure-by-using-yeoman">Update skinny project structure by using Yeoman</h4>
-
-<p>Yo can use Yeoman to merge updates in skinny-blank-app project. Yeoman&rsquo;s merging process is similar to Rails generator. Very easy to use!</p>
-<pre class="highlight plaintext"><code>npm install -g yo
-npm install -g generator-skinny
-yo skinny
-</code></pre>
-
-<hr/>
-
-<h4 id="&quot;org.scalatest.matchers.shouldmatchers&quot;-is-deprecated">&ldquo;org.scalatest.matchers.ShouldMatchers&rdquo; is deprecated</h4>
-
-<p>Use &ldquo;org.scalatest.Matchers&rdquo; instead. Sorry to say this.</p>
-
-<hr/>
-
-<h4 id="importing-&quot;scalikejdbc.sqlinterpolation._&quot;-is-deprecated">Importing &ldquo;scalikejdbc.SQLInterpolation._&rdquo; is deprecated</h4>
-
-<p>Just import only &ldquo;scalikejdbc._&rdquo;.</p>
-
-<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0">https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0</a></p>
-
-<hr/>
-
-<h4 id="renamed-joda-time-apis-due-to-jsr-310">Renamed joda-time APIs due to JSR-310</h4>
-
-<p><code>WrappedResultSet#dateTime</code>, <code>#localDate</code>, <code>#localTime</code> and <code>#localDateTime</code> are deprecated and <code>#jodaDateTime</code> and #jodaXXX are added.</p>
-
-<p>See also the issue: <a href="https://github.com/scalikejdbc/scalikejdbc/issues/222">https://github.com/scalikejdbc/scalikejdbc/issues/222</a></p>
-
-<p>Other changes in ScalikeJDBC 2.0:</p>
-
-<p><a href="https://github.com/scalikejdbc/scalikejdbc/blob/develop/notes/2.0.0.markdown">https://github.com/scalikejdbc/scalikejdbc/blob/develop/notes/2.0.0.markdown</a></p>
-
-<hr/>
-
-<h4 id="skinny-package&#39;s-scalate-precompilation-error">skinny package&rsquo;s Scalate precompilation error</h4>
-
-<p>Since Scalate 1.7.0, Skinny&rsquo;s blank app project&rsquo;s settings fail to execute <code>package</code> command.</p>
-<pre class="highlight plaintext"><code>default_ssp.scala:7: $_scalate_$default_ssp is already defined as object $_scalate_$default_ssp
-</code></pre>
-
-<p>Remove scalateSettings if your build settings loads it twice.</p>
-
-<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87">https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87</a></p>
-
-<hr/>
-
-<h2 id="skinny&#39;s-components-overview">Skinny&rsquo;s Components Overview</h2>
-
-<hr/>
-
-<h3 id="routing-&amp;-controller-&amp;-validator">Routing &amp; Controller &amp; Validator</h3>
+<h3 id="routing-amp-controller-amp-validator">Routing &amp; Controller &amp; Validator</h3>
 
 <hr/>
 
@@ -532,7 +399,7 @@ yo skinny
   <span class="o">.</span><span class="n">body</span> <span class="o">{</span>
     <span class="s">"""Hi all,
     |
-    |We're very proud to announce that Skinny Framework version 1.0.0 is relaesed.
+    |We're very proud to announce that Skinny Framework version 1.0.0 is released.
     |
     |.....
     |
@@ -546,7 +413,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="assets-support-(coffeescript,-less,-sass,-reactjs,-scala.js)">Assets Support (CoffeeScript, LESS, Sass, ReactJS, Scala.js)</h3>
+<h3 id="assets-support-coffeescript-less-sass-reactjs-scala-js">Assets Support (CoffeeScript, LESS, Sass, ReactJS, Scala.js)</h3>
 
 <hr/>
 
@@ -558,9 +425,9 @@ yo skinny
 
 <p>First, add <code>skinny-assets</code> to libraryDependencies.</p>
 <pre class="highlight plaintext"><code>libraryDependencies ++= Seq(
-  "org.skinny-framework" %% "skinny-framework" % "1.3.13",
-  "org.skinny-framework" %% "skinny-assets"    % "1.3.13",
-  "org.skinny-framework" %% "skinny-test"      % "1.3.13" % "test"
+  "org.skinny-framework" %% "skinny-framework" % "1.3.20",
+  "org.skinny-framework" %% "skinny-assets"    % "1.3.20",
+  "org.skinny-framework" %% "skinny-test"      % "1.3.20" % "test"
 )
 </code></pre>
 
@@ -581,7 +448,7 @@ yo skinny
 
 <hr/>
 
-<h3 id="angular.js-friendly-server-side">Angular.js Friendly Server Side</h3>
+<h3 id="angular-js-friendly-server-side">Angular.js Friendly Server Side</h3>
 
 <hr/>
 
@@ -651,6 +518,36 @@ yo skinny
 
 <hr/>
 
+<h2 id="examples">Examples</h2>
+
+<hr/>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p>How to write controllers, models and routes. Test suites (87% coverage). Coveralls settings.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework-example">https://github.com/skinny-framework/skinny-framework-example</a></p>
+
+<h4 id="scaldi-example">Scaldi Example</h4>
+
+<p>How to integrate Scaldi with Skinny Framework. Stubbing AWS SDK.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-scaldi-example">https://github.com/skinny-framework/skinny-scaldi-example</a></p>
+
+<h4 id="skinny-orm-in-play-apps">Skinny ORM in Play apps</h4>
+
+<p>How to use Skinny ORM in Play applications. Typesafe Activator Template. Reverse model generator.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-orm-in-play">https://github.com/skinny-framework/skinny-orm-in-play</a></p>
+
+<h4 id="skinny-task-runner-example">Skinny Task Runner Example</h4>
+
+<p>How to use only skinny-task without Web application project settings.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-task-example">https://github.com/skinny-framework/skinny-task-example</a></p>
+
+<hr/>
+
 <h3 id="skinny-framework-team-and-you">Skinny Framework Team and You</h3>
 
 <hr/>
@@ -681,31 +578,59 @@ yo skinny
 
 <p>Copyright &copy; skinny-framework.org</p>
 
-            <hr/>
-            <div class="alert alert-info small"> 
-              If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
-            </div> 
-
-<a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <hr/>
+  <div class="alert alert-info small"> 
+    If you find a typo or mistake in this page, please report or fix it. <a href="/contribution.html">How?</a>
+  </div> 
+  <a href="https://twitter.com/skinnyframework" class="twitter-follow-button" data-show-count="false">Follow @skinnyframework</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://skinny-framework.org/" data-text="#Scala on #Rails" data-via="skinnyframework">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </a>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=658247244206928";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  </body>
+  <div class="fb-like" data-href="http://skinny-framework.org/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+</div>
+<div class="col-md-2" role="complementary">
+  <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+  <ul class="nav bs-docs-sidenav side-menu">
+    <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+    <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
+    <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
+    <li><a href="/documentation/validator.html">Validator</a></li>
+    <li><a href="/documentation/view-templates.html">View Templates</a></li>
+    <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
+    <li><a href="/documentation/assets.html">Assets Support</a></li>
+    <li><a href="/documentation/mail.html">Mail</a></li>
+    <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
+    <li><a href="/documentation/i18n.html">i18n</a></li>
+    <li><a href="/documentation/orm.html">O/R Mapper</a></li>
+    <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
+    <li><a href="/documentation/db-migration.html">DB Migration</a></li>
+    <li><a href="/documentation/json.html">Working with JSON</a></li>
+    <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
+    <li><a href="/documentation/http-client.html">HTTP Client</a></li>
+    <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
+    <li><a href="/documentation/tasks.html">Tasks</a></li>
+    <li><a href="/documentation/testing.html">Testing</a></li>
+    <li><a href="/documentation/packaging.html">Packaging</a></li>
+    <li><a href="/documentation/heroku.html">Heroku</a></li>
+    <li><a href="/documentation/spray.html">Spray</a></li>
+    <li><a href="/documentation/migration-guide.html">Migration Guide</a></li>
+    <li><a href="/documentation/community.html">Community</a></li>
+    <li><a href="/contribution.html">Contribution</a></li>
+  </ul>
+  </nav>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
 </html>
 

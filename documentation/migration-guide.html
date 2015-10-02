@@ -5,7 +5,7 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Use title if it's in the page YAML frontmatter -->
-<title>Working with JSON - Skinny Framework</title>
+<title>Migration Guide - Skinny Framework</title>
 <script type="text/javascript" src="/javascripts/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 <link href="/stylesheets/all.css" rel="stylesheet" />
@@ -46,62 +46,105 @@ body {
 <div class="container">
 <div class="row">
 <div class="col-md-10" role="main">
-  <h2 id="working-with-json">Working with JSON</h2>
+  <h2 id="migration-guide">Migration Guide</h2>
 
 <hr/>
 
-<h3 id="easy-to-use-json4s-wrapper">Easy-to-use json4s wrapper</h3>
+<h3 id="1-3-migration-guide-for-1-2-x-users">1.3 Migration Guide for 1.2.x Users</h3>
 
 <hr/>
 
-<p><code>SkinnyController</code> provides the following useful methods from <code>JSONStringOps</code> trait by default.</p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.3.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.3.0</a></p>
+
+<p>Deprecated joda-time methods in WrappedResultSet are removed. If you you&rsquo;re using <code>rs.dateTime(...)</code>, just rename it to <code>rs.jodaDateTime(...)</code>.</p>
+
+<hr/>
+
+<h3 id="1-2-migration-guide-for-1-1-x-users">1.2 Migration Guide for 1.1.x Users</h3>
+
+<hr/>
+
+<p>APIs are basically compatible. If you don&rsquo;t have some extensions that depend on <code>LocaleFeature</code>, <code>RequestScopeFeature</code> and <code>SkinnySessionFilter</code> methods, 
+your app will work fine without changing your code.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.2.0</a></p>
+
+<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
+
+<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
+
+<hr/>
+
+<h3 id="1-1-migration-guide-for-1-0-x-users">1.1 Migration Guide for 1.0.x Users</h3>
+
+<hr/>
+
+<p>Skinny 1.1 APIs are basically compatible with Skinny 1.0 though the release includes basic dependencies&rsquo; major upgrades. 
+If your app depends on the dependencies directly (not via Skinny APIs), you may need to update your code.</p>
 
 <ul>
-<li>def toJSON(v: Any): JValue</li>
-<li>def toJSONString(v: Any, underscoreKeys: Boolean = true): String </li>
-<li>def toPrettyJSONString(v: Any, underscoreKeys: Boolean = true): String</li>
-<li>def fromJSONString[A](json: String)(implicit mf: Manifest[A]): Option[A] </li>
+<li>All the components run on Scala 2.11 or Scala 2.10 (Skinny 1.0: Scala 2.10)</li>
+<li>Web framework runs on Java 7 or higher (Skinny 1.0: Java 6 or higher) </li>
+<li>Web framework is compatible with Servlet API 3.1 (Skinny 1.0: Servlet 3.0)</li>
+<li>Web framework depends on Scalatra 2.3 (Skinny 1.0: Scalatra 2.2)</li>
+<li>ORM depends on ScalikeJDBC 2.0 (Skinny 1.0: ScalikeJDBC 1.8)</li>
+<li>Migration command depends on Flyway 3.0 (Skinny 1.0: Flyway 2.3)</li>
+<li>Test support depends on ScalaTest 2.2 (Skinny 1.0: ScalaTest 1.9)</li>
 </ul>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/json/src/main/scala/skinny/util/JSONStringOps.scala">json/src/main/scala/skinny/util/JSONStringOps.scala</a></p>
+<p><a href="https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0">https://github.com/skinny-framework/skinny-framework/releases/tag/1.1.0</a></p>
 
-<p>The following methods come from <code>JSONFeature</code> trait.</p>
+<p>Though we believe migration is not difficult, please tell us here if you find something wrong.</p>
 
-<ul>
-<li>def responseAsJSON(entity: Any, charset: Option[String] = Some(&ldquo;utf-8&rdquo;), prettify: Boolean = false): String</li>
-</ul>
+<p><a href="https://github.com/skinny-framework/skinny-framework/issues">https://github.com/skinny-framework/skinny-framework/issues</a></p>
 
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/JSONFeature.scala">framework/src/main/scala/skinny/controller/feature/JSONFeature.scala</a></p>
-<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.util.JSONStringOps._</span>
+<hr/>
 
-<span class="k">case</span> <span class="k">class</span> <span class="nc">UserResponse</span><span class="o">(</span><span class="n">user</span><span class="k">:</span> <span class="kt">User</span><span class="o">)</span>
-<span class="k">case</span> <span class="k">class</span> <span class="nc">User</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">age</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">email</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
-  <span class="n">isAlive</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">friend</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
+<h4 id="update-skinny-project-structure-by-using-yeoman">Update skinny project structure by using Yeoman</h4>
 
-<span class="k">val</span> <span class="n">jsonString</span> <span class="k">=</span>
-  <span class="s">"""{
-    |  "user": {
-    |    "name" : "toto",
-    |    "age" : 25,
-    |    "email" : "toto@jmail.com",
-    |    "isAlive" : true,
-    |    "friend" : {
-    |      "name" : "tata",
-    |      "age" : 20,
-    |      "email" : "tata@coldmail.com"
-    |    }
-    |  }
-    |}
-  """</span><span class="o">.</span><span class="n">stripMargin</span>
-
-<span class="k">val</span> <span class="n">userResponse</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">]</span> <span class="k">=</span> <span class="n">fromJSONString</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">](</span><span class="n">jsonString</span><span class="o">)</span>
-
-<span class="k">val</span> <span class="n">jsonString2</span> <span class="k">=</span> <span class="n">userResponse</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">toJSONString</span><span class="o">(</span><span class="n">r</span><span class="o">))</span>
+<p>Yo can use Yeoman to merge updates in skinny-blank-app project. Yeoman&rsquo;s merging process is similar to Rails generator. Very easy to use!</p>
+<pre class="highlight plaintext"><code>npm install -g yo
+npm install -g generator-skinny
+yo skinny
 </code></pre>
 
-<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/json/src/test/scala/skinny/util/JSONStringOpsSpec.scala">json/src/test/scala/skinny/util/JSONStringOpsSpec.scala</a></p>
+<hr/>
 
-<p>If you need more complex operations, use <a href="https://github.com/json4s/json4s">json4s</a> directly.</p>
+<h4 id="quot-org-scalatest-matchers-shouldmatchers-quot-is-deprecated">&ldquo;org.scalatest.matchers.ShouldMatchers&rdquo; is deprecated</h4>
+
+<p>Use &ldquo;org.scalatest.Matchers&rdquo; instead. Sorry to say this.</p>
+
+<hr/>
+
+<h4 id="importing-quot-scalikejdbc-sqlinterpolation-_-quot-is-deprecated">Importing &ldquo;scalikejdbc.SQLInterpolation._&rdquo; is deprecated</h4>
+
+<p>Just import only &ldquo;scalikejdbc._&rdquo;.</p>
+
+<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0">https://github.com/skinny-framework/skinny-framework/commit/1e44f60e5c5d0f53ab0102697a00413ad7a696d0</a></p>
+
+<hr/>
+
+<h4 id="renamed-joda-time-apis-due-to-jsr-310">Renamed joda-time APIs due to JSR-310</h4>
+
+<p><code>WrappedResultSet#dateTime</code>, <code>#localDate</code>, <code>#localTime</code> and <code>#localDateTime</code> are deprecated and <code>#jodaDateTime</code> and #jodaXXX are added.</p>
+
+<p>See also the issue: <a href="https://github.com/scalikejdbc/scalikejdbc/issues/222">https://github.com/scalikejdbc/scalikejdbc/issues/222</a></p>
+
+<p>Other changes in ScalikeJDBC 2.0:</p>
+
+<p><a href="https://github.com/scalikejdbc/scalikejdbc/blob/master/notes/2.0.0.markdown">https://github.com/scalikejdbc/scalikejdbc/blob/master/notes/2.0.0.markdown</a></p>
+
+<hr/>
+
+<h4 id="skinny-package-39-s-scalate-precompilation-error">skinny package&rsquo;s Scalate precompilation error</h4>
+
+<p>Since Scalate 1.7.0, Skinny&rsquo;s blank app project&rsquo;s settings fail to execute <code>package</code> command.</p>
+<pre class="highlight plaintext"><code>default_ssp.scala:7: $_scalate_$default_ssp is already defined as object $_scalate_$default_ssp
+</code></pre>
+
+<p>Remove scalateSettings if your build settings loads it twice.</p>
+
+<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87">https://github.com/skinny-framework/skinny-framework/commit/4ad2b874116ad3b60b76b104b2bf528106aeda87</a></p>
 
   <hr/>
   <div class="alert alert-info small"> 

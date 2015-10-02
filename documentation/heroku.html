@@ -5,7 +5,7 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Use title if it's in the page YAML frontmatter -->
-<title>Working with JSON - Skinny Framework</title>
+<title>Heroku Deployment - Skinny Framework</title>
 <script type="text/javascript" src="/javascripts/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 <link href="/stylesheets/all.css" rel="stylesheet" />
@@ -46,62 +46,19 @@ body {
 <div class="container">
 <div class="row">
 <div class="col-md-10" role="main">
-  <h2 id="working-with-json">Working with JSON</h2>
+  <h2 id="heroku-buildpack">Heroku buildpack</h2>
 
 <hr/>
 
-<h3 id="easy-to-use-json4s-wrapper">Easy-to-use json4s wrapper</h3>
+<p>Here is a Heroku buildpack for Skinny Framework by @jkutner. </p>
 
-<hr/>
+<p>You can easily deploy Skinny apps to Heroku platform with it.</p>
 
-<p><code>SkinnyController</code> provides the following useful methods from <code>JSONStringOps</code> trait by default.</p>
-
-<ul>
-<li>def toJSON(v: Any): JValue</li>
-<li>def toJSONString(v: Any, underscoreKeys: Boolean = true): String </li>
-<li>def toPrettyJSONString(v: Any, underscoreKeys: Boolean = true): String</li>
-<li>def fromJSONString[A](json: String)(implicit mf: Manifest[A]): Option[A] </li>
-</ul>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/json/src/main/scala/skinny/util/JSONStringOps.scala">json/src/main/scala/skinny/util/JSONStringOps.scala</a></p>
-
-<p>The following methods come from <code>JSONFeature</code> trait.</p>
-
-<ul>
-<li>def responseAsJSON(entity: Any, charset: Option[String] = Some(&ldquo;utf-8&rdquo;), prettify: Boolean = false): String</li>
-</ul>
-
-<p><a href="https://github.com/skinny-framework/skinny-framework/blob/master/framework/src/main/scala/skinny/controller/feature/JSONFeature.scala">framework/src/main/scala/skinny/controller/feature/JSONFeature.scala</a></p>
-<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">skinny.util.JSONStringOps._</span>
-
-<span class="k">case</span> <span class="k">class</span> <span class="nc">UserResponse</span><span class="o">(</span><span class="n">user</span><span class="k">:</span> <span class="kt">User</span><span class="o">)</span>
-<span class="k">case</span> <span class="k">class</span> <span class="nc">User</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">age</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">email</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
-  <span class="n">isAlive</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">friend</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">User</span><span class="o">]</span> <span class="k">=</span> <span class="nc">None</span><span class="o">)</span>
-
-<span class="k">val</span> <span class="n">jsonString</span> <span class="k">=</span>
-  <span class="s">"""{
-    |  "user": {
-    |    "name" : "toto",
-    |    "age" : 25,
-    |    "email" : "toto@jmail.com",
-    |    "isAlive" : true,
-    |    "friend" : {
-    |      "name" : "tata",
-    |      "age" : 20,
-    |      "email" : "tata@coldmail.com"
-    |    }
-    |  }
-    |}
-  """</span><span class="o">.</span><span class="n">stripMargin</span>
-
-<span class="k">val</span> <span class="n">userResponse</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">]</span> <span class="k">=</span> <span class="n">fromJSONString</span><span class="o">[</span><span class="kt">UserResponse</span><span class="o">](</span><span class="n">jsonString</span><span class="o">)</span>
-
-<span class="k">val</span> <span class="n">jsonString2</span> <span class="k">=</span> <span class="n">userResponse</span><span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">r</span> <span class="k">=&gt;</span> <span class="n">toJSONString</span><span class="o">(</span><span class="n">r</span><span class="o">))</span>
+<p><a href="https://github.com/jkutner/heroku-buildpack-skinny">https://github.com/jkutner/heroku-buildpack-skinny</a></p>
+<pre class="highlight shell"><code>heroku buildpacks:set https://github.com/jkutner/heroku-buildpack-skinny
 </code></pre>
 
-<p>See also: <a href="https://github.com/skinny-framework/skinny-framework/blob/master/json/src/test/scala/skinny/util/JSONStringOpsSpec.scala">json/src/test/scala/skinny/util/JSONStringOpsSpec.scala</a></p>
-
-<p>If you need more complex operations, use <a href="https://github.com/json4s/json4s">json4s</a> directly.</p>
+<p>Enjoy!</p>
 
   <hr/>
   <div class="alert alert-info small"> 
