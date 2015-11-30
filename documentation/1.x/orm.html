@@ -36,7 +36,7 @@ body {
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+        <li><a href="/documentation/1.x/getting-started.html">Getting Started</a></li>
         <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
         <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
       </ul>
@@ -46,6 +46,7 @@ body {
 <div class="container">
 <div class="row">
 <div class="col-md-10" role="main">
+<div class="alert alert-warning">WARNING: This page is not a guide for 1.x series. See <a href="/">here</a> instead to learn about the latest</div>
   <h2 id="orm">ORM</h2>
 
 <hr/>
@@ -54,7 +55,7 @@ body {
 
 <hr/>
 
-<p>Skinny provides you with Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>. This is a portable library, so you can also use it with Play2, Scalatra, Lift and any other frameworks.</p>
+<p>Skinny provides you with Skinny-ORM as the default O/R mapper, which is built with <a href="https://github.com/scalikejdbc/scalikejdbc">ScalikeJDBC</a>. This is a portable library, so you can also use it with Play2, pure Scalatra, Lift and any other frameworks.</p>
 
 <p><img alt="Logo" src="/images/scalikejdbc.png" /></p>
 
@@ -82,7 +83,7 @@ body {
 
 <h4 id="build-sbt">build.sbt</h4>
 <pre class="highlight scala"><code><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"2.0.1"</span><span class="o">,</span>
+  <span class="s">"org.skinny-framework"</span> <span class="o">%%</span> <span class="s">"skinny-orm"</span>      <span class="o">%</span> <span class="s">"1.3.20"</span><span class="o">,</span>
   <span class="s">"com.h2database"</span>       <span class="o">%</span>  <span class="s">"h2"</span>              <span class="o">%</span> <span class="s">"1.4.+"</span><span class="o">,</span>
   <span class="s">"ch.qos.logback"</span>       <span class="o">%</span>  <span class="s">"logback-classic"</span> <span class="o">%</span> <span class="s">"1.1.+"</span>
 <span class="o">)</span>
@@ -891,8 +892,8 @@ implicit val session = AutoSession
 
 <p>If you&rsquo;re using Skinny-ORM with Skinny Framework,
 <a href="https://github.com/skinny-framework/skinny-framework/blob/master/orm/src/main/scala/skinny/orm/servlet/TxPerRequestFilter.scala">skinny.orm.servlet.TxPerRequestFilter</a> simplifies your applications.</p>
-<pre class="highlight scala"><code><span class="c1">// src/main/scala/Bootstrap.scala
-</span><span class="k">class</span> <span class="nc">Bootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
+<pre class="highlight scala"><code><span class="c1">// src/main/scala/ScalatraBootstrap.scala
+</span><span class="k">class</span> <span class="nc">ScalatraBootstrap</span> <span class="k">extends</span> <span class="nc">SkinnyLifeCycle</span> <span class="o">{</span>
   <span class="k">override</span> <span class="k">def</span> <span class="n">initSkinnyApp</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">ServletContext</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">mount</span><span class="o">(</span><span class="k">new</span> <span class="nc">TxPerRequestFilter</span><span class="o">,</span> <span class="s">"/*"</span><span class="o">)</span>
   <span class="o">}</span>
@@ -1032,7 +1033,7 @@ implicit val session = AutoSession
 
 <p>An easy-to-use fixture tool named FactoryGirl makes testing easy.</p>
 
-<p>See in detail here: <a href="/documentation/factory-girl.html">FactoryGirl</a></p>
+<p>See in detail here: <a href="/documentation/1.x/factory-girl.html">FactoryGirl</a></p>
 
 <hr/>
 
@@ -1145,37 +1146,33 @@ implicit val session = AutoSession
 <div class="col-md-2" role="complementary">
   <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
   <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/1.x/">1.x series</a></li>
+    <li><a href="/">Back to the latest</a></li>
   </ul>
   <hr/>
   <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/micro.html">Skinny Micro</a></li>
-  </ul>
-  <hr/>
-  <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/getting-started.html">Getting Started</a></li>
-    <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
-    <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
-    <li><a href="/documentation/validator.html">Validator</a></li>
-    <li><a href="/documentation/view-templates.html">View Templates</a></li>
-    <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
-    <li><a href="/documentation/assets.html">Assets Support</a></li>
-    <li><a href="/documentation/mail.html">Mail</a></li>
-    <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
-    <li><a href="/documentation/i18n.html">i18n</a></li>
-    <li><a href="/documentation/orm.html">O/R Mapper</a></li>
-    <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
-    <li><a href="/documentation/db-migration.html">DB Migration</a></li>
-    <li><a href="/documentation/json.html">Working with JSON</a></li>
-    <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
-    <li><a href="/documentation/http-client.html">HTTP Client</a></li>
-    <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
-    <li><a href="/documentation/tasks.html">Tasks</a></li>
-    <li><a href="/documentation/testing.html">Testing</a></li>
-    <li><a href="/documentation/packaging.html">Packaging</a></li>
-    <li><a href="/documentation/spray.html">Spray</a></li>
-    <li><a href="/documentation/migration-guide.html">Migration Guide</a></li>
-    <li><a href="/documentation/community.html">Community</a></li>
+    <li><a href="/documentation/1.x/getting-started.html">Getting Started</a></li>
+    <li><a href="/documentation/1.x/scaffolding.html">Scaffolding</a></li>
+    <li><a href="/documentation/1.x/controller-and-routes.html">Controller & Routes</a></li>
+    <li><a href="/documentation/1.x/validator.html">Validator</a></li>
+    <li><a href="/documentation/1.x/view-templates.html">View Templates</a></li>
+    <li><a href="/documentation/1.x/oauth.html">OAuth for Login</a></li>
+    <li><a href="/documentation/1.x/assets.html">Assets Support</a></li>
+    <li><a href="/documentation/1.x/mail.html">Mail</a></li>
+    <li><a href="/documentation/1.x/worker_jobs.html">Worker Jobs</a></li>
+    <li><a href="/documentation/1.x/i18n.html">i18n</a></li>
+    <li><a href="/documentation/1.x/orm.html">O/R Mapper</a></li>
+    <li><a href="/documentation/1.x/factory-girl.html">FactoryGirl</a></li>
+    <li><a href="/documentation/1.x/db-migration.html">DB Migration</a></li>
+    <li><a href="/documentation/1.x/json.html">Working with JSON</a></li>
+    <li><a href="/documentation/1.x/angular.html">Angular.js Server Side</a></li>
+    <li><a href="/documentation/1.x/http-client.html">HTTP Client</a></li>
+    <li><a href="/documentation/1.x/dependency-injection.html">Dependency Injection</a></li>
+    <li><a href="/documentation/1.x/tasks.html">Tasks</a></li>
+    <li><a href="/documentation/1.x/testing.html">Testing</a></li>
+    <li><a href="/documentation/1.x/packaging.html">Packaging</a></li>
+    <li><a href="/documentation/1.x/spray.html">Spray</a></li>
+    <li><a href="/documentation/1.x/migration-guide.html">Migration Guide</a></li>
+    <li><a href="/documentation/1.x/community.html">Community</a></li>
     <li><a href="/contribution.html">Contribution</a></li>
   </ul>
   </nav>

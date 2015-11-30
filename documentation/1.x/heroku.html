@@ -5,7 +5,7 @@
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Use title if it's in the page YAML frontmatter -->
-<title>Community - Skinny Framework</title>
+<title>Heroku Deployment - Skinny Framework</title>
 <script type="text/javascript" src="/javascripts/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 <link href="/stylesheets/all.css" rel="stylesheet" />
@@ -36,7 +36,7 @@ body {
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/documentation/getting-started.html">Getting Started</a></li>
+        <li><a href="/documentation/1.x/getting-started.html">Getting Started</a></li>
         <li><a href="https://github.com/skinny-framework/skinny-framework">Source Code on GitHub</a></li>
         <li><a href="https://groups.google.com/forum/#!forum/skinny-framework">Users ML <small>(Google Group)</small></a></li>
       </ul>
@@ -46,37 +46,20 @@ body {
 <div class="container">
 <div class="row">
 <div class="col-md-10" role="main">
-  <h2 id="community">Community</h2>
+<div class="alert alert-warning">WARNING: This page is not a guide for 1.x series. See <a href="/">here</a> instead to learn about the latest</div>
+  <h2 id="heroku-buildpack">Heroku buildpack</h2>
 
 <hr/>
 
-<h3 id="skinny-framework-users-group">Skinny Framework Users Group</h3>
+<p>Here is a Heroku buildpack for Skinny Framework by @jkutner. </p>
 
-<hr/>
+<p>You can easily deploy Skinny apps to Heroku platform with it.</p>
 
-<p>The official users ML:</p>
+<p><a href="https://github.com/jkutner/heroku-buildpack-skinny">https://github.com/jkutner/heroku-buildpack-skinny</a></p>
+<pre class="highlight shell"><code>heroku buildpacks:set https://github.com/jkutner/heroku-buildpack-skinny
+</code></pre>
 
-<p><a href="https://groups.google.com/forum/#!forum/skinny-framework">https://groups.google.com/forum/#!forum/skinny-framework</a></p>
-
-<hr/>
-
-<h3 id="scalikejdbc-users-group">ScalikeJDBC Users Group</h3>
-
-<hr/>
-
-<p>ScalikeJDBC (Skinny ORM base) users ML:</p>
-
-<p><a href="https://groups.google.com/forum/#!forum/scalikejdbc-users-group">https://groups.google.com/forum/#!forum/scalikejdbc-users-group</a></p>
-
-<hr/>
-
-<h3 id="skinny-framework-users-group-in-japan">Skinny Framework users group in Japan</h3>
-
-<hr/>
-
-<p>日本 Skinny Framework ユーザ会:</p>
-
-<p><a href="http://skinnyjp.doorkeeper.jp/">http://skinnyjp.doorkeeper.jp/</a></p>
+<p>Enjoy!</p>
 
   <hr/>
   <div class="alert alert-info small"> 
@@ -100,37 +83,33 @@ body {
 <div class="col-md-2" role="complementary">
   <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
   <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/1.x/">1.x series</a></li>
+    <li><a href="/">Back to the latest</a></li>
   </ul>
   <hr/>
   <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/micro.html">Skinny Micro</a></li>
-  </ul>
-  <hr/>
-  <ul class="nav bs-docs-sidenav side-menu">
-    <li><a href="/documentation/getting-started.html">Getting Started</a></li>
-    <li><a href="/documentation/scaffolding.html">Scaffolding</a></li>
-    <li><a href="/documentation/controller-and-routes.html">Controller & Routes</a></li>
-    <li><a href="/documentation/validator.html">Validator</a></li>
-    <li><a href="/documentation/view-templates.html">View Templates</a></li>
-    <li><a href="/documentation/oauth.html">OAuth for Login</a></li>
-    <li><a href="/documentation/assets.html">Assets Support</a></li>
-    <li><a href="/documentation/mail.html">Mail</a></li>
-    <li><a href="/documentation/worker_jobs.html">Worker Jobs</a></li>
-    <li><a href="/documentation/i18n.html">i18n</a></li>
-    <li><a href="/documentation/orm.html">O/R Mapper</a></li>
-    <li><a href="/documentation/factory-girl.html">FactoryGirl</a></li>
-    <li><a href="/documentation/db-migration.html">DB Migration</a></li>
-    <li><a href="/documentation/json.html">Working with JSON</a></li>
-    <li><a href="/documentation/angular.html">Angular.js Server Side</a></li>
-    <li><a href="/documentation/http-client.html">HTTP Client</a></li>
-    <li><a href="/documentation/dependency-injection.html">Dependency Injection</a></li>
-    <li><a href="/documentation/tasks.html">Tasks</a></li>
-    <li><a href="/documentation/testing.html">Testing</a></li>
-    <li><a href="/documentation/packaging.html">Packaging</a></li>
-    <li><a href="/documentation/spray.html">Spray</a></li>
-    <li><a href="/documentation/migration-guide.html">Migration Guide</a></li>
-    <li><a href="/documentation/community.html">Community</a></li>
+    <li><a href="/documentation/1.x/getting-started.html">Getting Started</a></li>
+    <li><a href="/documentation/1.x/scaffolding.html">Scaffolding</a></li>
+    <li><a href="/documentation/1.x/controller-and-routes.html">Controller & Routes</a></li>
+    <li><a href="/documentation/1.x/validator.html">Validator</a></li>
+    <li><a href="/documentation/1.x/view-templates.html">View Templates</a></li>
+    <li><a href="/documentation/1.x/oauth.html">OAuth for Login</a></li>
+    <li><a href="/documentation/1.x/assets.html">Assets Support</a></li>
+    <li><a href="/documentation/1.x/mail.html">Mail</a></li>
+    <li><a href="/documentation/1.x/worker_jobs.html">Worker Jobs</a></li>
+    <li><a href="/documentation/1.x/i18n.html">i18n</a></li>
+    <li><a href="/documentation/1.x/orm.html">O/R Mapper</a></li>
+    <li><a href="/documentation/1.x/factory-girl.html">FactoryGirl</a></li>
+    <li><a href="/documentation/1.x/db-migration.html">DB Migration</a></li>
+    <li><a href="/documentation/1.x/json.html">Working with JSON</a></li>
+    <li><a href="/documentation/1.x/angular.html">Angular.js Server Side</a></li>
+    <li><a href="/documentation/1.x/http-client.html">HTTP Client</a></li>
+    <li><a href="/documentation/1.x/dependency-injection.html">Dependency Injection</a></li>
+    <li><a href="/documentation/1.x/tasks.html">Tasks</a></li>
+    <li><a href="/documentation/1.x/testing.html">Testing</a></li>
+    <li><a href="/documentation/1.x/packaging.html">Packaging</a></li>
+    <li><a href="/documentation/1.x/spray.html">Spray</a></li>
+    <li><a href="/documentation/1.x/migration-guide.html">Migration Guide</a></li>
+    <li><a href="/documentation/1.x/community.html">Community</a></li>
     <li><a href="/contribution.html">Contribution</a></li>
   </ul>
   </nav>
